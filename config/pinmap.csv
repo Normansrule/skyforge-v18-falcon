@@ -1,0 +1,13 @@
+fc_output,timer_group,servo_function,function_name,device,rate_class,power_source,notes
+S1,1,33,Motor1,4-in-1 ESC signal for M1 front-right CCW (x240 y+220),motor,4-in-1 ESC (star branch),"Pad-to-motor order on the ESC is NOT assumed; confirm with props-off motor test A"
+S2,1,34,Motor2,4-in-1 ESC signal for M2 rear-left CCW (x420 y-220),motor,4-in-1 ESC (star branch),Motor test C
+S3,2,35,Motor3,4-in-1 ESC signal for M3 front-left CW (x240 y-220),motor,4-in-1 ESC (star branch),Motor test D
+S4,2,36,Motor4,4-in-1 ESC signal for M4 rear-right CW (x420 y+220),motor,4-in-1 ESC (star branch),Motor test B
+S5,3,77,ElevonLeft,Left elevon servo,servo,Isolated 5.0 V UBEC bus,FC does elevon mixing - no transmitter mix
+S6,3,78,ElevonRight,Right elevon servo,servo,Isolated 5.0 V UBEC bus,
+S7,3,2,Flap,Left flap servo,servo,Isolated 5.0 V UBEC bus,
+S8,4,2,Flap,Right flap servo,servo,Isolated 5.0 V UBEC bus,Mirror-mounted: set SERVO8_REVERSED at calibration if needed
+S9,4,26,GroundSteering,Nose-steering servo,servo,Isolated 5.0 V UBEC bus,
+S10,4,0,Disabled,-,none,-,
+S11,5,70,Throttle,Rear EDF ESC signal,esc_pwm,EDF ESC (star branch),"EDF ESC BEC red lead isolated"
+S12,5,0,Disabled,- (board default is serial LED),none,-,Keep disabled unless an LED is added

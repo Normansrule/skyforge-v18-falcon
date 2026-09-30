@@ -1,0 +1,124 @@
+{
+  "note": "Computed from config/geometry.json + cad/src/params.py. PASS/FAIL are geometric only; FLAG = needs a decision or a real-part check. The planform is a proxy, NOT the V18 shape.",
+  "checks": [
+    {
+      "id": "L1",
+      "check": "Prop tip radial margin in the 145 mm well (mm)",
+      "value": 9.0,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L2",
+      "check": "Fore/aft web between wells, same side (mm) >= spar + 2 x 5",
+      "value": 35,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L3-M1",
+      "check": "M1 well edge to planform-proxy edge (mm) - proxy outline, informational",
+      "value": 38.6,
+      "status": "PASS",
+      "note": "Proxy planform only; the V18 CAD edge gap is 35 mm by construction"
+    },
+    {
+      "id": "L3-M2",
+      "check": "M2 well edge to planform-proxy edge (mm) - proxy outline, informational",
+      "value": 57.7,
+      "status": "PASS",
+      "note": "Proxy planform only; the V18 CAD edge gap is 35 mm by construction"
+    },
+    {
+      "id": "L3-M3",
+      "check": "M3 well edge to planform-proxy edge (mm) - proxy outline, informational",
+      "value": 38.6,
+      "status": "PASS",
+      "note": "Proxy planform only; the V18 CAD edge gap is 35 mm by construction"
+    },
+    {
+      "id": "L3-M4",
+      "check": "M4 well edge to planform-proxy edge (mm) - proxy outline, informational",
+      "value": 57.7,
+      "status": "PASS",
+      "note": "Proxy planform only; the V18 CAD edge gap is 35 mm by construction"
+    },
+    {
+      "id": "L4-R",
+      "check": "Outer servo centre to nearest well edge (mm) >= 25",
+      "value": 103.9,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L4-L",
+      "check": "Outer servo centre to nearest well edge (mm) >= 25",
+      "value": 103.9,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L5-R",
+      "check": "Main wheel contact point outside every rotor-well footprint (plan view)",
+      "value": "(385, +180) inside ['M4']",
+      "status": "FLAG",
+      "note": "Wheel sits under a rear well: attach the leg inboard of |y|=147.5, keep leg + wheel below the rotor wash, and include the leg in the Stage-2/9 thrust measurement."
+    },
+    {
+      "id": "L5-L",
+      "check": "Main wheel contact point outside every rotor-well footprint (plan view)",
+      "value": "(385, -180) inside ['M2']",
+      "status": "FLAG",
+      "note": "Wheel sits under a rear well: attach the leg inboard of |y|=147.5, keep leg + wheel below the rotor wash, and include the leg in the Stage-2/9 thrust measurement."
+    },
+    {
+      "id": "L6-330",
+      "check": "Main-gear axle aft of CG x330 (mm) - tip-back margin, informational",
+      "value": 55,
+      "status": "PASS",
+      "note": "Check the 15 deg rule with the measured CG height at Stage 9"
+    },
+    {
+      "id": "L6-345",
+      "check": "Main-gear axle aft of CG x345 (mm) - tip-back margin, informational",
+      "value": 40,
+      "status": "PASS",
+      "note": "Check the 15 deg rule with the measured CG height at Stage 9"
+    },
+    {
+      "id": "L6-360",
+      "check": "Main-gear axle aft of CG x360 (mm) - tip-back margin, informational",
+      "value": 25,
+      "status": "FLAG",
+      "note": "Check the 15 deg rule with the measured CG height at Stage 9"
+    },
+    {
+      "id": "L7",
+      "check": "Beam + pad blockage of the prop disc outside the motor footprint (fraction)",
+      "value": 0.104,
+      "status": "FLAG",
+      "note": "Bench the prop WITH the beam and pad under it at Stage 2 to measure the real thrust loss."
+    },
+    {
+      "id": "L8-x150",
+      "check": "Spar x150 (+/-240) inside planform proxy",
+      "value": true,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L8-x330",
+      "check": "Spar x330 (+/-300) inside planform proxy",
+      "value": true,
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "id": "L8-x510",
+      "check": "Spar x510 (+/-300) inside planform proxy",
+      "value": true,
+      "status": "PASS",
+      "note": ""
+    }
+  ]
+}

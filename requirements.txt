@@ -1,0 +1,5 @@
+# Only needed to rebuild CAD (cad/src/build.py). tools/*.py use the standard library.
+cadquery>=2.4
+trimesh>=4.0
+matplotlib>=3.7
+ezdxf>=1.1

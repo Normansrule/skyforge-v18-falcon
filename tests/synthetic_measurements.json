@@ -1,0 +1,19 @@
+{
+  "_note": "SYNTHETIC TEST DATA ONLY - exercises the gate code in CI. These numbers are invented; they are NOT measurements of any motor and must never be copied into config/measurements.json.",
+  "owned_items": {"ids": ["X01", "X02"]},
+  "stage0": {},
+  "stage1": {"lwpla_effective_density_g_cm3": 0.7},
+  "stage2": {
+    "thrust_table": [
+      {"throttle_pct": 25, "thrust_g": 250, "current_a": 4, "voltage_v": 15.8},
+      {"throttle_pct": 50, "thrust_g": 600, "current_a": 12, "voltage_v": 15.2},
+      {"throttle_pct": 75, "thrust_g": 950, "current_a": 24, "voltage_v": 14.6},
+      {"throttle_pct": 100, "thrust_g": 1200, "current_a": 36, "voltage_v": 14.0}
+    ],
+    "max_static_thrust_g_loaded": 1200,
+    "max_current_a": 36,
+    "edf_max_current_a": 35
+  },
+  "stage9": {"all_up_mass_g": null, "flight_cg_x_mm": 340},
+  "component_masses_g": {"values": {"P01": 34.0}}
+}

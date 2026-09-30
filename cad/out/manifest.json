@@ -1,0 +1,117 @@
+{
+  "_note": "Repo interface parts. Label per brief: FINISHED / PROTOTYPE-READY / EXPERIMENTAL. Files are unsliced; no slicer validation performed.",
+  "parts": {
+    "SF_MP_motor_pad_G10_2p5": {
+      "bbox_mm": [
+        50.0,
+        34.0,
+        2.51
+      ],
+      "volume_cm3": 2.963,
+      "printed": false,
+      "material": "G10/FR4 2.5 mm",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 4,
+      "notes": "Cut from G10 via DXF. Motor screws must not bottom on the beam - check length.",
+      "fits_P1S": null
+    },
+    "SF_XC_cross_clamp_G10_2p5": {
+      "bbox_mm": [
+        24.4,
+        22.4,
+        2.5
+      ],
+      "volume_cm3": 1.277,
+      "printed": false,
+      "material": "G10/FR4 2.5 mm",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 16,
+      "notes": "Two per beam/spar crossing, 8 crossings. M3 x 25 through the 18 mm stack.",
+      "fits_P1S": null
+    },
+    "SF_G10_drill_templates_PLA": {
+      "bbox_mm": [
+        50.0,
+        68.2,
+        2.01
+      ],
+      "volume_cm3": 3.543,
+      "printed": true,
+      "material": "PLA",
+      "label": "PROTOTYPE-READY",
+      "qty_per_aircraft": 1,
+      "notes": "Flat, no supports. Tool only - scribe outline and centre-punch holes on G10.",
+      "fits_P1S": true
+    },
+    "SF_RC8_rail_cradle": {
+      "bbox_mm": [
+        20.0,
+        25.35,
+        10.5
+      ],
+      "volume_cm3": 3.632,
+      "printed": true,
+      "material": "PETG or PA-CF",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 8,
+      "notes": "Under the 8x8 motor beam, two per motor pad. Print floor-up so nut traps bridge; 5 walls.",
+      "fits_P1S": true
+    },
+    "SF_RC10_rail_cradle": {
+      "bbox_mm": [
+        20.0,
+        27.35,
+        12.5
+      ],
+      "volume_cm3": 4.37,
+      "printed": true,
+      "material": "PETG or PA-CF",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 0,
+      "notes": "For clamping G10 plates (gear, EDF) to 10x10 spars - quantity set by the V18 rail layout.",
+      "fits_P1S": true
+    },
+    "SF_FC_iso_carrier_TPU": {
+      "bbox_mm": [
+        62.0,
+        42.0,
+        3.0
+      ],
+      "volume_cm3": 6.628,
+      "printed": true,
+      "material": "TPU 95A",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 1,
+      "notes": "Flat, no supports. Slots span a range because the FC hole pattern is unconfirmed.",
+      "fits_P1S": true
+    },
+    "SF_EDF_thrust_plate_G10_2p0": {
+      "bbox_mm": [
+        2.02,
+        120.0,
+        84.0
+      ],
+      "volume_cm3": 13.397,
+      "printed": false,
+      "material": "G10/FR4 2.0 mm",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 1,
+      "notes": "Cut from G10 via DXF; drill EDF ears to the measured unit.",
+      "fits_P1S": null
+    },
+    "SF_nose_steer_collar": {
+      "bbox_mm": [
+        29.51,
+        12.01,
+        10.01
+      ],
+      "volume_cm3": 1.33,
+      "printed": true,
+      "material": "PETG",
+      "label": "EXPERIMENTAL",
+      "qty_per_aircraft": 1,
+      "notes": "Print standing on the collar end; supports off. Test piece until the real leg is measured.",
+      "fits_P1S": true
+    }
+  }
+}

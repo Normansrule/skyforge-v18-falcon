@@ -1,0 +1,28 @@
+{
+  "_note": "V18 layout values from the master build brief. Axes: +X aft from nose, +Y starboard, +Z up, mm. These are LAYOUT values, not an approved flight CG or gear setting.",
+  "length_mm": 810,
+  "span_mm": 1000,
+  "lift_motors": {
+    "M1": {"pos": "front-right", "x": 240, "y": 220, "spin": "CCW", "fc_output": "S1", "servo_function": 33},
+    "M2": {"pos": "rear-left",   "x": 420, "y": -220, "spin": "CCW", "fc_output": "S2", "servo_function": 34},
+    "M3": {"pos": "front-left",  "x": 240, "y": -220, "spin": "CW",  "fc_output": "S3", "servo_function": 35},
+    "M4": {"pos": "rear-right",  "x": 420, "y": 220, "spin": "CW",  "fc_output": "S4", "servo_function": 36}
+  },
+  "prop_diameter_mm": 127,
+  "rotor_opening_mm": 145,
+  "rotor_edge_gap_mm": 35,
+  "equal_thrust_centroid_x_mm": 330,
+  "outer_servo_centers": {"x": 527, "y_abs": 360.22},
+  "main_wheel_track_mm": 360,
+  "gear_crossbar_x_mm": 385,
+  "nose_axle_x_mm": 150,
+  "polymer": {
+    "permanent_volume_cm3": 1297.2,
+    "solid_pla_density_g_cm3": 1.24,
+    "lwpla_planning_density_g_cm3": 0.80,
+    "lwpla_best_case_density_g_cm3": 0.60,
+    "_density_note": "LW-PLA effective densities are PLANNING assumptions until Stage-1 coupons are weighed; enter the measured value in measurements.json."
+  },
+  "largest_part_mm": 234.7,
+  "printer": "Bambu Lab P1S (256 x 256 x 256 mm build volume)"
+}

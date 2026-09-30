@@ -1,0 +1,22 @@
+{
+  "_note": "Power-system planning constants used by tools/budget.py. Change here when the battery or connectors change, then re-run the tool.",
+  "battery_bom_id": "E01",
+  "battery_capacity_mah": 3300,
+  "battery_cells": 4,
+  "battery_c_rating_continuous_label": 40,
+  "usable_capacity_fraction": 0.80,
+  "avionics_video_servo_avg_current_a": 2.0,
+  "connector_class_continuous_a": {
+    "_note": "Commonly cited continuous classes for genuine AMASS parts; treat as nominal and verify heating on the bench.",
+    "XT60": 60,
+    "XT90": 90
+  },
+  "main_connector": "XT90",
+  "gates": {
+    "hover_fraction_pass_max": 0.50,
+    "hover_fraction_fix_max": 0.60,
+    "hover_minutes_pass_min": 2.0,
+    "hover_minutes_fix_min": 1.0,
+    "_note": "Project gates, not ArduPilot requirements. hover_fraction = worst-loaded motor hover thrust / its measured max static thrust at loaded voltage."
+  }
+}

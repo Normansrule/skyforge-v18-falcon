@@ -1,0 +1,44 @@
+{
+  "_note": "Enter MEASURED values only. null = not yet measured. tools/budget.py uses these to override estimates and to evaluate PASS/FIX/STOP gates. Record units exactly as named.",
+  "owned_items": {
+    "_note": "List BOM ids you already own/bought, e.g. [\"E01\", \"X02\"]. Owned rows are excluded from the remaining-spend total.",
+    "ids": []
+  },
+  "stage0": {
+    "m2_clearance_hole_that_slides_mm": null,
+    "m2_nut_pocket_that_holds_af_mm": null,
+    "rotor_gauge_fits_all_four_wells": null,
+    "owned_2mm_screws_are_m2x0p4_machine": null
+  },
+  "stage1": {
+    "lwpla_effective_density_g_cm3": null,
+    "_how": "Print the E2 wing sample in the production LW-PLA profile; density = measured mass / slicer-reported extruded volume (cm3).",
+    "e2_sample_mass_g": null,
+    "e2_sample_slicer_volume_cm3": null,
+    "servo_fit_ok": null,
+    "camera_fov_ok": null
+  },
+  "stage2": {
+    "_how": "One motor + chosen prop + ESC + E01 battery on a GUARDED stand. Log each throttle step for >= 10 s after settling. voltage_v is LOADED voltage at the battery.",
+    "prop": null,
+    "thrust_table": [],
+    "_thrust_table_example_do_not_use": [
+      {"throttle_pct": 50, "thrust_g": 0, "current_a": 0, "voltage_v": 0, "motor_temp_c_after_60s": 0}
+    ],
+    "max_static_thrust_g_loaded": null,
+    "max_current_a": null,
+    "edf_max_current_a": null,
+    "edf_max_thrust_g": null,
+    "vibration_ok": null
+  },
+  "stage9": {
+    "all_up_mass_g": null,
+    "flight_cg_x_mm": null,
+    "flight_cg_y_mm": null,
+    "simultaneous_lift_plus_edf_peak_a": null
+  },
+  "component_masses_g": {
+    "_note": "Measured per-unit masses keyed by BOM id, e.g. {\"P01\": 33.4}. Overrides the BOM estimate.",
+    "values": {}
+  }
+}

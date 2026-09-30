@@ -1,0 +1,26 @@
+name: checks
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Budget regenerates cleanly
+        run: |
+          python3 tools/budget.py
+          git diff --exit-code docs/BOM.md docs/BUDGET.md || (echo "Generated docs are stale - run tools/budget.py and commit" && exit 1)
+      - name: Consistency checks
+        run: python3 tools/check_repo.py
+  cad:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install -r requirements.txt
+      - run: python3 cad/src/build.py && python3 tools/check_repo.py
+      - uses: actions/upload-artifact@v4
+        with: {name: cad-out, path: cad/out}
