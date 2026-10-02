@@ -5,11 +5,13 @@ Written for an Ubuntu (WSL2) terminal and the `Normansrule` GitHub account throu
 `workflow` scope cannot push them. If this repo belongs on another account, change `GH_USER` and
 `GH_HOST` (for example `N0rmansrule` and `github.com`).
 
-## 1. Unpack (never inside a git-tracked home folder)
+## 1. Get the repo (never inside a git-tracked home folder)
+
+The repo ships as a git bundle (one file with the full history):
 
 ```bash
 mkdir -p ~/src && cd ~/src
-unzip -q /mnt/c/Users/aleks/Downloads/skyforge-v18-falcon.zip
+git clone /mnt/c/Users/aleks/Downloads/skyforge-v18-falcon.bundle skyforge-v18-falcon
 cd ~/src/skyforge-v18-falcon
 git log --oneline | head -3
 ```
