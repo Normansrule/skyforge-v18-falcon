@@ -59,9 +59,10 @@ def _semi_inf(P, A, direction):
 def solve_lattice(panels: dict, rhs_extra=None):
     """panels: arrays xa, ya, xb, yb (bound vortex endpoints, z=0), xc, yc (control points), dy, slope (dzc/dx).
     Returns influence matrix-based solution for alpha=1 rad (gamma_alpha) and for camber (gamma_0)."""
-    A_pts = np.c_[panels["xa"], panels["ya"], np.zeros_like(panels["xa"])]
-    B_pts = np.c_[panels["xb"], panels["yb"], np.zeros_like(panels["xb"])]
-    C = np.c_[panels["xc"], panels["yc"], np.zeros_like(panels["xc"])]
+    z = panels["z"] if "z" in panels else np.zeros_like(panels["xa"])
+    A_pts = np.c_[panels["xa"], panels["ya"], z]
+    B_pts = np.c_[panels["xb"], panels["yb"], z]
+    C = np.c_[panels["xc"], panels["yc"], z]
     ex = np.array([1.0, 0.0, 0.0])
     # horseshoe: from +inf to A, A->B, B to +inf  (velocity of inf->A = -(A->inf))
     w = (-_semi_inf(C, A_pts, ex) + _seg_induced(C, A_pts, B_pts) + _semi_inf(C, B_pts, ex))[:, :, 2]
@@ -233,13 +234,15 @@ def derivatives(P, stations) -> dict:
     """All linear derivatives about the nose (x=0) for one lattice."""
     geo = planform_metrics(stations)
     S, c = geo["S_m2"], geo["mac_m"]
-    inv = np.linalg.inv(solve_lattice(P))
+    aic = solve_lattice(P)
     n = len(P["xc"])
     out = {"geo": geo}
     for key, rhs in (("a", -np.ones(n)), ("0", P["slope"]), ("de", -(P["tag"] == "elevon").astype(float)),
                      ("df", -(P["tag"] == "flap").astype(float)),
-                     ("dall", -np.isin(P["tag"], ["elevon", "flap"]).astype(float))):
-        CL, Cm, _ = forces(inv @ rhs, P, S, c, 0.0)
+                     ("dall", -np.isin(P["tag"], ["elevon", "flap"]).astype(float)),
+                     ("dt", -(P["tag"] == "elev").astype(float)),
+                     ("dpitch", -np.isin(P["tag"], ["elevon", "flap", "elev"]).astype(float))):
+        CL, Cm, _ = forces(np.linalg.solve(aic, rhs), P, S, c, 0.0)
         out["CL" + key], out["Cm" + key] = CL, Cm
     out["x_np_mm"] = -out["Cma"] / out["CLa"] * c * 1000
     return out
@@ -261,7 +264,7 @@ def trim(d: dict, x_cg_mm: float, mass_g: float, V: float, eta: float = 0.8, sur
 
 
 def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift_mm=0.0, wells=None, body_half_mm=81.0,
-                      le_ext_mm=0.0, le_ext_span=(81.0, 315.0)):
+                      le_ext_mm=0.0, le_ext_span=(81.0, 315.0), extra_surfaces=None):
     """wing_shift_mm moves every strip outboard of |y| > body_half_mm aft (wing group relative to the body).
     wells: list of (x, y, r) circles (mm, after the shift) whose panels are removed; implies fill_wells."""
     fill_wells = fill_wells or wells is not None
@@ -269,7 +272,7 @@ def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift
     half = max(b[1][1] for _, _, b in meshes)
     edges = np.arange(0.0, half + strip_mm, strip_mm)
     edges[-1] = min(edges[-1], half)
-    pan = {k: [] for k in ("xa", "ya", "xb", "yb", "xc", "yc", "slope", "tag", "x_le", "x_te")}
+    pan = {k: [] for k in ("xa", "ya", "xb", "yb", "xc", "yc", "slope", "tag", "x_le", "x_te", "z")}
     stations = []
     for j in range(len(edges) - 1):
         ya, yb = edges[j], edges[j + 1]
@@ -334,10 +337,43 @@ def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift
                     pan["slope"].append(slope)
                     pan["tag"].append(tag[a:b][k])
                     pan["x_le"].append(xl + shift); pan["x_te"].append(xr + shift)
+                    pan["z"].append(0.0)
+    for surf in extra_surfaces or []:
+        add_surface(pan, surf, strip_mm, panel_mm)
     P = {k: np.array(v) for k, v in pan.items()}
-    for k in ("xa", "ya", "xb", "yb", "xc", "yc", "x_le", "x_te"):
+    for k in ("xa", "ya", "xb", "yb", "xc", "yc", "x_le", "x_te", "z"):
         P[k] = P[k] / 1000.0  # -> metres
     return P, stations
+
+
+def add_surface(pan, s, strip_mm=10.0, panel_mm=12.0):
+    """Append a mirrored, flat, straight-tapered surface (e.g. a horizontal tail).
+    s: y_root, y_tip, x_le_root, x_le_tip, c_root, c_tip (mm), incidence_deg (leading edge up +),
+    tag, flap_frac (aft fraction tagged `flap_tag`, e.g. an elevator)."""
+    n_span = max(2, int(round((s["y_tip"] - s["y_root"]) / strip_mm)))
+    ys = np.linspace(s["y_root"], s["y_tip"], n_span + 1)
+    slope0 = -np.tan(np.radians(s.get("incidence_deg", 0.0)))
+    for j in range(n_span):
+        ya, yb = ys[j], ys[j + 1]
+        yc = (ya + yb) / 2
+        f = (yc - s["y_root"]) / (s["y_tip"] - s["y_root"])
+        xl = s["x_le_root"] + f * (s["x_le_tip"] - s["x_le_root"])
+        c = s["c_root"] + f * (s["c_tip"] - s["c_root"])
+        n = max(2, int(round(c / panel_mm)))
+        dx = c / n
+        for i in range(n):
+            x0 = xl + i * dx
+            frac = (i + 0.5) / n
+            tag = s.get("flap_tag", "elev") if frac > 1 - s.get("flap_frac", 0.0) else s.get("tag", "tail")
+            for sgn in (1, -1):
+                y0, y1 = (ya, yb) if sgn == 1 else (-yb, -ya)
+                pan["xa"].append(x0 + dx / 4); pan["xb"].append(x0 + dx / 4)
+                pan["ya"].append(y0); pan["yb"].append(y1)
+                pan["xc"].append(x0 + 0.75 * dx); pan["yc"].append(sgn * yc)
+                pan["slope"].append(slope0)
+                pan["tag"].append(tag)
+                pan["x_le"].append(xl); pan["x_te"].append(xl + c)
+                pan["z"].append(s.get("z_mm", 0.0))
 
 
 def planform_metrics(stations):

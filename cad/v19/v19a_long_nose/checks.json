@@ -1,0 +1,108 @@
+{
+ "collisions_new_vs_V18": [],
+ "intended_contacts": [
+  {
+   "a": "CF_crossrail_450_10x10x820",
+   "b": "G10_cassette_B_support_left",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "CF_crossrail_450_10x10x820",
+   "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "NEW_leading_edge_glove_L",
+   "intended": "glove root seats against the body side, like the wing root"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "NEW_leading_edge_glove_R",
+   "intended": "glove root seats against the body side, like the wing root"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "WLA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "WRA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F3_hollow_body",
+   "b": "WLA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F3_hollow_body",
+   "b": "WRA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "KEEP_OUT_BATTERY_NOSE_BAY_140x48x33",
+   "b": "NEW_G10_nose_battery_floor",
+   "intended": "pack sits on the floor between the rails"
+  },
+  {
+   "a": "NEW_leading_edge_glove_L",
+   "b": "WLA_hollow_wing",
+   "intended": "glove bonds to the trimmed panel nose"
+  },
+  {
+   "a": "NEW_leading_edge_glove_L",
+   "b": "WLB_hollow_wing",
+   "intended": "glove bonds to the trimmed panel nose"
+  },
+  {
+   "a": "NEW_leading_edge_glove_R",
+   "b": "WRA_hollow_wing",
+   "intended": "glove bonds to the trimmed panel nose"
+  },
+  {
+   "a": "NEW_leading_edge_glove_R",
+   "b": "WRB_hollow_wing",
+   "intended": "glove bonds to the trimmed panel nose"
+  }
+ ],
+ "P1S_fit": {
+  "NEW_nose_battery_rails": {
+   "fits": true,
+   "footprint_max_mm": 44.5,
+   "rotation_deg": 45.0,
+   "height_mm": 128.0,
+   "margin_mm": 211.5
+  },
+  "NEW_well_fill_R": {
+   "fits": true,
+   "footprint_max_mm": 237.4,
+   "rotation_deg": 45.0,
+   "height_mm": 143.3,
+   "margin_mm": 18.6
+  },
+  "NEW_well_fill_L": {
+   "fits": true,
+   "footprint_max_mm": 237.4,
+   "rotation_deg": 45.0,
+   "height_mm": 143.3,
+   "margin_mm": 18.6
+  },
+  "NEW_leading_edge_glove_R": {
+   "fits": true,
+   "footprint_max_mm": 197.5,
+   "rotation_deg": 43.5,
+   "height_mm": 194.5,
+   "margin_mm": 58.5
+  },
+  "NEW_leading_edge_glove_L": {
+   "fits": true,
+   "footprint_max_mm": 197.5,
+   "rotation_deg": 43.5,
+   "height_mm": 194.5,
+   "margin_mm": 58.5
+  }
+ },
+ "status": "PASS"
+}

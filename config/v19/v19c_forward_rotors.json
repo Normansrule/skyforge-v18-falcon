@@ -1,0 +1,17 @@
+{
+ "name": "v19c_forward_rotors",
+ "label": "V19-C forward rotors",
+ "wing_shift_mm": 275,
+ "front_rotor": {
+  "mode": "boom",
+  "dx": 0.0,
+  "x": 261.7593329277306
+ },
+ "rear_rotor_dx_mm": 0.0,
+ "battery": "nose_bay",
+ "avionics_forward": true,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": null,
+ "summary": "Front rotors on booms ahead of the leading edge, wing 275 mm aft"
+}

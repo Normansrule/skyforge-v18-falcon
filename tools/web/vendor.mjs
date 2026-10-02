@@ -10,7 +10,8 @@ const copy = (from, to) => { mkdirSync(dirname(join(out, to)), { recursive: true
 
 for (const f of ['build/three.module.js', 'build/three.core.js', 'LICENSE',
   'examples/jsm/controls/OrbitControls.js', 'examples/jsm/loaders/GLTFLoader.js',
-  'examples/jsm/utils/BufferGeometryUtils.js', 'examples/jsm/utils/SkeletonUtils.js', 'examples/jsm/libs/meshopt_decoder.module.js']) {
+  'examples/jsm/utils/BufferGeometryUtils.js', 'examples/jsm/utils/SkeletonUtils.js', 'examples/jsm/libs/meshopt_decoder.module.js',
+  'examples/jsm/environments/RoomEnvironment.js']) {
   copy(`three/${f}`, `three/${f}`);
 }
 copy('marked/lib/marked.esm.js', 'marked/marked.esm.js');

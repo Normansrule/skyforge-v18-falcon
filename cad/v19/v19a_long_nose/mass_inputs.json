@@ -1,0 +1,438 @@
+{
+ "moves": {
+  "WRA_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRB_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRC_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRD_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "FLAP_R": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLA_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLB_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLC_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLD_hollow_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "FLAP_L": [
+   200,
+   0.0,
+   0.0
+  ],
+  "TRAY_A_battery_power_cassette": [
+   16.0,
+   0.0,
+   0.0
+  ],
+  "FIN_R": [
+   200,
+   0.0,
+   0.0
+  ],
+  "FIN_L": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRE1_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLE1_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRE2_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLE2_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WRF_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "WLF_falcon_wing": [
+   200,
+   0.0,
+   0.0
+  ],
+  "ELEVON_R_falcon": [
+   200,
+   0.0,
+   0.0
+  ],
+  "ELEVON_L_falcon": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_-180": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_-180": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_180": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_180": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_-360.222222222": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_-360.222222222": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_360.222222222": [
+   200,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_360.222222222": [
+   200,
+   0.0,
+   0.0
+  ],
+  "CF_crossrail_270_10x10x620": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "CF_crossrail_450_10x10x820": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_cassette_A_support_left": [
+   16.0,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_OR_CUT_cassette_A_support_strip": [
+   16.0,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_OR_CUT_motor_plate_PRINT_TEMPLATE_NOT_FLIGHT": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_OR_CUT_motor_backing_plate": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M1_2207_envelope": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_2": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_2": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M2_2207_envelope": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_3": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_3": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M3_2207_envelope": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_4": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_4": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M4_2207_envelope": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "CF_gear_crossbar_10x10x340": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "G10_main_gear_left": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_gear_leg_-1": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_wheel_-1": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_OR_CUT_main_gear_plate": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_gear_leg_1": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_wheel_1": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "KEEP_OUT_RX_antenna_free_zone": [
+   0.0,
+   0.0,
+   7.0
+  ],
+  "KEEP_OUT_LIFT_ESC_54x46x14": [
+   16.0,
+   0.0,
+   0.0
+  ],
+  "KEEP_OUT_SERVO_BEC_48x38x16": [
+   16.0,
+   0.0,
+   0.0
+  ],
+  "KEEP_OUT_FC_54x34x24": [
+   -147.0,
+   17.0,
+   0.0
+  ],
+  "KEEP_OUT_EDF_ESC_73x30x12_plus_margin": [
+   -132.0,
+   0.0,
+   -3.0
+  ],
+  "KEEP_OUT_VTX_42x26x14": [
+   -149.0,
+   -30.0,
+   22.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M1_REFERENCE_ONLY": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M2_REFERENCE_ONLY": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M3_REFERENCE_ONLY": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M4_REFERENCE_ONLY": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "site:240,24,-19:2.8": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "site:240,-24,-19:2.8": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "site:420,24,-19:2.8": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "site:420,-24,-19:2.8": [
+   118.30120958022553,
+   0.0,
+   0.0
+  ],
+  "site:385,24,-31:2.8": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "site:385,-24,-31:2.8": [
+   108.10000000000002,
+   0.0,
+   -1.5
+  ],
+  "xyz:287,0,10": [
+   16.0,
+   0,
+   0
+  ],
+  "xyz:520,25,12": [
+   -124.0,
+   0,
+   0
+  ],
+  "KEEP_OUT_BATTERY_MAX_140x50x38": [
+   -205.0,
+   0.0,
+   -17.9
+  ]
+ },
+ "removed": [],
+ "new": [
+  {
+   "name": "NEW_G10_nose_battery_floor",
+   "mass_g": 18.55965009337803,
+   "lwpla": false,
+   "xyz": [
+    157.28,
+    -0.0,
+    -19.15
+   ]
+  },
+  {
+   "name": "NEW_nose_battery_rails",
+   "mass_g": 7.802879999999996,
+   "lwpla": false,
+   "xyz": [
+    157.0,
+    0.0,
+    -13.4
+   ]
+  },
+  {
+   "name": "NEW_well_fill_R",
+   "mass_g": 26.275387950988282,
+   "lwpla": true,
+   "xyz": [
+    549.71,
+    217.51,
+    -0.0
+   ]
+  },
+  {
+   "name": "NEW_well_fill_L",
+   "mass_g": 26.275387950988282,
+   "lwpla": true,
+   "xyz": [
+    549.71,
+    -217.51,
+    -0.0
+   ]
+  },
+  {
+   "name": "NEW_leading_edge_glove_R",
+   "mass_g": 47.396369963984455,
+   "lwpla": true,
+   "xyz": [
+    299.55,
+    178.0,
+    0.18
+   ]
+  },
+  {
+   "name": "NEW_leading_edge_glove_L",
+   "mass_g": 47.396369963984455,
+   "lwpla": true,
+   "xyz": [
+    299.55,
+    -178.0,
+    0.18
+   ]
+  }
+ ],
+ "volume_override_cm3": {
+  "CAM_19mm_cradle": 5.201341827845105,
+  "WRA_hollow_wing": 9.440904685595445,
+  "WRB_hollow_wing": 47.825145566591694,
+  "WRC_hollow_wing": 77.75543137673453,
+  "WLA_hollow_wing": 9.440845881388535,
+  "WLB_hollow_wing": 47.824926384633464,
+  "WLC_hollow_wing": 77.75519767720306,
+  "WRE1_falcon_wing": 30.749350728762977,
+  "WLE1_falcon_wing": 30.749349879848918,
+  "WRE2_falcon_wing": 10.645264577979082,
+  "WLE2_falcon_wing": 10.645264254703417,
+  "F2_hollow_body": 56.041200760592396,
+  "F3_hollow_body": 52.47465006876617
+ },
+ "main_gear_x_mm": 493.1
+}

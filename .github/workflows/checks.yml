@@ -52,6 +52,10 @@ jobs:
           python3 tools/harness.py
           python3 tools/budget.py
           python3 cad/interface/src/build.py
+      - name: V19 search and geometry
+        run: |
+          python3 tools/v19/search.py
+          python3 tools/v19/geometry.py
       - uses: actions/upload-artifact@v4
         with:
           name: analysis
@@ -59,3 +63,5 @@ jobs:
             analysis
             cad/v18/parts.json
             cad/interface/out
+            cad/v19
+            config/v19

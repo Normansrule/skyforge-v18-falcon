@@ -1,0 +1,16 @@
+{
+ "name": "v19a_long_nose",
+ "label": "V19-A long-nose falcon",
+ "wing_shift_mm": 200,
+ "front_rotor": {
+  "mode": "wing",
+  "dx": -81.69879041977447
+ },
+ "rear_rotor_dx_mm": -81.69879041977447,
+ "battery": "nose_bay",
+ "avionics_forward": true,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": null,
+ "summary": "Wing group 200 mm aft, battery in a nose bay, rotors stay in the wing wells"
+}

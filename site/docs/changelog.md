@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0 - 2026-10-02
+
+V19: the three requested directions, built and checked, and a recommendation that passes.
+
+- `tools/v19/`: configuration engine, search over 44 configurations (long nose, falcon tail, forward rotors,
+  combined) with masses from the V19 construction itself, variant geometry from the V18 meshes (moved parts,
+  cut panels, new booms, pods, risers, hangers, well caps, glove, root fairings, tail booms, fins, stabiliser,
+  elevator, nose-bay floor), full-assembly collision checks against the V18 baseline, and a generated report.
+- **Result:** V19-R (wing 250 mm aft + forward rotors on booms + 0.05 m2 tail) and V19-C (wing 275 mm aft +
+  forward rotors) pass every model gate; the long nose alone and the tail alone do not.
+- Web app redesign: environment lighting, soft shadows, grid floor, intro, animated V18/V19 switching with an
+  X-ray ghost of V18, a V19 tab with variant cards, change lists, part cards and a comparison table; refreshed
+  visual style throughout (light and dark).
+- Easy setup: `scripts/setup_ubuntu.sh`, `scripts/publish_github.sh`, `Makefile` (`make help`).
+- Repo checks and tests cover the V19 data; CI's manual analysis job re-runs the V19 search and geometry.
+
+
 ## 0.2.0 - 2026-10-02
 
 Rebuilt around the actual V18 assembly instead of a proxy layout.

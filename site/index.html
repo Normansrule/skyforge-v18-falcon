@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SKYFORGE V18 Falcon</title>
-<meta name="description" content="Build workbench for the SKYFORGE V18 Falcon hybrid-VTOL: 3D model, balance study, budget, bench data, wiring and build stages.">
-<meta name="theme-color" content="#26313D">
+<title>SKYFORGE Falcon Workbench</title>
+<meta name="description" content="Build workbench for the SKYFORGE V18 Falcon hybrid-VTOL and its V19 directions: 3D model, balance, budget, bench data, wiring and build stages.">
+<meta name="theme-color" content="#1B232C">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -19,29 +19,33 @@
 </head>
 <body>
 <header class="bar">
-  <a class="brand" href="#aircraft" aria-label="SKYFORGE V18 Falcon home">
-    <img src="icons/mark.svg" alt="" width="28" height="28">
-    <span class="brand-name">SKYFORGE V18 Falcon</span>
+  <a class="brand" href="#aircraft" aria-label="SKYFORGE Falcon home">
+    <img src="icons/mark.svg" alt="" width="30" height="30">
+    <span class="brand-name">SKYFORGE <b>Falcon</b></span>
   </a>
   <nav class="tabs" aria-label="Sections">
     <a href="#aircraft" data-tab="aircraft">Aircraft</a>
+    <a href="#v19" data-tab="v19">V19</a>
     <a href="#balance" data-tab="balance">Balance</a>
     <a href="#budget" data-tab="budget">Budget</a>
-    <a href="#bom" data-tab="bom">Parts list</a>
+    <a href="#bom" data-tab="bom">Parts</a>
     <a href="#bench" data-tab="bench">Bench</a>
     <a href="#wiring" data-tab="wiring">Wiring</a>
     <a href="#stages" data-tab="stages">Stages</a>
     <a href="#docs" data-tab="docs">Docs</a>
   </nav>
-  <span class="status-pill" id="status-pill" title="Overall model gate status">loading…</span>
+  <span class="status-pill" id="status-pill" title="Model gate status">loading…</span>
 </header>
 
 <main id="app">
   <section class="workbench" id="workbench">
     <div class="viewport" id="viewport">
-      <canvas id="three" aria-label="3D model of the V18 assembly. Drag to orbit, scroll to zoom, click a part to inspect it."></canvas>
-      <div class="viewport-hint" id="viewport-hint">Drag to orbit, scroll to zoom, click a part to inspect it</div>
+      <canvas id="three" aria-label="3D model. Drag to orbit, scroll to zoom, click a part to inspect it."></canvas>
+      <div class="load" aria-hidden="true"><div class="load-mark"></div><div class="load-bar" id="load-bar"></div></div>
+      <div class="variant-pills" id="variant-pills" role="group" aria-label="Design variant"></div>
+      <div class="viewport-hint" id="viewport-hint">Drag to orbit · scroll to zoom · click a part</div>
       <div class="ruler" id="ruler" aria-label="Fore-aft balance ruler"></div>
+      <div class="intro" id="intro" hidden></div>
     </div>
     <aside class="panel" id="panel"></aside>
   </section>

@@ -1,4 +1,4 @@
-// The eight views. Panel views (aircraft, balance) render beside the 3D model; the rest are pages.
+// The views. Panel views (aircraft, v19, balance) render beside the 3D model; the rest are pages.
 import { ingestBench } from './budget.js';
 import { save, clear, download } from './store.js';
 import { esc, fmt, usd, badge, html, $, $$ } from './util.js';
@@ -21,11 +21,16 @@ export function aircraft(ctx, el) {
   const r = ctx.results;
   const d = ctx.data;
   const [g1, g2, g3] = r.gates;
+  const vsel = ctx.variant && d.variants?.variants[ctx.variant];
   const band = Object.values(r.neutral_point_band_x_mm);
   const sweep = d.geom_checks.C3_control_sweep;
   const wells = d.geom_checks.C1_C2_wells;
   const minTip = Math.min(...Object.values(wells).map((w) => w.tip_clearance_mm));
-  html(el, `
+  const intro = vsel ? `
+    <h2>${esc(vsel.label)}</h2>
+    <p class="lede-s">${esc(vsel.summary)}</p>
+    ${variantReadout(vsel)}
+    <p class="small"><a href="#v19/${esc(ctx.variant)}">Everything that changes, part by part</a> · <a href="#aircraft" data-variant="">Back to V18</a></p>` : `
     <h2>Where V18 balances today</h2>
     <dl class="readout">
       <dt>All-up mass</dt><dd>${fmt(r.all_up_g)} g</dd>
@@ -39,10 +44,12 @@ export function aircraft(ctx, el) {
       <p><a href="#balance">Try the balance study</a> to see which changes move the CG where it needs to be.</p>
     </div>
     <p class="small muted">Model values from your V18 geometry and the BOM (${esc(r.basis)}). Enter measurements in <a href="#budget">Budget</a> and they replace the model.</p>
+    ${d.variants ? `<p class="small"><a href="#v19">See the V19 directions</a>: the recommended one passes every model gate.</p>` : ''}`;
+  html(el, `${intro}
 
     <h2>View</h2>
     <div class="seg" role="group" aria-label="Camera">
-      <button data-view="three-quarter" aria-pressed="true">3/4</button><button data-view="top">Top</button><button data-view="side">Side</button><button data-view="front">Front</button>
+      <button data-view="three-quarter" aria-pressed="true">3/4</button><button data-view="top">Top</button><button data-view="side">Side</button><button data-view="front">Front</button><button data-view="rear">Rear</button>
     </div>
     <div class="field"><span class="lab">Layers</span>
       <div class="layers">${LAYERS.map(([k, label, c]) => `<label><input type="checkbox" data-layer="${k}" ${layerState[k] ? 'checked' : ''}><span class="swatch" style="background:${c}"></span>${label}</label>`).join('')}</div>
@@ -60,7 +67,7 @@ export function aircraft(ctx, el) {
 
     <h2>Part</h2>
     <label class="field"><span class="lab">Find a part</span>
-      <select id="part-select"><option value="">Click the model or choose…</option>${d.parts.parts.map((p) => `<option>${esc(p.name)}</option>`).join('')}</select></label>
+      <select id="part-select"><option value="">Click the model or choose…</option>${vsel ? `<optgroup label="New in ${esc(vsel.label)}">${vsel.new.map((p) => `<option>${esc(p.name)}</option>`).join('')}</optgroup><optgroup label="V18">` : ''}${d.parts.parts.map((p) => `<option>${esc(p.name)}</option>`).join('')}${vsel ? '</optgroup>' : ''}</select></label>
     <div id="part-card" class="small muted">Nothing selected.</div>
   `);
   $$(el, '[data-view]').forEach((b) => b.addEventListener('click', () => {
@@ -76,6 +83,7 @@ export function aircraft(ctx, el) {
       ctx.viewer?.setDeflection(k === 'flap' ? 'FLAP' : 'ELEVON', Number(e.target.value));
     });
   }
+  $$(el, '[data-variant]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); ctx.setVariant(a.dataset.variant || null); }));
   $(el, '#part-select').addEventListener('change', (e) => { ctx.viewer?.select(e.target.value || null); onPick(ctx, e.target.value || null); });
   whenViewer(ctx, (v) => { for (const [k, on] of Object.entries(layerState)) v.setLayer(k, on); });
   if (pickedName) onPick(ctx, pickedName);
@@ -88,6 +96,19 @@ export function onPick(ctx, name) {
   const sel = document.getElementById('part-select');
   if (sel && name && [...sel.options].some((o) => o.value === name)) sel.value = name;
   if (!name) { card.textContent = 'Nothing selected.'; return; }
+  const vv = ctx.variant && ctx.data.variants?.variants[ctx.variant];
+  const np = vv?.new.find((x) => x.name === name);
+  if (np) {
+    const rows = [['Kind', `New in ${esc(vv.label)}`], np.material && ['Material', esc(np.material)],
+      np.mass_g > 0 && ['Mass', `${fmt(np.mass_g, 1)} g <span class="muted">(${esc(np.mass_basis)})</span>`],
+      ['Centroid', `x ${fmt(np.centroid_mm[0])}, y ${fmt(np.centroid_mm[1])}, z ${fmt(np.centroid_mm[2])} mm`],
+      ['Size', `${np.bbox_mm.map((v) => fmt(v, 1)).join(' x ')} mm`],
+      np.P1S && ['P1S bed', np.P1S.fits ? `fits, ${fmt(np.P1S.footprint_max_mm, 1)} mm footprint` : `${badge('FIX')} does not fit in one piece`]].filter(Boolean);
+    card.classList.remove('muted');
+    card.innerHTML = `<h3>${esc(name)}</h3><p>${esc(np.note)}</p><dl class="readout">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl><p class="small muted">STL in <code>cad/v19/${esc(ctx.variant)}/stl/</code></p>`;
+    return;
+  }
+  const modv = vv?.modified_detail?.find((x) => x.name === name);
   const p = ctx.data.parts.parts.find((x) => x.name === name);
   if (!p) {
     const base = name.replace(/^REPO_/, '').replace(/_\d+$/, '');
@@ -109,7 +130,85 @@ export function onPick(ctx, name) {
     ['Balance group', p.group],
   ].filter(Boolean);
   card.classList.remove('muted');
-  card.innerHTML = `<h3>${esc(name)}</h3><dl class="readout">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+  card.innerHTML = `<h3>${esc(name)}</h3>${modv ? `<p><span class="label-tag">modified in ${esc(vv.label)}</span> ${esc(modv.why.join('; '))}.</p>` : ''}${vv?.moves[name] && !modv ? `<p class="small"><span class="label-tag">moved in ${esc(vv.label)}</span> ${vv.moves[name].map((v, i) => (Math.abs(v) > 0.05 ? `${'xyz'[i]} ${v > 0 ? '+' : ''}${fmt(v, 1)}` : '')).filter(Boolean).join(', ')} mm</p>` : ''}<dl class="readout">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+}
+
+// ------------------------------------------------------------------------------------------------
+const pct = (v) => `${fmt(v, 1)} %`;
+function gateChips(e) {
+  return `<span class="chips">${badge(e.hover_ok ? 'PASS' : 'STOP')}<span>Hover</span>${badge(e.flight_ok ? 'PASS' : 'STOP')}<span>Wing-borne</span>${badge(e.geometry_ok && e.fit_ok !== false ? 'PASS' : 'FIX')}<span>Fit</span></span>`;
+}
+function variantReadout(v) {
+  const e = v.eval;
+  const t = Object.values(e.trim_16ms);
+  return `<div class="gates">${gateChips(e)}</div>
+    <dl class="readout">
+      <dt>All-up mass</dt><dd>${fmt(e.all_up_g)} g</dd>
+      <dt>CG / rotor centroid</dt><dd>x ${fmt(e.cg_mm[0])} / x ${fmt(e.rotor_centroid_x_mm)} mm</dd>
+      <dt>Neutral point</dt><dd>x ${fmt(e.np_closed_x_mm)} to ${fmt(e.np_open_x_mm)} mm</dd>
+      <dt>Static margin</dt><dd>${pct(e.sm_closed_pct)} to ${pct(e.sm_open_pct)} <span class="muted">need ≥ 5</span></dd>
+      <dt>Heaviest motor</dt><dd>${pct(e.worst_motor_pct)} of weight <span class="muted">need ≤ 30</span></dd>
+      <dt>Pitch trim 16 m/s</dt><dd>${t.map((x) => `${fmt(x.pitch_surfaces_deg, 1)}°`).join(' / ')} at α ${fmt(t[0].alpha_deg, 1)}°</dd>
+      <dt>Length × span</dt><dd>${fmt(v.length_mm)} × ${fmt(v.span_mm)} mm</dd>
+    </dl>`;
+}
+
+export function v19(ctx, el, sub) {
+  const V = ctx.data.variants;
+  if (!V) { html(el, '<h2>V19</h2><p>The V19 data has not been generated. Run <code>make v19</code>.</p>'); return; }
+  let want = sub === 'v18' ? null : (sub || ctx.variant || V.recommended);
+  if (want && !V.variants[want]) want = V.recommended;
+  if (want !== ctx.variant) { ctx.setVariant(want); return; }
+  const cur = want;
+  const v = cur && V.variants[cur];
+  const card = (slug, x, label, summary) => `
+    <button class="vcard ${slug === (cur || '') ? 'on' : ''}" data-slug="${esc(slug)}" aria-pressed="${slug === (cur || '')}">
+      <span class="vcard-top"><span class="vname">${esc(label)}</span>${x.passes ? '<span class="pill ok">passes</span>' : '<span class="pill no">fails</span>'}</span>
+      <span class="vsum">${esc(summary)}</span>
+      <span class="vnums num">SM ${fmt(x.sm_closed_pct, 1)} % · motor ${fmt(x.worst_motor_pct, 1)} % · ${fmt(x.all_up_g)} g</span>
+    </button>`;
+  const groups = {};
+  if (v) for (const p of v.new) { const k = p.group_label; (groups[k] ||= []).push(p); }
+  html(el, `
+    <h2>V19 directions</h2>
+    <p class="lede-s">Your three directions, built from your V18 parts and checked with the same models: the long nose, the falcon tail, the forward rotors, and the combination.</p>
+    <div class="vcards">
+      ${card('', V.v18, 'V18 as designed', 'Your assembly today.')}
+      ${V.order.map((s) => card(s, V.variants[s].eval, V.variants[s].label, V.variants[s].summary)).join('')}
+    </div>
+    ${v ? `
+      <div class="finding ${v.eval.passes ? 'ok' : ''}">${v.eval.passes
+        ? `<p>${badge('PASS')} Every model gate passes with the parts as modelled: the CG sits on the rotor centroid within ${fmt(Math.abs(v.eval.cg_mm[0] - v.eval.rotor_centroid_x_mm), 0)} mm and ${fmt(v.eval.sm_closed_pct, 1)} % of the chord ahead of the neutral point.</p>`
+        : `<p>${badge('STOP')} ${esc(v.verdict)}</p>`}</div>
+      ${variantReadout(v)}
+      <p class="legend small"><span class="swatch" style="background:#5E8DB8"></span>new printed (LW-PLA) <span class="swatch" style="background:#3E5F80"></span>new PETG <span class="swatch" style="background:#2A2F35"></span>carbon <span class="swatch" style="background:#C9B98A"></span>G10 <span class="swatch" style="background:#929BA5"></span>your V18 parts</p>
+      <label class="check"><input type="checkbox" id="ghost" ${ctx.ghost ? 'checked' : ''}> Show V18 as an X-ray ghost</label>
+      <h2>What changes</h2>
+      <ul class="changes">${v.changes.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+      <h3>New parts <span class="muted small">(+${fmt(v.new_mass_g)} g)</span></h3>
+      ${Object.entries(groups).map(([k, ps]) => `<details><summary>${esc(k)} <span class="muted small">${ps.length} · ${fmt(ps.reduce((a, p) => a + p.mass_g, 0), 0)} g</span></summary>
+        <ul class="plist">${ps.map((p) => `<li><a href="#" data-part="${esc(p.name)}">${esc(p.name.replace(/^NEW_/, '').replace(/_/g, ' '))}</a> <span class="muted small">${p.material ? esc(p.material) + ', ' : ''}${p.mass_g ? fmt(p.mass_g, 1) + ' g' : 'envelope'}${p.P1S && !p.P1S.fits ? ' · split to print' : ''}</span></li>`).join('')}</ul></details>`).join('')}
+      ${v.modified_detail.length ? `<h3>Your V18 parts that change</h3><ul class="plist">${v.modified_detail.map((m) => `<li><a href="#" data-part="${esc(m.name)}">${esc(m.name)}</a> <span class="muted small">${esc(m.why.join('; '))}</span></li>`).join('')}</ul>` : ''}
+      <div id="part-card" class="small muted part-card">Click a part in the list or on the model.</div>
+      <h3>Checks</h3>
+      <p>${badge(v.checks.collisions ? 'FIX' : 'PASS')} ${v.checks.collisions ? `${v.checks.collisions} new collisions against V18: ${esc(v.checks.collision_list.join('; '))}` : `No new collisions in the whole assembly (${v.checks.intended} intended contacts: joints, clamps, sockets). Prop discs are checked against the leading edge separately.`}</p>
+      ${v.checks.jet ? `<p>${badge(v.checks.jet.status)} EDF jet: the stabiliser underside is about ${fmt(v.checks.jet.stab_clear_mm, 0)} mm above the estimated jet edge. ${esc(v.checks.jet.note)}</p>` : ''}
+      <p>${badge(v.checks.p1s_ok ? 'PASS' : 'FIX')} ${v.checks.p1s_ok ? 'Every new printed part fits the P1S bed.' : `Needs splitting for the P1S: ${esc(v.checks.p1s_fail.join(', '))}.`}</p>
+    ` : `<p>V18 as designed: CG x ${fmt(V.v18.cg_mm[0])} mm, rotors x ${fmt(V.v18.rotor_centroid_x_mm)} mm. Pick a V19 direction above.</p>`}
+    <h2>Side by side</h2>
+    <div class="table-wrap"><table class="cmp">
+      <thead><tr><th></th><th class="n">V18</th>${V.order.map((s) => `<th class="n">${esc(V.variants[s].short)}</th>`).join('')}</tr></thead>
+      <tbody>${[
+        ['Mass, g', (e) => fmt(e.all_up_g)], ['CG x, mm', (e) => fmt(e.cg_mm[0])], ['Rotors x, mm', (e) => fmt(e.rotor_centroid_x_mm)],
+        ['Static margin, %', (e) => `${fmt(e.sm_closed_pct, 1)} / ${fmt(e.sm_open_pct, 1)}`], ['Heaviest motor, %', (e) => fmt(e.worst_motor_pct, 1)],
+        ['Trim 16 m/s, °', (e) => Object.values(e.trim_16ms).map((t) => fmt(t.pitch_surfaces_deg, 1)).join(' / ')],
+        ['All gates', (e) => badge(e.passes ? 'PASS' : 'STOP')],
+      ].map(([k, f]) => `<tr><td>${k}</td><td class="n">${f(V.v18)}</td>${V.order.map((s) => `<td class="n">${f(V.variants[s].eval)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+    <p class="small muted">Point-mass and vortex-lattice screening with the masses of the parts as modelled; not a flight clearance. Full write-up: <a href="#docs/v19-variants">V19 variants</a>.</p>
+  `);
+  $$(el, '.vcard').forEach((b) => b.addEventListener('click', () => { location.hash = b.dataset.slug ? `#v19/${b.dataset.slug}` : '#v19/v18'; }));
+  $(el, '#ghost')?.addEventListener('change', (e) => { ctx.ghost = e.target.checked; ctx.viewer?.setGhost(e.target.checked); });
+  $$(el, '[data-part]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); ctx.viewer?.select(a.dataset.part); onPick(ctx, a.dataset.part); }));
 }
 
 // ------------------------------------------------------------------------------------------------

@@ -6,7 +6,10 @@ import { statSync } from 'node:fs';
 const root = new URL('../..', import.meta.url).pathname;
 const cli = `${root}node_modules/.bin/gltf-transform`;
 const run = (...a) => execFileSync(cli, a, { stdio: ['ignore', 'ignore', 'inherit'] });
-for (const [name, ratio, error] of [['v18', '0.12', '0.0006'], ['repo_parts', '0.5', '0.0005']]) {
+import { existsSync } from 'node:fs';
+const variants = ['v19a_long_nose', 'v19b_falcon_tail', 'v19c_forward_rotors', 'v19r_recommended']
+  .filter((v) => existsSync(`${root}site/models/raw/${v}.glb`)).map((v) => [v, '0.25', '0.0005']);
+for (const [name, ratio, error] of [['v18', '0.12', '0.0006'], ['repo_parts', '0.5', '0.0005'], ...variants]) {
   const raw = `${root}site/models/raw/${name}.glb`;
   const tmp = `${root}site/models/raw/${name}.tmp.glb`;
   const out = `${root}site/models/${name}.glb`;

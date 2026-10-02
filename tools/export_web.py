@@ -98,6 +98,101 @@ def build_glb():
     s2.export(raw / "repo_parts.glb")
 
 
+V19_ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_recommended"]
+V19_SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_recommended": "V19-R"}
+
+
+def part_group(n: str) -> str:
+    if re.search(r"nose_battery|BATTERY_NOSE", n):
+        return "Nose bay"
+    if n.endswith("__TRAY_A"):
+        return "Avionics in Tray A"
+    if re.search(r"rotor_boom|motor_pod|boom_hanger|motor_riser", n):
+        return "Rotor booms"
+    if re.search(r"well_cap|well_fill", n):
+        return "Well caps and fills"
+    if re.search(r"tail_|elevator_servo", n):
+        return "Falcon tail"
+    return "Fairings and glove"
+
+
+def eval_subset(e: dict) -> dict:
+    keys = ("all_up_g", "cg_mm", "rotor_front_x_mm", "rotor_rear_x_mm", "rotor_centroid_x_mm", "np_closed_x_mm", "np_open_x_mm",
+            "mac_mm", "sm_closed_pct", "sm_open_pct", "worst_motor_pct", "motor_hover_g", "trim_16ms", "trim_20ms", "stall_speed_ms",
+            "main_gear_x_mm", "hover_ok", "flight_ok", "geometry_ok", "passes", "le_extension_mm", "boom_prop_to_le_mm",
+            "rear_well_to_flap_mm", "new_parts_g", "mass_basis")
+    return {k: e.get(k) for k in keys}
+
+
+def verdict(e: dict, ck: dict) -> str:
+    bits = []
+    if e["sm_closed_pct"] < 5:
+        bits.append(f"static margin {e['sm_closed_pct']:.1f} % with the wells closed (needs 5 % or more): the CG is "
+                    f"{e['cg_mm'][0] - e['np_closed_x_mm']:.0f} mm behind the neutral point")
+    if e["worst_motor_pct"] > 30:
+        bits.append(f"the heaviest motor carries {e['worst_motor_pct']:.1f} % of the weight in hover (30 % limit)")
+    tr = max(abs(t["pitch_surfaces_deg"]) for t in e["trim_16ms"].values())
+    if tr > 10:
+        bits.append(f"pitch trim needs {tr:.0f} deg of surface at 16 m/s")
+    nice = {"CF_crossrail_450_10x10x820": "the rear crossrail", "CF_crossrail_270_10x10x620": "the front crossrail",
+            "D1_belly_intake": "the D1 belly intake"}
+    if ck["collisions_new_vs_V18"]:
+        bits.append("; ".join(f"{nice.get(c['a'], c['a'])} runs into {nice.get(c['b'], c['b'])}" for c in ck["collisions_new_vs_V18"]))
+    return ("Fails: " + "; ".join(bits) + ".") if bits else "Passes every model gate."
+
+
+def variants_data():
+    import math
+    f = ROOT / "analysis" / "v19_variants.json"
+    if not f.exists():
+        return None
+    allv = json.loads(f.read_text())
+    sys.path.insert(0, str(ROOT / "tools" / "v19"))
+    import engine as E
+    E.MODE["res"] = "fine"
+    c18 = E.full({"no_le_ext": True})   # V18 exactly as drawn (no leading-edge extension)
+    c18["_geometry"] = {"moves": {}, "removed": [], "new": [], "main_gear_x_mm": 385.0}
+    v18 = eval_subset(E.evaluate(c18))
+    v18["mass_basis"] = "V18 as modelled"
+    E.save_cache()
+    names = {p.name for p in g.load()}
+    sys.path.insert(0, str(ROOT / "cad" / "interface" / "src"))
+    import build as ib
+    out = {"order": [s for s in V19_ORDER if s in allv], "recommended": "v19r_recommended", "v18": v18, "variants": {}}
+    for slug in out["order"]:
+        v = allv[slug]
+        cfg = json.loads((ROOT / "config" / "v19" / f"{slug}.json").read_text())
+        e = v["evaluation"]
+        moves = {k: [round(x, 2) for x in mv] for k, mv in v["moves"].items() if k in names}
+        repo = {}
+        for pname, spec in ib.PARTS.items():
+            for i, (x, y, z, rz) in enumerate(spec[6]):
+                obj = {240.0: "CF_crossrail_270_10x10x620", 420.0: "CF_crossrail_450_10x10x820", 385.0: "CF_gear_crossbar_10x10x340",
+                       486.0: "KEEP_OUT_FC_54x34x24"}.get(x)
+                if obj and obj in moves:
+                    repo[f"REPO_{pname}_{i}"] = moves[obj]
+        ck = v["checks"]
+        p1s_fail = [k for k, r in ck["P1S_fit"].items() if r and not r.get("fits", True)]
+        new = []
+        for p in v["parts"]:
+            q = {k: p[k] for k in ("name", "class", "material", "mass_g", "layer", "note", "mass_basis", "centroid_mm", "bbox_mm", "P1S")}
+            q["group_label"] = part_group(p["name"])
+            new.append(q)
+        out["variants"][slug] = {
+            "label": cfg["label"], "short": V19_SHORT.get(slug, slug), "summary": cfg["summary"], "eval": eval_subset(e),
+            "verdict": verdict(e, ck), "length_mm": v["extent"]["length_mm"], "span_mm": v["extent"]["span_mm"],
+            "moves": moves, "repo_moves": repo, "hidden": [h for h in v["hidden_in_viewer"] if h in names],
+            "modified": [m["name"] for m in v["modified"]], "modified_detail": v["modified"],
+            "new": new, "new_mass_g": round(sum(p["mass_g"] for p in new), 1), "changes": v["changes"], "notes": v["notes"],
+            "checks": {"collisions": len(ck["collisions_new_vs_V18"]),
+                       "collision_list": [f"{c['a']} x {c['b']}" for c in ck["collisions_new_vs_V18"]],
+                       "intended": len(ck["intended_contacts"]), "jet": ck.get("jet_vs_tail"),
+                       "p1s_ok": not p1s_fail, "p1s_fail": p1s_fail},
+        }
+        out["variants"][slug]["eval"]["fit_ok"] = not ck["collisions_new_vs_V18"] and not p1s_fail
+    return out
+
+
 def bom_rows():
     with open(ROOT / "bom" / "bom.csv", newline="") as fh:
         rows = list(csv.DictReader(fh))
@@ -177,7 +272,7 @@ def main() -> int:
 
     docs = SITE / "docs"
     docs.mkdir(exist_ok=True)
-    order = [("README.md", "Overview"), ("BUILD_STATUS.md", "Build status"), ("docs/BALANCE_AND_STABILITY.md", "Balance and stability"),
+    order = [("README.md", "Overview"), ("BUILD_STATUS.md", "Build status"), ("docs/V19_VARIANTS.md", "V19 variants"), ("docs/BALANCE_AND_STABILITY.md", "Balance and stability"),
              ("docs/V18_CHECKS.md", "V18 geometry checks"), ("docs/TEST_GATES.md", "Build stages and gates"),
              ("docs/BUDGET.md", "Budget"), ("docs/BOM.md", "Bill of materials"), ("docs/WIRING.md", "Wiring"),
              ("docs/HARNESS.md", "Harness cut list"), ("docs/CAD_PARTS.md", "CAD parts"), ("firmware/thrust_stand/README.md", "Thrust stand"),
@@ -202,6 +297,9 @@ def main() -> int:
     for src in [*(ROOT / "analysis").glob("*.png"), *(ROOT / "cad" / "interface" / "out" / "png").glob("*.png")]:
         shutil.copy(src, imgs / src.name)
 
+    vd = variants_data()
+    if vd:
+        dump("variants.json", vd)
     build_glb()
     write_sw_manifest()
     print("site data written:", sorted(p.name for p in DATA.iterdir()))

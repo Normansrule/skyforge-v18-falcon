@@ -141,7 +141,7 @@ def check_analysis() -> None:
             flags.append(f"{k}: inside the rear-well footprint {v['inside_well_footprint_of']}")
     bs = j("analysis/balance_study.json")
     if bs["n_feasible"] == 0:
-        flags.append("balance study: no combination passes hover balance AND static margin - configuration decision needed")
+        flags.append("balance study: no silhouette-preserving V18 combination passes hover AND static margin - see docs/V19_VARIANTS.md (V19-R passes)")
     man = ROOT / "cad" / "interface" / "out" / "manifest.json"
     if man.exists():
         for name, info in json.loads(man.read_text())["parts"].items():
@@ -195,6 +195,44 @@ def check_generated() -> None:
         fails.append(f"version mismatch across package.json / desktop / tauri.conf / Cargo.toml: {sorted(v)}")
 
 
+def check_v19() -> None:
+    """V19 variants: configs, geometry outputs, web data and the recommendation agree."""
+    vf = ROOT / "analysis" / "v19_variants.json"
+    if not vf.exists():
+        flags.append("analysis/v19_variants.json missing - run make v19")
+        return
+    allv = json.loads(vf.read_text())
+    web = j("site/data/variants.json")
+    for slug in web["order"]:
+        if not (ROOT / "config" / "v19" / f"{slug}.json").exists():
+            fails.append(f"config/v19/{slug}.json missing")
+        if not (ROOT / "site" / "models" / f"{slug}.glb").exists():
+            fails.append(f"site/models/{slug}.glb missing - run npm run models")
+        if slug not in allv:
+            fails.append(f"{slug} not in analysis/v19_variants.json")
+            continue
+        a, w = allv[slug]["evaluation"], web["variants"][slug]["eval"]
+        if abs(a["cg_mm"][0] - w["cg_mm"][0]) > 0.05 or a["passes"] != w["passes"]:
+            fails.append(f"{slug}: site/data/variants.json is stale - run python3 tools/export_web.py")
+        for c in allv[slug]["checks"]["collisions_new_vs_V18"]:
+            flags.append(f"{slug}: new collision {c['a']} x {c['b']}")
+    rec = allv.get(web["recommended"])
+    if not rec or not rec["evaluation"]["passes"] or rec["checks"]["collisions_new_vs_V18"]:
+        fails.append("the recommended V19 variant does not pass its gates cleanly")
+    for slug in ("v19c_forward_rotors", "v19r_recommended"):
+        out = ROOT / "cad" / "v19" / slug
+        for f in ("parts.json", "checks.json", "mass_inputs.json", f"{slug}_print_set.3mf"):
+            if not (out / f).exists():
+                fails.append(f"cad/v19/{slug}/{f} missing - run python3 tools/v19/geometry.py")
+        if slug in allv:
+            for pnm in allv[slug]["parts"]:
+                if pnm["class"] in ("printed", "g10", "carbon") and not (out / "stl" / f"{pnm['name']}.stl").exists():
+                    fails.append(f"cad/v19/{slug}/stl/{pnm['name']}.stl missing")
+    doc = ROOT / "docs" / "V19_VARIANTS.md"
+    if not doc.exists() or "V19-R" not in doc.read_text():
+        fails.append("docs/V19_VARIANTS.md missing or stale - run python3 tools/v19/report.py")
+
+
 def main() -> int:
     parts = j("cad/v18/parts.json")
     names = {p["name"] for p in parts["parts"]}
@@ -203,6 +241,7 @@ def main() -> int:
     check_pins()
     check_analysis()
     check_generated()
+    check_v19()
     for f in flags:
         print("FLAG ", f)
     for f in fails:

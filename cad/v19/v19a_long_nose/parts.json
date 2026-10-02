@@ -1,0 +1,408 @@
+{
+ "variant": "v19a_long_nose",
+ "new": [
+  {
+   "name": "KEEP_OUT_BATTERY_NOSE_BAY_140x48x33",
+   "class": "keepout",
+   "material": null,
+   "mass_g": 0.0,
+   "lwpla": false,
+   "layer": "keepouts",
+   "note": "Nose-bay envelope for the BOM pack (136 x 44 x 31) with 2 mm all round. The V18 140 x 50 x 38 maximum does not fit the nose; buy a pack no larger than 136 x 44 x 31.",
+   "mass_basis": "item",
+   "P1S": null,
+   "centroid_mm": [
+    157.0,
+    0.0,
+    -1.9
+   ],
+   "bbox_mm": [
+    140.0,
+    48.0,
+    33.0
+   ]
+  },
+  {
+   "name": "NEW_G10_nose_battery_floor",
+   "class": "g10",
+   "material": "G10",
+   "mass_g": 18.6,
+   "lwpla": false,
+   "layer": "structure",
+   "note": "1.5 mm G10 floor bolted to both keel tops (x150-227, 4x M3) and cantilevered 63 mm forward.",
+   "mass_basis": "volume x density",
+   "P1S": null,
+   "centroid_mm": [
+    157.3,
+    -0.0,
+    -19.1
+   ],
+   "bbox_mm": [
+    140.0,
+    48.0,
+    1.5
+   ]
+  },
+  {
+   "name": "KEEP_OUT_FC_54x34x24__TRAY_A",
+   "class": "keepout",
+   "material": null,
+   "mass_g": 0.0,
+   "lwpla": false,
+   "layer": "keepouts",
+   "note": "Moved into the Tray A battery pocket (rotated to fit its 50 mm width); FC and VTX stacked.",
+   "mass_basis": "item",
+   "P1S": null,
+   "centroid_mm": [
+    339.0,
+    0.0,
+    8.0
+   ],
+   "bbox_mm": [
+    54.0,
+    34.0,
+    24.0
+   ]
+  },
+  {
+   "name": "KEEP_OUT_VTX_42x26x14__TRAY_A",
+   "class": "keepout",
+   "material": null,
+   "mass_g": 0.0,
+   "lwpla": false,
+   "layer": "keepouts",
+   "note": "Moved into the Tray A battery pocket (rotated to fit its 50 mm width); FC and VTX stacked.",
+   "mass_basis": "item",
+   "P1S": null,
+   "centroid_mm": [
+    339.0,
+    0.0,
+    27.0
+   ],
+   "bbox_mm": [
+    42.0,
+    26.0,
+    14.0
+   ]
+  },
+  {
+   "name": "KEEP_OUT_EDF_ESC_73x30x12_plus_margin__TRAY_A",
+   "class": "keepout",
+   "material": null,
+   "mass_g": 0.0,
+   "lwpla": false,
+   "layer": "keepouts",
+   "note": "Moved into the Tray A battery pocket (rotated to fit its 50 mm width); FC and VTX stacked.",
+   "mass_basis": "item",
+   "P1S": null,
+   "centroid_mm": [
+    406.0,
+    0.0,
+    2.0
+   ],
+   "bbox_mm": [
+    73.0,
+    30.0,
+    12.0
+   ]
+  },
+  {
+   "name": "NEW_nose_battery_rails",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 7.8,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Two PETG side rails with strap slots; bonded and bolted to the floor.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 44.5,
+    "rotation_deg": 45.0,
+    "height_mm": 128.0,
+    "margin_mm": 211.5
+   },
+   "centroid_mm": [
+    157.0,
+    0.0,
+    -13.4
+   ],
+   "bbox_mm": [
+    128.0,
+    53.0,
+    10.0
+   ]
+  },
+  {
+   "name": "NEW_well_fill_R",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 26.3,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 237.4,
+    "rotation_deg": 45.0,
+    "height_mm": 143.3,
+    "margin_mm": 18.6
+   },
+   "centroid_mm": [
+    549.7,
+    217.5,
+    -0.0
+   ],
+   "bbox_mm": [
+    292.4,
+    143.3,
+    56.6
+   ]
+  },
+  {
+   "name": "NEW_well_fill_L",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 26.3,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 237.4,
+    "rotation_deg": 45.0,
+    "height_mm": 143.3,
+    "margin_mm": 18.6
+   },
+   "centroid_mm": [
+    549.7,
+    -217.5,
+    -0.0
+   ],
+   "bbox_mm": [
+    292.4,
+    143.3,
+    56.6
+   ]
+  },
+  {
+   "name": "NEW_leading_edge_glove_R",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 47.4,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Moves the inner-wing leading edge 85 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 197.5,
+    "rotation_deg": 43.5,
+    "height_mm": 194.5,
+    "margin_mm": 58.5
+   },
+   "centroid_mm": [
+    299.5,
+    178.0,
+    0.2
+   ],
+   "bbox_mm": [
+    216.7,
+    232.0,
+    45.3
+   ]
+  },
+  {
+   "name": "NEW_leading_edge_glove_L",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 47.4,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Moves the inner-wing leading edge 85 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 197.5,
+    "rotation_deg": 43.5,
+    "height_mm": 194.5,
+    "margin_mm": 58.5
+   },
+   "centroid_mm": [
+    299.5,
+    -178.0,
+    0.2
+   ],
+   "bbox_mm": [
+    216.7,
+    232.0,
+    45.3
+   ]
+  }
+ ],
+ "modified_v18": [
+  {
+   "name": "CAM_19mm_cradle",
+   "why": [
+    "base trimmed 7 mm for the nose-bay pack; camera stays put"
+   ],
+   "move_mm": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "name": "WRA_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station",
+    "nose trimmed under the leading-edge glove"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WRB_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station",
+    "nose trimmed under the leading-edge glove"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WRC_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WLA_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station",
+    "nose trimmed under the leading-edge glove"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WLB_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station",
+    "nose trimmed under the leading-edge glove"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WLC_hollow_wing",
+   "why": [
+    "re-cut rotor wells",
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WRE1_falcon_wing",
+   "why": [
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WLE1_falcon_wing",
+   "why": [
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WRE2_falcon_wing",
+   "why": [
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "WLE2_falcon_wing",
+   "why": [
+    "slot for the crossrail at its new station"
+   ],
+   "move_mm": [
+    200,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "F2_hollow_body",
+   "why": [
+    "slot for CF_crossrail_270_10x10x620 at x 358.3"
+   ],
+   "move_mm": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "name": "F3_hollow_body",
+   "why": [
+    "slot for CF_crossrail_450_10x10x820 at x 538.3",
+    "slot for CF_gear_crossbar_10x10x340 at x 493.1"
+   ],
+   "move_mm": [
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "removed_v18": [],
+ "notes": [
+  "CAM_19mm_cradle: bottom 7 mm trimmed so the pack fits under it; the camera keeps its V18 position. The cradle bolts to C1 so lifting C1 opens the nose bay.",
+  "Rotor wells re-cut at x 358.3, 538.3 (V19 frame); old well areas filled.",
+  "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
+  "Wing root runs past the body end; root fairings are only generated for the boom variants."
+ ]
+}

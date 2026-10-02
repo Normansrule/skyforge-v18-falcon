@@ -1,0 +1,25 @@
+{
+ "name": "v19b_falcon_tail",
+ "label": "V19-B falcon tail",
+ "wing_shift_mm": 120,
+ "front_rotor": {
+  "mode": "wing",
+  "dx": 30.218728535149637
+ },
+ "rear_rotor_dx_mm": 30.218728535149637,
+ "battery": "nose_bay",
+ "avionics_forward": true,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": {
+  "area_m2": 0.15,
+  "aspect": 3.2,
+  "taper": 0.55,
+  "le_sweep_deg": 28.0,
+  "x_le_root_mm": 850,
+  "incidence_deg": 0.0,
+  "elevator_frac": 0.35,
+  "height_mm": 80.0
+ },
+ "summary": "Horizontal tail on twin swept fins at the ends of the EDF outrigger booms; wing 120 mm aft"
+}

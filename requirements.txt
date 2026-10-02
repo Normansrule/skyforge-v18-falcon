@@ -1,6 +1,6 @@
 # Analysis + CAD (tools/*.py that read the V18 3MF, cad/interface/src/build.py).
 # tools/budget.py, tools/check_repo.py, tools/ingest_bench.py need only the standard library.
-numpy>=1.26
+numpy>=2.0
 trimesh>=4.0
 lxml>=5.0
 shapely>=2.0
@@ -9,3 +9,7 @@ python-fcl>=0.7
 matplotlib>=3.8
 ezdxf>=1.1
 cadquery>=2.4
+# V19 geometry (tools/v19/geometry.py): booleans and surface interpolation
+manifold3d>=3.0
+scipy>=1.11
+# Optional: doc screenshots (tools/web/screenshots.py) - pip install playwright && playwright install chromium

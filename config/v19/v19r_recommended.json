@@ -1,0 +1,26 @@
+{
+ "name": "v19r_recommended",
+ "label": "V19-R recommended",
+ "wing_shift_mm": 250,
+ "front_rotor": {
+  "mode": "boom",
+  "dx": 0.0,
+  "x": 307.5
+ },
+ "rear_rotor_dx_mm": 0.0,
+ "battery": "nose_bay",
+ "avionics_forward": true,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": {
+  "area_m2": 0.05,
+  "aspect": 3.2,
+  "taper": 0.55,
+  "le_sweep_deg": 28.0,
+  "x_le_root_mm": 980,
+  "incidence_deg": 0.0,
+  "elevator_frac": 0.35,
+  "height_mm": 80.0
+ },
+ "summary": "Long nose, forward rotors on booms and a small falcon tail; rear rotors stay in the V18 wells"
+}

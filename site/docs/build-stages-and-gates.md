@@ -111,3 +111,15 @@ Then the EDF, separately, outside the airframe, inlet screened, same logging: `e
 | 8 Electrical | `docs/WIRING.md` section 12 order, props OFF | Every rail measured; no brownout with all servos + motors; motor test A-D order and direction correct; video clean | Props on |
 | 9 Weigh + CG | Whole aircraft; flight CG from aero work (neutral point, static margin) - **not** x330 | Hover gate re-run with measured mass and CG still PASS; simultaneous current measured; failsafes configured | Flight |
 | 10 Flight qualification | With an experienced RC / QuadPlane pilot at a proper site: taxi -> hover -> wing-borne -> transitions, as separate sessions | Each session's own plan; first flight line-of-sight, not immersive FPV | Decoration before final reweigh/rebalance |
+
+## V19-R additions (before the first hover)
+
+From [V19_VARIANTS.md](V19_VARIANTS.md#v19-r-build-changes):
+
+| Gate | PASS | FIX | STOP |
+|---|---|---|---|
+| Front prop disc to wing leading edge | >= 15 mm | 10-15 mm: move the pod forward on the boom, recheck CG | < 10 mm |
+| Boom tip vibration at 50 % throttle on the stand | none visible | visible: add a second strap, stiffer hanger | boom or clamp moves |
+| EDF at 100 % on the bench, tufts on the stabiliser underside and fins | tufts hang or flutter | tufts stream aft on the fins only: raise or splay the fins | tufts stream on the stabiliser |
+| Elevator +/-20 deg | no contact | rubs: trim the fin trailing edge | binds |
+| Weighed CG | within 5 mm of the model (V19_VARIANTS.md) | 5-15 mm: ballast or move the pack | > 15 mm |
