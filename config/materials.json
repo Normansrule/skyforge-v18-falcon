@@ -1,0 +1,22 @@
+{
+  "_note": "Material assignment for V18 printed parts plus structural densities. Rules are matched in order against the print template name; the first match wins. Densities marked 'assumed' must be replaced by measured values (config/measurements.json stage1.lwpla_effective_density_g_cm3 overrides LW-PLA).",
+  "densities_g_cm3": {
+    "LW-PLA": {"value": 0.80, "basis": "assumed planning value; best case 0.60, fully dense PLA 1.24"},
+    "PETG": {"value": 1.27, "basis": "typical datasheet"},
+    "TPU": {"value": 1.21, "basis": "typical datasheet"},
+    "G10": {"value": 1.85, "basis": "typical datasheet"},
+    "steel": {"value": 7.85, "basis": "typical"}
+  },
+  "lwpla_cases": {"best": 0.60, "planning": 0.80, "worst_solid_pla": 1.24},
+  "rules": [
+    {"match": "^(F[1-4]_hollow_body|W[RL][A-D]_hollow_wing|W[RL](E1|E2|F)_falcon_wing)$", "material": "LW-PLA", "why": "gray skins (V18: calibrated LW-PLA skins)"},
+    {"match": "^(FLAP_|ELEVON_|FIN_)", "material": "LW-PLA", "why": "charcoal control surfaces and fins"},
+    {"match": "^(C1|H1|H2)_service_cover$", "material": "LW-PLA", "why": "charcoal covers - change to PETG if they must take screw loads"},
+    {"match": "^(TRAY_|SP1_|SC1_|CAM_|EDF_saddle|D1_|D2_)", "material": "PETG", "why": "V18: PETG fittings - trays, cassettes, cradle, saddles, ducts"}
+  ],
+  "carbon_tube": {
+    "_note": "Pultruded square tube, ~1 mm wall candidate. Mass per metre = (outer^2 - (outer - 2 t)^2) x density.",
+    "wall_mm": 1.0,
+    "density_g_cm3": 1.55
+  }
+}

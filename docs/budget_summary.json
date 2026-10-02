@@ -1,29 +1,188 @@
 {
-  "aircraft_usd": [
-    908.0,
-    1375.0
+ "cost_usd": {
+  "aircraft": [
+   816.0,
+   1353.0
   ],
-  "contingency_usd": [
-    136.2,
-    275.0
+  "extras": [
+   341.0,
+   700.0
   ],
-  "extras_usd": [
-    331.0,
-    690.0
+  "contingency": [
+   122.39999999999999,
+   270.6
   ],
-  "installed_hardware_g": 1607.46,
-  "polymer_cases_g": {
-    "best (LW-PLA 0.60 assumed)": 778.32,
-    "planning (LW-PLA 0.80 assumed)": 1037.76,
-    "worst (solid PLA 1.24)": 1608.528
+  "from_scratch": [
+   1279.4,
+   2323.6
+  ],
+  "remaining": [
+   1279.4,
+   2323.6
+  ]
+ },
+ "spend_by_stage": {
+  "S2": [
+   338.0,
+   587.0
+  ],
+  "S6": [
+   42.0,
+   66.0
+  ],
+  "S5": [
+   95.0,
+   130.0
+  ],
+  "S8": [
+   281.0,
+   501.0
+  ],
+  "S1": [
+   43.0,
+   66.0
+  ],
+  "S7": [
+   52.0,
+   112.0
+  ],
+  "S3": [
+   120.0,
+   218.0
+  ],
+  "S0": [
+   103.0,
+   187.0
+  ],
+  "S10": [
+   83.0,
+   186.0
+  ]
+ },
+ "owned": [],
+ "mass_cases": {
+  "best": {
+   "lwpla": 0.6,
+   "all_up_g": 2515.24125,
+   "cg_mm": [
+    418.7426734115465,
+    -0.25946187070524557,
+    -1.9793741057642085
+   ]
   },
-  "all_up_g": 2645.2200000000003,
-  "all_up_basis": "PROVISIONAL (planning (LW-PLA 0.80 assumed))",
-  "hover_fraction": null,
-  "hover_gate": "UNKNOWN",
-  "hover_minutes": null,
-  "hover_minutes_gate": "UNKNOWN",
-  "transition_peak_current_a": null,
-  "worst_case_current_a": null,
-  "bench_max_thrust_needed_for_pass_g_at_cg345": 1543.0449999999998
+  "planning": {
+   "lwpla": 0.8,
+   "all_up_g": 2723.93305,
+   "cg_mm": [
+    418.39670079262777,
+    -0.2395099982358231,
+    -1.6023343158158747
+   ]
+  },
+  "worst_solid_pla": {
+   "lwpla": 1.24,
+   "all_up_g": 3183.05501,
+   "cg_mm": [
+    417.79525026179175,
+    -0.2048249866721594,
+    -0.9468755615379703
+   ]
+  }
+ },
+ "design_case": "planning",
+ "all_up_g": 2723.93305,
+ "cg_mm": [
+  418.39670079262777,
+  -0.2395099982358231,
+  -1.6023343158158747
+ ],
+ "basis": "MODEL (planning LW-PLA 0.80)",
+ "rotor_centroid_x_mm": 330.0,
+ "motor_hover_g": {
+  "M1": 11.389958409090948,
+  "M2": 1350.5765665909087,
+  "M3": 12.872706590909155,
+  "M4": 1349.0938184090905
+ },
+ "worst_motor": "M2",
+ "bench_max_thrust_needed_g": {
+  "PASS": 2701.1531331818173,
+  "FIX": 2250.960944318181
+ },
+ "mass_for_hover_pass_g": null,
+ "hover_current_a": null,
+ "worst_case_current_a": null,
+ "neutral_point_band_x_mm": {
+  "open_wells_body_lifting": 322.3,
+  "closed_wells_body_lifting": 284.6,
+  "open_wells_body_nonlifting": 332.3,
+  "closed_wells_body_nonlifting": 293.5
+ },
+ "mac_mm": 543.6999999999999,
+ "static_margin_pct": [
+  -24.608552656359713,
+  -15.835332130334335
+ ],
+ "cg_window_x_mm": [
+  219.35600000000005,
+  257.415
+ ],
+ "gates": [
+  {
+   "id": "G1",
+   "gate": "Hover balance: |CG x - rotor centroid x|",
+   "value": 88.39670079262777,
+   "unit": "mm",
+   "status": "STOP",
+   "basis": "MODEL (planning LW-PLA 0.80)"
+  },
+  {
+   "id": "G2",
+   "gate": "Worst motor share of weight (M2)",
+   "value": 49.58185615431732,
+   "unit": "%",
+   "status": "STOP",
+   "basis": "MODEL (planning LW-PLA 0.80)"
+  },
+  {
+   "id": "G3",
+   "gate": "Static margin, most forward neutral point",
+   "value": -24.608552656359713,
+   "unit": "% MAC",
+   "status": "STOP",
+   "basis": "MODEL (planning LW-PLA 0.80); NP band x285-332"
+  },
+  {
+   "id": "G4",
+   "gate": "Worst-motor hover fraction of measured max thrust",
+   "value": null,
+   "unit": "",
+   "status": "UNKNOWN",
+   "basis": "Stage-2 bench"
+  },
+  {
+   "id": "G5",
+   "gate": "Hover endurance at 80% of 3300 mAh",
+   "value": null,
+   "unit": "min",
+   "status": "UNKNOWN",
+   "basis": "Stage-2 thrust table"
+  },
+  {
+   "id": "G6",
+   "gate": "Transition peak current vs XT90 class 90 A",
+   "value": null,
+   "unit": "A",
+   "status": "UNKNOWN",
+   "basis": "UNKNOWN until Stage 2"
+  },
+  {
+   "id": "G7",
+   "gate": "Transition peak vs 70 % of battery label (132 A)",
+   "value": null,
+   "unit": "A",
+   "status": "UNKNOWN",
+   "basis": "UNKNOWN until Stage 2"
+  }
+ ]
 }

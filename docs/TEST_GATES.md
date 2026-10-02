@@ -1,5 +1,10 @@
 # Staged build and test gates
 
+> **Read [BALANCE_AND_STABILITY.md](BALANCE_AND_STABILITY.md) first.** The model gates G1-G3 are STOP for the V18
+> layout as modelled. Stages 0-2 are still worth doing because they produce the real numbers (LW-PLA density,
+> motor thrust) that any V19 layout needs, but do not bulk-buy or bulk-print beyond Stage 2 until the
+> configuration is revised.
+
 Each stage lists: files + quantities, buy-now list, steps, measurements, PASS / FIX / STOP, and
 what NOT to buy yet. Stages 0-2 are detailed because they gate every bulk purchase and bulk print.
 Stages 3-10 follow the master brief; their numeric gates are set when Stage 2 data exists.
@@ -16,7 +21,7 @@ Record every measurement in `config/measurements.json`, then run `python3 tools/
 |---|---|---|
 | `TEST_M2_hole_coupon` | 1 | V18 archive (`cad/v18_baseline/`) |
 | `TEST_145mm_rotor_gauge` | 1 | V18 archive |
-| `SF_G10_drill_templates_PLA` | 1 | this repo, `cad/out/3mf/` |
+| `SF_XC_drill_template_PLA` | 1 | this repo, `cad/interface/out/3mf/` |
 
 **Buy now:** F01 (M2 kit), C05 (filament), X01 calipers, X02 scales, X10 soldering station if not owned.
 **Do not buy yet:** motors, ESCs, EDF, FC, servos beyond A07, carbon, G10.
@@ -57,7 +62,7 @@ Record every measurement in `config/measurements.json`, then run `python3 tools/
 
 ## Stage 2 - guarded single-motor and EDF bench (the gate for all propulsion spending)
 
-**Buy now:** P01 (one motor), P03 (spare), P04 + P05 props, P06 (4-in-1, use one channel), E01 battery,
+**Buy now:** P01 (one motor), P03 (spare), P04 props (two packs), P06 (4-in-1, use one channel), E01 battery,
 E02 current sensor, E05-E07 connectors/wire/caps, X03-X07 (meter, watt meter, stand, servo tester,
 charger) as needed. P07/P08 EDF + ESC may be bought here **only** if their fit to the V18 saddle was
 confirmed from dimensions; otherwise wait for Stage 5.
@@ -65,8 +70,9 @@ confirmed from dimensions; otherwise wait for Stage 5.
 
 **Rig**
 
-- Motor on a mock of the real mount: a 180 mm length of 8 x 8 carbon (or aluminium of the same width)
-  with the G10 motor pad, so the thrust figure includes the beam + pad blockage (layout check L7).
+- Motor on a mock of the real mount: the V18 G10 motor plate and backing plate (`cad/v18/dxf/`) clamped
+  on a 10 x 10 carbon crossrail stub, so the thrust figure includes the rail and plate blockage under the prop.
+  If you can, bench with a printed wing-panel section around it so the well wall is present too.
 - Load cell (X05) under the mount, prop guard around the full disc, stand clamped to a heavy bench.
   Nobody in the prop plane. Battery in a LiPo bag, EDF unplugged.
 - Inline watt meter (X04) **and** E02 in series so E02 is calibrated at the same time.
@@ -97,9 +103,9 @@ Then the EDF, separately, outside the airframe, inlet screened, same logging: `e
 
 | Stage | Build / check | Key PASS criteria | Do not do yet |
 |---|---|---|---|
-| 3 Structure | 10x10 spars at the V18 rail stations, 8x8 motor beams, G10 pads + cross-clamps (`SF_MP`, `SF_XC`), cradles (`SF_RC8`), real gear, **no printed skin** | Each crossing and motor clamp holds 3x the Stage-2 max thrust without slip (hang weights); gear drop from 10 cm with ballast at planned mass, no permanent set; nose steering moves freely | Wing shells |
+| 3 Structure | V18 carbon per `cad/v18/carbon_cut_list.json` (crossrails x240/x420, keels, gear crossbar, EDF outriggers), V18 G10 motor plates and backers (`cad/v18/dxf/`), repo crossing clamps and belly straps (`SF_XC_*`), real gear, **no printed skin** | Each crossing and motor clamp holds 3x the Stage-2 max thrust without slip (hang weights); gear drop from 10 cm with ballast at planned mass, no permanent set; nose steering moves freely | Wing shells |
 | 4 Trays and covers | TRAY_A/B, H1/H2 with real battery, FC, harness | Battery pull test 3 g equivalent (hang 3x pack mass from the strap) with no movement; cover removal without unplugging; connector bend radius | - |
-| 5 EDF dry-fit | EDF_saddle x2, D1, D2, `SF_EDF_thrust_plate` drilled to the measured ears; EDF power disconnected | Blade tip clearance uniform to +/-0.3 mm by feeler; thrust path is plate -> 8x8 rails, not printed saddle | Powered EDF runs inside the body before this passes |
+| 5 EDF dry-fit | EDF_saddle x2, D1, D2, `SF_EDF_ear_bracket` on the outriggers drilled to the measured E7206 ears; EDF power disconnected | Blade tip clearance uniform to +/-0.3 mm by feeler; thrust path is ear -> bracket -> 8x8 outrigger, not the printed saddle | Powered EDF runs inside the body before this passes |
 | 6 Wings | One wing, then its mirror; 145 mm gauge through every well including seams that cross wells | Gauge passes all four wells; left/right mass within 3 %; seams flush; rail fit without force | - |
 | 7 Controls | Hinges, flaps, elevons, fins, all 5 servos | Free motion over full range + 5 deg margin, both sides; correcting directions; no horn/pushrod/wire contact at any deflection | - |
 | 8 Electrical | `docs/WIRING.md` section 12 order, props OFF | Every rail measured; no brownout with all servos + motors; motor test A-D order and direction correct; video clean | Props on |

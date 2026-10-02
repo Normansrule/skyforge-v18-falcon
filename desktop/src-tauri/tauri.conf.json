@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SKYFORGE V18",
+  "version": "0.2.0",
+  "identifier": "io.github.normansrule.skyforgev18",
+  "build": {
+    "frontendDist": "../../site"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "SKYFORGE V18 Falcon",
+        "url": "index.html",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 900,
+        "minHeight": 600,
+        "backgroundColor": "#E6E9EC",
+        "label": "main"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Education",
+    "shortDescription": "Build workbench for the SKYFORGE V18 Falcon hybrid-VTOL",
+    "longDescription": "3D model of the V18 assembly, balance study, running budget, thrust-stand data, wiring and build stages for an educational hybrid-VTOL RC aircraft. Works offline.",
+    "copyright": "Copyright (C) 2026 Aleksander Norman",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

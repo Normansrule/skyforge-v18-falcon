@@ -4,3 +4,10 @@ __pycache__/
 .DS_Store
 *.gcode
 *.bgcode
+.cache/
+site/models/raw/
+node_modules/
+cad/v18/stl/
+desktop/src-tauri/target/
+desktop/node_modules/
+.venv/

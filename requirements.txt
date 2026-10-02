@@ -1,5 +1,11 @@
-# Only needed to rebuild CAD (cad/src/build.py). tools/*.py use the standard library.
-cadquery>=2.4
+# Analysis + CAD (tools/*.py that read the V18 3MF, cad/interface/src/build.py).
+# tools/budget.py, tools/check_repo.py, tools/ingest_bench.py need only the standard library.
+numpy>=1.26
 trimesh>=4.0
-matplotlib>=3.7
+lxml>=5.0
+shapely>=2.0
+rtree>=1.2
+python-fcl>=0.7
+matplotlib>=3.8
 ezdxf>=1.1
+cadquery>=2.4

@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Consistency checks for the SKYFORGE V18 repo. Exit code 1 on any FAIL.
+"""Consistency checks for the SKYFORGE V18 repo. Exit code 1 on any FAIL; FLAGs are printed.
 
     python3 tools/check_repo.py
 
-Checks: BOM schema, pin map vs ArduPilot param file vs geometry, PWM timer-group rate classes,
-QuadPlane X motor order, CAD manifest (P1S fit), layout-check FAILs, and that the budget gates
-evaluate on synthetic data. FLAG items are printed but do not fail the run.
+Needs only the standard library (CI runs it before installing anything).
 """
 from __future__ import annotations
 
 import csv
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -23,132 +22,187 @@ fails: list[str] = []
 flags: list[str] = []
 
 
-def fail(msg: str) -> None:
-    fails.append(msg)
+def j(rel):
+    return json.loads((ROOT / rel).read_text())
 
 
-def check_bom() -> None:
+def check_bom(v18_names: set[str]) -> None:
     rows = list(csv.DictReader(open(ROOT / "bom" / "bom.csv", newline="")))
     ids = [r["id"] for r in rows]
     for d in {i for i in ids if ids.count(i) > 1}:
-        fail(f"BOM: duplicate id {d}")
+        fails.append(f"BOM: duplicate id {d}")
     for r in rows:
         rid = r["id"]
         if r["stage"] not in STAGES:
-            fail(f"BOM {rid}: bad stage {r['stage']}")
+            fails.append(f"BOM {rid}: bad stage {r['stage']}")
         if r["change"] not in CHANGES:
-            fail(f"BOM {rid}: bad change tag {r['change']}")
+            fails.append(f"BOM {rid}: bad change tag {r['change']}")
         if not (r["url"].startswith("https://") or r["url"].startswith("repo:")):
-            fail(f"BOM {rid}: url must be https:// or repo:")
+            fails.append(f"BOM {rid}: url must be https:// or repo:")
         try:
-            lo, hi = float(r["row_usd_low"]), float(r["row_usd_high"])
-            float(r["unit_mass_g"]); float(r["buy_qty"]); float(r["installed_qty"])
+            if float(r["row_usd_low"]) > float(r["row_usd_high"]):
+                fails.append(f"BOM {rid}: low cost > high cost")
+            q = float(r["installed_qty"])
+            float(r["unit_mass_g"])
         except ValueError:
-            fail(f"BOM {rid}: non-numeric qty/cost/mass")
+            fails.append(f"BOM {rid}: non-numeric qty/cost/mass")
             continue
-        if lo > hi:
-            fail(f"BOM {rid}: low cost > high cost")
         if not r["purchase_gate"].strip():
-            fail(f"BOM {rid}: empty purchase gate")
-    print(f"BOM: {len(rows)} rows checked")
+            fails.append(f"BOM {rid}: empty purchase gate")
+        pl = r["placement"].strip()
+        installed_mass = q > 0 and r["stage"] != "ALT" and r["mass_basis"] not in ("none",)
+        if installed_mass and not pl:
+            fails.append(f"BOM {rid}: installed item has no placement")
+        for e in [e for e in pl.split(";") if e]:
+            if e.startswith(("xyz:", "site:", "distributed:", "geometry:")):
+                continue
+            name = e.split(":")[0]
+            if name not in v18_names:
+                fails.append(f"BOM {rid}: placement {name} is not a V18 object")
+    stage_ids = {i for s in j("config/stages.json")["stages"] for i in s["buy"]}
+    for i in stage_ids - set(ids):
+        fails.append(f"stages.json buys unknown BOM id {i}")
+    print(f"BOM: {len(rows)} rows")
 
 
-def parse_params() -> dict[str, float]:
-    out = {}
-    for line in (ROOT / "config" / "ardupilot" / "skyforge_v18_BENCH_ONLY.param").read_text().splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        k, v = line.split(",")
-        out[k] = float(v)
-    return out
+def check_v18(parts) -> None:
+    s = parts["summary"]
+    if s["printed_templates"] != 35:
+        fails.append(f"V18: expected 35 printed templates, found {s['printed_templates']}")
+    if s["printed_instances"] != 42:
+        fails.append(f"V18: expected 42 installed printed pieces, found {s['printed_instances']}")
+    if abs(s["printed_volume_cm3"] - s["brief_permanent_polymer_cm3"]) > 10:
+        fails.append("V18: printed volume differs from the brief's 1,297.2 cm3 by more than 10 cm3")
+    if not s["all_printed_fit_P1S"]:
+        fails.append("V18: a printed part does not fit the P1S bed")
+    for d in s.get("diagonal_only_parts", []):
+        flags.append(f"V18 {d}: longer than the 256 mm bed edge - print rotated (see parts.json P1S_best_placement)")
+    geo = j("config/geometry.json")
+    env = {p["name"]: p for p in parts["parts"]}
+    for m, v in geo["lift_motors"].items():
+        e = env[f"PURCHASE_{m}_2207_envelope"]
+        cx = (e["bbox_min_mm"][0] + e["bbox_max_mm"][0]) / 2
+        cy = (e["bbox_min_mm"][1] + e["bbox_max_mm"][1]) / 2
+        if abs(cx - v["x"]) > 0.5 or abs(cy - v["y"]) > 0.5:
+            fails.append(f"geometry.json {m} ({v['x']},{v['y']}) does not match the V18 envelope ({cx:.1f},{cy:.1f})")
+    print(f"V18: {s['objects']} objects, {s['printed_templates']} templates, {s['printed_volume_cm3']} cm3")
 
 
 def check_pins() -> None:
-    params = parse_params()
+    params = {}
+    for line in (ROOT / "config" / "ardupilot" / "skyforge_v18_BENCH_ONLY.param").read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            k, v = line.split(",")
+            params[k] = float(v)
     pins = list(csv.DictReader(open(ROOT / "config" / "pinmap.csv", newline="")))
     groups: dict[str, set[str]] = {}
     for p in pins:
         n = int(p["fc_output"][1:])
-        want = float(p["servo_function"])
-        got = params.get(f"SERVO{n}_FUNCTION")
-        if got != want:
-            fail(f"pinmap {p['fc_output']}: pinmap says {want:g}, param file says {got}")
+        if params.get(f"SERVO{n}_FUNCTION") != float(p["servo_function"]):
+            fails.append(f"pinmap {p['fc_output']}: {p['servo_function']} vs param {params.get(f'SERVO{n}_FUNCTION')}")
         if p["rate_class"] != "none":
             groups.setdefault(p["timer_group"], set()).add(p["rate_class"])
-    for g, classes in groups.items():
-        if len(classes) > 1:
-            fail(f"timer group {g} mixes output rate classes {sorted(classes)}")
-    geo = json.loads((ROOT / "config" / "geometry.json").read_text())
-    for name, m in geo["lift_motors"].items():
-        row = next(p for p in pins if p["fc_output"] == m["fc_output"])
-        if float(row["servo_function"]) != m["servo_function"]:
-            fail(f"{name}: geometry.json function {m['servo_function']} != pinmap {row['servo_function']}")
-    # ArduPilot Quad X: M1 front-right CCW, M2 rear-left CCW, M3 front-left CW, M4 rear-right CW
-    lm = geo["lift_motors"]
-    expect = {"M1": (-1, +1, "CCW"), "M2": (+1, -1, "CCW"), "M3": (-1, -1, "CW"), "M4": (+1, +1, "CW")}
-    cx = sum(m["x"] for m in lm.values()) / 4
+    for gname, cls in groups.items():
+        if len(cls) > 1:
+            fails.append(f"timer group {gname} mixes output rate classes {sorted(cls)}")
+    geo = j("config/geometry.json")["lift_motors"]
+    cx = sum(m["x"] for m in geo.values()) / 4
+    expect = {"M1": (-1, 1, "CCW"), "M2": (1, -1, "CCW"), "M3": (-1, -1, "CW"), "M4": (1, 1, "CW")}
     for name, (sx, sy, spin) in expect.items():
-        m = lm[name]
+        m = geo[name]
         if (m["x"] - cx) * sx <= 0 or m["y"] * sy <= 0 or m["spin"] != spin:
-            fail(f"{name}: position/spin does not match ArduPilot Quad X ordering")
+            fails.append(f"{name}: position/spin does not match ArduPilot Quad X ordering")
     for key, val in (("Q_FRAME_CLASS", 1), ("Q_FRAME_TYPE", 1), ("RC7_OPTION", 208), ("SERIAL1_PROTOCOL", 23),
                      ("SERIAL3_PROTOCOL", 5), ("BATT_CURR_PIN", 14), ("BATT_VOLT_PIN", 10)):
         if params.get(key) != val:
-            fail(f"param {key} expected {val}, got {params.get(key)}")
-    print(f"Pins: {len(pins)} outputs, {len(groups)} active timer groups checked")
+            fails.append(f"param {key} expected {val}, got {params.get(key)}")
+    print(f"Pins: {len(pins)} outputs, {len(groups)} active timer groups")
 
 
-def check_cad() -> None:
-    man = ROOT / "cad" / "out" / "manifest.json"
-    if not man.exists():
-        flags.append("CAD outputs not built - run python3 cad/src/build.py")
-        return
-    parts = json.loads(man.read_text())["parts"]
-    for name, info in parts.items():
-        for sub, ext in (("step", "step"), ("stl", "stl")):
-            if not (ROOT / "cad" / "out" / sub / f"{name}.{ext}").exists():
-                fail(f"CAD {name}: missing {ext}")
-        if info["printed"]:
-            if not (ROOT / "cad" / "out" / "3mf" / f"{name}.3mf").exists():
-                fail(f"CAD {name}: missing 3mf")
-            if not info["fits_P1S"]:
-                fail(f"CAD {name}: exceeds the P1S build volume")
-        elif not (ROOT / "cad" / "out" / "dxf" / f"{name}.dxf").exists():
-            fail(f"CAD {name}: missing DXF cutting profile")
-    lc = json.loads((ROOT / "cad" / "out" / "checks" / "layout_checks.json").read_text())["checks"]
-    for c in lc:
-        if c["status"] == "FAIL":
-            fail(f"layout {c['id']}: {c['check']} = {c['value']}")
-        elif c["status"] == "FLAG":
-            flags.append(f"layout {c['id']}: {c['check']} = {c['value']}")
-    print(f"CAD: {len(parts)} parts, {len(lc)} layout checks")
+def check_analysis() -> None:
+    for f in ("mass_cg.json", "mass_model.json", "aero.json", "geom_checks.json", "balance_study.json", "harness.json"):
+        if not (ROOT / "analysis" / f).exists():
+            fails.append(f"analysis/{f} missing - run the analysis tools")
+    aero = j("analysis/aero.json")
+    if not aero["selftest"]["pass"]:
+        fails.append("VLM self-test did not pass")
+    gc = j("analysis/geom_checks.json")
+    for k, w in gc["C1_C2_wells"].items():
+        if w["status"] == "FAIL":
+            fails.append(f"well {k}: prop tip clearance {w['tip_clearance_mm']} mm")
+        if w["seam_crosses_well"]:
+            flags.append(f"well {k}: seam between {', '.join(w['well_wall_parts'])} crosses the opening")
+    for k, v in gc["C3_control_sweep"].items():
+        if isinstance(v, dict) and v["status"] == "FAIL":
+            flags.append(f"{k}: interference at {v['colliding_angles']} deg with {', '.join(v['colliding_with'])} (V18 geometry - see docs/V18_CHECKS.md)")
+    for k, v in gc["C4_gear"].items():
+        if v["status"] != "PASS":
+            flags.append(f"{k}: inside the rear-well footprint {v['inside_well_footprint_of']}")
+    bs = j("analysis/balance_study.json")
+    if bs["n_feasible"] == 0:
+        flags.append("balance study: no combination passes hover balance AND static margin - configuration decision needed")
+    man = ROOT / "cad" / "interface" / "out" / "manifest.json"
+    if man.exists():
+        for name, info in json.loads(man.read_text())["parts"].items():
+            if info["v18_fit"] == "FAIL":
+                fails.append(f"interface part {name} collides with V18 geometry")
+            for ext, sub in (("step", "step"), ("stl", "stl")):
+                if not (ROOT / "cad" / "interface" / "out" / sub / f"{name}.{ext}").exists():
+                    fails.append(f"interface part {name}: missing {ext}")
+    else:
+        fails.append("cad/interface/out missing - run python3 cad/interface/src/build.py")
 
 
-def check_budget() -> None:
+def check_generated() -> None:
     with tempfile.TemporaryDirectory() as td:
-        r = subprocess.run([sys.executable, str(ROOT / "tools" / "budget.py"), "--measurements",
-                            str(ROOT / "tests" / "synthetic_measurements.json"), "--out", td],
-                           capture_output=True, text=True)
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "budget.py"), "--out", td], capture_output=True, text=True)
         if r.returncode:
-            fail(f"budget.py failed on synthetic data: {r.stderr[-400:]}")
+            fails.append(f"budget.py failed: {r.stderr[-300:]}")
             return
-        s = json.loads(Path(td, "budget_summary.json").read_text())
-        for k in ("hover_gate", "hover_minutes_gate"):
-            if s[k] not in ("PASS", "FIX", "STOP"):
-                fail(f"budget gate {k} did not evaluate on synthetic data ({s[k]})")
-    r = subprocess.run([sys.executable, str(ROOT / "tools" / "budget.py"), "--out",
-                        tempfile.mkdtemp()], capture_output=True, text=True)
-    if r.returncode:
-        fail("budget.py failed on config/measurements.json")
-    print("Budget: synthetic-data gate evaluation OK")
+        for f in ("BOM.md", "BUDGET.md"):
+            if (Path(td) / f).read_text() != (ROOT / "docs" / f).read_text():
+                fails.append(f"docs/{f} is stale - run python3 tools/budget.py")
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "budget.py"), "--measurements",
+                            str(ROOT / "tests" / "synthetic_measurements.json"), "--out", td], capture_output=True, text=True)
+        s = json.loads((Path(td) / "budget_summary.json").read_text())
+        if any(gt["status"] == "UNKNOWN" for gt in s["gates"]):
+            fails.append("budget gates did not all evaluate on synthetic data")
+    # site data mirrors the analysis
+    for f in ("mass_model.json", "aero.json"):
+        a = j(f"analysis/{f}")
+        b = j(f"site/data/{f}")
+        if json.dumps(a, sort_keys=True) != json.dumps(b, sort_keys=True):
+            fails.append(f"site/data/{f} is stale - run python3 tools/export_web.py")
+    bom_site = j("site/data/bom.json")
+    bom_csv = list(csv.DictReader(open(ROOT / "bom" / "bom.csv", newline="")))
+    if [r["id"] for r in bom_site] != [r["id"] for r in bom_csv]:
+        fails.append("site/data/bom.json is stale - run python3 tools/export_web.py")
+    for f in ("index.html", "sw.js", "manifest.webmanifest", "models/v18.glb", "vendor/three/build/three.module.js"):
+        if not (ROOT / "site" / f).exists():
+            fails.append(f"site/{f} missing")
+    listed = set(json.loads((ROOT / "site" / "sw-manifest.json").read_text()))
+    for p in (ROOT / "site").rglob("*"):
+        rel = p.relative_to(ROOT / "site").as_posix()
+        if p.is_file() and "models/raw" not in rel and p.name not in ("sw.js", "sw-manifest.json") and rel not in listed:
+            fails.append(f"site/{rel} is not in the offline cache list - run python3 tools/export_web.py --sw-only")
+    # versions agree
+    v = {json.loads((ROOT / "package.json").read_text())["version"], json.loads((ROOT / "desktop" / "package.json").read_text())["version"],
+         json.loads((ROOT / "desktop" / "src-tauri" / "tauri.conf.json").read_text())["version"]}
+    cargo = re.search(r'^version = "([^"]+)"', (ROOT / "desktop" / "src-tauri" / "Cargo.toml").read_text(), re.M).group(1)
+    v.add(cargo)
+    if len(v) != 1:
+        fails.append(f"version mismatch across package.json / desktop / tauri.conf / Cargo.toml: {sorted(v)}")
 
 
 def main() -> int:
-    check_bom()
+    parts = j("cad/v18/parts.json")
+    names = {p["name"] for p in parts["parts"]}
+    check_v18(parts)
+    check_bom(names)
     check_pins()
-    check_cad()
-    check_budget()
+    check_analysis()
+    check_generated()
     for f in flags:
         print("FLAG ", f)
     for f in fails:

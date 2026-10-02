@@ -1,0 +1,22 @@
+{
+  "name": "skyforge-v18-falcon",
+  "version": "0.2.0",
+  "private": true,
+  "description": "SKYFORGE V18 Falcon - educational hybrid-VTOL build workbench (web + desktop)",
+  "author": "Aleksander Norman",
+  "type": "module",
+  "scripts": {
+    "vendor": "node tools/web/vendor.mjs",
+    "models": "node tools/web/build_models.mjs",
+    "test": "node --test tests/*.mjs",
+    "serve": "python3 -m http.server 8080 --directory site"
+  },
+  "devDependencies": {
+    "@fontsource/atkinson-hyperlegible-next": "5.3.0",
+    "@fontsource/saira-semi-condensed": "5.3.0",
+    "@gltf-transform/cli": "4.5.1",
+    "marked": "18.0.14",
+    "three": "0.186.1"
+  },
+  "engines": { "node": ">=20" }
+}

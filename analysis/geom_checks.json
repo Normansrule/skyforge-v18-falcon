@@ -1,0 +1,589 @@
+{
+ "_note": "Geometry checks on the V18 assembly - BOTH sides, continuous control sweeps.\n\n    python3 tools/geom_checks.py          # analysis/geom_checks.json\n\nC1  Prop tip to well wall: section all wing panels at the prop plane (z = 24, 26, 28) and measure the\n    smallest radial distance from each motor axis to the wall, minus the 63.5 mm prop radius.\nC2  Seams crossing a rotor well: which printed parts form each well wall (more than one = a seam\n    crosses the opening; assemble with the 145 mm gauge through the full opening).\nC3  Control-surface sweep: rotate FLAP_R/L and ELEVON_R/L about a hinge axis estimated from their\n    leading edge (centre of the nose radius), -25..+25 deg in 1 deg steps, and test collision and\n    minimum clearance against every nearby printed part, both sides. The hinge axis is an\n    ESTIMATE - confirm it against the V18 hinge design before trusting a pass.\nC4  Main wheels inside a rear-rotor well footprint (plan view).",
+ "C1_C2_wells": {
+  "M1": {
+   "axis_xy": [
+    240.0,
+    220.0
+   ],
+   "wall_radius_mm": 72.49,
+   "tip_clearance_mm": 8.99,
+   "closest_part": "WRB_hollow_wing",
+   "at_z": 24.0,
+   "well_wall_parts": [
+    "WRA_hollow_wing",
+    "WRB_hollow_wing"
+   ],
+   "seam_crosses_well": true,
+   "status": "PASS"
+  },
+  "M2": {
+   "axis_xy": [
+    420.0,
+    -220.0
+   ],
+   "wall_radius_mm": 72.5,
+   "tip_clearance_mm": 9.0,
+   "closest_part": "WLC_hollow_wing",
+   "at_z": 26.0,
+   "well_wall_parts": [
+    "WLB_hollow_wing",
+    "WLC_hollow_wing"
+   ],
+   "seam_crosses_well": true,
+   "status": "PASS"
+  },
+  "M3": {
+   "axis_xy": [
+    240.0,
+    -220.0
+   ],
+   "wall_radius_mm": 72.49,
+   "tip_clearance_mm": 8.99,
+   "closest_part": "WLB_hollow_wing",
+   "at_z": 24.0,
+   "well_wall_parts": [
+    "WLA_hollow_wing",
+    "WLB_hollow_wing"
+   ],
+   "seam_crosses_well": true,
+   "status": "PASS"
+  },
+  "M4": {
+   "axis_xy": [
+    420.0,
+    220.0
+   ],
+   "wall_radius_mm": 72.5,
+   "tip_clearance_mm": 9.0,
+   "closest_part": "WRC_hollow_wing",
+   "at_z": 26.0,
+   "well_wall_parts": [
+    "WRB_hollow_wing",
+    "WRC_hollow_wing"
+   ],
+   "seam_crosses_well": true,
+   "status": "PASS"
+  }
+ },
+ "C4_gear": {
+  "PURCHASE_main_wheel_-1": {
+   "wheel_xy": [
+    385.0,
+    -180.0
+   ],
+   "inside_well_footprint_of": [
+    "M2"
+   ],
+   "z_top_mm": -67.0,
+   "status": "FLAG"
+  },
+  "PURCHASE_main_wheel_1": {
+   "wheel_xy": [
+    385.0,
+    180.0
+   ],
+   "inside_well_footprint_of": [
+    "M4"
+   ],
+   "z_top_mm": -67.0,
+   "status": "FLAG"
+  }
+ },
+ "C3_control_sweep": {
+  "FLAP_R": {
+   "hinge_point_mm": [
+    590.5,
+    202.5,
+    0.1
+   ],
+   "hinge_dir": [
+    -0.0256,
+    0.9997,
+    0.0
+   ],
+   "neighbours_checked": [
+    "F3_hollow_body",
+    "WRD_hollow_wing",
+    "FIN_R",
+    "WRF_falcon_wing",
+    "ELEVON_R_falcon",
+    "SP1_side_servo_cassette_PRINT4_180",
+    "SC1_servo_access_cover_PRINT4_180"
+   ],
+   "angles_checked": 51,
+   "colliding_angles": [
+    -1.0,
+    0.0
+   ],
+   "colliding_with": [
+    "WRD_hollow_wing"
+   ],
+   "free_range_deg": [
+    -25.0,
+    25.0
+   ],
+   "tightest": {
+    "deg": 1.0,
+    "collides": false,
+    "with": [],
+    "min_clearance_mm": 0.07,
+    "nearest": "WRD_hollow_wing"
+   },
+   "collides_at_neutral": true,
+   "clearance_at_pm5_mm": [
+    1.18,
+    1.18
+   ],
+   "status": "FAIL",
+   "samples": [
+    {
+     "deg": -25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.1,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": -20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.12,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": -15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.14,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": -10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.16,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": -5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.18,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 0.0,
+     "collides": true,
+     "with": [
+      "WRD_hollow_wing"
+     ],
+     "min_clearance_mm": 0.0,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.18,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.17,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.15,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.13,
+     "nearest": "WRD_hollow_wing"
+    },
+    {
+     "deg": 25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.12,
+     "nearest": "WRD_hollow_wing"
+    }
+   ]
+  },
+  "FLAP_L": {
+   "hinge_point_mm": [
+    590.5,
+    -202.5,
+    0.1
+   ],
+   "hinge_dir": [
+    0.0256,
+    0.9997,
+    -0.0
+   ],
+   "neighbours_checked": [
+    "F3_hollow_body",
+    "WLD_hollow_wing",
+    "FIN_L",
+    "WLF_falcon_wing",
+    "ELEVON_L_falcon",
+    "SP1_side_servo_cassette_PRINT4_-180",
+    "SC1_servo_access_cover_PRINT4_-180"
+   ],
+   "angles_checked": 51,
+   "colliding_angles": [
+    -1.0,
+    0.0
+   ],
+   "colliding_with": [
+    "WLD_hollow_wing"
+   ],
+   "free_range_deg": [
+    -25.0,
+    25.0
+   ],
+   "tightest": {
+    "deg": 1.0,
+    "collides": false,
+    "with": [],
+    "min_clearance_mm": 0.07,
+    "nearest": "WLD_hollow_wing"
+   },
+   "collides_at_neutral": true,
+   "clearance_at_pm5_mm": [
+    1.18,
+    1.18
+   ],
+   "status": "FAIL",
+   "samples": [
+    {
+     "deg": -25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.1,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": -20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.12,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": -15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.14,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": -10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.16,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": -5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.18,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 0.0,
+     "collides": true,
+     "with": [
+      "WLD_hollow_wing"
+     ],
+     "min_clearance_mm": 0.0,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.18,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.17,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.15,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.13,
+     "nearest": "WLD_hollow_wing"
+    },
+    {
+     "deg": 25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.12,
+     "nearest": "WLD_hollow_wing"
+    }
+   ]
+  },
+  "ELEVON_R_falcon": {
+   "hinge_point_mm": [
+    568.5,
+    399.3,
+    -0.0
+   ],
+   "hinge_dir": [
+    -0.1672,
+    0.9859,
+    0.0071
+   ],
+   "neighbours_checked": [
+    "WRC_hollow_wing",
+    "WRD_hollow_wing",
+    "FLAP_R",
+    "WRF_falcon_wing",
+    "SP1_side_servo_cassette_PRINT4_360.222222222",
+    "SC1_servo_access_cover_PRINT4_360.222222222"
+   ],
+   "angles_checked": 51,
+   "colliding_angles": [],
+   "colliding_with": [],
+   "free_range_deg": [
+    -25.0,
+    25.0
+   ],
+   "tightest": {
+    "deg": -25.0,
+    "collides": false,
+    "with": [],
+    "min_clearance_mm": 1.89,
+    "nearest": "WRF_falcon_wing"
+   },
+   "collides_at_neutral": false,
+   "clearance_at_pm5_mm": [
+    2.35,
+    2.39
+   ],
+   "status": "PASS",
+   "samples": [
+    {
+     "deg": -25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.89,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": -20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.01,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": -15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.12,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": -10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.24,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": -5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.35,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 0.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.47,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.39,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.32,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.24,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.17,
+     "nearest": "WRF_falcon_wing"
+    },
+    {
+     "deg": 25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.09,
+     "nearest": "WRF_falcon_wing"
+    }
+   ]
+  },
+  "ELEVON_L_falcon": {
+   "hinge_point_mm": [
+    568.5,
+    -399.3,
+    -0.0
+   ],
+   "hinge_dir": [
+    0.1672,
+    0.9859,
+    -0.0071
+   ],
+   "neighbours_checked": [
+    "WLC_hollow_wing",
+    "WLD_hollow_wing",
+    "FLAP_L",
+    "WLF_falcon_wing",
+    "SP1_side_servo_cassette_PRINT4_-360.222222222",
+    "SC1_servo_access_cover_PRINT4_-360.222222222"
+   ],
+   "angles_checked": 51,
+   "colliding_angles": [],
+   "colliding_with": [],
+   "free_range_deg": [
+    -25.0,
+    25.0
+   ],
+   "tightest": {
+    "deg": -25.0,
+    "collides": false,
+    "with": [],
+    "min_clearance_mm": 1.89,
+    "nearest": "WLF_falcon_wing"
+   },
+   "collides_at_neutral": false,
+   "clearance_at_pm5_mm": [
+    2.35,
+    2.39
+   ],
+   "status": "PASS",
+   "samples": [
+    {
+     "deg": -25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 1.89,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": -20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.01,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": -15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.12,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": -10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.24,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": -5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.35,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 0.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.47,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 5.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.39,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 10.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.32,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 15.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.24,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 20.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.17,
+     "nearest": "WLF_falcon_wing"
+    },
+    {
+     "deg": 25.0,
+     "collides": false,
+     "with": [],
+     "min_clearance_mm": 2.09,
+     "nearest": "WLF_falcon_wing"
+    }
+   ]
+  },
+  "FLAP_R_vs_FLAP_L_symmetric": true,
+  "ELEVON_R_falcon_vs_ELEVON_L_falcon_symmetric": true
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "SF_XC_crossing_clamp_G10_2p0": {
+  "status": "PASS",
+  "sites": [
+   {
+    "at": [
+     240.0,
+     24.0,
+     -9.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.3,
+    "nearest": "PURCHASE_OR_CUT_cassette_A_support_strip"
+   },
+   {
+    "at": [
+     240.0,
+     24.0,
+     -30.05,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 3.2,
+    "nearest": "F2_hollow_body"
+   },
+   {
+    "at": [
+     240.0,
+     -24.0,
+     -9.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.3,
+    "nearest": "G10_cassette_A_support_left"
+   },
+   {
+    "at": [
+     240.0,
+     -24.0,
+     -30.05,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 3.2,
+    "nearest": "F2_hollow_body"
+   },
+   {
+    "at": [
+     420.0,
+     24.0,
+     -9.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.3,
+    "nearest": "PURCHASE_OR_CUT_cassette_A_support_strip"
+   },
+   {
+    "at": [
+     420.0,
+     24.0,
+     -30.05,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 2.58,
+    "nearest": "F3_hollow_body"
+   },
+   {
+    "at": [
+     420.0,
+     -24.0,
+     -9.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.3,
+    "nearest": "G10_cassette_A_support_left"
+   },
+   {
+    "at": [
+     420.0,
+     -24.0,
+     -30.05,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 2.59,
+    "nearest": "F3_hollow_body"
+   },
+   {
+    "at": [
+     385.0,
+     24.0,
+     -19.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 7.96,
+    "nearest": "PURCHASE_OR_CUT_cassette_A_support_strip"
+   },
+   {
+    "at": [
+     385.0,
+     -24.0,
+     -19.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 7.96,
+    "nearest": "G10_cassette_A_support_left"
+   }
+  ]
+ },
+ "SF_XC_belly_strap_G10_2p0": {
+  "status": "PASS",
+  "sites": [
+   {
+    "at": [
+     385.0,
+     24.0,
+     -42.6,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 2.29,
+    "nearest": "F2_hollow_body"
+   },
+   {
+    "at": [
+     385.0,
+     -24.0,
+     -42.6,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 2.16,
+    "nearest": "F2_hollow_body"
+   }
+  ]
+ },
+ "SF_XC_drill_template_PLA": {
+  "status": "not placed (no V18 site)"
+ },
+ "SF_EDF_ear_bracket_lower": {
+  "status": "PASS",
+  "sites": [
+   {
+    "at": [
+     695.0,
+     54.0,
+     0.0,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.62,
+    "nearest": "F4_hollow_body"
+   },
+   {
+    "at": [
+     695.0,
+     -54.0,
+     0.0,
+     180
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 0.62,
+    "nearest": "F4_hollow_body"
+   }
+  ]
+ },
+ "SF_EDF_ear_bracket_upper": {
+  "status": "PASS",
+  "sites": [
+   {
+    "at": [
+     695.0,
+     54.0,
+     0.0,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 1.17,
+    "nearest": "F4_hollow_body"
+   },
+   {
+    "at": [
+     695.0,
+     -54.0,
+     0.0,
+     180
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 1.16,
+    "nearest": "F4_hollow_body"
+   }
+  ]
+ },
+ "SF_FC_iso_pad_TPU": {
+  "status": "PASS",
+  "sites": [
+   {
+    "at": [
+     486.0,
+     -17.0,
+     -3.95,
+     0
+    ],
+    "collides_with": [],
+    "min_clearance_mm": 1.25,
+    "nearest": "TRAY_B_avionics_video_cassette"
+   }
+  ]
+ },
+ "SF_nose_steer_collar": {
+  "status": "not placed (no V18 site)"
+ }
+}

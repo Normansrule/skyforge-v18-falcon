@@ -1,0 +1,29 @@
+{
+  "_note": "Power-system planning constants used by tools/budget.py. Change here when the battery or connectors change, then re-run the tool.",
+  "battery_bom_id": "E01",
+  "battery_capacity_mah": 3300,
+  "battery_cells": 4,
+  "battery_c_rating_continuous_label": 40,
+  "usable_capacity_fraction": 0.8,
+  "avionics_video_servo_avg_current_a": 2.0,
+  "connector_class_continuous_a": {
+    "_note": "Commonly cited continuous classes for genuine AMASS parts; treat as nominal and verify heating on the bench.",
+    "XT60": 60,
+    "XT90": 90
+  },
+  "main_connector": "XT90",
+  "gates": {
+    "hover_fraction_pass_max": 0.5,
+    "hover_fraction_fix_max": 0.6,
+    "hover_minutes_pass_min": 2.0,
+    "hover_minutes_fix_min": 1.0,
+    "_note": "Project gates, not ArduPilot requirements. hover_fraction = worst-loaded motor hover thrust / its measured max static thrust at loaded voltage. cg_offset and worst_share are hover-balance gates; static_margin uses the most forward neutral point in analysis/aero.json.",
+    "cg_offset_pass_mm": 10,
+    "cg_offset_fix_mm": 25,
+    "worst_share_pass_pct": 30,
+    "worst_share_fix_pct": 35,
+    "static_margin_pass_pct": 5,
+    "static_margin_fix_pct": 2,
+    "static_margin_target_pct": 12
+  }
+}

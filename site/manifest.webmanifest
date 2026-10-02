@@ -1,0 +1,15 @@
+{
+  "name": "SKYFORGE V18 Falcon workbench",
+  "short_name": "SKYFORGE V18",
+  "description": "3D model, balance study, budget, bench data, wiring and build stages for the SKYFORGE V18 Falcon hybrid-VTOL.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#E6E9EC",
+  "theme_color": "#26313D",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,61 @@
+# Consistency checks, model self-tests, JS/Python parity and the thrust-stand firmware compile.
+name: Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Repo consistency (BOM, V18 facts, pin map, generated files)
+        run: python3 tools/check_repo.py
+      - name: Vortex-lattice self-test against AeroSandbox reference values
+        run: |
+          pip install numpy
+          python3 tools/aero_vlm.py --selftest
+      - name: Web calculator matches the Python budget
+        run: node --test tests/*.mjs
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: arduino:avr:nano
+          sketch-paths: firmware/thrust_stand
+          libraries: |
+            - name: HX711 Arduino Library
+            - name: Servo
+  analysis:
+    # Full re-run of the geometry and aero analysis from the V18 3MF (slow; run by hand).
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: |
+          python3 tools/v18_extract.py
+          python3 tools/mass_cg.py
+          python3 tools/aero_vlm.py
+          python3 tools/geom_checks.py
+          python3 tools/harness.py
+          python3 tools/budget.py
+          python3 cad/interface/src/build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: analysis
+          path: |
+            analysis
+            cad/v18/parts.json
+            cad/interface/out

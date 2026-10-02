@@ -1,0 +1,513 @@
+{
+ "_note": "Harness cut list from V18 component positions.\n\n    python3 tools/harness.py      # docs/HARNESS.md + analysis/harness.json\n\nEach run is routed orthogonally (along x down the body keels, then along y out the crossrails or\nwing, plus any z change), then 15 % slack and 25 mm per termination are added. Positions are the\ncentroids of the V18 keep-out boxes / purchased-part envelopes; `xyz:` positions are assumptions\nfor parts the V18 model does not place. Gauges are starting points; currents are planning values\nuntil the Stage-2 bench measures them.",
+ "assumed_positions": {
+  "star": [
+   288.0,
+   0.0,
+   8.0
+  ],
+  "sensor": [
+   287.0,
+   0.0,
+   10.0
+  ],
+  "servo_bus": [
+   255.0,
+   27.0,
+   16.0
+  ],
+  "airspeed": [
+   130.0,
+   0.0,
+   20.0
+  ],
+  "buzzer": [
+   520.0,
+   25.0,
+   12.0
+  ],
+  "servo_steer": [
+   200.0,
+   0.0,
+   -15.0
+  ]
+ },
+ "nodes": {
+  "M1": [
+   240.0,
+   220.0,
+   7.0
+  ],
+  "sensor": [
+   287.0,
+   0.0,
+   10.0
+  ],
+  "M4": [
+   420.0,
+   220.0,
+   7.0
+  ],
+  "M2": [
+   420.0,
+   -220.0,
+   7.0
+  ],
+  "servo_elevon_R": [
+   527.0,
+   360.2,
+   -18.0
+  ],
+  "edf": [
+   710.0,
+   0.0,
+   0.0
+  ],
+  "servo_flap_L": [
+   566.0,
+   -180.0,
+   -18.0
+  ],
+  "lift_esc": [
+   254.0,
+   -25.0,
+   6.0
+  ],
+  "rx": [
+   168.0,
+   0.0,
+   18.0
+  ],
+  "airspeed": [
+   130.0,
+   0.0,
+   20.0
+  ],
+  "edf_esc": [
+   538.0,
+   0.0,
+   5.0
+  ],
+  "vtx": [
+   488.0,
+   30.0,
+   5.0
+  ],
+  "ubec": [
+   254.0,
+   27.0,
+   6.0
+  ],
+  "camera": [
+   103.0,
+   0.0,
+   40.0
+  ],
+  "servo_flap_R": [
+   566.0,
+   180.0,
+   -18.0
+  ],
+  "fc": [
+   486.0,
+   -17.0,
+   8.0
+  ],
+  "buzzer": [
+   520.0,
+   25.0,
+   12.0
+  ],
+  "battery": [
+   362.0,
+   0.0,
+   15.0
+  ],
+  "servo_elevon_L": [
+   527.0,
+   -360.2,
+   -18.0
+  ],
+  "servo_steer": [
+   200.0,
+   0.0,
+   -15.0
+  ],
+  "gps": [
+   52.0,
+   0.0,
+   35.0
+  ],
+  "M3": [
+   240.0,
+   -220.0,
+   7.0
+  ],
+  "servo_bus": [
+   255.0,
+   27.0,
+   16.0
+  ],
+  "star": [
+   288.0,
+   0.0,
+   8.0
+  ]
+ },
+ "runs": [
+  {
+   "run": "Battery lead to sensor",
+   "from": "battery",
+   "to": "sensor",
+   "conductors": 2,
+   "awg": 10,
+   "length_each_mm": 142,
+   "planning_current_a": 120,
+   "voltage_drop_v": 0.112,
+   "loss_w": 13.41,
+   "note": "battery XT90 pigtail; + through the hall sensor"
+  },
+  {
+   "run": "Sensor to star",
+   "from": "sensor",
+   "to": "star",
+   "conductors": 1,
+   "awg": 10,
+   "length_each_mm": 53,
+   "planning_current_a": 120,
+   "voltage_drop_v": 0.021,
+   "loss_w": 2.52,
+   "note": "+ only; - goes straight to the star"
+  },
+  {
+   "run": "Star to 4-in-1 (branch A)",
+   "from": "star",
+   "to": "lift_esc",
+   "conductors": 2,
+   "awg": 10,
+   "length_each_mm": 120,
+   "planning_current_a": 100,
+   "voltage_drop_v": 0.079,
+   "loss_w": 7.88,
+   "note": "cap E07 #1 at the ESC pads"
+  },
+  {
+   "run": "Star to EDF ESC (branch B)",
+   "from": "star",
+   "to": "edf_esc",
+   "conductors": 2,
+   "awg": 12,
+   "length_each_mm": 341,
+   "planning_current_a": 60,
+   "voltage_drop_v": 0.213,
+   "loss_w": 12.79,
+   "note": "XT60; cap E07 #2 at the ESC"
+  },
+  {
+   "run": "Star to FC PDB (branch C, fused)",
+   "from": "star",
+   "to": "fc",
+   "conductors": 2,
+   "awg": 18,
+   "length_each_mm": 297,
+   "planning_current_a": 5,
+   "voltage_drop_v": 0.062,
+   "loss_w": 0.31,
+   "note": "fuse E08 near the star"
+  },
+  {
+   "run": "Star to UBEC (branch D)",
+   "from": "star",
+   "to": "ubec",
+   "conductors": 2,
+   "awg": 18,
+   "length_each_mm": 122,
+   "planning_current_a": 5,
+   "voltage_drop_v": 0.026,
+   "loss_w": 0.13,
+   "note": ""
+  },
+  {
+   "run": "4-in-1 to M1 (FR)",
+   "from": "lift_esc",
+   "to": "M1",
+   "conductors": 3,
+   "awg": 18,
+   "length_each_mm": 349,
+   "planning_current_a": 30,
+   "voltage_drop_v": 0.438,
+   "loss_w": 13.13,
+   "note": "motor stock leads are short: extension + 3.5 mm bullets"
+  },
+  {
+   "run": "4-in-1 to M2 (RL)",
+   "from": "lift_esc",
+   "to": "M2",
+   "conductors": 3,
+   "awg": 18,
+   "length_each_mm": 466,
+   "planning_current_a": 30,
+   "voltage_drop_v": 0.585,
+   "loss_w": 17.54,
+   "note": ""
+  },
+  {
+   "run": "4-in-1 to M3 (FL)",
+   "from": "lift_esc",
+   "to": "M3",
+   "conductors": 3,
+   "awg": 18,
+   "length_each_mm": 292,
+   "planning_current_a": 30,
+   "voltage_drop_v": 0.366,
+   "loss_w": 10.97,
+   "note": ""
+  },
+  {
+   "run": "4-in-1 to M4 (RR)",
+   "from": "lift_esc",
+   "to": "M4",
+   "conductors": 3,
+   "awg": 18,
+   "length_each_mm": 524,
+   "planning_current_a": 30,
+   "voltage_drop_v": 0.657,
+   "loss_w": 19.71,
+   "note": ""
+  },
+  {
+   "run": "EDF ESC to EDF motor",
+   "from": "edf_esc",
+   "to": "edf",
+   "conductors": 3,
+   "awg": 14,
+   "length_each_mm": 254,
+   "planning_current_a": 40,
+   "voltage_drop_v": 0.168,
+   "loss_w": 6.73,
+   "note": "3.5 mm bullets; route clear of the fan inlet"
+  },
+  {
+   "run": "FC S1-S4 + GND to 4-in-1",
+   "from": "fc",
+   "to": "lift_esc",
+   "conductors": 5,
+   "awg": 26,
+   "length_each_mm": 328,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.004,
+   "loss_w": 0.0,
+   "note": "signal ribbon"
+  },
+  {
+   "run": "FC S11 + GND to EDF ESC",
+   "from": "fc",
+   "to": "edf_esc",
+   "conductors": 2,
+   "awg": 26,
+   "length_each_mm": 133,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.002,
+   "loss_w": 0.0,
+   "note": "BEC red lead isolated"
+  },
+  {
+   "run": "FC S5-S9 + GND to servo bus",
+   "from": "fc",
+   "to": "servo_bus",
+   "conductors": 6,
+   "awg": 26,
+   "length_each_mm": 375,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.005,
+   "loss_w": 0.0,
+   "note": ""
+  },
+  {
+   "run": "UBEC to servo bus",
+   "from": "ubec",
+   "to": "servo_bus",
+   "conductors": 2,
+   "awg": 20,
+   "length_each_mm": 63,
+   "planning_current_a": 4,
+   "voltage_drop_v": 0.017,
+   "loss_w": 0.07,
+   "note": ""
+  },
+  {
+   "run": "Servo bus to right flap servo",
+   "from": "servo_bus",
+   "to": "servo_flap_R",
+   "conductors": 3,
+   "awg": 22,
+   "length_each_mm": 623,
+   "planning_current_a": 1,
+   "voltage_drop_v": 0.033,
+   "loss_w": 0.03,
+   "note": "servo extension"
+  },
+  {
+   "run": "Servo bus to left flap servo",
+   "from": "servo_bus",
+   "to": "servo_flap_L",
+   "conductors": 3,
+   "awg": 22,
+   "length_each_mm": 685,
+   "planning_current_a": 1,
+   "voltage_drop_v": 0.036,
+   "loss_w": 0.04,
+   "note": ""
+  },
+  {
+   "run": "Servo bus to right elevon servo",
+   "from": "servo_bus",
+   "to": "servo_elevon_R",
+   "conductors": 3,
+   "awg": 22,
+   "length_each_mm": 785,
+   "planning_current_a": 1,
+   "voltage_drop_v": 0.042,
+   "loss_w": 0.04,
+   "note": ""
+  },
+  {
+   "run": "Servo bus to left elevon servo",
+   "from": "servo_bus",
+   "to": "servo_elevon_L",
+   "conductors": 3,
+   "awg": 22,
+   "length_each_mm": 847,
+   "planning_current_a": 1,
+   "voltage_drop_v": 0.045,
+   "loss_w": 0.04,
+   "note": ""
+  },
+  {
+   "run": "Servo bus to nose-steering servo",
+   "from": "servo_bus",
+   "to": "servo_steer",
+   "conductors": 3,
+   "awg": 22,
+   "length_each_mm": 180,
+   "planning_current_a": 1,
+   "voltage_drop_v": 0.01,
+   "loss_w": 0.01,
+   "note": "servo position assumed"
+  },
+  {
+   "run": "FC to receiver",
+   "from": "fc",
+   "to": "rx",
+   "conductors": 4,
+   "awg": 26,
+   "length_each_mm": 447,
+   "planning_current_a": 0.2,
+   "voltage_drop_v": 0.012,
+   "loss_w": 0.0,
+   "note": "5V GND TX RX"
+  },
+  {
+   "run": "FC to GNSS/compass",
+   "from": "fc",
+   "to": "gps",
+   "conductors": 6,
+   "awg": 26,
+   "length_each_mm": 600,
+   "planning_current_a": 0.2,
+   "voltage_drop_v": 0.016,
+   "loss_w": 0.0,
+   "note": "5V GND TX RX SDA SCL"
+  },
+  {
+   "run": "FC to airspeed",
+   "from": "fc",
+   "to": "airspeed",
+   "conductors": 4,
+   "awg": 26,
+   "length_each_mm": 493,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.007,
+   "loss_w": 0.0,
+   "note": "I2C; position assumed"
+  },
+  {
+   "run": "FC to current sensor",
+   "from": "fc",
+   "to": "sensor",
+   "conductors": 3,
+   "awg": 26,
+   "length_each_mm": 301,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.004,
+   "loss_w": 0.0,
+   "note": "VCC, CURR, GND"
+  },
+  {
+   "run": "FC to buzzer",
+   "from": "fc",
+   "to": "buzzer",
+   "conductors": 2,
+   "awg": 26,
+   "length_each_mm": 142,
+   "planning_current_a": 0.1,
+   "voltage_drop_v": 0.002,
+   "loss_w": 0.0,
+   "note": "position assumed"
+  },
+  {
+   "run": "Video rail to VTX",
+   "from": "fc",
+   "to": "vtx",
+   "conductors": 2,
+   "awg": 22,
+   "length_each_mm": 110,
+   "planning_current_a": 0.5,
+   "voltage_drop_v": 0.003,
+   "loss_w": 0.0,
+   "note": "5.0 V measured"
+  },
+  {
+   "run": "Video rail + signal to camera",
+   "from": "fc",
+   "to": "camera",
+   "conductors": 3,
+   "awg": 26,
+   "length_each_mm": 547,
+   "planning_current_a": 0.3,
+   "voltage_drop_v": 0.022,
+   "loss_w": 0.01,
+   "note": "5 V, GND, VIDEO"
+  },
+  {
+   "run": "Camera video to VTX",
+   "from": "camera",
+   "to": "vtx",
+   "conductors": 2,
+   "awg": 26,
+   "length_each_mm": 568,
+   "planning_current_a": 0.0,
+   "voltage_drop_v": 0.0,
+   "loss_w": 0.0,
+   "note": "shielded or twisted with GND"
+  }
+ ],
+ "wire_per_gauge_m": {
+  "10": 0.58,
+  "12": 0.68,
+  "14": 0.76,
+  "18": 5.73,
+  "20": 0.13,
+  "22": 9.58,
+  "26": 15.48
+ },
+ "buy_per_gauge_m_with_25pct_spare": {
+  "10": 0.7,
+  "12": 0.9,
+  "14": 1.0,
+  "18": 7.2,
+  "20": 0.2,
+  "22": 12.0,
+  "26": 19.3
+ }
+}
