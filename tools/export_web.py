@@ -98,11 +98,13 @@ def build_glb():
     s2.export(raw / "repo_parts.glb")
 
 
-V19_ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_recommended"]
-V19_SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_recommended": "V19-R"}
+V19_ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"]
+V19_SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_boom_rotors": "V19-R", "v19w_four_in_wings": "V19-W"}
 
 
 def part_group(n: str) -> str:
+    if re.search(r"canopy|cockpit", n):
+        return "Cockpit"
     if re.search(r"nose_battery|BATTERY_NOSE", n):
         return "Nose bay"
     if n.endswith("__TRAY_A"):
@@ -158,7 +160,7 @@ def variants_data():
     names = {p.name for p in g.load()}
     sys.path.insert(0, str(ROOT / "cad" / "interface" / "src"))
     import build as ib
-    out = {"order": [s for s in V19_ORDER if s in allv], "recommended": "v19r_recommended", "v18": v18, "variants": {}}
+    out = {"order": [s for s in V19_ORDER if s in allv], "recommended": "v19w_four_in_wings", "v18": v18, "variants": {}}
     for slug in out["order"]:
         v = allv[slug]
         cfg = json.loads((ROOT / "config" / "v19" / f"{slug}.json").read_text())

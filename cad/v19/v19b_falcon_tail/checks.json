@@ -74,7 +74,12 @@
   },
   {
    "a": "NEW_CF_tail_spar_L_6x4x320",
-   "b": "NEW_tail_stab_L",
+   "b": "NEW_tail_stab_L1",
+   "intended": "spar inside the stabiliser"
+  },
+  {
+   "a": "NEW_CF_tail_spar_L_6x4x320",
+   "b": "NEW_tail_stab_L2",
    "intended": "spar inside the stabiliser"
   },
   {
@@ -84,17 +89,27 @@
   },
   {
    "a": "NEW_CF_tail_spar_R_6x4x320",
-   "b": "NEW_tail_stab_R",
+   "b": "NEW_tail_stab_R1",
    "intended": "spar inside the stabiliser"
   },
   {
+   "a": "NEW_CF_tail_spar_R_6x4x320",
+   "b": "NEW_tail_stab_R2",
+   "intended": "spar inside the stabiliser"
+  },
+  {
+   "a": "NEW_canopy_clear_PETG",
+   "b": "NEW_canopy_frame",
+   "intended": "canopy bonds to the frame lip"
+  },
+  {
    "a": "NEW_tail_fin_L",
-   "b": "NEW_tail_stab_L",
+   "b": "NEW_tail_stab_L1",
    "intended": "fin tip bonds into the stabiliser"
   },
   {
    "a": "NEW_tail_fin_R",
-   "b": "NEW_tail_stab_R",
+   "b": "NEW_tail_stab_R1",
    "intended": "fin tip bonds into the stabiliser"
   }
  ],
@@ -117,19 +132,40 @@
    "height_mm": 128.0,
    "margin_mm": 211.5
   },
+  "NEW_canopy_frame": {
+   "fits": true,
+   "footprint_max_mm": 38.5,
+   "rotation_deg": 52.5,
+   "height_mm": 75.4,
+   "margin_mm": 217.5
+  },
+  "NEW_canopy_clear_PETG": {
+   "fits": true,
+   "footprint_max_mm": 65.6,
+   "rotation_deg": 45.0,
+   "height_mm": 134.3,
+   "margin_mm": 190.4
+  },
+  "NEW_cockpit_camera_seat": {
+   "fits": true,
+   "footprint_max_mm": 32.0,
+   "rotation_deg": 0.0,
+   "height_mm": 40.0,
+   "margin_mm": 224.0
+  },
   "NEW_well_fill_R": {
    "fits": true,
-   "footprint_max_mm": 219.2,
+   "footprint_max_mm": 219.9,
    "rotation_deg": 45.0,
    "height_mm": 143.3,
-   "margin_mm": 36.8
+   "margin_mm": 36.1
   },
   "NEW_well_fill_L": {
    "fits": true,
-   "footprint_max_mm": 219.2,
+   "footprint_max_mm": 219.9,
    "rotation_deg": 45.0,
    "height_mm": 143.3,
-   "margin_mm": 36.8
+   "margin_mm": 36.1
   },
   "NEW_tail_fin_R": {
    "fits": true,
@@ -145,33 +181,61 @@
    "height_mm": 216.1,
    "margin_mm": 182.0
   },
-  "NEW_tail_stab_R": {
-   "fits": false,
-   "footprint_max_mm": 312.7,
+  "NEW_tail_stab_R1": {
+   "fits": true,
+   "footprint_max_mm": 127.6,
    "rotation_deg": 45.0,
-   "height_mm": 157.2,
-   "margin_mm": -56.7
+   "height_mm": 230.1,
+   "margin_mm": 128.4
   },
-  "NEW_tail_elevator_R": {
-   "fits": false,
-   "footprint_max_mm": 270.0,
+  "NEW_tail_elevator_R1": {
+   "fits": true,
+   "footprint_max_mm": 73.2,
    "rotation_deg": 45.0,
-   "height_mm": 92.1,
-   "margin_mm": -14.0
+   "height_mm": 189.9,
+   "margin_mm": 182.8
   },
-  "NEW_tail_stab_L": {
-   "fits": false,
-   "footprint_max_mm": 312.7,
+  "NEW_tail_stab_R2": {
+   "fits": true,
+   "footprint_max_mm": 99.0,
    "rotation_deg": 45.0,
-   "height_mm": 157.2,
-   "margin_mm": -56.7
+   "height_mm": 218.6,
+   "margin_mm": 157.0
   },
-  "NEW_tail_elevator_L": {
-   "fits": false,
-   "footprint_max_mm": 270.0,
+  "NEW_tail_elevator_R2": {
+   "fits": true,
+   "footprint_max_mm": 56.9,
    "rotation_deg": 45.0,
-   "height_mm": 92.1,
-   "margin_mm": -14.0
+   "height_mm": 186.3,
+   "margin_mm": 199.1
+  },
+  "NEW_tail_stab_L1": {
+   "fits": true,
+   "footprint_max_mm": 127.6,
+   "rotation_deg": 45.0,
+   "height_mm": 230.1,
+   "margin_mm": 128.4
+  },
+  "NEW_tail_elevator_L1": {
+   "fits": true,
+   "footprint_max_mm": 73.2,
+   "rotation_deg": 45.0,
+   "height_mm": 189.9,
+   "margin_mm": 182.8
+  },
+  "NEW_tail_stab_L2": {
+   "fits": true,
+   "footprint_max_mm": 99.0,
+   "rotation_deg": 45.0,
+   "height_mm": 218.6,
+   "margin_mm": 157.0
+  },
+  "NEW_tail_elevator_L2": {
+   "fits": true,
+   "footprint_max_mm": 56.9,
+   "rotation_deg": 45.0,
+   "height_mm": 186.3,
+   "margin_mm": 199.1
   }
  },
  "status": "FAIL"

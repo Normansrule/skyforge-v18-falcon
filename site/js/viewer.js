@@ -220,7 +220,35 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
   const VIEWS = { 'three-quarter': [-860, 600, 1180], top: [0, 1850, 1], side: [0, 110, 1650], front: [-1650, 210, 0], rear: [1650, 260, 300] };
   let lastView = 'three-quarter';
   let spanX = 810;
+  // pilot's eye: just ahead of the FPV camera envelope, wherever the current variant puts it
+  function cockpitPose() {
+    const e = objects.get('KEEP_OUT_CAMERA_19mm');
+    const c = e ? e.centroid.clone().add(e.offset) : new THREE.Vector3(103, 0, 40);
+    const eye = new THREE.Vector3(c.x - 11, c.y, c.z).applyMatrix4(root.matrixWorld);
+    const look = new THREE.Vector3(c.x - 12, c.y, c.z - 0.12).applyMatrix4(root.matrixWorld);
+    return { pos: eye, target: look };
+  }
+  // in the pilot's seat a real camera sees through the clear canopy, not the envelopes around it
+  const PILOT_HIDE = /canopy_clear|cockpit_camera_seat|^CAM_19mm_cradle$/;
+  let pilot = false;
+  function setLens(cockpit) {
+    if (cockpit !== pilot) {
+      pilot = cockpit;
+      for (const e of all) {
+        if (e.layer === 'keepouts' || PILOT_HIDE.test(e.name)) e.obj.visible = cockpit ? false : (e.show && state.layers[e.layer] !== false);
+      }
+    }
+    camera.fov = cockpit ? 84 : 32;
+    camera.near = cockpit ? 0.5 : 5;
+    camera.updateProjectionMatrix();
+    controls.minDistance = cockpit ? 0.2 : 250;
+    controls.enableZoom = !cockpit;
+    controls.enablePan = !cockpit;
+    controls.maxPolarAngle = cockpit ? Math.PI : Math.PI * 0.53;
+    markers.visible = !cockpit;
+  }
   function viewPose(view = 'three-quarter', cx = center.x, len = spanX) {
+    if (view === 'cockpit') return cockpitPose();
     const target = new THREE.Vector3(cx, 0, -10).applyMatrix4(root.matrixWorld);
     const v = VIEWS[view];
     const k = (camera.aspect < 1.25 ? Math.pow(1.25 / camera.aspect, 1.05) : 1) * Math.max(1, Math.pow(len / 900, 0.95));
@@ -230,6 +258,8 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
   function frame(view = 'three-quarter', ms = reduceMotion ? 0 : 750, cx = center.x, len = spanX) {
     lastView = view;
     const { target, pos } = viewPose(view, cx, len);
+    setLens(view === 'cockpit');
+    if (view === 'cockpit') ms = 0; // jump straight into the seat
     if (!ms) { controls.target.copy(target); camera.position.copy(pos); controls.update(); request(); return; }
     camTween = { t0: performance.now(), ms, p0: camera.position.clone(), p1: pos, q0: controls.target.clone(), q1: target };
     request();
@@ -401,7 +431,7 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
       e.animMove = !e.from.equals(e.to);
       // a modified part appears where its V18 original currently is, then travels with it
       if (e.kind === 'mod' && show && !e.show) { const orig = objects.get(e.name); if (orig) { e.offset.copy(orig.offset); e.from.copy(orig.offset); e.animMove = !e.from.equals(e.to); } }
-      const visible = show && layerOn(e);
+      const visible = show && layerOn(e) && !(pilot && (e.layer === 'keepouts' || PILOT_HIDE.test(e.name)));
       if (visible && !e.obj.visible) { e.obj.visible = true; setOpacity(e, 0); e.fade = [0, 1]; }
       else if (!visible && e.obj.visible) e.fade = [e.opacity, 0];
       else e.fade = null;
@@ -410,7 +440,8 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
     const c1 = new THREE.Vector3(v ? Math.max(405, v.length_mm / 2) : 405, 0, 0);
     spanX = v ? v.length_mm : 810;
     if (ghost) ghost.visible = false;
-    frame(lastView, ms ? ms * 0.95 : 0, c1.x, spanX);
+    if (lastView === 'cockpit') setTimeout(() => frame('cockpit', 0), (ms || 0) + 30);
+    else frame(lastView, ms ? ms * 0.95 : 0, c1.x, spanX);
     if (ms) { anim = { t0: performance.now(), ms, c0: center.clone(), c1 }; request(); }
     else { anim = { c0: center.clone(), c1 }; stepAnim(1); finishAnim(); anim = null; }
     sun.target.position.set(c1.x, 0, 0);
@@ -486,6 +517,7 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
     objects, frame, request, resize, setLayer, setCut, setMarkers, setMarkersVisible, setGhost, select: highlight, snapshot,
     setVariant, preload: loadVariant,
     get variant() { return state.variant; },
+    get pilot() { return pilot; },
     get busy() { return !!anim || !!camTween; },
     setExplode(f) { state.explode = f; applyTransforms(); },
     setDeflection(key, deg) { state.deflect[key] = deg; applyTransforms(); },

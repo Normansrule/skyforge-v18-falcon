@@ -1,8 +1,8 @@
 # Balance and stability: the finding that gates V18
 
 > **Update (V19):** the configuration decision this document asks for has been worked through in
-> [V19_VARIANTS.md](V19_VARIANTS.md). V19-R (long nose + forward rotors + small falcon tail) passes every model
-> gate with the masses of the parts as modelled.
+> [V19_VARIANTS.md](V19_VARIANTS.md). V19-W (four rotors in the wing wells, wing 200 mm aft, falcon tail) passes
+> every model gate with the masses of the parts as modelled.
 
 **Status: STOP for bulk buying and printing.** The V18 assembly as modelled cannot hover
 balanced *and* fly stable on its wing. This is the most important result in the repo, and it is

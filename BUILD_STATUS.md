@@ -7,11 +7,19 @@ test) / **EXPERIMENTAL** (design proposal, unverified). Nothing is FINISHED yet.
 
 **V18 as designed does not balance** (model gates G1-G3 STOP, see
 [docs/BALANCE_AND_STABILITY.md](docs/BALANCE_AND_STABILITY.md)): CG x418, 88 mm aft of the rotor centroid and
-aft of the whole neutral-point band. **Recommended: V19-R** ([docs/V19_VARIANTS.md](docs/V19_VARIANTS.md)) -
-wing group 250 mm aft, front rotors on carbon booms ahead of the leading edge, rear rotors in the V18 wells,
-nose-bay battery, 0.05 m2 falcon tail. It passes every model gate with the masses of the parts as modelled
-(static margin 7.4 %, heaviest motor 26.3 %) and has no new collisions in the full assembly. V19-C (no tail,
-wing 275 mm aft) is the fallback. The long nose alone (V19-A) and the tail alone (V19-B) do not pass.
+aft of the whole neutral-point band.
+
+**Recommended: V19-W** ([docs/V19_VARIANTS.md](docs/V19_VARIANTS.md)):
+- all four lift motors in your V18 wing wells, wing group 200 mm aft;
+- 0.18 m2 falcon tail on the EDF outrigger booms;
+- rear motors and main gear on short under-wing booms;
+- nose-bay battery, pilot's-eye FPV camera under a clear canopy;
+- the single V18 EDF as the cruise engine.
+
+It passes every model gate with the masses of the parts as modelled (static margin 8.2 %, heaviest
+motor 26.2 %) and has no new collisions in the full assembly. It is long: 1355 mm nose to tail
+tip. V19-R and V19-C (front rotors on booms ahead of the wing) also pass and are the alternatives. The long nose alone
+(V19-A) and the tail alone (V19-B) do not pass.
 
 Stages 0-2 (fit coupons, LW-PLA density, single-motor and EDF bench) are unchanged and come first: their
 measurements replace the model assumptions V19 rests on.
@@ -31,18 +39,19 @@ measurements replace the model assumptions V19 rests on.
 | ArduPilot bench .param | PROTOTYPE-READY (bench) | Port map only |
 | Interface parts | EXPERIMENTAL | All fit-checked inside V18; strength unproven |
 | Thrust-stand firmware + ingest | PROTOTYPE-READY | Compiles for ATmega328P (44 % flash); synthetic-log tested |
-| V19 search + variant geometry (A, B, C, R) | EXPERIMENTAL | 44 configurations with as-built masses; full-assembly collision check against V18 |
-| V19-R / V19-C part files (STL, 3MF print set, DXF) | EXPERIMENTAL | Outer mould lines; unsliced; strength unproven |
-| Web app (Pages, offline) | PROTOTYPE-READY | V18/V19 switcher; tested in Chromium desktop + phone widths |
+| V19 search + variant geometry (A, B, C, R, W) | EXPERIMENTAL | 64 configurations with as-built masses; full-assembly collision check against V18 |
+| V19-W / V19-R / V19-C part files (STL, 3MF print set, DXF) | EXPERIMENTAL | Outer mould lines; unsliced; strength unproven |
+| Web app (Pages, offline) | PROTOTYPE-READY | V18/V19 switcher, pilot view; tested in Chromium desktop + phone widths |
 | Desktop app (Tauri) | PROTOTYPE-READY | Linux release build verified running; Windows/macOS built by CI on tag |
 
 ## Flagged (open)
 
 | Finding | Action |
 |---|---|
-| CG / NP / rotor-centroid conflict | Resolved in the model by V19-R; confirm by weighing at Stage 9 |
-| V19-R front props are 15 mm ahead of the leading edge (the limit) | Hold the boom position; measure at assembly |
-| V19-R trims at 12 deg angle of attack at 16 m/s (8 deg at 20 m/s) | Transition and cruise at 18-20 m/s; confirm stall in glide tests |
+| CG / NP / rotor-centroid conflict | Resolved in the model by V19-W; confirm by weighing at Stage 9 |
+| V19-W tail is large (0.18 m2, 759 mm span) and far aft; aircraft length 1355 mm | Accept, or use V19-R (0.05 m2 tail, front rotors on booms) |
+| V19-W trims at 10 deg angle of attack at 16 m/s (7 deg at 20 m/s) | Transition and cruise at 18-20 m/s; confirm stall in glide tests |
+| FPV through a vacuum-formed canopy | Check glare and distortion on the bench; matt-black seat and frame |
 | V19 tail sits 80 mm above the wing plane to clear the EDF jet (estimate) | Tuft test on the EDF bench before gluing the tail |
 | V19-B: rear crossrail runs into the D1 intake | V19-B is not recommended |
 | Flaps touch the D-panel trailing lip at neutral (both sides, y 229-247); 0.07 mm at +1 deg | Relieve ~0.8 mm |

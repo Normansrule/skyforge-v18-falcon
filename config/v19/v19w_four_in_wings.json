@@ -1,0 +1,29 @@
+{
+ "name": "v19w_four_in_wings",
+ "label": "V19-W four rotors in the wings",
+ "wing_shift_mm": 200,
+ "front_rotor": {
+  "mode": "wing",
+  "dx": 0.0
+ },
+ "rear_rotor_dx_mm": 0.0,
+ "battery": "nose_bay",
+ "avionics_forward": true,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": {
+  "area_m2": 0.18,
+  "aspect": 3.2,
+  "taper": 0.55,
+  "le_sweep_deg": 28.0,
+  "x_le_root_mm": 985,
+  "incidence_deg": 0.0,
+  "elevator_frac": 0.35,
+  "height_mm": 80.0
+ },
+ "cockpit_camera": true,
+ "gps_aft": true,
+ "no_le_ext": true,
+ "rear_support": "boom",
+ "summary": "All four lift rotors in your V18 wing wells, wing 200 mm aft, falcon tail, pilot's-eye cockpit camera, one EDF"
+}

@@ -49,7 +49,7 @@ export function aircraft(ctx, el) {
 
     <h2>View</h2>
     <div class="seg" role="group" aria-label="Camera">
-      <button data-view="three-quarter" aria-pressed="true">3/4</button><button data-view="top">Top</button><button data-view="side">Side</button><button data-view="front">Front</button><button data-view="rear">Rear</button>
+      <button data-view="three-quarter" aria-pressed="true">3/4</button><button data-view="top">Top</button><button data-view="side">Side</button><button data-view="front">Front</button><button data-view="rear">Rear</button><button data-view="cockpit" title="Look from the FPV camera; drag to look around">Pilot</button>
     </div>
     <div class="field"><span class="lab">Layers</span>
       <div class="layers">${LAYERS.map(([k, label, c]) => `<label><input type="checkbox" data-layer="${k}" ${layerState[k] ? 'checked' : ''}><span class="swatch" style="background:${c}"></span>${label}</label>`).join('')}</div>
@@ -73,7 +73,9 @@ export function aircraft(ctx, el) {
   $$(el, '[data-view]').forEach((b) => b.addEventListener('click', () => {
     $$(el, '[data-view]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     ctx.viewer?.frame(b.dataset.view);
+    ctx.setPilot(b.dataset.view === 'cockpit');
   }));
+  if (ctx.viewer?.pilot) $$(el, '[data-view]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.view === 'cockpit')));
   $$(el, '[data-layer]').forEach((c) => c.addEventListener('change', () => { layerState[c.dataset.layer] = c.checked; ctx.viewer?.setLayer(c.dataset.layer, c.checked); }));
   $(el, '#cut').addEventListener('change', (e) => ctx.viewer?.setCut(e.target.checked));
   $(el, '#explode').addEventListener('input', (e) => ctx.viewer?.setExplode(Number(e.target.value)));
@@ -171,7 +173,7 @@ export function v19(ctx, el, sub) {
   if (v) for (const p of v.new) { const k = p.group_label; (groups[k] ||= []).push(p); }
   html(el, `
     <h2>V19 directions</h2>
-    <p class="lede-s">Your three directions, built from your V18 parts and checked with the same models: the long nose, the falcon tail, the forward rotors, and the combination.</p>
+    <p class="lede-s">Your directions, built from your V18 parts and checked with the same models: the long nose, the falcon tail, the forward rotors, the combination, and four rotors in the wings with a pilot's-eye cockpit camera. Try the <b>Pilot</b> view on the Aircraft tab.</p>
     <div class="vcards">
       ${card('', V.v18, 'V18 as designed', 'Your assembly today.')}
       ${V.order.map((s) => card(s, V.variants[s].eval, V.variants[s].label, V.variants[s].summary)).join('')}

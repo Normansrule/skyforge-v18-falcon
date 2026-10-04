@@ -134,6 +134,87 @@
    ]
   },
   {
+   "name": "NEW_canopy_frame",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 1.5,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Lower 12 mm of your C1 cover printed as the canopy frame: it carries the latches and the camera seat, and the clear canopy bonds to its lip.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 38.5,
+    "rotation_deg": 52.5,
+    "height_mm": 75.4,
+    "margin_mm": 217.5
+   },
+   "centroid_mm": [
+    82.6,
+    0.0,
+    17.2
+   ],
+   "bbox_mm": [
+    48.5,
+    75.4,
+    12.0
+   ]
+  },
+  {
+   "name": "NEW_canopy_clear_PETG",
+   "class": "printed",
+   "material": "PETG (clear sheet)",
+   "mass_g": 15.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Vacuum-formed 0.75 mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is only translucent). Trim to the frame lip.",
+   "mass_basis": "half the surface x 0.75 mm sheet",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 65.6,
+    "rotation_deg": 45.0,
+    "height_mm": 134.3,
+    "margin_mm": 190.4
+   },
+   "centroid_mm": [
+    141.1,
+    -0.0,
+    39.1
+   ],
+   "bbox_mm": [
+    133.7,
+    75.4,
+    37.7
+   ]
+  },
+  {
+   "name": "NEW_cockpit_camera_seat",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 8.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back behind it; screws to the canopy frame so lifting the canopy opens the nose bay.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 32.0,
+    "rotation_deg": 0.0,
+    "height_mm": 40.0,
+    "margin_mm": 224.0
+   },
+   "centroid_mm": [
+    136.3,
+    -0.0,
+    30.9
+   ],
+   "bbox_mm": [
+    40.0,
+    32.0,
+    28.4
+   ]
+  },
+  {
    "name": "NEW_front_well_cap_upper_R",
    "class": "printed",
    "material": "LW-PLA",
@@ -296,22 +377,22 @@
    ]
   },
   {
-   "name": "NEW_CF_rotor_boom_R_10x10x526",
+   "name": "NEW_CF_rotor_boom_R_10x10x523",
    "class": "carbon",
    "material": "carbon",
-   "mass_g": 29.4,
+   "mass_g": 29.2,
    "lwpla": false,
    "layer": "structure",
    "note": "10x10x1 carbon square tube; carries the front motor (pod) and the rear motor (riser), hangs under the wing from both crossrails.",
    "mass_basis": "length x g/m",
    "P1S": null,
    "centroid_mm": [
-    466.9,
+    468.7,
     220.0,
     -32.5
    ],
    "bbox_mm": [
-    526.2,
+    522.5,
     10.0,
     10.0
    ]
@@ -328,12 +409,12 @@
    "P1S": {
     "fits": true,
     "footprint_max_mm": 31.9,
-    "rotation_deg": 41.5,
+    "rotation_deg": 48.0,
     "height_mm": 145.0,
     "margin_mm": 224.1
    },
    "centroid_mm": [
-    259.8,
+    263.6,
     220.0,
     -26.0
    ],
@@ -425,22 +506,22 @@
    ]
   },
   {
-   "name": "NEW_CF_rotor_boom_L_10x10x526",
+   "name": "NEW_CF_rotor_boom_L_10x10x523",
    "class": "carbon",
    "material": "carbon",
-   "mass_g": 29.4,
+   "mass_g": 29.2,
    "lwpla": false,
    "layer": "structure",
    "note": "10x10x1 carbon square tube; carries the front motor (pod) and the rear motor (riser), hangs under the wing from both crossrails.",
    "mass_basis": "length x g/m",
    "P1S": null,
    "centroid_mm": [
-    466.9,
+    468.7,
     -220.0,
     -32.5
    ],
    "bbox_mm": [
-    526.2,
+    522.5,
     10.0,
     10.0
    ]
@@ -457,12 +538,12 @@
    "P1S": {
     "fits": true,
     "footprint_max_mm": 31.9,
-    "rotation_deg": 41.5,
+    "rotation_deg": 48.0,
     "height_mm": 145.0,
     "margin_mm": 224.1
    },
    "centroid_mm": [
-    259.8,
+    263.6,
     -220.0,
     -26.0
    ],
@@ -556,17 +637,6 @@
  ],
  "modified_v18": [
   {
-   "name": "CAM_19mm_cradle",
-   "why": [
-    "base trimmed 7 mm for the nose-bay pack; camera stays put"
-   ],
-   "move_mm": [
-    0,
-    0,
-    0
-   ]
-  },
-  {
    "name": "WRB_hollow_wing",
    "why": [
     "slot for the relocated rear crossrail"
@@ -615,7 +685,7 @@
    "why": [
     "slot for CF_crossrail_270_10x10x620 at x 515.0",
     "slot for CF_crossrail_450_10x10x820 at x 566.5",
-    "slot for CF_gear_crossbar_10x10x340 at x 523.7"
+    "slot for CF_gear_crossbar_10x10x340 at x 525.5"
    ],
    "move_mm": [
     0,
@@ -624,9 +694,11 @@
    ]
   }
  ],
- "removed_v18": [],
+ "removed_v18": [
+  "C1_service_cover",
+  "CAM_19mm_cradle"
+ ],
  "notes": [
-  "CAM_19mm_cradle: bottom 7 mm trimmed so the pack fits under it; the camera keeps its V18 position. The cradle bolts to C1 so lifting C1 opens the nose bay.",
   "Rear crossrail moves to x 566.5 (wing frame x 291.5): the V18 station would put it through the D1 intake. It now crosses the keels ahead of the outrigger connectors.",
   "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
   "Rotor booms: 10x10 carbon at y +/-220, z -37.5 to -27.5 (0.5 mm under the lowest wing skin they pass)."

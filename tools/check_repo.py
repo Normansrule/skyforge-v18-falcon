@@ -219,7 +219,7 @@ def check_v19() -> None:
     rec = allv.get(web["recommended"])
     if not rec or not rec["evaluation"]["passes"] or rec["checks"]["collisions_new_vs_V18"]:
         fails.append("the recommended V19 variant does not pass its gates cleanly")
-    for slug in ("v19c_forward_rotors", "v19r_recommended"):
+    for slug in ("v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"):
         out = ROOT / "cad" / "v19" / slug
         for f in ("parts.json", "checks.json", "mass_inputs.json", f"{slug}_print_set.3mf"):
             if not (out / f).exists():

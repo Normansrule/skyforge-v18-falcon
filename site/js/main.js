@@ -53,6 +53,16 @@ const ctx = {
     drawRuler(this.els.ruler, { cgX, rotorX, rotorRows: [240 + shift, 420 + shift], npBand: band, window: win });
     this.viewer?.setMarkers({ cg: b ? [cgX, 0, 0] : r.cg_mm, rotorX, np: band });
   },
+  setPilot(on) {
+    const vp = document.getElementById('viewport');
+    vp.classList.toggle('pilot', on);
+    const hud = document.getElementById('hud');
+    if (on) {
+      const v = this.variant && this.data.variants?.variants[this.variant];
+      const cam = v?.moves?.KEEP_OUT_CAMERA_19mm ? 103 + v.moves.KEEP_OUT_CAMERA_19mm[0] : 103;
+      hud.querySelector('.hud-cap').textContent = `FPV · 19 mm camera at x ${Math.round(cam)} mm${v ? ` · ${v.short}` : ' · V18'}`;
+    }
+  },
   setVariant(slug, { rerender = true } = {}) {
     const V = this.data.variants;
     if (!V || !V.variants[slug]) slug = null;
@@ -62,6 +72,7 @@ const ctx = {
     if (slug) this.balance = null;
     pills();
     this.updateRuler();
+    if (this.viewer?.pilot) this.setPilot(true);
     if (rerender && (current === 'aircraft' || current === 'v19')) render(true);
   },
 };
@@ -101,6 +112,7 @@ function render(force = false) {
   if (force || current !== name || currentSub !== sub || !wb) {
     if (current === 'balance' && name !== 'balance') { ctx.balance = null; ctx.viewer?.setShifts({ wing: 0, rotor: 0, battery: 0, avionics: 0 }); }
     if (name === 'balance' && ctx.variant) ctx.setVariant(null, { rerender: false });
+    if (current === 'aircraft' && name !== 'aircraft' && ctx.viewer?.pilot) { ctx.viewer.frame('three-quarter', 0); ctx.setPilot(false); }
     if (current === 'aircraft' && name !== 'aircraft' && ctx.viewer) { ctx.viewer.setExplode(0); ctx.viewer.setDeflection('FLAP', 0); ctx.viewer.setDeflection('ELEVON', 0); }
     const changed = current !== name;
     current = name;

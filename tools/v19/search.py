@@ -8,9 +8,11 @@ nose bay, FC/VTX/EDF ESC into the vacated battery bay, tail ducts/saddles in LW-
   A  long-nose falcon     wing group 150-200 mm aft of the nose; rotors stay in wing wells
   B  falcon tail          horizontal tail on a dorsal pylon over the EDF nozzle
   C  forward rotors       front rotor pair on booms ahead of the wing leading edge, front wells closed
-  R  recommended          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,
+  W  four in the wings     all four lift rotors in your V18 wells (no dx: the holes stay where you drew them),
+                          rear pair on under-wing booms so the rear crossrail clears D1, falcon tail far aft
+  R  boom alternative          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,
                           the cheapest combination that passes every gate with margin on balance
-                          (heaviest motor <= 28 %, static margin >= 6 % wells closed); the front
+                          (heaviest motor <= 28 %, static margin >= 6 % wells closed; 7.5 % for W); the front
                           props sit at the 15 mm leading-edge clearance limit
 
 In every candidate the rotor positions are set so the rotor centroid sits on that candidate's CG
@@ -35,7 +37,7 @@ import engine as E  # noqa: E402
 import geometry as G  # noqa: E402
 
 ROOT = E.ROOT
-SUPPORT = {"battery": "nose_bay", "avionics_forward": True, "tail_parts_lwpla": True}
+SUPPORT = {"battery": "nose_bay", "avionics_forward": True, "tail_parts_lwpla": True, "cockpit_camera": True, "gps_aft": True}
 MAX_LE_EXT = 120.0
 MAX_BOOM = 340.0
 
@@ -108,6 +110,10 @@ def candidates():
     for dw, area in itertools.product((200, 225, 250), (0.05, 0.065, 0.08, 0.095)):
         out.append(("R", {**SUPPORT, "wing_shift_mm": dw, "lwpla_density": 0.8, "tail": tail(area, 790 + max(0, dw - 60)),
                           "front_rotor": {"mode": "boom", "x": 0.0}}))
+    for dw, area in itertools.product((150, 175, 200, 225, 250), (0.10, 0.14, 0.18, 0.22)):
+        out.append(("W", {**SUPPORT, "wing_shift_mm": dw, "lwpla_density": 0.8, "tail": tail(area, 675 + dw + 110),
+                          "front_rotor": {"mode": "wing", "dx": 0.0}, "rear_rotor_dx_mm": 0.0, "no_le_ext": True,
+                          "rear_support": "boom"}))
     return out
 
 
@@ -115,7 +121,8 @@ VARIANTS = {
     "A": ("v19a_long_nose", "V19-A long-nose falcon", "Wing group 200 mm aft, battery in a nose bay, rotors stay in the wing wells"),
     "B": ("v19b_falcon_tail", "V19-B falcon tail", "Horizontal tail on twin swept fins at the ends of the EDF outrigger booms; wing {dw} mm aft"),
     "C": ("v19c_forward_rotors", "V19-C forward rotors", "Front rotors on booms ahead of the leading edge, wing {dw} mm aft"),
-    "R": ("v19r_recommended", "V19-R recommended", "Long nose, forward rotors on booms and a small falcon tail; rear rotors stay in the V18 wells"),
+    "W": ("v19w_four_in_wings", "V19-W four rotors in the wings", "All four lift rotors in your V18 wing wells, wing {dw} mm aft, falcon tail, pilot's-eye cockpit camera, one EDF"),
+    "R": ("v19r_boom_rotors", "V19-R boom rotors", "Long nose, forward rotors on booms and a small falcon tail; rear rotors stay in the V18 wells"),
 }
 
 
@@ -125,6 +132,8 @@ def pick(fam: str, fr: list) -> dict:
     passing = [r for r in fr if r["passes"]]
     if fam == "R":
         passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 6]
+    if fam == "W":   # the coarse lattice reads ~1 % high on these tails; ask for more so the fine result keeps margin
+        passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 7.5]
     if fam == "C":
         passing = [r for r in passing if r["config"]["lwpla_density"] == 0.8]
     if passing:
@@ -137,7 +146,7 @@ def main() -> int:
     t0 = time.time()
     rows = []
     for i, (fam, cfg) in enumerate(candidates()):
-        c = balance_rotors(cfg, lock_rear=(fam == "R"))
+        c = E.full(cfg) if fam == "W" else balance_rotors(cfg, lock_rear=(fam == "R"))
         r = evaluate(c)
         r["family"] = fam
         r["score"] = round(score(r), 2)
@@ -148,7 +157,7 @@ def main() -> int:
               f"NP={r['np_closed_x_mm']}/{r['np_open_x_mm']} SM={r['sm_closed_pct']}/{r['sm_open_pct']} worst={r['worst_motor_pct']} "
               f"trim={[t['pitch_surfaces_deg'] for t in r['trim_16ms'].values()]} pass={r['passes']} ({time.time() - t0:.0f}s)", flush=True)
         E.save_cache()
-    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCR"}
+    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCRW"}
     # finalists at full resolution
     E.MODE["res"] = "fine"
     final = {}

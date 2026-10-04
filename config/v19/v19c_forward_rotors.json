@@ -5,7 +5,7 @@
  "front_rotor": {
   "mode": "boom",
   "dx": 0.0,
-  "x": 261.7593329277306
+  "x": 265.4750518817523
  },
  "rear_rotor_dx_mm": 0.0,
  "battery": "nose_bay",
@@ -13,5 +13,7 @@
  "tail_parts_lwpla": true,
  "lwpla_density": 0.8,
  "tail": null,
+ "cockpit_camera": true,
+ "gps_aft": true,
  "summary": "Front rotors on booms ahead of the leading edge, wing 275 mm aft"
 }

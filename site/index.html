@@ -45,6 +45,17 @@
       <div class="variant-pills" id="variant-pills" role="group" aria-label="Design variant"></div>
       <div class="viewport-hint" id="viewport-hint">Drag to orbit · scroll to zoom · click a part</div>
       <div class="ruler" id="ruler" aria-label="Fore-aft balance ruler"></div>
+      <div class="hud" id="hud" aria-hidden="true">
+        <svg viewBox="-200 -120 400 240" preserveAspectRatio="xMidYMid meet">
+          <g class="ladder"><line x1="-120" x2="-40" y1="0" y2="0"/><line x1="40" x2="120" y1="0" y2="0"/>
+            <line x1="-60" x2="-30" y1="-48" y2="-48"/><line x1="30" x2="60" y1="-48" y2="-48"/><text x="66" y="-44">10</text>
+            <line x1="-60" x2="-30" y1="48" y2="48" stroke-dasharray="6 5"/><line x1="30" x2="60" y1="48" y2="48" stroke-dasharray="6 5"/><text x="66" y="52">-10</text></g>
+          <path class="wings" d="M-34,8 L-14,8 L-7,16 L0,8 L7,16 L14,8 L34,8"/>
+          <circle class="wings" cx="0" cy="0" r="2.5"/>
+        </svg>
+        <div class="hud-cap"></div>
+        <div class="hud-tip">Drag to look around · pick another view to leave the seat</div>
+      </div>
       <div class="intro" id="intro" hidden></div>
     </div>
     <aside class="panel" id="panel"></aside>

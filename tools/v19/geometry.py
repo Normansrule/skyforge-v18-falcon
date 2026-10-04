@@ -2,7 +2,7 @@
 """Build the V19 variant assemblies from your V18 meshes plus the new parts each variant needs.
 
     python3 tools/v19/geometry.py                 # every config/v19/*.json
-    python3 tools/v19/geometry.py v19r_recommended
+    python3 tools/v19/geometry.py v19r_boom_rotors
 
 For each variant this moves V18 objects as the configuration says (wing group aft, rotors, gear, nose-bay
 battery, Tray A, avionics), cuts the V18 panels where the variant needs it (moved wells, crossrail and
@@ -69,6 +69,7 @@ BAY_X0 = 87.0                # nose-bay envelope starts here (from the collision
 FLOOR_T = 1.5                # G10 battery floor on the keel tops
 KEEL_TOP = -20.0
 AVIONICS_DX = -140.0 + TRAY_A_AFT
+GEAR_CROSSBAR_MAX_X = 563.0  # the gear crossbar must still cross the keels (they end at x 570)
 GEAR_DROP = -1.5             # main gear 1.5 mm lower so the crossbar clears the thickest wing section above it
 # V18 avionics envelopes and where they go in the Tray A battery pocket (x 308-448 once Tray A slides aft):
 # FC rotated 90 deg with the VTX stacked on it, EDF ESC rotated so its 73 mm runs fore-aft
@@ -86,10 +87,19 @@ G_PER_M = {10: 55.8, 8: 43.4, "rod6": 24.3}
 SKIN_G_M2 = E.SKIN_G_PER_M2_AT_08     # both skins, per planform area
 TAIL_G_M2 = E.TAIL_G_PER_M2_AT_08
 
-BUILD_PACKS = {"v19c_forward_rotors", "v19r_recommended"}   # variants that pass get the full file set
+BUILD_PACKS = {"v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"}
+# cockpit: camera centre at a pilot's eye point under the canopy, GPS off the nose
+V18_CAM = (103.0, 0.0, 40.0)
+COCKPIT_CAM = (130.0, 0.0, 44.0)
+V18_GPS = (52.0, 0.0, 35.0)
+GPS_AFT = (493.0, 0.0, 51.0)
+CANOPY_SILL = 12.0
+CANOPY_T = 0.75
+SEAT_BASE_Z = 21.6
+# variants that pass get the full file set (BUILD_PACKS above)
 
 COLORS = {"printed": "#9AA3AD", "new_printed": "#5E8DB8", "carbon": "#2A2F35", "g10": "#C9B98A", "purchase": "#1E2227",
-          "keepout": "#E5A34E", "new_keepout": "#E5A34E", "petg": "#3E5F80"}
+          "keepout": "#E5A34E", "new_keepout": "#E5A34E", "petg": "#3E5F80", "glass": "#BFD8EC"}
 
 
 # ---------------------------------------------------------------------------------------------------
@@ -264,6 +274,9 @@ class Builder:
         self.wf = WINGFIELD
         self.dw = self.c["wing_shift_mm"]
         self.boom = self.c["front_rotor"]["mode"] == "boom"
+        # four rotors in the wing wells, rear pair carried on under-wing booms so the rear crossrail can move ahead of D1
+        self.wellboom = (not self.boom) and self.c.get("rear_support") == "boom"
+        self.underboom = self.boom or self.wellboom
         self.out = OUT / slug
         if not light:
             for sub in ("stl", "dxf"):
@@ -281,7 +294,7 @@ class Builder:
         c, lay, dw = self.c, self.lay, self.dw
         dxf = lay["front_x"] - E.FRONT_X
         dxr = lay["rear_x"] - E.REAR_X
-        self.rear_rail_x = (E.REAR_X + dxr) if not self.boom else min(E.REAR_X + dw, REAR_RAIL_MAX_X)
+        self.rear_rail_x = (E.REAR_X + dxr) if not self.underboom else min(E.REAR_X + dxr, REAR_RAIL_MAX_X)
         self.front_rail_x = (E.FRONT_X + dxf) if not self.boom else E.FRONT_X + dw
         for n, p in self.parts.items():
             mv = [0.0, 0.0, 0.0]
@@ -293,7 +306,7 @@ class Builder:
                     mv[2] = self.boom_bot - 0.1 - (-20.0)   # backing plate becomes the clamp plate under the boom
             elif REAR_HW.match(n):
                 mv[0] = dxr
-                if self.boom and BACKING.search(n):
+                if self.underboom and BACKING.search(n):
                     mv[2] = self.boom_bot - 0.1 - (-20.0)
             elif n == CR_F:
                 mv[0] = self.front_rail_x - E.FRONT_X
@@ -302,15 +315,28 @@ class Builder:
             elif MAIN_GEAR.search(n) or n in ("G10_main_gear_left", "PURCHASE_OR_CUT_main_gear_plate"):
                 mv[0] = self.gear_x - 385.0
                 mv[2] = GEAR_DROP if dw > 0 else 0.0
+                if self.gear_on_booms:
+                    if n in ("CF_gear_crossbar_10x10x340", "G10_main_gear_left", "PURCHASE_OR_CUT_main_gear_plate"):
+                        self.removed.append(n)
+                    else:   # legs and wheels bolt to the rear motor backing plates under the booms (leg top y 110 -> 220)
+                        ysgn = 1.0 if p.vertices[:, 1].mean() > 0 else -1.0
+                        mv[1] = ysgn * (E.MOTOR_Y - 110.0)
+                        mv[2] = (self.boom_bot - 0.1 - 2.0) - (-40.0) - 0.1
             elif n in TRAY_A and c["battery"] == "nose_bay":
                 mv[0] = TRAY_A_AFT
             elif n in AVIONICS and c["avionics_forward"]:
                 mv[:] = (np.array(AVIONICS_TRAY_A[n][0]) - np.array(AVIONICS_V18_CENTRE[n])).tolist()
             elif n == "KEEP_OUT_RX_antenna_free_zone" and c["battery"] == "nose_bay":
                 mv[2] = CAM_RAISE
+            elif n == "KEEP_OUT_CAMERA_19mm" and c.get("cockpit_camera"):
+                mv[:] = (np.array(COCKPIT_CAM) - np.array(V18_CAM)).tolist()
+            elif n == "KEEP_OUT_GPS_mount_EXTERNAL_TBD" and c.get("gps_aft"):
+                mv[:] = (np.array(GPS_AFT) - np.array(V18_GPS)).tolist()
             if any(mv):
                 self.moves[n] = mv
         # mass-model placements that are not V18 objects
+        if self.gear_on_booms:
+            self.removed += ["site:385,24,-31:2.8", "site:385,-24,-31:2.8"]
         site = {"site:240,24,-19:2.8": CR_F, "site:240,-24,-19:2.8": CR_F, "site:420,24,-19:2.8": CR_R,
                 "site:420,-24,-19:2.8": CR_R, "site:385,24,-31:2.8": "CF_gear_crossbar_10x10x340",
                 "site:385,-24,-31:2.8": "CF_gear_crossbar_10x10x340"}
@@ -372,39 +398,73 @@ class Builder:
                                          box(x0 + 6, x0 + L - 6, -W / 2 - 2.5, -W / 2 - 0.1, z0, z0 + 10)])
         self.add("NEW_nose_battery_rails", rail, "printed", "PETG", rail.volume / 1000 * RHO["PETG"],
                  note="Two PETG side rails with strap slots; bonded and bolted to the floor.")
-        # camera cradle: base raised, camera stays where V18 has it
-        self.modified["CAM_19mm_cradle"] = cam_trimmed(self.parts)
-        self.mod_why.setdefault("CAM_19mm_cradle", []).append(f"base trimmed {CAM_RAISE:.0f} mm for the nose-bay pack; camera stays put")
-        self.notes.append(f"CAM_19mm_cradle: bottom {CAM_RAISE:.0f} mm trimmed so the pack fits under it; the camera keeps its V18 position. "
-                          "The cradle bolts to C1 so lifting C1 opens the nose bay.")
+        # camera cradle: base raised, camera stays where V18 has it (the cockpit variant replaces the cradle instead)
+        if not self.c.get("cockpit_camera"):
+            self.modified["CAM_19mm_cradle"] = cam_trimmed(self.parts)
+            self.mod_why.setdefault("CAM_19mm_cradle", []).append(f"base trimmed {CAM_RAISE:.0f} mm for the nose-bay pack; camera stays put")
+            self.notes.append(f"CAM_19mm_cradle: bottom {CAM_RAISE:.0f} mm trimmed so the pack fits under it; the camera keeps its V18 "
+                              "position. The cradle bolts to C1 so lifting C1 opens the nose bay.")
         self.allow += [(r"NEW_G10_nose_battery_floor", r"CF_keel_", "floor bolted on the keel tops"),
                        (r"NEW_nose_battery_rails", r"NEW_G10_nose_battery_floor", "rails bonded to the floor"),
                        (r"KEEP_OUT_BATTERY_NOSE_BAY", r"NEW_(G10_nose_battery_floor|nose_battery_rails)", "pack sits on the floor between the rails")]
 
+    # ---------------- cockpit (pilot's-eye camera under a clear canopy)
+    def cockpit(self):
+        if not self.c.get("cockpit_camera"):
+            return
+        c1 = self.parts["C1_service_cover"].mesh()
+        self.removed += ["C1_service_cover", "CAM_19mm_cradle"]
+        z0 = c1.bounds[0][2]
+        sill = trimesh.boolean.intersection([c1, box(60, 205, -50, 50, z0 - 1, z0 + CANOPY_SILL)], engine="manifold")
+        glass = diff(c1, box(60, 205, -50, 50, z0 - 1, z0 + CANOPY_SILL))
+        self.add("NEW_canopy_frame", sill, "printed", "PETG", sill.volume / 1000 * RHO["PETG"],
+                 note=f"Lower {CANOPY_SILL:.0f} mm of your C1 cover printed as the canopy frame: it carries the latches and the camera "
+                      "seat, and the clear canopy bonds to its lip.")
+        area = glass.area / 2.0
+        self.add("NEW_canopy_clear_PETG", glass, "printed", "PETG (clear sheet)", area * CANOPY_T / 1000 * RHO["PETG"],
+                 mass_basis=f"half the surface x {CANOPY_T} mm sheet",
+                 note=f"Vacuum-formed {CANOPY_T} mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is "
+                      "only translucent). Trim to the frame lip.")
+        cx, cy, cz = COCKPIT_CAM
+        seat = trimesh.util.concatenate([
+            box(cx - 18, cx + 22, -16, 16, SEAT_BASE_Z, SEAT_BASE_Z + 2.0),                    # base on the frame ledge
+            box(cx - 6, cx + 8, 10.0, 12.4, SEAT_BASE_Z + 2.0, cz + 6),                          # cheeks either side of the
+            box(cx - 6, cx + 8, -12.4, -10.0, SEAT_BASE_Z + 2.0, cz + 6),                        # camera (M2 tilt screws)
+            box(cx + 14, cx + 17, -15, 15, SEAT_BASE_Z + 2.0, cz + 4)])                         # seat back
+        self.add("NEW_cockpit_camera_seat", seat, "printed", "PETG", seat.volume / 1000 * RHO["PETG"],
+                 note="Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back "
+                      "behind it; screws to the canopy frame so lifting the canopy opens the nose bay.")
+        self.allow += [(r"NEW_canopy_frame", r"NEW_canopy_clear_PETG", "canopy bonds to the frame lip"),
+                       (r"NEW_cockpit_camera_seat", r"(NEW_canopy_frame|KEEP_OUT_CAMERA_19mm)", "seat screws to the frame; camera held by the seat"),
+                       (r"NEW_canopy_(frame|clear_PETG)", r"F1_hollow_body", "canopy seats on the F1 hatch opening, as C1 does")]
+
     # ---------------- rotor booms (boom mode)
     def booms(self):
-        if not self.boom:
+        if not self.underboom:
             return
         dw, lay = self.dw, self.lay
         xf, xr = lay["front_x"], lay["rear_x"]
-        x0, x1 = xf - 58.0, xr + 35.0
+        x0, x1 = (xf - 58.0 if self.boom else self.front_rail_x - 30.0), xr + 35.0
         top, bot = self.boom_top, self.boom_bot
         Lb = x1 - x0
         for s, side in ((1, "R"), (-1, "L")):
             y = s * E.MOTOR_Y
             tube = box(x0, x1, y - BOOM_SEC / 2, y + BOOM_SEC / 2, bot, top)
             self.add(f"NEW_CF_rotor_boom_{side}_10x10x{Lb:.0f}", tube, "carbon", "carbon", Lb / 1000 * G_PER_M[10],
-                     layer="structure", note="10x10x1 carbon square tube; carries the front motor (pod) and the rear motor (riser), "
-                                             "hangs under the wing from both crossrails.")
-            # front motor pod
-            pod = self.pod(xf, y, top, bot)
-            area = pod.area
-            self.add(f"NEW_front_motor_pod_{side}", pod, "printed", "PETG", area * 1.2 / 1000 * RHO["PETG"],
-                     note="PETG nacelle (1.2 mm wall) around the boom nose; the V18 motor plate sits on top at the V18 motor height, "
-                          "the V18 backing plate clamps under the boom.", mass_basis="surface x 1.2 mm wall")
-            # hangers: crossrail bottom (-20) down to the boom top
+                     layer="structure", note=("10x10x1 carbon square tube; carries the front motor (pod) and the rear motor (riser), "
+                                              "hangs under the wing from both crossrails.") if self.boom else
+                     ("10x10x1 carbon square tube under the wing, from the front crossrail to behind the rear motor; carries the "
+                      "rear motor riser so the rear crossrail can sit ahead of the D1 intake."))
+            if self.boom:   # front motor pod
+                pod = self.pod(xf, y, top, bot)
+                area = pod.area
+                self.add(f"NEW_front_motor_pod_{side}", pod, "printed", "PETG", area * 1.2 / 1000 * RHO["PETG"],
+                         note="PETG nacelle (1.2 mm wall) around the boom nose; the V18 motor plate sits on top at the V18 motor height, "
+                              "the V18 backing plate clamps under the boom.", mass_basis="surface x 1.2 mm wall")
+            # hangers: crossrail bottom (-20) down to the boom top (under the front motor's backing plate in the well layout)
             for nm, xc in (("front", self.front_rail_x), ("rear", self.rear_rail_x)):
-                h = box(xc - 11, xc + 11, y - 8, y + 8, top + 0.05, -20.05)
+                ztop = -22.05 if (nm == "front" and self.wellboom) else -20.05
+                h = box(xc - 11, xc + 11, y - 8, y + 8, top + 0.05, ztop)
                 self.add(f"NEW_boom_hanger_{nm}_{side}", h, "printed", "PETG", h.volume / 1000 * RHO["PETG"],
                          note=f"PETG spacer between the {nm} crossrail and the boom, two M3 U-straps round each tube.")
             # rear motor riser (hollow PETG box)
@@ -418,7 +478,9 @@ class Builder:
                        (r"NEW_front_motor_pod", r"(PURCHASE_OR_CUT_motor_(plate|backing)|G10_motor_(plate|backing)_3)", "motor plate on the pod, backing under the boom inside the pod"),
                        (r"NEW_boom_hanger", r"(NEW_CF_rotor_boom|CF_crossrail)", "hanger clamps boom to crossrail"),
                        (r"NEW_rear_motor_riser", r"(NEW_CF_rotor_boom|G10_motor_plate_[24])", "riser sits on the boom under the motor plate"),
-                       (r"G10_motor_backing_[24]|PURCHASE_OR_CUT_motor_backing|G10_motor_backing_3", r"NEW_CF_rotor_boom", "backing plate clamps under the boom")]
+                       (r"G10_motor_backing_[24]|PURCHASE_OR_CUT_motor_backing|G10_motor_backing_3", r"NEW_CF_rotor_boom", "backing plate clamps under the boom"),
+                       (r"NEW_boom_hanger_front", r"(G10_motor_backing_3|PURCHASE_OR_CUT_motor_backing)", "front motor backing plate bolts through the hanger"),
+                       (r"PURCHASE_main_gear_leg", r"(G10_motor_backing_[24])", "gear leg bolts to the rear motor backing plate")]
         self.notes.append(f"Rotor booms: 10x10 carbon at y +/-{E.MOTOR_Y:.0f}, z {bot:.1f} to {top:.1f} (0.5 mm under the lowest wing skin they pass).")
 
     def pod(self, xf, y, top, bot):
@@ -581,6 +643,11 @@ class Builder:
                     cuts.append(box(xw - 5.3, xw + 5.3, 75, 420, -20.3, -9.7))
             self.cut_panels(cuts, "slot for the crossrail at its new station")
             self.rail_cuts = cuts
+            if self.wellboom:
+                xh = self.rear_rail_x - self.dw
+                self.cut_panels([box(xh - 11.6, xh + 11.6, E.MOTOR_Y - 8.6, E.MOTOR_Y + 8.6, -60, -19.5)], "slot for the rear boom hanger")
+                self.notes.append(f"Rear crossrail moves to x {self.rear_rail_x:.1f} (wing frame x {xh:.1f}), ahead of the D1 intake; "
+                                  "the rear motors ride on risers on the under-wing booms.")
             return
         dw = self.dw
         xw = self.rear_rail_x - dw     # V18 wing frame
@@ -646,9 +713,7 @@ class Builder:
     def root_fairings(self):
         dw = self.dw
         te = 675.0 + dw
-        if te <= 812.0 or not self.boom:
-            if te > 812.0:
-                self.notes.append("Wing root runs past the body end; root fairings are only generated for the boom variants.")
+        if te <= 812.0:
             return
         xs_f = np.arange(300.0, 680.0, 2.0)
         ys_f = np.array([80.5, 82.0, 84.0])
@@ -737,27 +802,33 @@ class Builder:
                      note="Swept tail fin on the boom end (socket round the boom); carries the stabiliser on top.")
         # stabiliser halves + elevators
         hinge = 1 - t.get("elevator_frac", 0.35)
+        nseg = max(1, math.ceil((b2 - 3.0) / 200.0))      # spanwise pieces so every piece fits the P1S bed
+        bounds = np.linspace(3.0, b2, nseg + 1)
         for s, side in ((1, "R"), (-1, "L")):
-            yv = np.linspace(3.0, b2, 30)
-            le = tg["x_le_root"] + yv / b2 * (tg["x_le_tip"] - tg["x_le_root"])
-            cc = tg["c_root"] + yv / b2 * (tg["c_tip"] - tg["c_root"])
-            for part, (u0, u1) in (("stab", (0.0, hinge - 0.01)), ("elevator", (hinge + 0.005, 1.0))):
-                uu = u0 + (u1 - u0) * (1 - np.cos(np.linspace(0, np.pi, 30))) / 2
-                X = le[:, None] + uu[None, :] * cc[:, None]
-                Y = np.repeat(s * yv[:, None], len(uu), 1)
-                P = np.stack([X, Y, np.full(X.shape, zt)], -1)
-                N = np.zeros_like(P)
-                N[..., 2] = 1
-                H = naca_t(uu, 0.09)[None, :] * cc[:, None]
-                if part == "elevator":
-                    H = np.maximum(H, 0.4)
-                m = surface_solid(P, N, H)
-                area = float(np.trapezoid(cc * (u1 - u0), yv)) / 1e6
-                self.add(f"NEW_tail_{part}_{side}", m, "printed", "LW-PLA", area * TAIL_G_M2, lwpla=True,
-                         layer="controls" if part == "elevator" else "skin", mass_basis="falcon-panel areal density x area",
-                         note=("Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner."
-                                if part == "stab" else f"Elevator, {100 * (1 - hinge):.0f} % chord, one piece per side, joined by a "
-                                                        "wire torque rod; one servo."))
+            for k in range(nseg):
+                y_a, y_b = bounds[k] + (0.25 if k else 0.0), bounds[k + 1] - (0.25 if k < nseg - 1 else 0.0)
+                yv = np.linspace(y_a, y_b, 16)
+                le = tg["x_le_root"] + yv / b2 * (tg["x_le_tip"] - tg["x_le_root"])
+                cc = tg["c_root"] + yv / b2 * (tg["c_tip"] - tg["c_root"])
+                tag = side if nseg == 1 else f"{side}{k + 1}"
+                for part, (u0, u1) in (("stab", (0.0, hinge - 0.01)), ("elevator", (hinge + 0.005, 1.0))):
+                    uu = u0 + (u1 - u0) * (1 - np.cos(np.linspace(0, np.pi, 30))) / 2
+                    X = le[:, None] + uu[None, :] * cc[:, None]
+                    Y = np.repeat(s * yv[:, None], len(uu), 1)
+                    P = np.stack([X, Y, np.full(X.shape, zt)], -1)
+                    N = np.zeros_like(P)
+                    N[..., 2] = 1
+                    H = naca_t(uu, 0.09)[None, :] * cc[:, None]
+                    if part == "elevator":
+                        H = np.maximum(H, 0.4)
+                    m = surface_solid(P, N, H)
+                    area = float(np.trapezoid(cc * (u1 - u0), yv)) / 1e6
+                    piece = "" if nseg == 1 else f" Piece {k + 1} of {nseg} (inboard first), bonded on the spar."
+                    self.add(f"NEW_tail_{part}_{tag}", m, "printed", "LW-PLA", area * TAIL_G_M2, lwpla=True,
+                             layer="controls" if part == "elevator" else "skin", mass_basis="falcon-panel areal density x area",
+                             note=("Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner."
+                                   if part == "stab" else f"Elevator, {100 * (1 - hinge):.0f} % chord, joined side to side by a "
+                                                           "wire torque rod; one servo.") + piece)
             # spar tube along each half's 30 % chord line
             p0 = np.array([tg["x_le_root"] + 0.3 * tg["c_root"], 0.0, zt])
             yt = 0.85 * b2
@@ -779,6 +850,7 @@ class Builder:
                        (r"NEW_tail_fin", r"NEW_tail_stab", "fin tip bonds into the stabiliser"),
                        (r"NEW_CF_tail_spar", r"NEW_tail_stab", "spar inside the stabiliser"),
                        (r"NEW_tail_stab_R", r"NEW_tail_stab_L", "halves meet at the joiner"),
+                       (r"NEW_tail_elevator_R", r"NEW_tail_elevator_L", "elevator halves meet at the torque rod"),
                        (r"NEW_CF_tail_spar_R", r"NEW_CF_tail_spar_L", "spars meet at the root joiner"),
                        (r"KEEP_OUT_elevator_servo", r"NEW_tail_fin_R", "servo pocket in the fin"),
                        (r"NEW_CF_tail_boom", r"(FIT_G10_EDF_outrigger_connector|F4_hollow_body)", "same connector as the V18 outrigger; F4 slotted"),
@@ -854,17 +926,19 @@ class Builder:
         t0 = time.time()
         self.mod_why = {}
         # boom height: under the lowest wing surface the boom passes (wells filled)
-        if self.boom:
+        if self.underboom:
             xs = np.arange(60.0, 520.0, 2.0)
             ys = np.arange(212.0, 230.0, 2.0)
             _, fb, (fx, fy, zt, zb) = self.wf.interp("boomline", xs, ys)
-            x0w = self.lay["front_x"] - 58.0 - self.dw
+            x0w = (self.lay["front_x"] - 58.0 - self.dw) if self.boom else (E.FRONT_X - 30.0)
             x1w = self.lay["rear_x"] + 35.0 - self.dw
             sel = (fx >= x0w) & (fx <= x1w)
             zmin = np.nanmin(zb[:, sel])
             self.boom_top = round(float(zmin) - 0.5 - CAP_T * 0, 2)
             self.boom_bot = self.boom_top - BOOM_SEC
-        # gear at CG + 45 (iterate with the geometry masses)
+        # gear at CG + 45 (iterate with the geometry masses); if the crossbar would have to sit behind the keels (in the
+        # D1 intake) and there are under-wing booms, the legs hang from the booms instead
+        self.gear_on_booms = False
         self.gear_x = 385.0 + self.dw * 0.5
         passes = 3
         for it in range(passes):
@@ -873,6 +947,7 @@ class Builder:
             self.mod_why = {}
             self.place()
             self.nose_bay()
+            self.cockpit()
             if it == passes - 1 and not self.light:   # heavy geometry only on the last pass
                 self.wells()
                 self.rail_slots()
@@ -893,6 +968,11 @@ class Builder:
             new_gear = round(float(cg[0]) + 45.0, 1)
             if it < passes - 1:
                 self.gear_x = new_gear
+                if self.underboom and (self.gear_on_booms or self.gear_x > GEAR_CROSSBAR_MAX_X):
+                    self.gear_on_booms = True
+                    self.gear_x = self.lay["rear_x"]
+                elif not self.underboom:
+                    self.gear_x = min(self.gear_x, GEAR_CROSSBAR_MAX_X)
         self.cg_geometry = cg
         if not self.light:
             print(f"  [{self.slug}] parts built in {time.time() - t0:.0f}s; gear x {self.gear_x}", flush=True)
@@ -957,6 +1037,13 @@ class Builder:
                 out.append(f"Rear crossrail moves to x {self.rear_rail_x:.1f}, ahead of the D1 intake: new slots in the panels and F3.")
         else:
             dx = lay["front_x"] - E.FRONT_X - dw
+            if abs(dx) < 0.5:
+                out.append("All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on "
+                           "their V18 motor plates.")
+            if self.wellboom:
+                out.append(f"Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-{E.MOTOR_Y:.0f}), hung "
+                           f"from the front crossrail and from the rear crossrail, which moves to x {self.rear_rail_x:.1f} ahead of the "
+                           "D1 intake.")
             if abs(dx) > 0.5:
                 out.append(f"Both rotor pairs move {dx:+.0f} mm within the wing (crossrails with them): wells re-cut, the uncovered "
                            "parts of the V18 wells filled.")
@@ -968,9 +1055,20 @@ class Builder:
             out.append(f"Falcon tail: {c['tail']['area_m2']:.3f} m2 stabiliser, {tg['span_mm']:.0f} mm span, 28 deg sweep, 80 mm above "
                        f"the wing plane on two swept fins; {100 * c['tail']['elevator_frac']:.0f} % elevator, one servo in the "
                        "starboard fin. The V18 EDF outriggers become one-piece 8 x 8 tail booms.")
-        if self.boom and 675.0 + dw > 812:
+        if 675.0 + dw > 812:
             out.append(f"F5 root fairings carry the wing-root profile past the end of the body to x {675 + dw:.0f}.")
-        out.append(f"Main gear to x {self.gear_x:.0f} (CG + 45 mm){' and 1.5 mm lower' if dw > 0 else ''}.")
+        if c.get("cockpit_camera"):
+            out.append(f"Pilot's-eye FPV camera: moved back to x {COCKPIT_CAM[0] - 10:.0f}-{COCKPIT_CAM[0] + 10:.0f}, z {COCKPIT_CAM[2]:.0f} under a "
+                       "vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).")
+        if c.get("gps_aft"):
+            out.append("GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.")
+        out.append("Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.")
+        if self.gear_on_booms:
+            out.append(f"Main gear legs bolt to the rear motor backing plates under the booms at x {self.gear_x:.0f} (about "
+                       f"{self.gear_x - self.cg_geometry[0]:.0f} mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: "
+                       "at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake.")
+        else:
+            out.append(f"Main gear to x {self.gear_x:.0f} (CG + 45 mm){' and 1.5 mm lower' if dw > 0 else ''}.")
         return out
 
     # ---------------- outputs
@@ -1037,6 +1135,8 @@ class Builder:
             key = {"printed": "petg" if n["material"] == "PETG" else "new_printed", "carbon": "carbon", "g10": "g10",
                    "keepout": "new_keepout", "purchase": "purchase"}[n["class"]]
             alpha = 0.28 if n["class"] == "keepout" else 1.0
+            if "canopy_clear" in n["name"]:
+                key, alpha = "glass", 0.26
             mm.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
                 name=n["name"], baseColorFactor=[*col(COLORS[key]), alpha], roughnessFactor=0.55 if n["class"] != "carbon" else 0.35,
                 metallicFactor=0.05 if n["class"] != "carbon" else 0.3, alphaMode="BLEND" if alpha < 1 else "OPAQUE",

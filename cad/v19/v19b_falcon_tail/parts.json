@@ -134,57 +134,138 @@
    ]
   },
   {
+   "name": "NEW_canopy_frame",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 1.5,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Lower 12 mm of your C1 cover printed as the canopy frame: it carries the latches and the camera seat, and the clear canopy bonds to its lip.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 38.5,
+    "rotation_deg": 52.5,
+    "height_mm": 75.4,
+    "margin_mm": 217.5
+   },
+   "centroid_mm": [
+    82.6,
+    0.0,
+    17.2
+   ],
+   "bbox_mm": [
+    48.5,
+    75.4,
+    12.0
+   ]
+  },
+  {
+   "name": "NEW_canopy_clear_PETG",
+   "class": "printed",
+   "material": "PETG (clear sheet)",
+   "mass_g": 15.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Vacuum-formed 0.75 mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is only translucent). Trim to the frame lip.",
+   "mass_basis": "half the surface x 0.75 mm sheet",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 65.6,
+    "rotation_deg": 45.0,
+    "height_mm": 134.3,
+    "margin_mm": 190.4
+   },
+   "centroid_mm": [
+    141.1,
+    -0.0,
+    39.1
+   ],
+   "bbox_mm": [
+    133.7,
+    75.4,
+    37.7
+   ]
+  },
+  {
+   "name": "NEW_cockpit_camera_seat",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 8.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back behind it; screws to the canopy frame so lifting the canopy opens the nose bay.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 32.0,
+    "rotation_deg": 0.0,
+    "height_mm": 40.0,
+    "margin_mm": 224.0
+   },
+   "centroid_mm": [
+    136.3,
+    -0.0,
+    30.9
+   ],
+   "bbox_mm": [
+    40.0,
+    32.0,
+    28.4
+   ]
+  },
+  {
    "name": "NEW_well_fill_R",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 11.9,
+   "mass_g": 12.6,
    "lwpla": true,
    "layer": "skin",
    "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 219.2,
+    "footprint_max_mm": 219.9,
     "rotation_deg": 45.0,
     "height_mm": 143.3,
-    "margin_mm": 36.8
+    "margin_mm": 36.1
    },
    "centroid_mm": [
-    408.7,
+    409.4,
     217.4,
     -0.0
    ],
    "bbox_mm": [
-    265.3,
+    266.4,
     143.3,
-    56.4
+    56.5
    ]
   },
   {
    "name": "NEW_well_fill_L",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 11.9,
+   "mass_g": 12.6,
    "lwpla": true,
    "layer": "skin",
    "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 219.2,
+    "footprint_max_mm": 219.9,
     "rotation_deg": 45.0,
     "height_mm": 143.3,
-    "margin_mm": 36.8
+    "margin_mm": 36.1
    },
    "centroid_mm": [
-    408.7,
+    409.4,
     -217.4,
     -0.0
    ],
    "bbox_mm": [
-    265.3,
+    266.4,
     143.3,
-    56.4
+    56.5
    ]
   },
   {
@@ -284,57 +365,111 @@
    ]
   },
   {
-   "name": "NEW_tail_stab_R",
+   "name": "NEW_tail_stab_R1",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 52.2,
+   "mass_g": 29.8,
    "lwpla": true,
    "layer": "skin",
-   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner.",
+   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner. Piece 1 of 2 (inboard first), bonded on the spar.",
    "mass_basis": "falcon-panel areal density x area",
    "P1S": {
-    "fits": false,
-    "footprint_max_mm": 312.7,
+    "fits": true,
+    "footprint_max_mm": 127.6,
     "rotation_deg": 45.0,
-    "height_mm": 157.2,
-    "margin_mm": -56.7
+    "height_mm": 230.1,
+    "margin_mm": 128.4
    },
    "centroid_mm": [
-    1001.3,
-    142.6,
+    976.2,
+    81.6,
     80.0
    ],
    "bbox_mm": [
-    280.9,
-    343.4,
+    229.4,
+    171.5,
     25.0
    ]
   },
   {
-   "name": "NEW_tail_elevator_R",
+   "name": "NEW_tail_elevator_R1",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 28.1,
+   "mass_g": 16.1,
    "lwpla": true,
    "layer": "controls",
-   "note": "Elevator, 35 % chord, one piece per side, joined by a wire torque rod; one servo.",
+   "note": "Elevator, 35 % chord, joined side to side by a wire torque rod; one servo. Piece 1 of 2 (inboard first), bonded on the spar.",
    "mass_basis": "falcon-panel areal density x area",
    "P1S": {
-    "fits": false,
-    "footprint_max_mm": 270.0,
+    "fits": true,
+    "footprint_max_mm": 73.2,
     "rotation_deg": 45.0,
-    "height_mm": 92.1,
-    "margin_mm": -14.0
+    "height_mm": 189.9,
+    "margin_mm": 182.8
    },
    "centroid_mm": [
-    1102.1,
-    142.7,
+    1086.8,
+    81.6,
     80.0
    ],
    "bbox_mm": [
-    154.0,
-    343.4,
+    124.9,
+    171.5,
     17.0
+   ]
+  },
+  {
+   "name": "NEW_tail_stab_R2",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 22.3,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner. Piece 2 of 2 (inboard first), bonded on the spar.",
+   "mass_basis": "falcon-panel areal density x area",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 99.0,
+    "rotation_deg": 45.0,
+    "height_mm": 218.6,
+    "margin_mm": 157.0
+   },
+   "centroid_mm": [
+    1046.0,
+    251.1,
+    80.0
+   ],
+   "bbox_mm": [
+    189.5,
+    171.5,
+    19.4
+   ]
+  },
+  {
+   "name": "NEW_tail_elevator_R2",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 12.0,
+   "lwpla": true,
+   "layer": "controls",
+   "note": "Elevator, 35 % chord, joined side to side by a wire torque rod; one servo. Piece 2 of 2 (inboard first), bonded on the spar.",
+   "mass_basis": "falcon-panel areal density x area",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 56.9,
+    "rotation_deg": 45.0,
+    "height_mm": 186.3,
+    "margin_mm": 199.1
+   },
+   "centroid_mm": [
+    1129.4,
+    251.2,
+    80.0
+   ],
+   "bbox_mm": [
+    103.4,
+    171.5,
+    13.2
    ]
   },
   {
@@ -359,57 +494,111 @@
    ]
   },
   {
-   "name": "NEW_tail_stab_L",
+   "name": "NEW_tail_stab_L1",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 52.2,
+   "mass_g": 29.8,
    "lwpla": true,
    "layer": "skin",
-   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner.",
+   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner. Piece 1 of 2 (inboard first), bonded on the spar.",
    "mass_basis": "falcon-panel areal density x area",
    "P1S": {
-    "fits": false,
-    "footprint_max_mm": 312.7,
+    "fits": true,
+    "footprint_max_mm": 127.6,
     "rotation_deg": 45.0,
-    "height_mm": 157.2,
-    "margin_mm": -56.7
+    "height_mm": 230.1,
+    "margin_mm": 128.4
    },
    "centroid_mm": [
-    1001.3,
-    -142.6,
+    976.2,
+    -81.6,
     80.0
    ],
    "bbox_mm": [
-    280.9,
-    343.4,
+    229.4,
+    171.5,
     25.0
    ]
   },
   {
-   "name": "NEW_tail_elevator_L",
+   "name": "NEW_tail_elevator_L1",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 28.1,
+   "mass_g": 16.1,
    "lwpla": true,
    "layer": "controls",
-   "note": "Elevator, 35 % chord, one piece per side, joined by a wire torque rod; one servo.",
+   "note": "Elevator, 35 % chord, joined side to side by a wire torque rod; one servo. Piece 1 of 2 (inboard first), bonded on the spar.",
    "mass_basis": "falcon-panel areal density x area",
    "P1S": {
-    "fits": false,
-    "footprint_max_mm": 270.0,
+    "fits": true,
+    "footprint_max_mm": 73.2,
     "rotation_deg": 45.0,
-    "height_mm": 92.1,
-    "margin_mm": -14.0
+    "height_mm": 189.9,
+    "margin_mm": 182.8
    },
    "centroid_mm": [
-    1102.1,
-    -142.7,
+    1086.8,
+    -81.6,
     80.0
    ],
    "bbox_mm": [
-    154.0,
-    343.4,
+    124.9,
+    171.5,
     17.0
+   ]
+  },
+  {
+   "name": "NEW_tail_stab_L2",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 22.3,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Stabiliser half, NACA 0009, 28 deg leading-edge sweep; halves join at the centre on a printed joiner. Piece 2 of 2 (inboard first), bonded on the spar.",
+   "mass_basis": "falcon-panel areal density x area",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 99.0,
+    "rotation_deg": 45.0,
+    "height_mm": 218.6,
+    "margin_mm": 157.0
+   },
+   "centroid_mm": [
+    1046.0,
+    -251.1,
+    80.0
+   ],
+   "bbox_mm": [
+    189.5,
+    171.5,
+    19.4
+   ]
+  },
+  {
+   "name": "NEW_tail_elevator_L2",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 12.0,
+   "lwpla": true,
+   "layer": "controls",
+   "note": "Elevator, 35 % chord, joined side to side by a wire torque rod; one servo. Piece 2 of 2 (inboard first), bonded on the spar.",
+   "mass_basis": "falcon-panel areal density x area",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 56.9,
+    "rotation_deg": 45.0,
+    "height_mm": 186.3,
+    "margin_mm": 199.1
+   },
+   "centroid_mm": [
+    1129.4,
+    -251.2,
+    80.0
+   ],
+   "bbox_mm": [
+    103.4,
+    171.5,
+    13.2
    ]
   },
   {
@@ -456,17 +645,6 @@
   }
  ],
  "modified_v18": [
-  {
-   "name": "CAM_19mm_cradle",
-   "why": [
-    "base trimmed 7 mm for the nose-bay pack; camera stays put"
-   ],
-   "move_mm": [
-    0,
-    0,
-    0
-   ]
-  },
   {
    "name": "WRA_hollow_wing",
    "why": [
@@ -606,7 +784,7 @@
   {
    "name": "F2_hollow_body",
    "why": [
-    "slot for CF_crossrail_270_10x10x620 at x 390.2"
+    "slot for CF_crossrail_270_10x10x620 at x 392.1"
    ],
    "move_mm": [
     0,
@@ -617,9 +795,9 @@
   {
    "name": "F3_hollow_body",
    "why": [
-    "slot for CF_crossrail_270_10x10x620 at x 390.2",
-    "slot for CF_crossrail_450_10x10x820 at x 570.2",
-    "slot for CF_gear_crossbar_10x10x340 at x 525.1"
+    "slot for CF_crossrail_270_10x10x620 at x 392.1",
+    "slot for CF_crossrail_450_10x10x820 at x 572.1",
+    "slot for CF_gear_crossbar_10x10x340 at x 527.0"
    ],
    "move_mm": [
     0,
@@ -640,12 +818,13 @@
   }
  ],
  "removed_v18": [
+  "C1_service_cover",
+  "CAM_19mm_cradle",
   "CF_EDF_outrigger_54_8x8x174",
   "CF_EDF_outrigger_-54_8x8x174"
  ],
  "notes": [
-  "CAM_19mm_cradle: bottom 7 mm trimmed so the pack fits under it; the camera keeps its V18 position. The cradle bolts to C1 so lifting C1 opens the nose bay.",
-  "Rotor wells re-cut at x 390.2, 570.2 (V19 frame); old well areas filled.",
+  "Rotor wells re-cut at x 392.1, 572.1 (V19 frame); old well areas filled.",
   "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in)."
  ]
 }

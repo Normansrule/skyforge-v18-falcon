@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.4.0 - 2026-10-04
+
+V19-W: four rotors in the wings, pilot's-eye camera, one EDF.
+
+- New variant V19-W, now the recommendation. All four lift motors sit in your V18 wing wells, the front pair in the holes
+  V19-R closes. The wing group moves 200 mm aft with a 0.18 m2 falcon tail on the EDF outrigger booms. Two short
+  under-wing booms carry the rear motors, so the rear crossrail can sit ahead of the D1 intake; the main gear legs bolt to
+  the rear motor backing plates, and the gear crossbar goes. Static margin 8.2 %, heaviest motor
+  26.2 %, no new collisions.
+- Cockpit: the FPV camera moves back to a pilot's eye point (x 120-140, z 44) on a printed pilot-seat mount, under a
+  vacuum-formed clear PETG canopy on a printed frame cut from your C1 cover. The GPS moves off the nose (it sat in the
+  camera's view) to the H2 hatch. All V19 variants get the cockpit.
+- Cruise engine: one Freewing E7206 64 mm EDF stays in the jet bay (1,200 g, 44 A, 142 g). Twin 50 mm fans would draw
+  about 80 A and add a second ESC, with no lift redundancy gained; the comparison is in the V19 document.
+- The V19-R slug becomes `v19r_boom_rotors`. Large tails are split spanwise so every piece fits the P1S.
+- Web app: Pilot view (look around from the FPV camera with a HUD); V19-W in the switcher.
+
+
 ## 0.3.0 - 2026-10-02
 
 V19: the three requested directions, built and checked, and a recommendation that passes.

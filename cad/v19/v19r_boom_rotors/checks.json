@@ -1,0 +1,318 @@
+{
+ "collisions_new_vs_V18": [],
+ "intended_contacts": [
+  {
+   "a": "CF_crossrail_270_10x10x620",
+   "b": "G10_cassette_B_support_left",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "CF_crossrail_270_10x10x620",
+   "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "CF_crossrail_450_10x10x820",
+   "b": "G10_cassette_B_support_left",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "CF_crossrail_450_10x10x820",
+   "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+   "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "WLA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F2_hollow_body",
+   "b": "WRA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F3_hollow_body",
+   "b": "WLA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "F3_hollow_body",
+   "b": "WRA_hollow_wing",
+   "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+  },
+  {
+   "a": "FIT_G10_EDF_outrigger_connector_-54",
+   "b": "NEW_CF_tail_boom_L_8x8x547",
+   "intended": "same connector as the V18 outrigger; F4 slotted"
+  },
+  {
+   "a": "FIT_G10_EDF_outrigger_connector_54",
+   "b": "NEW_CF_tail_boom_R_8x8x547",
+   "intended": "same connector as the V18 outrigger; F4 slotted"
+  },
+  {
+   "a": "G10_motor_backing_3",
+   "b": "NEW_front_motor_pod_L",
+   "intended": "motor plate on the pod, backing under the boom inside the pod"
+  },
+  {
+   "a": "KEEP_OUT_BATTERY_NOSE_BAY_140x48x33",
+   "b": "NEW_G10_nose_battery_floor",
+   "intended": "pack sits on the floor between the rails"
+  },
+  {
+   "a": "KEEP_OUT_elevator_servo_23x12x26",
+   "b": "NEW_tail_fin_R",
+   "intended": "servo pocket in the fin"
+  },
+  {
+   "a": "NEW_CF_rotor_boom_L_10x10x456",
+   "b": "NEW_front_motor_pod_L",
+   "intended": "pod is printed round the boom"
+  },
+  {
+   "a": "NEW_CF_rotor_boom_R_10x10x456",
+   "b": "NEW_front_motor_pod_R",
+   "intended": "pod is printed round the boom"
+  },
+  {
+   "a": "NEW_CF_tail_boom_L_8x8x547",
+   "b": "NEW_tail_fin_L",
+   "intended": "fin socket round the boom"
+  },
+  {
+   "a": "NEW_CF_tail_boom_R_8x8x547",
+   "b": "NEW_tail_fin_R",
+   "intended": "fin socket round the boom"
+  },
+  {
+   "a": "NEW_CF_tail_spar_L_6x4x185",
+   "b": "NEW_CF_tail_spar_R_6x4x185",
+   "intended": "spars meet at the root joiner"
+  },
+  {
+   "a": "NEW_CF_tail_spar_L_6x4x185",
+   "b": "NEW_tail_fin_L",
+   "intended": "spar passes the fin top"
+  },
+  {
+   "a": "NEW_CF_tail_spar_L_6x4x185",
+   "b": "NEW_tail_stab_L",
+   "intended": "spar inside the stabiliser"
+  },
+  {
+   "a": "NEW_CF_tail_spar_R_6x4x185",
+   "b": "NEW_tail_fin_R",
+   "intended": "spar passes the fin top"
+  },
+  {
+   "a": "NEW_CF_tail_spar_R_6x4x185",
+   "b": "NEW_tail_stab_R",
+   "intended": "spar inside the stabiliser"
+  },
+  {
+   "a": "NEW_canopy_clear_PETG",
+   "b": "NEW_canopy_frame",
+   "intended": "canopy bonds to the frame lip"
+  },
+  {
+   "a": "NEW_front_motor_pod_R",
+   "b": "PURCHASE_OR_CUT_motor_backing_plate",
+   "intended": "motor plate on the pod, backing under the boom inside the pod"
+  },
+  {
+   "a": "NEW_tail_fin_L",
+   "b": "NEW_tail_stab_L",
+   "intended": "fin tip bonds into the stabiliser"
+  },
+  {
+   "a": "NEW_tail_fin_R",
+   "b": "NEW_tail_stab_R",
+   "intended": "fin tip bonds into the stabiliser"
+  }
+ ],
+ "front_prop_to_leading_edge_mm": 15.0,
+ "jet_vs_tail": {
+  "assumed_exit_radius_mm": 30.0,
+  "assumed_spread_mm_per_mm": 0.1,
+  "jet_top_at_stab_le_mm": 47.0,
+  "stab_underside_z_mm": 72.7,
+  "stab_clear_mm": 20.9,
+  "jet_radius_at_fin_le_mm": 45.4,
+  "fin_inner_face_y_mm": 47.6,
+  "status": "PASS",
+  "note": "Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued."
+ },
+ "P1S_fit": {
+  "NEW_nose_battery_rails": {
+   "fits": true,
+   "footprint_max_mm": 44.5,
+   "rotation_deg": 45.0,
+   "height_mm": 128.0,
+   "margin_mm": 211.5
+  },
+  "NEW_canopy_frame": {
+   "fits": true,
+   "footprint_max_mm": 38.5,
+   "rotation_deg": 52.5,
+   "height_mm": 75.4,
+   "margin_mm": 217.5
+  },
+  "NEW_canopy_clear_PETG": {
+   "fits": true,
+   "footprint_max_mm": 65.6,
+   "rotation_deg": 45.0,
+   "height_mm": 134.3,
+   "margin_mm": 190.4
+  },
+  "NEW_cockpit_camera_seat": {
+   "fits": true,
+   "footprint_max_mm": 32.0,
+   "rotation_deg": 0.0,
+   "height_mm": 40.0,
+   "margin_mm": 224.0
+  },
+  "NEW_front_well_cap_upper_R": {
+   "fits": true,
+   "footprint_max_mm": 102.2,
+   "rotation_deg": 45.0,
+   "height_mm": 144.1,
+   "margin_mm": 153.8
+  },
+  "NEW_front_well_cap_upper_L": {
+   "fits": true,
+   "footprint_max_mm": 102.2,
+   "rotation_deg": 45.0,
+   "height_mm": 144.1,
+   "margin_mm": 153.8
+  },
+  "NEW_front_well_cap_lower_R": {
+   "fits": true,
+   "footprint_max_mm": 102.5,
+   "rotation_deg": 45.0,
+   "height_mm": 144.3,
+   "margin_mm": 153.5
+  },
+  "NEW_front_well_cap_lower_L": {
+   "fits": true,
+   "footprint_max_mm": 102.5,
+   "rotation_deg": 45.0,
+   "height_mm": 144.3,
+   "margin_mm": 153.5
+  },
+  "NEW_F5_root_fairing_R": {
+   "fits": true,
+   "footprint_max_mm": 234.6,
+   "rotation_deg": 46.0,
+   "height_mm": 52.3,
+   "margin_mm": 21.4
+  },
+  "NEW_F5_root_fairing_L": {
+   "fits": true,
+   "footprint_max_mm": 234.6,
+   "rotation_deg": 46.0,
+   "height_mm": 52.3,
+   "margin_mm": 21.4
+  },
+  "NEW_front_motor_pod_R": {
+   "fits": true,
+   "footprint_max_mm": 31.9,
+   "rotation_deg": 41.5,
+   "height_mm": 145.0,
+   "margin_mm": 224.1
+  },
+  "NEW_boom_hanger_front_R": {
+   "fits": true,
+   "footprint_max_mm": 16.0,
+   "rotation_deg": 0.0,
+   "height_mm": 22.0,
+   "margin_mm": 240.0
+  },
+  "NEW_boom_hanger_rear_R": {
+   "fits": true,
+   "footprint_max_mm": 16.0,
+   "rotation_deg": 0.0,
+   "height_mm": 22.0,
+   "margin_mm": 240.0
+  },
+  "NEW_rear_motor_riser_R": {
+   "fits": true,
+   "footprint_max_mm": 40.0,
+   "rotation_deg": 0.0,
+   "height_mm": 17.4,
+   "margin_mm": 216.0
+  },
+  "NEW_front_motor_pod_L": {
+   "fits": true,
+   "footprint_max_mm": 31.9,
+   "rotation_deg": 48.0,
+   "height_mm": 145.0,
+   "margin_mm": 224.1
+  },
+  "NEW_boom_hanger_front_L": {
+   "fits": true,
+   "footprint_max_mm": 16.0,
+   "rotation_deg": 0.0,
+   "height_mm": 22.0,
+   "margin_mm": 240.0
+  },
+  "NEW_boom_hanger_rear_L": {
+   "fits": true,
+   "footprint_max_mm": 16.0,
+   "rotation_deg": 0.0,
+   "height_mm": 22.0,
+   "margin_mm": 240.0
+  },
+  "NEW_rear_motor_riser_L": {
+   "fits": true,
+   "footprint_max_mm": 40.0,
+   "rotation_deg": 0.0,
+   "height_mm": 17.4,
+   "margin_mm": 216.0
+  },
+  "NEW_tail_fin_R": {
+   "fits": true,
+   "footprint_max_mm": 69.5,
+   "rotation_deg": 45.0,
+   "height_mm": 142.8,
+   "margin_mm": 186.5
+  },
+  "NEW_tail_fin_L": {
+   "fits": true,
+   "footprint_max_mm": 69.5,
+   "rotation_deg": 45.0,
+   "height_mm": 142.8,
+   "margin_mm": 186.5
+  },
+  "NEW_tail_stab_R": {
+   "fits": true,
+   "footprint_max_mm": 68.1,
+   "rotation_deg": 45.0,
+   "height_mm": 249.8,
+   "margin_mm": 187.9
+  },
+  "NEW_tail_elevator_R": {
+   "fits": true,
+   "footprint_max_mm": 41.2,
+   "rotation_deg": 45.0,
+   "height_mm": 214.0,
+   "margin_mm": 214.8
+  },
+  "NEW_tail_stab_L": {
+   "fits": true,
+   "footprint_max_mm": 68.1,
+   "rotation_deg": 45.0,
+   "height_mm": 249.8,
+   "margin_mm": 187.9
+  },
+  "NEW_tail_elevator_L": {
+   "fits": true,
+   "footprint_max_mm": 41.2,
+   "rotation_deg": 45.0,
+   "height_mm": 214.0,
+   "margin_mm": 214.8
+  }
+ },
+ "status": "PASS"
+}

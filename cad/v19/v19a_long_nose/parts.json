@@ -134,28 +134,109 @@
    ]
   },
   {
+   "name": "NEW_canopy_frame",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 1.5,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Lower 12 mm of your C1 cover printed as the canopy frame: it carries the latches and the camera seat, and the clear canopy bonds to its lip.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 38.5,
+    "rotation_deg": 52.5,
+    "height_mm": 75.4,
+    "margin_mm": 217.5
+   },
+   "centroid_mm": [
+    82.6,
+    0.0,
+    17.2
+   ],
+   "bbox_mm": [
+    48.5,
+    75.4,
+    12.0
+   ]
+  },
+  {
+   "name": "NEW_canopy_clear_PETG",
+   "class": "printed",
+   "material": "PETG (clear sheet)",
+   "mass_g": 15.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Vacuum-formed 0.75 mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is only translucent). Trim to the frame lip.",
+   "mass_basis": "half the surface x 0.75 mm sheet",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 65.6,
+    "rotation_deg": 45.0,
+    "height_mm": 134.3,
+    "margin_mm": 190.4
+   },
+   "centroid_mm": [
+    141.1,
+    -0.0,
+    39.1
+   ],
+   "bbox_mm": [
+    133.7,
+    75.4,
+    37.7
+   ]
+  },
+  {
+   "name": "NEW_cockpit_camera_seat",
+   "class": "printed",
+   "material": "PETG",
+   "mass_g": 8.3,
+   "lwpla": false,
+   "layer": "skin",
+   "note": "Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back behind it; screws to the canopy frame so lifting the canopy opens the nose bay.",
+   "mass_basis": "volume x density",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 32.0,
+    "rotation_deg": 0.0,
+    "height_mm": 40.0,
+    "margin_mm": 224.0
+   },
+   "centroid_mm": [
+    136.3,
+    -0.0,
+    30.9
+   ],
+   "bbox_mm": [
+    40.0,
+    32.0,
+    28.4
+   ]
+  },
+  {
    "name": "NEW_well_fill_R",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 26.3,
+   "mass_g": 25.6,
    "lwpla": true,
    "layer": "skin",
    "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 237.4,
+    "footprint_max_mm": 236.3,
     "rotation_deg": 45.0,
     "height_mm": 143.3,
-    "margin_mm": 18.6
+    "margin_mm": 19.7
    },
    "centroid_mm": [
-    549.7,
+    549.9,
     217.5,
     -0.0
    ],
    "bbox_mm": [
-    292.4,
+    290.7,
     143.3,
     56.6
    ]
@@ -164,25 +245,25 @@
    "name": "NEW_well_fill_L",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 26.3,
+   "mass_g": 25.6,
    "lwpla": true,
    "layer": "skin",
    "note": "Fills the part of each V18 well the rotors left (printed as a hollow insert, outer surface from the V18 skin either side of the well).",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 237.4,
+    "footprint_max_mm": 236.3,
     "rotation_deg": 45.0,
     "height_mm": 143.3,
-    "margin_mm": 18.6
+    "margin_mm": 19.7
    },
    "centroid_mm": [
-    549.7,
+    549.9,
     -217.5,
     -0.0
    ],
    "bbox_mm": [
-    292.4,
+    290.7,
     143.3,
     56.6
    ]
@@ -191,25 +272,25 @@
    "name": "NEW_leading_edge_glove_R",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 47.4,
+   "mass_g": 46.3,
    "lwpla": true,
    "layer": "skin",
-   "note": "Moves the inner-wing leading edge 85 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
+   "note": "Moves the inner-wing leading edge 82 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 197.5,
-    "rotation_deg": 43.5,
-    "height_mm": 194.5,
-    "margin_mm": 58.5
+    "footprint_max_mm": 197.6,
+    "rotation_deg": 46.5,
+    "height_mm": 191.4,
+    "margin_mm": 58.4
    },
    "centroid_mm": [
-    299.5,
-    178.0,
+    301.2,
+    178.2,
     0.2
    ],
    "bbox_mm": [
-    216.7,
+    213.4,
     232.0,
     45.3
    ]
@@ -218,42 +299,85 @@
    "name": "NEW_leading_edge_glove_L",
    "class": "printed",
    "material": "LW-PLA",
-   "mass_g": 47.4,
+   "mass_g": 46.3,
    "lwpla": true,
    "layer": "skin",
-   "note": "Moves the inner-wing leading edge 85 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
+   "note": "Moves the inner-wing leading edge 82 mm forward (y 82-314) so the forward-shifted front well keeps 35 mm of wing ahead of it; replaces the front 60 mm of the V18 panel nose.",
    "mass_basis": "V18 skin areal density x planform",
    "P1S": {
     "fits": true,
-    "footprint_max_mm": 197.5,
-    "rotation_deg": 43.5,
-    "height_mm": 194.5,
-    "margin_mm": 58.5
+    "footprint_max_mm": 197.6,
+    "rotation_deg": 46.5,
+    "height_mm": 191.4,
+    "margin_mm": 58.4
    },
    "centroid_mm": [
-    299.5,
-    -178.0,
+    301.2,
+    -178.2,
     0.2
    ],
    "bbox_mm": [
-    216.7,
+    213.4,
     232.0,
     45.3
+   ]
+  },
+  {
+   "name": "NEW_F5_root_fairing_R",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 6.2,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 875).",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 197.2,
+    "rotation_deg": 46.0,
+    "height_mm": 47.6,
+    "margin_mm": 58.8
+   },
+   "centroid_mm": [
+    708.3,
+    71.5,
+    0.2
+   ],
+   "bbox_mm": [
+    264.0,
+    18.5,
+    47.6
+   ]
+  },
+  {
+   "name": "NEW_F5_root_fairing_L",
+   "class": "printed",
+   "material": "LW-PLA",
+   "mass_g": 6.2,
+   "lwpla": true,
+   "layer": "skin",
+   "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 875).",
+   "mass_basis": "V18 skin areal density x planform",
+   "P1S": {
+    "fits": true,
+    "footprint_max_mm": 197.2,
+    "rotation_deg": 46.0,
+    "height_mm": 47.6,
+    "margin_mm": 58.8
+   },
+   "centroid_mm": [
+    708.3,
+    -71.5,
+    0.2
+   ],
+   "bbox_mm": [
+    264.0,
+    18.5,
+    47.6
    ]
   }
  ],
  "modified_v18": [
-  {
-   "name": "CAM_19mm_cradle",
-   "why": [
-    "base trimmed 7 mm for the nose-bay pack; camera stays put"
-   ],
-   "move_mm": [
-    0,
-    0,
-    0
-   ]
-  },
   {
    "name": "WRA_hollow_wing",
    "why": [
@@ -377,7 +501,7 @@
   {
    "name": "F2_hollow_body",
    "why": [
-    "slot for CF_crossrail_270_10x10x620 at x 358.3"
+    "slot for CF_crossrail_270_10x10x620 at x 361.6"
    ],
    "move_mm": [
     0,
@@ -388,8 +512,8 @@
   {
    "name": "F3_hollow_body",
    "why": [
-    "slot for CF_crossrail_450_10x10x820 at x 538.3",
-    "slot for CF_gear_crossbar_10x10x340 at x 493.1"
+    "slot for CF_crossrail_450_10x10x820 at x 541.6",
+    "slot for CF_gear_crossbar_10x10x340 at x 496.5"
    ],
    "move_mm": [
     0,
@@ -398,11 +522,12 @@
    ]
   }
  ],
- "removed_v18": [],
+ "removed_v18": [
+  "C1_service_cover",
+  "CAM_19mm_cradle"
+ ],
  "notes": [
-  "CAM_19mm_cradle: bottom 7 mm trimmed so the pack fits under it; the camera keeps its V18 position. The cradle bolts to C1 so lifting C1 opens the nose bay.",
-  "Rotor wells re-cut at x 358.3, 538.3 (V19 frame); old well areas filled.",
-  "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
-  "Wing root runs past the body end; root fairings are only generated for the boom variants."
+  "Rotor wells re-cut at x 361.6, 541.6 (V19 frame); old well areas filled.",
+  "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in)."
  ]
 }

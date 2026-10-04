@@ -2,7 +2,7 @@
 # Put this repo on GitHub with the web version (GitHub Pages) and, with --tag, the desktop installers.
 #
 #   ./scripts/publish_github.sh                        # create the repo if needed, push main, enable Pages
-#   ./scripts/publish_github.sh --tag v0.3.0           # ...and tag a release: GitHub Actions builds the installers
+#   ./scripts/publish_github.sh --tag v0.4.0           # ...and tag a release: GitHub Actions builds the installers
 #   ./scripts/publish_github.sh --user N0rmansrule --host github.com --private
 #
 # Defaults: --user Normansrule --host github-normansrule (an SSH host alias in ~/.ssh/config) --repo skyforge-v18-falcon.

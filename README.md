@@ -12,28 +12,33 @@ installers on the Releases page (same app, works offline). Steps: [docs/PUBLISHI
 > **Status: mechanical fitting / development prototype - not flight-ready.** Nothing here has been flown,
 > bench-tested or slicer-validated. Named parts are reference candidates until fitted and measured.
 
-![V19-R, the recommended variant, in the web workbench](analysis/view_v19r_recommended.png)
+![V19-W, the recommended variant, in the web workbench](analysis/view_v19w_four_in_wings.png)
 
 ## The headline
 
-**V18 as designed does not balance; V19-R does (in the models).** V18's CG sits 88 mm tail-heavy of its rotors
-and behind its neutral point, and no silhouette-preserving tweak fixes both. Your three V19 directions were each
-built from the V18 parts, collision-checked and evaluated with the masses of the parts as modelled
-([docs/V19_VARIANTS.md](docs/V19_VARIANTS.md)):
+**V18 as designed does not balance; V19-W does (in the models).** V18's CG sits 88 mm tail-heavy of its rotors and
+behind its neutral point, and no silhouette-preserving tweak fixes both. Each V19 direction was built from the V18
+parts, collision-checked and evaluated with the masses of the parts as modelled ([docs/V19_VARIANTS.md](docs/V19_VARIANTS.md)):
 
 | | Mass | CG x | Static margin | Heaviest motor | Result |
 |---|---:|---:|---:|---:|---|
 | V18 as designed | 2,724 g | 418 | -24.6 % | 49.6 % | STOP |
-| V19-A long-nose falcon (wing 200 mm aft, nose-bay battery) | 2,719 g | 446 | -5.6 % | 25.7 % | STOP |
-| V19-B falcon tail (0.15 m², wing 120 mm aft) | 2,913 g | 481 | -2.9 % | 25.2 % | STOP |
-| V19-C forward rotors on booms (wing 275 mm aft) | 2,883 g | 479 | 7.7 % | 25.0 % | PASS |
-| **V19-R recommended**: long nose + forward rotors + 0.05 m² falcon tail (wing 250 mm aft) | 3,006 g | 498 | 7.4 % | 26.3 % | **PASS** |
+| V19-A long-nose falcon (wing 200 mm aft, nose-bay battery) | 2,728 g | 449 | -6.0 % | 25.6 % | STOP |
+| V19-B falcon tail (0.15 m², wing 120 mm aft) | 2,912 g | 483 | -3.3 % | 25.4 % | STOP |
+| V19-C forward rotors on booms (wing 275 mm aft) | 2,883 g | 480 | 7.4 % | 25.0 % | **PASS** |
+| V19-R forward rotors on booms + 0.05 m² tail (wing 250 mm aft) | 3,006 g | 499 | 7.1 % | 26.6 % | **PASS** |
+| **V19-W recommended**: four rotors in your wing wells + 0.18 m² falcon tail (wing 200 mm aft) | 3,014 g | 533 | 8.2 % | 26.2 % | **PASS** |
 
 Gates: static margin 5-25 % of the mean chord, heaviest motor no more than 30 % of the weight in hover, pitch trim
-within 10° at 16 m/s, no new collisions. V19-R keeps your rear rotors in the V18 wells, puts the front pair on
-carbon booms with nose pods, closes the front wells, moves the battery into a nose bay and adds a small swept
-tail on two fins above the EDF jet. Its print set, STLs, cut list and buy list are in
-[`cad/v19/v19r_recommended/`](cad/v19/v19r_recommended/) and the V19 document.
+within 10° at 16 m/s, no new collisions. **V19-W** keeps all four lift motors in your V18 wing wells and moves the wing
+group 200 mm aft. It adds a swept falcon tail on two fins above the EDF jet, carries the rear motors and main gear on
+short carbon booms under the wing, and puts the battery in a nose bay. The FPV camera sits at a pilot's eye point under
+a clear canopy; try the **Pilot** view in the app. The single V18 64 mm EDF stays in the jet bay at the back as the
+cruise engine. Its print set, STLs, cut list and buy list are in
+[`cad/v19/v19w_four_in_wings/`](cad/v19/v19w_four_in_wings/) and the V19 document. V19-R and V19-C are passing
+alternatives with the front rotors on booms ahead of the wing.
+
+![V19-W from the pilot's seat](analysis/view_v19w_cockpit.png)
 
 ## Quick start (Ubuntu / WSL2)
 
@@ -53,13 +58,13 @@ variants (with an X-ray ghost of V18 for comparison) and lists every part that c
 
 | Path | What | Label |
 |---|---|---|
-| [`site/`](site/) | Web app: 3D model with picking, layers, explode, cut-away, control sweep, balance ruler, V18/V19 switcher; balance explorer; live budget; bench log ingest; wiring map; stage tracker; all docs. Offline-capable | PROTOTYPE-READY |
+| [`site/`](site/) | Web app: 3D model with picking, layers, explode, cut-away, control sweep, balance ruler, V18/V19 switcher, pilot's-eye view; balance explorer; live budget; bench log ingest; wiring map; stage tracker; all docs. Offline-capable | PROTOTYPE-READY |
 | [`desktop/`](desktop/) | Tauri v2 desktop shell around `site/` | PROTOTYPE-READY |
 | [`cad/v18/`](cad/v18/) | Your V18 assembly, extracted part data, G10 cutting DXFs, carbon cut list, your original V18 BOM | source |
-| [`cad/v19/`](cad/v19/), [`config/v19/`](config/v19/) | V19 variants: configurations, new and modified parts (STL, 3MF print sets for C and R, DXF), collision and fit checks, mass inputs | EXPERIMENTAL |
+| [`cad/v19/`](cad/v19/), [`config/v19/`](config/v19/) | V19 variants: configurations, new and modified parts (STL, 3MF print sets for C, R and W, DXF), collision and fit checks, mass inputs | EXPERIMENTAL |
 | [`cad/interface/`](cad/interface/) | Parametric parts for the joints V18 left open: crossing clamps, belly straps, EDF ear brackets, FC isolation pad, nose-steering collar | EXPERIMENTAL |
 | [`bom/bom.csv`](bom/bom.csv) -> [`docs/BOM.md`](docs/BOM.md) | V18 BOM rows plus added rows, with links, stages, purchase gates and V18 placements | PROTOTYPE-READY |
-| [`docs/V19_VARIANTS.md`](docs/V19_VARIANTS.md) | The three directions and their combination: numbers, changes, parts, checks, V19-R build changes | results |
+| [`docs/V19_VARIANTS.md`](docs/V19_VARIANTS.md) | The V19 directions and V19-W: numbers, changes, parts, checks, engine choice, V19-W build changes | results |
 | [`docs/BALANCE_AND_STABILITY.md`](docs/BALANCE_AND_STABILITY.md) | Why V18 does not balance | results |
 | [`docs/BUDGET.md`](docs/BUDGET.md) | Running cost, mass, CG, hover and stability gates | generated |
 | [`docs/WIRING.md`](docs/WIRING.md), [`docs/HARNESS.md`](docs/HARNESS.md) | Pin-by-pin wiring per module; harness cut list | PROTOTYPE-READY (bench) |

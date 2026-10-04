@@ -343,3 +343,13 @@ input[type="number"], input[type="text"], select { padding: 0.32rem 0.5rem; bord
 .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.4rem; color: var(--ink-soft); }
 .legend .swatch { margin-left: 0.35rem; }
 .legend .swatch:first-child { margin-left: 0; }
+
+/* pilot's-eye view */
+.hud { position: absolute; inset: 0; display: none; pointer-events: none; color: #7CF2B0; font: 500 0.85rem var(--font-num); letter-spacing: 0.04em; }
+.viewport.pilot .hud { display: block; }
+.viewport.pilot .ruler, .viewport.pilot .viewport-hint { display: none; }
+.hud svg { position: absolute; inset: 12% 18%; width: 64%; height: 76%; overflow: visible; filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.55)); }
+.hud line, .hud .wings { stroke: currentColor; stroke-width: 2; fill: none; }
+.hud text { fill: currentColor; font: 500 11px var(--font-num); }
+.hud-cap { position: absolute; left: 1rem; bottom: 1rem; padding: 0.25rem 0.6rem; border-radius: 4px; background: rgba(8, 14, 20, 0.55); }
+.hud-tip { position: absolute; right: 1rem; bottom: 1rem; padding: 0.25rem 0.6rem; border-radius: 4px; background: rgba(8, 14, 20, 0.55); color: #DDE6EE; }

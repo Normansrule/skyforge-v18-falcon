@@ -4,13 +4,15 @@
  "wing_shift_mm": 200,
  "front_rotor": {
   "mode": "wing",
-  "dx": -81.69879041977447
+  "dx": -78.37254410092447
  },
- "rear_rotor_dx_mm": -81.69879041977447,
+ "rear_rotor_dx_mm": -78.37254410092447,
  "battery": "nose_bay",
  "avionics_forward": true,
  "tail_parts_lwpla": true,
  "lwpla_density": 0.8,
  "tail": null,
+ "cockpit_camera": true,
+ "gps_aft": true,
  "summary": "Wing group 200 mm aft, battery in a nose bay, rotors stay in the wing wells"
 }

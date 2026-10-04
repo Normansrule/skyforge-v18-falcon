@@ -32,14 +32,19 @@
    "intended": "pack sits on the floor between the rails"
   },
   {
-   "a": "NEW_CF_rotor_boom_L_10x10x526",
+   "a": "NEW_CF_rotor_boom_L_10x10x523",
    "b": "NEW_front_motor_pod_L",
    "intended": "pod is printed round the boom"
   },
   {
-   "a": "NEW_CF_rotor_boom_R_10x10x526",
+   "a": "NEW_CF_rotor_boom_R_10x10x523",
    "b": "NEW_front_motor_pod_R",
    "intended": "pod is printed round the boom"
+  },
+  {
+   "a": "NEW_canopy_clear_PETG",
+   "b": "NEW_canopy_frame",
+   "intended": "canopy bonds to the frame lip"
   },
   {
    "a": "NEW_front_motor_pod_R",
@@ -47,7 +52,7 @@
    "intended": "motor plate on the pod, backing under the boom inside the pod"
   }
  ],
- "front_prop_to_leading_edge_mm": 85.74066707226939,
+ "front_prop_to_leading_edge_mm": 82.02494811824772,
  "P1S_fit": {
   "NEW_nose_battery_rails": {
    "fits": true,
@@ -55,6 +60,27 @@
    "rotation_deg": 45.0,
    "height_mm": 128.0,
    "margin_mm": 211.5
+  },
+  "NEW_canopy_frame": {
+   "fits": true,
+   "footprint_max_mm": 38.5,
+   "rotation_deg": 52.5,
+   "height_mm": 75.4,
+   "margin_mm": 217.5
+  },
+  "NEW_canopy_clear_PETG": {
+   "fits": true,
+   "footprint_max_mm": 65.6,
+   "rotation_deg": 45.0,
+   "height_mm": 134.3,
+   "margin_mm": 190.4
+  },
+  "NEW_cockpit_camera_seat": {
+   "fits": true,
+   "footprint_max_mm": 32.0,
+   "rotation_deg": 0.0,
+   "height_mm": 40.0,
+   "margin_mm": 224.0
   },
   "NEW_front_well_cap_upper_R": {
    "fits": true,
@@ -101,7 +127,7 @@
   "NEW_front_motor_pod_R": {
    "fits": true,
    "footprint_max_mm": 31.9,
-   "rotation_deg": 41.5,
+   "rotation_deg": 48.0,
    "height_mm": 145.0,
    "margin_mm": 224.1
   },
@@ -129,7 +155,7 @@
   "NEW_front_motor_pod_L": {
    "fits": true,
    "footprint_max_mm": 31.9,
-   "rotation_deg": 41.5,
+   "rotation_deg": 48.0,
    "height_mm": 145.0,
    "margin_mm": 224.1
   },

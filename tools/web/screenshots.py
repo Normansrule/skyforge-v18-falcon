@@ -16,8 +16,9 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SHOTS = [("view_v18", "#aircraft", None), ("view_v19a_long_nose", "#v19/v19a_long_nose", None),
          ("view_v19b_falcon_tail", "#v19/v19b_falcon_tail", None), ("view_v19c_forward_rotors", "#v19/v19c_forward_rotors", None),
-         ("view_v19r_recommended", "#v19/v19r_recommended", None), ("view_v19r_side", "#v19/v19r_recommended", "side"),
-         ("view_v19r_top", "#v19/v19r_recommended", "top")]
+         ("view_v19r_boom_rotors", "#v19/v19r_boom_rotors", None), ("view_v19w_four_in_wings", "#v19/v19w_four_in_wings", None),
+         ("view_v19w_side", "#v19/v19w_four_in_wings", "side"), ("view_v19w_top", "#v19/v19w_four_in_wings", "top"),
+         ("view_v19w_cockpit", "#v19/v19w_four_in_wings", "cockpit")]
 HIDE = ".variant-pills, .viewport-hint { display: none !important; }"
 
 
@@ -29,10 +30,13 @@ async def main(url: str) -> None:
         await pg.add_style_tag(content=HIDE)
         await pg.wait_for_timeout(6000)
         for name, h, view in SHOTS:
+            await pg.evaluate("window.__viewer && window.__viewer.pilot && window.__viewer.frame('three-quarter', 0); document.getElementById('viewport').classList.remove('pilot')")
             await pg.evaluate(f"location.hash = '{h}'")
             await pg.wait_for_timeout(4500)
             if view:
                 await pg.evaluate(f"window.__viewer && window.__viewer.frame('{view}', 0)")
+                if view == "cockpit":
+                    await pg.evaluate("document.getElementById('viewport').classList.add('pilot'); document.querySelector('.hud-cap').textContent = 'FPV · 19 mm camera at x 130 mm · V19-W'")
                 await pg.wait_for_timeout(1500)
             box = await pg.locator("#viewport").bounding_box()
             await pg.screenshot(path=str(ROOT / "analysis" / f"{name}.png"), clip=box, timeout=120000)

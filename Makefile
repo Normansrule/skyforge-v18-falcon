@@ -65,7 +65,7 @@ desktop: ## run the desktop app in development mode
 desktop-build: ## build desktop installers for this OS (desktop/src-tauri/target/release/bundle)
 	cd desktop && npm install && npx tauri build
 
-publish: ## create/push the GitHub repo, enable Pages; TAG=v0.3.0 also builds the desktop release
+publish: ## create/push the GitHub repo, enable Pages; TAG=v0.4.0 also builds the desktop release
 	./scripts/publish_github.sh $(if $(TAG),--tag $(TAG),)
 
 bundle: ## one-file git bundle of the whole history (for moving the repo without GitHub)

@@ -112,14 +112,14 @@ Then the EDF, separately, outside the airframe, inlet screened, same logging: `e
 | 9 Weigh + CG | Whole aircraft; flight CG from aero work (neutral point, static margin) - **not** x330 | Hover gate re-run with measured mass and CG still PASS; simultaneous current measured; failsafes configured | Flight |
 | 10 Flight qualification | With an experienced RC / QuadPlane pilot at a proper site: taxi -> hover -> wing-borne -> transitions, as separate sessions | Each session's own plan; first flight line-of-sight, not immersive FPV | Decoration before final reweigh/rebalance |
 
-## V19-R additions (before the first hover)
+## V19-W additions (before the first hover)
 
-From [V19_VARIANTS.md](V19_VARIANTS.md#v19-r-build-changes):
+From [V19_VARIANTS.md](V19_VARIANTS.md#v19-w-build-changes):
 
 | Gate | PASS | FIX | STOP |
 |---|---|---|---|
-| Front prop disc to wing leading edge | >= 15 mm | 10-15 mm: move the pod forward on the boom, recheck CG | < 10 mm |
-| Boom tip vibration at 50 % throttle on the stand | none visible | visible: add a second strap, stiffer hanger | boom or clamp moves |
+| Rear boom / riser vibration at 50 % throttle on the stand | none visible | visible: add a second strap, stiffer riser | boom or clamp moves |
 | EDF at 100 % on the bench, tufts on the stabiliser underside and fins | tufts hang or flutter | tufts stream aft on the fins only: raise or splay the fins | tufts stream on the stabiliser |
 | Elevator +/-20 deg | no contact | rubs: trim the fin trailing edge | binds |
-| Weighed CG | within 5 mm of the model (V19_VARIANTS.md) | 5-15 mm: ballast or move the pack | > 15 mm |
+| FPV image through the canopy | horizon and nose clear, no glare at your flying sun angles | glare: matt-black seat and frame, tilt the camera | image unusable: cut a windscreen aperture |
+| Weighed CG | within 5 mm of the model (V19_VARIANTS.md) | 5-15 mm: move the pack in the bay or add nose ballast | > 15 mm |
