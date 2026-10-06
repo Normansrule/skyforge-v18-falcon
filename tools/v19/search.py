@@ -13,6 +13,8 @@ nose bay, FC/VTX/EDF ESC into the vacated battery bay, tail ducts/saddles in LW-
   S  stoop + crest       V19-W without the big boom tail: four rotors in your V18 wells, the outer falcon panels
                           swept back at the wrist ("stoop") and a small falcon crest on the tips of your V18 fins;
                           the battery stays in the V18 tray (no nose bay needed without tail weight to balance)
+  G, F  two more looks on the V19-S layout: a slim 45 deg crest (G) and a deeper stoop with it (F)
+  In S, G and F the battery slides in the V18 tray so the CG sits on the centre of the four motors.
   R  boom alternative          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,
                           the cheapest combination that passes every gate with margin on balance
                           (heaviest motor <= 28 %, static margin >= 6 % wells closed; 7.5 % for W); the front
@@ -29,6 +31,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -104,10 +107,12 @@ def tail(area, x=790.0):
 SUPPORT_S = {"battery": "v18", "avionics_forward": False, "tail_parts_lwpla": True, "cockpit_camera": True, "gps_aft": True}
 
 
-def crest(area, dw, inc=-4.0, ef=0.3):
+def crest(area, dw, inc=-4.0, ef=0.3, ar=6.0, sweep=35.0):
     """Falcon crest on the V18 fin tips (wing frame x 518 = 80 mm ahead of the fin-top chord), 75 mm above the wing
     plane. A small elevator (ef of chord) and a few degrees of nose-down incidence keep the pitch trim in the gate."""
-    return {"area_m2": area, "aspect": 6.0, "taper": 0.45, "le_sweep_deg": 35.0, "x_le_root_mm": 518.0 + dw,
+    # the leading edge crosses the fin tops (y 110) 10 mm ahead of their chord (wing frame x 596), whatever the sweep
+    x_root = round(586.0 - 110.0 * math.tan(math.radians(sweep)), 1)
+    return {"area_m2": area, "aspect": ar, "taper": 0.45, "le_sweep_deg": sweep, "x_le_root_mm": x_root + dw,
             "incidence_deg": inc, "elevator_frac": ef, "height_mm": 75.0, "mount": "fins"}
 
 
@@ -129,11 +134,37 @@ def candidates():
                           "rear_support": "boom"}))
     stoop = [(dw, st, area, -4.0, 0.3) for dw, st, area in itertools.product((225, 235, 245), (260, 300), (0.06, 0.07))]
     stoop += [(235, 300, 0.07, 0.0, 0.0), (235, 300, 0.07, -6.0, 0.0)]     # fixed crest, for the record: trim fails
-    for dw, st, area, inc, ef in stoop:
-        out.append(("S", {**SUPPORT_S, "wing_shift_mm": dw, "outer_shift_mm": st, "lwpla_density": 0.8, "tail": crest(area, dw, inc, ef),
-                          "front_rotor": {"mode": "wing", "dx": 0.0}, "rear_rotor_dx_mm": 0.0, "no_le_ext": True,
-                          "rear_support": "boom"}))
+    looks = [("S", dw, st, area, inc, ef, 6.0, 35.0) for dw, st, area, inc, ef in stoop]
+    # two more looks on the same layout: G, a slim crest (aspect 8, 45 deg); F, a deeper stoop with the slim crest
+    looks += [("G", dw, 300, area, -5.0, 0.3, 8.0, 45.0) for dw, area in itertools.product((225, 235, 245), (0.05, 0.06))]
+    looks += [("F", dw, st, area, -6.0, 0.3, 8.0, 45.0) for dw, st, area in itertools.product((235, 240), (340, 360), (0.055, 0.06))]
+    for fam, dw, st, area, inc, ef, ar, sw in looks:
+        out.append((fam, {**SUPPORT_S, "wing_shift_mm": dw, "outer_shift_mm": st, "lwpla_density": 0.8,
+                          "tail": crest(area, dw, inc, ef, ar, sw), "front_rotor": {"mode": "wing", "dx": 0.0},
+                          "rear_rotor_dx_mm": 0.0, "no_le_ext": True, "rear_support": "boom"}))
     return out
+
+
+BATTERY_SLACK = 15.0   # mm the pack can slide either way inside the V18 140 mm battery envelope
+
+
+def center_battery(c: dict) -> dict:
+    """Rotors fixed in the wing wells: slide the pack in the V18 tray so the CG sits on the centre of the four motors
+    (every motor a quarter of the weight in hover), within the envelope's slack."""
+    c = dict(c)
+    if c.get("battery") != "v18":
+        return c
+    c["battery_dx_mm"] = 0.0
+    gi = G.mass_inputs_for(c)
+    M, cg, entries, _ = E.mass_from_geometry(c, gi)
+    m_batt = sum(m for (label, m, x) in entries if label in BATT_LABELS)
+    target = E.rotor_layout(c)
+    xc = (target["front_x"] + target["rear_x"]) / 2
+    c["battery_dx_mm"] = float(np.clip(round((xc - cg[0]) * M / m_batt), -BATTERY_SLACK, BATTERY_SLACK))
+    return c
+
+
+BATT_LABELS = {lab for lab, _g, _m, _x, _b, src in E._items()[0] if src == E.BATT}
 
 
 VARIANTS = {
@@ -142,6 +173,8 @@ VARIANTS = {
     "C": ("v19c_forward_rotors", "V19-C forward rotors", "Front rotors on booms ahead of the leading edge, wing {dw} mm aft"),
     "W": ("v19w_four_in_wings", "V19-W four rotors in the wings", "All four lift rotors in your V18 wing wells, wing {dw} mm aft, falcon tail, pilot's-eye cockpit camera, one EDF"),
     "S": ("v19s_stoop_crest", "V19-S stoop wing + falcon crest", "All four lift rotors in your V18 wing wells, wing {dw} mm aft, outer panels swept {st} mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"),
+    "G": ("v19g_gyr_crest", "V19-G slim crest", "V19-S layout with a slimmer, sharper crest (aspect 8, 45 deg sweep): wing {dw} mm aft, outer panels swept {st} mm back, battery in the V18 tray"),
+    "F": ("v19f_swift_stoop", "V19-F deep stoop", "V19-S layout with the outer panels swept {st} mm back and the slim crest: wing {dw} mm aft, battery in the V18 tray"),
     "R": ("v19r_boom_rotors", "V19-R boom rotors", "Long nose, forward rotors on booms and a small falcon tail; rear rotors stay in the V18 wells"),
 }
 
@@ -154,8 +187,11 @@ def pick(fam: str, fr: list) -> dict:
         passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 6]
     if fam == "W":   # the coarse lattice reads ~1 % high on these tails; ask for more so the fine result keeps margin
         passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 7.5]
-    if fam == "S":   # same margin rule as W, and keep 1.5 deg of the 10 deg trim gate in hand (the crest trims close to it)
-        passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 7.5
+    if fam in "SGF":
+        # hover first: CG within 3 mm of the centre of the four motors (after the battery slide); 6.5 % margin (the coarse
+        # lattice reads the small crest the same as the fine one); 1.5 deg of the 10 deg trim gate in hand
+        passing = [r for r in passing if abs(r["cg_mm"][0] - (r["rotor_front_x_mm"] + r["rotor_rear_x_mm"]) / 2) <= 3.0
+                   and r["sm_closed_pct"] >= 6.5
                    and max(abs(t["pitch_surfaces_deg"]) for t in r["trim_16ms"].values()) <= 8.5]
     if fam == "C":
         passing = [r for r in passing if r["config"]["lwpla_density"] == 0.8]
@@ -169,18 +205,19 @@ def main() -> int:
     t0 = time.time()
     rows = []
     for i, (fam, cfg) in enumerate(candidates()):
-        c = E.full(cfg) if fam in "WS" else balance_rotors(cfg, lock_rear=(fam == "R"))
+        c = center_battery(E.full(cfg)) if fam in "SGF" else E.full(cfg) if fam == "W" else balance_rotors(cfg, lock_rear=(fam == "R"))
         r = evaluate(c)
         r["family"] = fam
         r["score"] = round(score(r), 2)
         r["cost"] = round(cost(r), 2)
         rows.append(r)
-        print(f"[{i:02d}] {fam} dw={c['wing_shift_mm']:>5} tail={c['tail']['area_m2'] if c['tail'] else 0:<5} "
+        print(f"[{i:02d}] {fam} dw={c['wing_shift_mm']:>5} st={c.get('outer_shift_mm', 0):>4} batt={c.get('battery_dx_mm', 0):>4} "
+              f"tail={c['tail']['area_m2'] if c['tail'] else 0:<5} "
               f"rho={c['lwpla_density']} front={r['rotor_front_x_mm']:>6} rear={r['rotor_rear_x_mm']:>6} CG={r['cg_mm'][0]:>6} "
               f"NP={r['np_closed_x_mm']}/{r['np_open_x_mm']} SM={r['sm_closed_pct']}/{r['sm_open_pct']} worst={r['worst_motor_pct']} "
               f"trim={[t['pitch_surfaces_deg'] for t in r['trim_16ms'].values()]} pass={r['passes']} ({time.time() - t0:.0f}s)", flush=True)
         E.save_cache()
-    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCRWS"}
+    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCRWSGF"}
     # finalists at full resolution
     E.MODE["res"] = "fine"
     final = {}

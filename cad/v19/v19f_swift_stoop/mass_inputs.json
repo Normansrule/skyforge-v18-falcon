@@ -1,0 +1,636 @@
+{
+ "moves": {
+  "WRA_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WRB_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WRC_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WRD_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "FLAP_R": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WLA_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WLB_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WLC_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WLD_hollow_wing": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "FLAP_L": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "FIN_R": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "FIN_L": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "WRE1_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "WLE1_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "WRE2_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "WLE2_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "WRF_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "WLF_falcon_wing": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "ELEVON_R_falcon": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "ELEVON_L_falcon": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_-180": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_-180": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_180": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_180": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_-360.222222222": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_-360.222222222": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "SP1_side_servo_cassette_PRINT4_360.222222222": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "SC1_servo_access_cover_PRINT4_360.222222222": [
+   575.0,
+   0.0,
+   0.0
+  ],
+  "CF_crossrail_270_10x10x620": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "CF_crossrail_450_10x10x820": [
+   146.5,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_OR_CUT_motor_plate_PRINT_TEMPLATE_NOT_FLIGHT": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_OR_CUT_motor_backing_plate": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M1_2207_envelope": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_2": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_2": [
+   235.0,
+   0.0,
+   -17.560000000000002
+  ],
+  "PURCHASE_M2_2207_envelope": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_3": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_3": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "PURCHASE_M3_2207_envelope": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_plate_4": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "G10_motor_backing_4": [
+   235.0,
+   0.0,
+   -17.560000000000002
+  ],
+  "PURCHASE_M4_2207_envelope": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "CF_gear_crossbar_10x10x340": [
+   270.0,
+   0.0,
+   -1.5
+  ],
+  "G10_main_gear_left": [
+   270.0,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_gear_leg_-1": [
+   270.0,
+   -110.0,
+   0.33999999999999775
+  ],
+  "PURCHASE_main_wheel_-1": [
+   270.0,
+   -110.0,
+   0.33999999999999775
+  ],
+  "PURCHASE_OR_CUT_main_gear_plate": [
+   270.0,
+   0.0,
+   -1.5
+  ],
+  "PURCHASE_main_gear_leg_1": [
+   270.0,
+   110.0,
+   0.33999999999999775
+  ],
+  "PURCHASE_main_wheel_1": [
+   270.0,
+   110.0,
+   0.33999999999999775
+  ],
+  "KEEP_OUT_CAMERA_19mm": [
+   27.0,
+   0.0,
+   4.0
+  ],
+  "KEEP_OUT_GPS_mount_EXTERNAL_TBD": [
+   441.0,
+   0.0,
+   16.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M1_REFERENCE_ONLY": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M2_REFERENCE_ONLY": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M3_REFERENCE_ONLY": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "NO_PRINT_PURCHASED_PROP_M4_REFERENCE_ONLY": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "site:240,24,-19:2.8": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "site:240,-24,-19:2.8": [
+   235.0,
+   0.0,
+   0.0
+  ],
+  "site:420,24,-19:2.8": [
+   146.5,
+   0.0,
+   0.0
+  ],
+  "site:420,-24,-19:2.8": [
+   146.5,
+   0.0,
+   0.0
+  ],
+  "site:385,24,-31:2.8": [
+   270.0,
+   0.0,
+   -1.5
+  ],
+  "site:385,-24,-31:2.8": [
+   270.0,
+   0.0,
+   -1.5
+  ]
+ },
+ "removed": [
+  "CF_gear_crossbar_10x10x340",
+  "G10_main_gear_left",
+  "PURCHASE_OR_CUT_main_gear_plate",
+  "site:385,24,-31:2.8",
+  "site:385,-24,-31:2.8",
+  "C1_service_cover",
+  "CAM_19mm_cradle"
+ ],
+ "new": [
+  {
+   "name": "NEW_canopy_frame",
+   "mass_g": 1.4623643868999971,
+   "lwpla": false,
+   "xyz": [
+    82.62,
+    0.05,
+    17.24
+   ]
+  },
+  {
+   "name": "NEW_canopy_clear_PETG",
+   "mass_g": 15.319050041880201,
+   "lwpla": false,
+   "xyz": [
+    141.13,
+    -0.03,
+    39.05
+   ]
+  },
+  {
+   "name": "NEW_cockpit_camera_seat",
+   "mass_g": 8.293201599999994,
+   "lwpla": false,
+   "xyz": [
+    136.27,
+    -0.0,
+    30.9
+   ]
+  },
+  {
+   "name": "NEW_CF_wrist_spar_R_10x10x254",
+   "mass_g": 14.147712241850295,
+   "lwpla": false,
+   "xyz": [
+    829.71,
+    337.5,
+    0.0
+   ]
+  },
+  {
+   "name": "NEW_CF_wrist_spar_L_10x10x254",
+   "mass_g": 14.147712241850295,
+   "lwpla": false,
+   "xyz": [
+    829.71,
+    -337.5,
+    0.0
+   ]
+  },
+  {
+   "name": "NEW_wrist_cap_inner_R",
+   "mass_g": 8.32235975390663,
+   "lwpla": true,
+   "xyz": [
+    575.62,
+    314.3,
+    0.1
+   ]
+  },
+  {
+   "name": "NEW_wrist_cap_inner_L",
+   "mass_g": 8.32235975390663,
+   "lwpla": true,
+   "xyz": [
+    575.62,
+    -314.3,
+    0.1
+   ]
+  },
+  {
+   "name": "NEW_wrist_cap_outer_R",
+   "mass_g": 6.108110485003167,
+   "lwpla": true,
+   "xyz": [
+    1012.79,
+    315.7,
+    0.11
+   ]
+  },
+  {
+   "name": "NEW_wrist_cap_outer_L",
+   "mass_g": 6.108110485003167,
+   "lwpla": true,
+   "xyz": [
+    1012.79,
+    -315.7,
+    0.11
+   ]
+  },
+  {
+   "name": "NEW_F5_root_fairing_R",
+   "mass_g": 7.103499312383275,
+   "lwpla": true,
+   "xyz": [
+    722.27,
+    71.32,
+    0.17
+   ]
+  },
+  {
+   "name": "NEW_F5_root_fairing_L",
+   "mass_g": 7.103499312383275,
+   "lwpla": true,
+   "xyz": [
+    722.27,
+    -71.32,
+    0.17
+   ]
+  },
+  {
+   "name": "NEW_CF_rotor_boom_R_10x10x245",
+   "mass_g": 13.671,
+   "lwpla": false,
+   "xyz": [
+    567.5,
+    220.0,
+    -32.46
+   ]
+  },
+  {
+   "name": "NEW_boom_hanger_front_R",
+   "mass_g": 2.3961344000000016,
+   "lwpla": false,
+   "xyz": [
+    475.0,
+    220.0,
+    -24.73
+   ]
+  },
+  {
+   "name": "NEW_boom_hanger_rear_R",
+   "mass_g": 3.2902144000000013,
+   "lwpla": false,
+   "xyz": [
+    566.5,
+    220.0,
+    -23.73
+   ]
+  },
+  {
+   "name": "NEW_rear_motor_riser_R",
+   "mass_g": 10.835930267810793,
+   "lwpla": false,
+   "xyz": [
+    655.0,
+    220.0,
+    -18.67
+   ]
+  },
+  {
+   "name": "NEW_CF_rotor_boom_L_10x10x245",
+   "mass_g": 13.671,
+   "lwpla": false,
+   "xyz": [
+    567.5,
+    -220.0,
+    -32.46
+   ]
+  },
+  {
+   "name": "NEW_boom_hanger_front_L",
+   "mass_g": 2.3961344000000016,
+   "lwpla": false,
+   "xyz": [
+    475.0,
+    -220.0,
+    -24.73
+   ]
+  },
+  {
+   "name": "NEW_boom_hanger_rear_L",
+   "mass_g": 3.2902144000000013,
+   "lwpla": false,
+   "xyz": [
+    566.5,
+    -220.0,
+    -23.73
+   ]
+  },
+  {
+   "name": "NEW_rear_motor_riser_L",
+   "mass_g": 10.835930267810793,
+   "lwpla": false,
+   "xyz": [
+    655.0,
+    -220.0,
+    -18.67
+   ]
+  },
+  {
+   "name": "NEW_crest_R1",
+   "mass_g": 12.373766310620098,
+   "lwpla": true,
+   "xyz": [
+    820.03,
+    74.26,
+    82.85
+   ]
+  },
+  {
+   "name": "NEW_crest_elevator_R1",
+   "mass_g": 5.290233422656422,
+   "lwpla": true,
+   "xyz": [
+    865.9,
+    74.41,
+    87.67
+   ]
+  },
+  {
+   "name": "NEW_crest_R2",
+   "mass_g": 8.441232466430924,
+   "lwpla": true,
+   "xyz": [
+    970.37,
+    236.2,
+    98.65
+   ]
+  },
+  {
+   "name": "NEW_crest_elevator_R2",
+   "mass_g": 3.608932721155251,
+   "lwpla": true,
+   "xyz": [
+    1002.73,
+    236.68,
+    102.06
+   ]
+  },
+  {
+   "name": "NEW_CF_crest_spar_R_6x4x388",
+   "mass_g": 9.416479545100172,
+   "lwpla": false,
+   "xyz": [
+    877.52,
+    140.96,
+    88.9
+   ]
+  },
+  {
+   "name": "NEW_crest_L1",
+   "mass_g": 12.373766310620098,
+   "lwpla": true,
+   "xyz": [
+    820.03,
+    -74.26,
+    82.85
+   ]
+  },
+  {
+   "name": "NEW_crest_elevator_L1",
+   "mass_g": 5.290233422656422,
+   "lwpla": true,
+   "xyz": [
+    865.9,
+    -74.41,
+    87.67
+   ]
+  },
+  {
+   "name": "NEW_crest_L2",
+   "mass_g": 8.441232466430924,
+   "lwpla": true,
+   "xyz": [
+    970.37,
+    -236.2,
+    98.65
+   ]
+  },
+  {
+   "name": "NEW_crest_elevator_L2",
+   "mass_g": 3.608932721155251,
+   "lwpla": true,
+   "xyz": [
+    1002.73,
+    -236.68,
+    102.06
+   ]
+  },
+  {
+   "name": "NEW_CF_crest_spar_L_6x4x388",
+   "mass_g": 9.416479545100172,
+   "lwpla": false,
+   "xyz": [
+    877.52,
+    -140.96,
+    88.9
+   ]
+  },
+  {
+   "name": "KEEP_OUT_crest_elevator_servo_20x18x9",
+   "mass_g": 10.0,
+   "lwpla": false,
+   "xyz": [
+    801.76,
+    30.0,
+    80.93
+   ]
+  }
+ ],
+ "volume_override_cm3": {
+  "WRC_hollow_wing": 95.62508449357422,
+  "WRD_hollow_wing": 30.243655501724398,
+  "WLC_hollow_wing": 95.62485027077767,
+  "WLD_hollow_wing": 30.242449453127996,
+  "WRE1_falcon_wing": 31.04844036072881,
+  "WLE1_falcon_wing": 31.04843952309872,
+  "WRE2_falcon_wing": 10.508785020620364,
+  "WLE2_falcon_wing": 10.508784697344673,
+  "WRB_hollow_wing": 69.95416043198556,
+  "WLB_hollow_wing": 69.95404469699643,
+  "F3_hollow_body": 53.047321724067245,
+  "FIN_R": 22.5023700844687,
+  "FIN_L": 22.59957795889398
+ },
+ "main_gear_x_mm": 655.0
+}

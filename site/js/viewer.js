@@ -191,10 +191,30 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
   cgStem.renderOrder = 19;
   cgGroup.add(cgIcon, cgStem);
   markers.add(cgGroup);
-  const rotorBar = new THREE.Mesh(new THREE.BoxGeometry(3, 560, 3), new THREE.MeshBasicMaterial({ color: '#3F6E9E', depthTest: false, transparent: true, opacity: 0.9 }));
-  rotorBar.renderOrder = 18;
-  rotorBar.position.z = 40;
-  markers.add(rotorBar);
+  // hover frame: the rectangle between the four lift motors and its diagonals. In a hover the CG has to sit where the
+  // diagonals cross (every motor then carries a quarter of the weight).
+  const hoverMat = new THREE.MeshBasicMaterial({ color: '#3F6E9E', depthTest: false, transparent: true, opacity: 0.9 });
+  const hoverFrame = new THREE.Group();
+  hoverFrame.position.z = 40;
+  markers.add(hoverFrame);
+  function setHoverFrame(xf, xr, y) {
+    for (const c of [...hoverFrame.children]) { hoverFrame.remove(c); c.geometry.dispose(); }
+    const P = [[xf, y], [xr, y], [xr, -y], [xf, -y]];
+    const segs = [[P[0], P[1]], [P[1], P[2]], [P[2], P[3]], [P[3], P[0]], [P[0], P[2]], [P[1], P[3]]];
+    segs.forEach(([a, b], i) => {
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(len, i < 4 ? 3 : 2, 2), hoverMat);
+      m.position.set((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0);
+      m.rotation.z = Math.atan2(b[1] - a[1], b[0] - a[0]);
+      m.renderOrder = 18;
+      hoverFrame.add(m);
+    });
+    const ring = new THREE.Mesh(new THREE.RingGeometry(9, 12, 32), hoverMat);
+    ring.position.set((xf + xr) / 2, 0, 0.5);
+    ring.renderOrder = 18;
+    hoverFrame.add(ring);
+  }
+  setHoverFrame(240, 420, 220);
   const npBand = new THREE.Mesh(new THREE.BoxGeometry(1, 1060, 1.5), new THREE.MeshBasicMaterial({ color: '#2F7D5B', transparent: true, opacity: 0.2, depthWrite: false }));
   npBand.position.z = 36;
   markers.add(npBand);
@@ -474,9 +494,9 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
     if (ghost) ghost.visible = on && !anim;
     request();
   }
-  function setMarkers({ cg, rotorX, np }) {
+  function setMarkers({ cg, rotorRows, motorY = 220, np }) {
     if (cg) cgGroup.position.set(cg[0], cg[1], Math.max(cg[2], 0) + 40);
-    if (rotorX !== undefined) rotorBar.position.x = rotorX;
+    if (rotorRows) setHoverFrame(rotorRows[0], rotorRows[1], motorY);
     if (np) { npBand.scale.x = Math.max(np[1] - np[0], 2); npBand.position.x = (np[0] + np[1]) / 2; }
     request();
   }

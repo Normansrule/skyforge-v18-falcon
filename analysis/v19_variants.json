@@ -7818,7 +7818,7 @@
    "config": {
     "name": "v19s_stoop_crest",
     "label": "V19-S stoop wing + falcon crest",
-    "wing_shift_mm": 235,
+    "wing_shift_mm": 225,
     "front_rotor": {
      "mode": "wing",
      "dx": 0.0
@@ -7833,7 +7833,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -7844,12 +7844,13 @@
     "outer_shift_mm": 300,
     "no_le_ext": true,
     "rear_support": "boom",
-    "summary": "All four lift rotors in your V18 wing wells, wing 235 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
+    "battery_dx_mm": -15.0,
+    "summary": "All four lift rotors in your V18 wing wells, wing 225 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
    },
    "mass_basis": "V19 geometry",
-   "all_up_g": 2831.9,
+   "all_up_g": 2825.1,
    "cg_mm": [
-    563.1,
+    556.0,
     -0.1,
     1.7
    ],
@@ -7863,8 +7864,8 @@
     "NEW_wrist_cap_inner_L": 7.5,
     "NEW_wrist_cap_outer_R": 4.9,
     "NEW_wrist_cap_outer_L": 4.9,
-    "NEW_F5_root_fairing_R": 7.1,
-    "NEW_F5_root_fairing_L": 7.1,
+    "NEW_F5_root_fairing_R": 6.9,
+    "NEW_F5_root_fairing_L": 6.9,
     "NEW_CF_rotor_boom_R_10x10x245": 13.7,
     "NEW_boom_hanger_front_R": 2.4,
     "NEW_boom_hanger_rear_R": 3.3,
@@ -7885,46 +7886,46 @@
     "NEW_CF_crest_spar_L_6x4x325": 7.9,
     "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0
    },
-   "rotor_front_x_mm": 475.0,
-   "rotor_rear_x_mm": 655.0,
-   "rotor_centroid_x_mm": 565.0,
+   "rotor_front_x_mm": 465.0,
+   "rotor_rear_x_mm": 645.0,
+   "rotor_centroid_x_mm": 555.0,
    "le_extension_mm": 0.0,
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 722.2,
-    "M2": 693.7,
-    "M3": 723.0,
-    "M4": 692.9
+    "M1": 698.0,
+    "M2": 714.5,
+    "M3": 698.8,
+    "M4": 713.7
    },
-   "worst_motor_pct": 25.5,
-   "np_closed_x_mm": 606.8,
-   "np_open_x_mm": 638.6,
+   "worst_motor_pct": 25.3,
+   "np_closed_x_mm": 595.1,
+   "np_open_x_mm": 626.9,
    "mac_mm": 543.7,
-   "sm_closed_pct": 8.0,
-   "sm_open_pct": 13.9,
+   "sm_closed_pct": 7.2,
+   "sm_open_pct": 13.0,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.7,
-     "pitch_surfaces_deg": -1.7,
-     "CL": 0.369
+     "alpha_deg": 12.5,
+     "pitch_surfaces_deg": -1.0,
+     "CL": 0.368
     },
     "open": {
-     "alpha_deg": 15.1,
-     "pitch_surfaces_deg": -8.1,
-     "CL": 0.369
+     "alpha_deg": 14.8,
+     "pitch_surfaces_deg": -7.5,
+     "CL": 0.368
     }
    },
    "trim_20ms": {
     "closed": {
-     "alpha_deg": 8.5,
-     "pitch_surfaces_deg": 0.9,
-     "CL": 0.236
+     "alpha_deg": 8.4,
+     "pitch_surfaces_deg": 1.3,
+     "CL": 0.235
     },
     "open": {
-     "alpha_deg": 10.0,
-     "pitch_surfaces_deg": -3.3,
-     "CL": 0.236
+     "alpha_deg": 9.9,
+     "pitch_surfaces_deg": -2.8,
+     "CL": 0.235
     }
    },
    "stall_speed_ms": {
@@ -7932,8 +7933,8 @@
     "CLmax_0.9": 10.2
    },
    "wing_area_m2": 0.4806,
-   "main_gear_x_mm": 655.0,
-   "length_mm": 1187.6,
+   "main_gear_x_mm": 645.0,
+   "length_mm": 1177.6,
    "hover_ok": true,
    "flight_ok": true,
    "geometry_ok": true,
@@ -7941,12 +7942,12 @@
    "planning_allowance_result": {
     "all_up_g": 2815.3,
     "cg_mm": [
-     526.9,
+     519.7,
      -0.2,
      1.2
     ],
-    "sm_closed_pct": 14.7,
-    "worst_motor_pct": 35.6,
+    "sm_closed_pct": 13.9,
+    "worst_motor_pct": 34.8,
     "passes": false
    }
   },
@@ -8112,10 +8113,1774 @@
    "jet_vs_tail": {
     "assumed_exit_radius_mm": 30.0,
     "assumed_spread_mm_per_mm": 0.1,
-    "jet_top_at_stab_le_mm": 24.3,
+    "jet_top_at_stab_le_mm": 22.4,
     "stab_underside_z_mm": 67.9,
-    "stab_clear_mm": 39.1,
-    "jet_radius_at_fin_le_mm": 44.3,
+    "stab_clear_mm": 41.0,
+    "jet_radius_at_fin_le_mm": 42.4,
+    "fin_inner_face_y_mm": 999.0,
+    "status": "PASS",
+    "note": "Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued."
+   },
+   "P1S_fit": {
+    "NEW_canopy_frame": {
+     "fits": true,
+     "footprint_max_mm": 38.5,
+     "rotation_deg": 52.5,
+     "height_mm": 75.4,
+     "margin_mm": 217.5
+    },
+    "NEW_canopy_clear_PETG": {
+     "fits": true,
+     "footprint_max_mm": 65.6,
+     "rotation_deg": 45.0,
+     "height_mm": 134.3,
+     "margin_mm": 190.4
+    },
+    "NEW_cockpit_camera_seat": {
+     "fits": true,
+     "footprint_max_mm": 32.0,
+     "rotation_deg": 0.0,
+     "height_mm": 40.0,
+     "margin_mm": 224.0
+    },
+    "NEW_wrist_cap_inner_R": {
+     "fits": true,
+     "footprint_max_mm": 218.0,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 38.0
+    },
+    "NEW_wrist_cap_inner_L": {
+     "fits": true,
+     "footprint_max_mm": 218.0,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 38.0
+    },
+    "NEW_wrist_cap_outer_R": {
+     "fits": true,
+     "footprint_max_mm": 205.9,
+     "rotation_deg": 45.0,
+     "height_mm": 42.1,
+     "margin_mm": 50.1
+    },
+    "NEW_wrist_cap_outer_L": {
+     "fits": true,
+     "footprint_max_mm": 205.9,
+     "rotation_deg": 45.0,
+     "height_mm": 42.1,
+     "margin_mm": 50.1
+    },
+    "NEW_F5_root_fairing_R": {
+     "fits": true,
+     "footprint_max_mm": 217.4,
+     "rotation_deg": 46.0,
+     "height_mm": 50.0,
+     "margin_mm": 38.6
+    },
+    "NEW_F5_root_fairing_L": {
+     "fits": true,
+     "footprint_max_mm": 217.4,
+     "rotation_deg": 46.0,
+     "height_mm": 50.0,
+     "margin_mm": 38.6
+    },
+    "NEW_boom_hanger_front_R": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "NEW_boom_hanger_rear_R": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "NEW_rear_motor_riser_R": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "NEW_boom_hanger_front_L": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "NEW_boom_hanger_rear_L": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "NEW_rear_motor_riser_L": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "NEW_crest_R1": {
+     "fits": true,
+     "footprint_max_mm": 63.0,
+     "rotation_deg": 45.0,
+     "height_mm": 239.9,
+     "margin_mm": 193.0
+    },
+    "NEW_crest_elevator_R1": {
+     "fits": true,
+     "footprint_max_mm": 30.6,
+     "rotation_deg": 45.0,
+     "height_mm": 196.9,
+     "margin_mm": 225.4
+    },
+    "NEW_crest_R2": {
+     "fits": true,
+     "footprint_max_mm": 45.7,
+     "rotation_deg": 45.0,
+     "height_mm": 224.0,
+     "margin_mm": 210.3
+    },
+    "NEW_crest_elevator_R2": {
+     "fits": true,
+     "footprint_max_mm": 22.3,
+     "rotation_deg": 45.0,
+     "height_mm": 191.6,
+     "margin_mm": 233.7
+    },
+    "NEW_crest_L1": {
+     "fits": true,
+     "footprint_max_mm": 63.0,
+     "rotation_deg": 45.0,
+     "height_mm": 239.9,
+     "margin_mm": 193.0
+    },
+    "NEW_crest_elevator_L1": {
+     "fits": true,
+     "footprint_max_mm": 30.6,
+     "rotation_deg": 45.0,
+     "height_mm": 196.9,
+     "margin_mm": 225.4
+    },
+    "NEW_crest_L2": {
+     "fits": true,
+     "footprint_max_mm": 45.7,
+     "rotation_deg": 45.0,
+     "height_mm": 224.0,
+     "margin_mm": 210.3
+    },
+    "NEW_crest_elevator_L2": {
+     "fits": true,
+     "footprint_max_mm": 22.3,
+     "rotation_deg": 45.0,
+     "height_mm": 191.6,
+     "margin_mm": 233.7
+    }
+   },
+   "status": "PASS"
+  },
+  "extent": {
+   "length_mm": 1177.6,
+   "span_mm": 999.8,
+   "height_mm": 219.8
+  },
+  "changes": [
+   "Wing group 225 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.",
+   "All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.",
+   "Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.",
+   "Falcon crest: a 0.070 m2 swept stabiliser (648 mm span, 35 deg sweep, aspect ratio 6) bonded across the tips of your V18 fins at z 75, set 4 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.",
+   "F5 root fairings carry the wing-root profile past the end of the body to x 900.",
+   "Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 300 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (219 mm, 52 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.",
+   "Battery stays in your V18 Tray A, slid 15 mm forward of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.",
+   "Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).",
+   "GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.",
+   "Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.",
+   "Main gear legs bolt to the rear motor backing plates under the booms at x 645 (about 89 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake."
+  ],
+  "parts": [
+   {
+    "name": "NEW_canopy_frame",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 1.5,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Lower 12 mm of your C1 cover printed as the canopy frame: it carries the latches and the camera seat, and the clear canopy bonds to its lip.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 38.5,
+     "rotation_deg": 52.5,
+     "height_mm": 75.4,
+     "margin_mm": 217.5
+    },
+    "centroid_mm": [
+     82.6,
+     0.0,
+     17.2
+    ],
+    "bbox_mm": [
+     48.5,
+     75.4,
+     12.0
+    ]
+   },
+   {
+    "name": "NEW_canopy_clear_PETG",
+    "class": "printed",
+    "material": "PETG (clear sheet)",
+    "mass_g": 15.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Vacuum-formed 0.75 mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is only translucent). Trim to the frame lip.",
+    "mass_basis": "half the surface x 0.75 mm sheet",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 65.6,
+     "rotation_deg": 45.0,
+     "height_mm": 134.3,
+     "margin_mm": 190.4
+    },
+    "centroid_mm": [
+     141.1,
+     -0.0,
+     39.1
+    ],
+    "bbox_mm": [
+     133.7,
+     75.4,
+     37.7
+    ]
+   },
+   {
+    "name": "NEW_cockpit_camera_seat",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 8.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back behind it; screws to the canopy frame so lifting the canopy opens the nose bay.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 32.0,
+     "rotation_deg": 0.0,
+     "height_mm": 40.0,
+     "margin_mm": 224.0
+    },
+    "centroid_mm": [
+     136.3,
+     -0.0,
+     30.9
+    ],
+    "bbox_mm": [
+     40.0,
+     32.0,
+     28.4
+    ]
+   },
+   {
+    "name": "NEW_CF_wrist_spar_R_10x10x219",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 12.2,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10 x 10 carbon wrist spar, swept 52 deg, bonded in both panels from y 266 to 400: 49 mm in the inner panel, 85 mm in the outer. It carries the swept outer panel's bending; the panels are also bonded along the wrist overlap.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     803.3,
+     333.0,
+     0.0
+    ],
+    "bbox_mm": [
+     179.5,
+     141.9,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_CF_wrist_spar_L_10x10x219",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 12.2,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10 x 10 carbon wrist spar, swept 52 deg, bonded in both panels from y 266 to 400: 49 mm in the inner panel, 85 mm in the outer. It carries the swept outer panel's bending; the panels are also bonded along the wrist overlap.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     803.3,
+     -333.0,
+     0.0
+    ],
+    "bbox_mm": [
+     179.5,
+     141.9,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_inner_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 7.5,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the inner panel's tip face ahead of the swept-back outer panel (the falcon 'wrist').",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 218.0,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 38.0
+    },
+    "centroid_mm": [
+     549.8,
+     314.3,
+     0.1
+    ],
+    "bbox_mm": [
+     307.0,
+     1.2,
+     44.1
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_inner_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 7.5,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the inner panel's tip face ahead of the swept-back outer panel (the falcon 'wrist').",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 218.0,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 38.0
+    },
+    "centroid_mm": [
+     549.8,
+     -314.3,
+     0.1
+    ],
+    "bbox_mm": [
+     307.0,
+     1.2,
+     44.1
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_outer_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 4.9,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the outer panel's root face behind the inner panel's trailing edge.",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 205.9,
+     "rotation_deg": 45.0,
+     "height_mm": 42.1,
+     "margin_mm": 50.1
+    },
+    "centroid_mm": [
+     988.2,
+     315.7,
+     0.1
+    ],
+    "bbox_mm": [
+     290.0,
+     1.2,
+     42.1
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_outer_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 4.9,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the outer panel's root face behind the inner panel's trailing edge.",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 205.9,
+     "rotation_deg": 45.0,
+     "height_mm": 42.1,
+     "margin_mm": 50.1
+    },
+    "centroid_mm": [
+     988.2,
+     -315.7,
+     0.1
+    ],
+    "bbox_mm": [
+     290.0,
+     1.2,
+     42.1
+    ]
+   },
+   {
+    "name": "NEW_F5_root_fairing_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.9,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 900).",
+    "mass_basis": "V18 skin areal density x planform",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 217.4,
+     "rotation_deg": 46.0,
+     "height_mm": 50.0,
+     "margin_mm": 38.6
+    },
+    "centroid_mm": [
+     718.3,
+     71.4,
+     0.2
+    ],
+    "bbox_mm": [
+     292.0,
+     18.5,
+     50.0
+    ]
+   },
+   {
+    "name": "NEW_F5_root_fairing_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.9,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 900).",
+    "mass_basis": "V18 skin areal density x planform",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 217.4,
+     "rotation_deg": 46.0,
+     "height_mm": 50.0,
+     "margin_mm": 38.6
+    },
+    "centroid_mm": [
+     718.3,
+     -71.4,
+     0.2
+    ],
+    "bbox_mm": [
+     292.0,
+     18.5,
+     50.0
+    ]
+   },
+   {
+    "name": "NEW_CF_rotor_boom_R_10x10x245",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 13.7,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10x10x1 carbon square tube under the wing, from the front crossrail to behind the rear motor; carries the rear motor riser so the rear crossrail can sit ahead of the D1 intake.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     557.5,
+     220.0,
+     -32.5
+    ],
+    "bbox_mm": [
+     245.0,
+     10.0,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_front_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 2.4,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the front crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "centroid_mm": [
+     465.0,
+     220.0,
+     -24.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     5.4
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_rear_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 3.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the rear crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "centroid_mm": [
+     566.5,
+     220.0,
+     -23.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     7.4
+    ]
+   },
+   {
+    "name": "NEW_rear_motor_riser_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 10.8,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Hollow PETG riser (1.6 mm walls) from the boom to the V18 rear motor plate.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "centroid_mm": [
+     645.0,
+     220.0,
+     -18.7
+    ],
+    "bbox_mm": [
+     40.0,
+     40.0,
+     17.4
+    ]
+   },
+   {
+    "name": "NEW_CF_rotor_boom_L_10x10x245",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 13.7,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10x10x1 carbon square tube under the wing, from the front crossrail to behind the rear motor; carries the rear motor riser so the rear crossrail can sit ahead of the D1 intake.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     557.5,
+     -220.0,
+     -32.5
+    ],
+    "bbox_mm": [
+     245.0,
+     10.0,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_front_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 2.4,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the front crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "centroid_mm": [
+     465.0,
+     -220.0,
+     -24.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     5.4
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_rear_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 3.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the rear crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "centroid_mm": [
+     566.5,
+     -220.0,
+     -23.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     7.4
+    ]
+   },
+   {
+    "name": "NEW_rear_motor_riser_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 10.8,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Hollow PETG riser (1.6 mm walls) from the boom to the V18 rear motor plate.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "centroid_mm": [
+     645.0,
+     -220.0,
+     -18.7
+    ],
+    "bbox_mm": [
+     40.0,
+     40.0,
+     17.4
+    ]
+   },
+   {
+    "name": "NEW_crest_R1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 15.7,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 63.0,
+     "rotation_deg": 45.0,
+     "height_mm": 239.9,
+     "margin_mm": 193.0
+    },
+    "centroid_mm": [
+     830.5,
+     72.6,
+     78.6
+    ],
+    "bbox_mm": [
+     187.4,
+     161.5,
+     20.5
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_R1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.7,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 30.6,
+     "rotation_deg": 45.0,
+     "height_mm": 196.9,
+     "margin_mm": 225.4
+    },
+    "centroid_mm": [
+     890.2,
+     72.6,
+     82.8
+    ],
+    "bbox_mm": [
+     116.2,
+     161.5,
+     12.8
+    ]
+   },
+   {
+    "name": "NEW_crest_R2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 10.7,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 45.7,
+     "rotation_deg": 45.0,
+     "height_mm": 224.0,
+     "margin_mm": 210.3
+    },
+    "centroid_mm": [
+     927.0,
+     230.8,
+     85.4
+    ],
+    "bbox_mm": [
+     159.3,
+     161.8,
+     16.2
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_R2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 4.6,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 22.3,
+     "rotation_deg": 45.0,
+     "height_mm": 191.6,
+     "margin_mm": 233.7
+    },
+    "centroid_mm": [
+     968.7,
+     231.1,
+     88.3
+    ],
+    "bbox_mm": [
+     104.2,
+     161.8,
+     10.6
+    ]
+   },
+   {
+    "name": "NEW_CF_crest_spar_R_6x4x325",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 7.9,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     864.5,
+     137.7,
+     81.0
+    ],
+    "bbox_mm": [
+     176.6,
+     278.6,
+     18.0
+    ]
+   },
+   {
+    "name": "NEW_crest_L1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 15.7,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 63.0,
+     "rotation_deg": 45.0,
+     "height_mm": 239.9,
+     "margin_mm": 193.0
+    },
+    "centroid_mm": [
+     830.5,
+     -72.6,
+     78.6
+    ],
+    "bbox_mm": [
+     187.4,
+     161.5,
+     20.5
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_L1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.7,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 30.6,
+     "rotation_deg": 45.0,
+     "height_mm": 196.9,
+     "margin_mm": 225.4
+    },
+    "centroid_mm": [
+     890.2,
+     -72.6,
+     82.8
+    ],
+    "bbox_mm": [
+     116.2,
+     161.5,
+     12.8
+    ]
+   },
+   {
+    "name": "NEW_crest_L2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 10.7,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 45.7,
+     "rotation_deg": 45.0,
+     "height_mm": 224.0,
+     "margin_mm": 210.3
+    },
+    "centroid_mm": [
+     927.0,
+     -230.8,
+     85.4
+    ],
+    "bbox_mm": [
+     159.3,
+     161.8,
+     16.2
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_L2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 4.6,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 22.3,
+     "rotation_deg": 45.0,
+     "height_mm": 191.6,
+     "margin_mm": 233.7
+    },
+    "centroid_mm": [
+     968.7,
+     -231.1,
+     88.3
+    ],
+    "bbox_mm": [
+     104.2,
+     161.8,
+     10.6
+    ]
+   },
+   {
+    "name": "NEW_CF_crest_spar_L_6x4x325",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 7.9,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     864.5,
+     -137.7,
+     81.0
+    ],
+    "bbox_mm": [
+     176.6,
+     278.6,
+     18.0
+    ]
+   },
+   {
+    "name": "KEEP_OUT_crest_elevator_servo_20x18x9",
+    "class": "keepout",
+    "material": null,
+    "mass_g": 10.0,
+    "lwpla": false,
+    "layer": "keepouts",
+    "note": "Slim 5 g wing servo (HS-40 class, 20 x 18 x 9 mm) + linkage, flat in a pocket under a printed cover in the crest root, right of centre; the lead runs down the starboard fin.",
+    "mass_basis": "item",
+    "P1S": null,
+    "centroid_mm": [
+     838.8,
+     30.0,
+     79.2
+    ],
+    "bbox_mm": [
+     20.6,
+     18.0,
+     10.4
+    ]
+   }
+  ],
+  "modified": [
+   {
+    "name": "CF_crossrail_450_10x10x820",
+    "why": [
+     "shortened to 610 mm: the swept outer panels ride on wrist spars"
+    ],
+    "move_mm": [
+     146.5,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRC_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar",
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRD_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLC_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar",
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLD_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRE1_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     525.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLE1_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     525.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRE2_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     525.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLE2_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     525.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRB_hollow_wing",
+    "why": [
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLB_hollow_wing",
+    "why": [
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "F3_hollow_body",
+    "why": [
+     "slot for CF_crossrail_270_10x10x620 at x 465.0",
+     "slot for CF_crossrail_450_10x10x820 at x 566.5"
+    ],
+    "move_mm": [
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "name": "FIN_R",
+    "why": [
+     "tip trimmed at z 68 (following the crest's incidence) to carry the crest"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "FIN_L",
+    "why": [
+     "tip trimmed at z 68 (following the crest's incidence) to carry the crest"
+    ],
+    "move_mm": [
+     225.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "removed": [
+   "CF_gear_crossbar_10x10x340",
+   "G10_main_gear_left",
+   "PURCHASE_OR_CUT_main_gear_plate",
+   "site:385,24,-31:2.8",
+   "site:385,-24,-31:2.8",
+   "C1_service_cover",
+   "CAM_19mm_cradle"
+  ],
+  "moves": {
+   "WRA_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WRB_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WRC_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WRD_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "FLAP_R": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WLA_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WLB_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WLC_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WLD_hollow_wing": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "FLAP_L": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "FIN_R": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "FIN_L": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "WRE1_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "WLE1_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "WRE2_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "WLE2_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "WRF_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "WLF_falcon_wing": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "ELEVON_R_falcon": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "ELEVON_L_falcon": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_-180": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_-180": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_180": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_180": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_-360.222222222": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_-360.222222222": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_360.222222222": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_360.222222222": [
+    525.0,
+    0.0,
+    0.0
+   ],
+   "CF_crossrail_270_10x10x620": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "CF_crossrail_450_10x10x820": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_OR_CUT_motor_plate_PRINT_TEMPLATE_NOT_FLIGHT": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_OR_CUT_motor_backing_plate": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_M1_2207_envelope": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_2": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_2": [
+    225.0,
+    0.0,
+    -17.560000000000002
+   ],
+   "PURCHASE_M2_2207_envelope": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_3": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_3": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_M3_2207_envelope": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_4": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_4": [
+    225.0,
+    0.0,
+    -17.560000000000002
+   ],
+   "PURCHASE_M4_2207_envelope": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "CF_gear_crossbar_10x10x340": [
+    260.0,
+    0.0,
+    -1.5
+   ],
+   "G10_main_gear_left": [
+    260.0,
+    0.0,
+    -1.5
+   ],
+   "PURCHASE_main_gear_leg_-1": [
+    260.0,
+    -110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_main_wheel_-1": [
+    260.0,
+    -110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_OR_CUT_main_gear_plate": [
+    260.0,
+    0.0,
+    -1.5
+   ],
+   "PURCHASE_main_gear_leg_1": [
+    260.0,
+    110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_main_wheel_1": [
+    260.0,
+    110.0,
+    0.33999999999999775
+   ],
+   "KEEP_OUT_CAMERA_19mm": [
+    27.0,
+    0.0,
+    4.0
+   ],
+   "KEEP_OUT_GPS_mount_EXTERNAL_TBD": [
+    441.0,
+    0.0,
+    16.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M1_REFERENCE_ONLY": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M2_REFERENCE_ONLY": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M3_REFERENCE_ONLY": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M4_REFERENCE_ONLY": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "site:240,24,-19:2.8": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "site:240,-24,-19:2.8": [
+    225.0,
+    0.0,
+    0.0
+   ],
+   "site:420,24,-19:2.8": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "site:420,-24,-19:2.8": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "site:385,24,-31:2.8": [
+    260.0,
+    0.0,
+    -1.5
+   ],
+   "site:385,-24,-31:2.8": [
+    260.0,
+    0.0,
+    -1.5
+   ]
+  },
+  "hidden_in_viewer": [
+   "CF_gear_crossbar_10x10x340",
+   "G10_main_gear_left",
+   "PURCHASE_OR_CUT_main_gear_plate",
+   "site:385,24,-31:2.8",
+   "site:385,-24,-31:2.8",
+   "C1_service_cover",
+   "CAM_19mm_cradle"
+  ],
+  "notes": [
+   "Outer falcon panels, elevons and their servo cassettes sweep 300 mm aft at the wrist (y 315); the panels stay bonded along 176 mm of shared chord with a swept carbon wrist spar through both.",
+   "Rear crossrail moves to x 566.5 (wing frame x 341.5), ahead of the D1 intake; the rear motors ride on risers on the under-wing booms.",
+   "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
+   "Rotor booms: 10x10 carbon at y +/-220, z -37.5 to -27.5 (0.5 mm under the lowest wing skin they pass)."
+  ],
+  "label": "V19-S stoop wing + falcon crest",
+  "summary": "All four lift rotors in your V18 wing wells, wing 225 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
+ },
+ "v19g_gyr_crest": {
+  "slug": "v19g_gyr_crest",
+  "evaluation": {
+   "config": {
+    "name": "v19g_gyr_crest",
+    "label": "V19-G slim crest",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 14.0,
+    "summary": "V19-S layout with a slimmer, sharper crest (aspect 8, 45 deg sweep): wing 235 mm aft, outer panels swept 300 mm back, battery in the V18 tray"
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2826.7,
+   "cg_mm": [
+    564.3,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 712.2,
+    "M2": 701.2,
+    "M3": 712.9,
+    "M4": 700.4
+   },
+   "worst_motor_pct": 25.2,
+   "np_closed_x_mm": 601.3,
+   "np_open_x_mm": 633.0,
+   "mac_mm": 543.7,
+   "sm_closed_pct": 6.8,
+   "sm_open_pct": 12.6,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.7,
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.368
+    },
+    "open": {
+     "alpha_deg": 15.1,
+     "pitch_surfaces_deg": -7.1,
+     "CL": 0.368
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.5,
+     "pitch_surfaces_deg": 2.6,
+     "CL": 0.235
+    },
+    "open": {
+     "alpha_deg": 10.0,
+     "pitch_surfaces_deg": -2.0,
+     "CL": 0.235
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4806,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 1187.6,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "planning_allowance_result": {
+    "all_up_g": 2804.3,
+    "cg_mm": [
+     525.7,
+     -0.2,
+     1.0
+    ],
+    "sm_closed_pct": 13.9,
+    "worst_motor_pct": 35.9,
+    "passes": false
+   }
+  },
+  "checks": {
+   "collisions_new_vs_V18": [],
+   "intended_contacts": [
+    {
+     "a": "CF_crossrail_270_10x10x620",
+     "b": "G10_cassette_B_support_left",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_270_10x10x620",
+     "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_450_10x10x820",
+     "b": "G10_cassette_B_support_left",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_450_10x10x820",
+     "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "F2_hollow_body",
+     "b": "WLA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F2_hollow_body",
+     "b": "WRA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F3_hollow_body",
+     "b": "WLA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F3_hollow_body",
+     "b": "WRA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "G10_motor_backing_2",
+     "b": "PURCHASE_main_gear_leg_-1",
+     "intended": "gear leg bolts to the rear motor backing plate"
+    },
+    {
+     "a": "G10_motor_backing_3",
+     "b": "NEW_boom_hanger_front_L",
+     "intended": "front motor backing plate bolts through the hanger"
+    },
+    {
+     "a": "G10_motor_backing_4",
+     "b": "PURCHASE_main_gear_leg_1",
+     "intended": "gear leg bolts to the rear motor backing plate"
+    },
+    {
+     "a": "KEEP_OUT_crest_elevator_servo_20x18x9",
+     "b": "NEW_crest_R1",
+     "intended": "servo pocket in the crest root"
+    },
+    {
+     "a": "KEEP_OUT_crest_elevator_servo_20x18x9",
+     "b": "NEW_crest_elevator_R1",
+     "intended": "servo pocket in the crest root"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x405",
+     "b": "NEW_CF_crest_spar_R_6x4x405",
+     "intended": "spars meet at the centre joiner"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x405",
+     "b": "NEW_crest_L1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x405",
+     "b": "NEW_crest_L2",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x405",
+     "b": "NEW_crest_R1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x405",
+     "b": "NEW_crest_L1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x405",
+     "b": "NEW_crest_R1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x405",
+     "b": "NEW_crest_R2",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_boom_hanger_front_R",
+     "b": "PURCHASE_OR_CUT_motor_backing_plate",
+     "intended": "front motor backing plate bolts through the hanger"
+    },
+    {
+     "a": "NEW_canopy_clear_PETG",
+     "b": "NEW_canopy_frame",
+     "intended": "canopy bonds to the frame lip"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLA_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLB_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLC_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRA_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRB_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRC_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_L",
+     "b": "WLE1_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_L",
+     "b": "WLF_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_R",
+     "b": "WRE1_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_R",
+     "b": "WRF_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    }
+   ],
+   "jet_vs_tail": {
+    "assumed_exit_radius_mm": 30.0,
+    "assumed_spread_mm_per_mm": 0.1,
+    "jet_top_at_stab_le_mm": 20.1,
+    "stab_underside_z_mm": 69.2,
+    "stab_clear_mm": 45.5,
+    "jet_radius_at_fin_le_mm": 40.1,
     "fin_inner_face_y_mm": 999.0,
     "status": "PASS",
     "note": "Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued."
@@ -8228,59 +9993,59 @@
     },
     "NEW_crest_R1": {
      "fits": true,
-     "footprint_max_mm": 63.0,
+     "footprint_max_mm": 204.8,
      "rotation_deg": 45.0,
-     "height_mm": 239.9,
-     "margin_mm": 193.0
+     "height_mm": 58.3,
+     "margin_mm": 51.2
     },
     "NEW_crest_elevator_R1": {
      "fits": true,
-     "footprint_max_mm": 30.6,
+     "footprint_max_mm": 21.4,
      "rotation_deg": 45.0,
-     "height_mm": 196.9,
-     "margin_mm": 225.4
+     "height_mm": 245.2,
+     "margin_mm": 234.6
     },
     "NEW_crest_R2": {
      "fits": true,
-     "footprint_max_mm": 45.7,
-     "rotation_deg": 45.0,
-     "height_mm": 224.0,
-     "margin_mm": 210.3
+     "footprint_max_mm": 192.5,
+     "rotation_deg": 39.5,
+     "height_mm": 7.8,
+     "margin_mm": 63.5
     },
     "NEW_crest_elevator_R2": {
      "fits": true,
-     "footprint_max_mm": 22.3,
+     "footprint_max_mm": 15.6,
      "rotation_deg": 45.0,
-     "height_mm": 191.6,
-     "margin_mm": 233.7
+     "height_mm": 239.2,
+     "margin_mm": 240.4
     },
     "NEW_crest_L1": {
      "fits": true,
-     "footprint_max_mm": 63.0,
+     "footprint_max_mm": 204.8,
      "rotation_deg": 45.0,
-     "height_mm": 239.9,
-     "margin_mm": 193.0
+     "height_mm": 58.3,
+     "margin_mm": 51.2
     },
     "NEW_crest_elevator_L1": {
      "fits": true,
-     "footprint_max_mm": 30.6,
+     "footprint_max_mm": 21.4,
      "rotation_deg": 45.0,
-     "height_mm": 196.9,
-     "margin_mm": 225.4
+     "height_mm": 245.2,
+     "margin_mm": 234.6
     },
     "NEW_crest_L2": {
      "fits": true,
-     "footprint_max_mm": 45.7,
-     "rotation_deg": 45.0,
-     "height_mm": 224.0,
-     "margin_mm": 210.3
+     "footprint_max_mm": 192.5,
+     "rotation_deg": 50.5,
+     "height_mm": 7.8,
+     "margin_mm": 63.5
     },
     "NEW_crest_elevator_L2": {
      "fits": true,
-     "footprint_max_mm": 22.3,
+     "footprint_max_mm": 15.6,
      "rotation_deg": 45.0,
-     "height_mm": 191.6,
-     "margin_mm": 233.7
+     "height_mm": 239.2,
+     "margin_mm": 240.4
     }
    },
    "status": "PASS"
@@ -8288,19 +10053,20 @@
   "extent": {
    "length_mm": 1187.6,
    "span_mm": 999.8,
-   "height_mm": 219.8
+   "height_mm": 234.2
   },
   "changes": [
    "Wing group 235 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.",
    "All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.",
    "Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.",
-   "Falcon crest: a 0.070 m2 swept stabiliser (648 mm span, 35 deg sweep) bonded across the tips of your V18 fins at z 75, set 4 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.",
+   "Falcon crest: a 0.060 m2 swept stabiliser (693 mm span, 45 deg sweep, aspect ratio 8) bonded across the tips of your V18 fins at z 75, set 5 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.",
    "F5 root fairings carry the wing-root profile past the end of the body to x 910.",
    "Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 300 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (219 mm, 52 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.",
+   "Battery stays in your V18 Tray A, slid 14 mm aft of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.",
    "Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).",
    "GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.",
    "Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.",
-   "Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 92 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake."
+   "Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 91 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake."
   ],
   "parts": [
    {
@@ -8796,258 +10562,258 @@
     "name": "NEW_crest_R1",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 15.7,
+    "mass_g": 13.5,
     "lwpla": true,
     "layer": "skin",
-    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 5 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 63.0,
+     "footprint_max_mm": 204.8,
      "rotation_deg": 45.0,
-     "height_mm": 239.9,
-     "margin_mm": 193.0
+     "height_mm": 58.3,
+     "margin_mm": 51.2
     },
     "centroid_mm": [
-     849.5,
-     72.6,
-     78.6
+     825.0,
+     77.6,
+     81.8
     ],
     "bbox_mm": [
-     187.4,
-     161.5,
-     20.5
+     231.8,
+     172.7,
+     25.9
     ]
    },
    {
     "name": "NEW_crest_elevator_R1",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 6.7,
+    "mass_g": 5.8,
     "lwpla": true,
     "layer": "controls",
     "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 30.6,
+     "footprint_max_mm": 21.4,
      "rotation_deg": 45.0,
-     "height_mm": 196.9,
-     "margin_mm": 225.4
+     "height_mm": 245.2,
+     "margin_mm": 234.6
     },
     "centroid_mm": [
-     909.2,
-     72.6,
-     82.8
+     873.0,
+     77.7,
+     86.0
     ],
     "bbox_mm": [
-     116.2,
-     161.5,
-     12.8
+     174.8,
+     172.7,
+     18.9
     ]
    },
    {
     "name": "NEW_crest_R2",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 10.7,
+    "mass_g": 9.2,
     "lwpla": true,
     "layer": "skin",
-    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 5 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 45.7,
-     "rotation_deg": 45.0,
-     "height_mm": 224.0,
-     "margin_mm": 210.3
+     "footprint_max_mm": 192.5,
+     "rotation_deg": 39.5,
+     "height_mm": 7.8,
+     "margin_mm": 63.5
     },
     "centroid_mm": [
-     946.0,
-     230.8,
-     85.4
+     982.3,
+     246.7,
+     95.6
     ],
     "bbox_mm": [
-     159.3,
-     161.8,
-     16.2
+     209.4,
+     173.0,
+     22.1
     ]
    },
    {
     "name": "NEW_crest_elevator_R2",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 4.6,
+    "mass_g": 3.9,
     "lwpla": true,
     "layer": "controls",
     "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 22.3,
+     "footprint_max_mm": 15.6,
      "rotation_deg": 45.0,
-     "height_mm": 191.6,
-     "margin_mm": 233.7
+     "height_mm": 239.2,
+     "margin_mm": 240.4
     },
     "centroid_mm": [
-     987.7,
-     231.1,
-     88.3
+     1016.1,
+     247.2,
+     98.6
     ],
     "bbox_mm": [
-     104.2,
-     161.8,
-     10.6
+     165.3,
+     173.0,
+     17.2
     ]
    },
    {
-    "name": "NEW_CF_crest_spar_R_6x4x325",
+    "name": "NEW_CF_crest_spar_R_6x4x405",
     "class": "carbon",
     "material": "carbon",
-    "mass_g": 7.9,
+    "mass_g": 9.8,
     "lwpla": false,
     "layer": "structure",
     "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
     "mass_basis": "length x g/m",
     "P1S": null,
     "centroid_mm": [
-     883.5,
-     137.7,
-     81.0
+     885.2,
+     147.2,
+     87.1
     ],
     "bbox_mm": [
-     176.6,
-     278.6,
-     18.0
+     281.0,
+     298.6,
+     30.2
     ]
    },
    {
     "name": "NEW_crest_L1",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 15.7,
+    "mass_g": 13.5,
     "lwpla": true,
     "layer": "skin",
-    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 5 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 63.0,
+     "footprint_max_mm": 204.8,
      "rotation_deg": 45.0,
-     "height_mm": 239.9,
-     "margin_mm": 193.0
+     "height_mm": 58.3,
+     "margin_mm": 51.2
     },
     "centroid_mm": [
-     849.5,
-     -72.6,
-     78.6
+     825.0,
+     -77.6,
+     81.8
     ],
     "bbox_mm": [
-     187.4,
-     161.5,
-     20.5
+     231.8,
+     172.7,
+     25.9
     ]
    },
    {
     "name": "NEW_crest_elevator_L1",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 6.7,
+    "mass_g": 5.8,
     "lwpla": true,
     "layer": "controls",
     "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 30.6,
+     "footprint_max_mm": 21.4,
      "rotation_deg": 45.0,
-     "height_mm": 196.9,
-     "margin_mm": 225.4
+     "height_mm": 245.2,
+     "margin_mm": 234.6
     },
     "centroid_mm": [
-     909.2,
-     -72.6,
-     82.8
+     873.0,
+     -77.7,
+     86.0
     ],
     "bbox_mm": [
-     116.2,
-     161.5,
-     12.8
+     174.8,
+     172.7,
+     18.9
     ]
    },
    {
     "name": "NEW_crest_L2",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 10.7,
+    "mass_g": 9.2,
     "lwpla": true,
     "layer": "skin",
-    "note": "Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 5 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 45.7,
-     "rotation_deg": 45.0,
-     "height_mm": 224.0,
-     "margin_mm": 210.3
+     "footprint_max_mm": 192.5,
+     "rotation_deg": 50.5,
+     "height_mm": 7.8,
+     "margin_mm": 63.5
     },
     "centroid_mm": [
-     946.0,
-     -230.8,
-     85.4
+     982.3,
+     -246.7,
+     95.6
     ],
     "bbox_mm": [
-     159.3,
-     161.8,
-     16.2
+     209.4,
+     173.0,
+     22.1
     ]
    },
    {
     "name": "NEW_crest_elevator_L2",
     "class": "printed",
     "material": "LW-PLA",
-    "mass_g": 4.6,
+    "mass_g": 3.9,
     "lwpla": true,
     "layer": "controls",
     "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
     "mass_basis": "falcon-panel areal density x area",
     "P1S": {
      "fits": true,
-     "footprint_max_mm": 22.3,
+     "footprint_max_mm": 15.6,
      "rotation_deg": 45.0,
-     "height_mm": 191.6,
-     "margin_mm": 233.7
+     "height_mm": 239.2,
+     "margin_mm": 240.4
     },
     "centroid_mm": [
-     987.7,
-     -231.1,
-     88.3
+     1016.1,
+     -247.2,
+     98.6
     ],
     "bbox_mm": [
-     104.2,
-     161.8,
-     10.6
+     165.3,
+     173.0,
+     17.2
     ]
    },
    {
-    "name": "NEW_CF_crest_spar_L_6x4x325",
+    "name": "NEW_CF_crest_spar_L_6x4x405",
     "class": "carbon",
     "material": "carbon",
-    "mass_g": 7.9,
+    "mass_g": 9.8,
     "lwpla": false,
     "layer": "structure",
     "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
     "mass_basis": "length x g/m",
     "P1S": null,
     "centroid_mm": [
-     883.5,
-     -137.7,
-     81.0
+     885.2,
+     -147.2,
+     87.1
     ],
     "bbox_mm": [
-     176.6,
-     278.6,
-     18.0
+     281.0,
+     298.6,
+     30.2
     ]
    },
    {
@@ -9061,14 +10827,14 @@
     "mass_basis": "item",
     "P1S": null,
     "centroid_mm": [
-     857.8,
+     805.4,
      30.0,
-     79.2
+     80.1
     ],
     "bbox_mm": [
-     20.6,
+     20.7,
      18.0,
-     10.4
+     10.7
     ]
    }
   ],
@@ -9213,7 +10979,7 @@
    {
     "name": "FIN_R",
     "why": [
-     "tip trimmed at z 68 (following the crest's incidence) to carry the crest"
+     "tip trimmed at z 69 (following the crest's incidence) to carry the crest"
     ],
     "move_mm": [
      235.0,
@@ -9224,7 +10990,7 @@
    {
     "name": "FIN_L",
     "why": [
-     "tip trimmed at z 68 (following the crest's incidence) to carry the crest"
+     "tip trimmed at z 69 (following the crest's incidence) to carry the crest"
     ],
     "move_mm": [
      235.0,
@@ -9564,7 +11330,1769 @@
    "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
    "Rotor booms: 10x10 carbon at y +/-220, z -37.5 to -27.5 (0.5 mm under the lowest wing skin they pass)."
   ],
-  "label": "V19-S stoop wing + falcon crest",
-  "summary": "All four lift rotors in your V18 wing wells, wing 235 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
+  "label": "V19-G slim crest",
+  "summary": "V19-S layout with a slimmer, sharper crest (aspect 8, 45 deg sweep): wing 235 mm aft, outer panels swept 300 mm back, battery in the V18 tray"
+ },
+ "v19f_swift_stoop": {
+  "slug": "v19f_swift_stoop",
+  "evaluation": {
+   "config": {
+    "name": "v19f_swift_stoop",
+    "label": "V19-F deep stoop",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -5.0,
+    "summary": "V19-S layout with the outer panels swept 340 mm back and the slim crest: wing 235 mm aft, battery in the V18 tray"
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2828.6,
+   "cg_mm": [
+    564.8,
+    -0.1,
+    1.5
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 708.1,
+    "M2": 706.2,
+    "M3": 708.9,
+    "M4": 705.4
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 605.5,
+   "np_open_x_mm": 636.9,
+   "mac_mm": 543.7,
+   "sm_closed_pct": 7.5,
+   "sm_open_pct": 13.3,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.4,
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.368
+    },
+    "open": {
+     "alpha_deg": 15.8,
+     "pitch_surfaces_deg": -7.5,
+     "CL": 0.368
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.9,
+     "pitch_surfaces_deg": 2.9,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 10.5,
+     "pitch_surfaces_deg": -2.0,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4806,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 1227.6,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "planning_allowance_result": {
+    "all_up_g": 2798.8,
+    "cg_mm": [
+     522.3,
+     -0.2,
+     0.9
+    ],
+    "sm_closed_pct": 15.3,
+    "worst_motor_pct": 36.9,
+    "passes": false
+   }
+  },
+  "checks": {
+   "collisions_new_vs_V18": [],
+   "intended_contacts": [
+    {
+     "a": "CF_crossrail_270_10x10x620",
+     "b": "G10_cassette_B_support_left",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_270_10x10x620",
+     "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_450_10x10x820",
+     "b": "G10_cassette_B_support_left",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "CF_crossrail_450_10x10x820",
+     "b": "PURCHASE_OR_CUT_cassette_B_support_strip",
+     "intended": "crossrail touches the tray support strips from below, as V18 does under Tray A"
+    },
+    {
+     "a": "F2_hollow_body",
+     "b": "WLA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F2_hollow_body",
+     "b": "WRA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F3_hollow_body",
+     "b": "WLA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "F3_hollow_body",
+     "b": "WRA_hollow_wing",
+     "intended": "wing root seats against the body side, as V18 (WRB/WRC x F2/F3)"
+    },
+    {
+     "a": "G10_motor_backing_2",
+     "b": "PURCHASE_main_gear_leg_-1",
+     "intended": "gear leg bolts to the rear motor backing plate"
+    },
+    {
+     "a": "G10_motor_backing_3",
+     "b": "NEW_boom_hanger_front_L",
+     "intended": "front motor backing plate bolts through the hanger"
+    },
+    {
+     "a": "G10_motor_backing_4",
+     "b": "PURCHASE_main_gear_leg_1",
+     "intended": "gear leg bolts to the rear motor backing plate"
+    },
+    {
+     "a": "KEEP_OUT_crest_elevator_servo_20x18x9",
+     "b": "NEW_crest_R1",
+     "intended": "servo pocket in the crest root"
+    },
+    {
+     "a": "KEEP_OUT_crest_elevator_servo_20x18x9",
+     "b": "NEW_crest_elevator_R1",
+     "intended": "servo pocket in the crest root"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x388",
+     "b": "NEW_CF_crest_spar_R_6x4x388",
+     "intended": "spars meet at the centre joiner"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x388",
+     "b": "NEW_crest_L1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x388",
+     "b": "NEW_crest_L2",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_L_6x4x388",
+     "b": "NEW_crest_R1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x388",
+     "b": "NEW_crest_L1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x388",
+     "b": "NEW_crest_R1",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_CF_crest_spar_R_6x4x388",
+     "b": "NEW_crest_R2",
+     "intended": "spar inside the crest, through the fin tops"
+    },
+    {
+     "a": "NEW_boom_hanger_front_R",
+     "b": "PURCHASE_OR_CUT_motor_backing_plate",
+     "intended": "front motor backing plate bolts through the hanger"
+    },
+    {
+     "a": "NEW_canopy_clear_PETG",
+     "b": "NEW_canopy_frame",
+     "intended": "canopy bonds to the frame lip"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLA_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLB_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_L",
+     "b": "WLC_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRA_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRB_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_inner_R",
+     "b": "WRC_hollow_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_L",
+     "b": "WLE1_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_L",
+     "b": "WLF_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_R",
+     "b": "WRE1_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    },
+    {
+     "a": "NEW_wrist_cap_outer_R",
+     "b": "WRF_falcon_wing",
+     "intended": "cap bonds to the panel face"
+    }
+   ],
+   "jet_vs_tail": {
+    "assumed_exit_radius_mm": 30.0,
+    "assumed_spread_mm_per_mm": 0.1,
+    "jet_top_at_stab_le_mm": 20.1,
+    "stab_underside_z_mm": 69.5,
+    "stab_clear_mm": 45.9,
+    "jet_radius_at_fin_le_mm": 40.1,
+    "fin_inner_face_y_mm": 999.0,
+    "status": "PASS",
+    "note": "Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued."
+   },
+   "P1S_fit": {
+    "NEW_canopy_frame": {
+     "fits": true,
+     "footprint_max_mm": 38.5,
+     "rotation_deg": 52.5,
+     "height_mm": 75.4,
+     "margin_mm": 217.5
+    },
+    "NEW_canopy_clear_PETG": {
+     "fits": true,
+     "footprint_max_mm": 65.6,
+     "rotation_deg": 45.0,
+     "height_mm": 134.3,
+     "margin_mm": 190.4
+    },
+    "NEW_cockpit_camera_seat": {
+     "fits": true,
+     "footprint_max_mm": 32.0,
+     "rotation_deg": 0.0,
+     "height_mm": 40.0,
+     "margin_mm": 224.0
+    },
+    "NEW_wrist_cap_inner_R": {
+     "fits": true,
+     "footprint_max_mm": 246.2,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 9.8
+    },
+    "NEW_wrist_cap_inner_L": {
+     "fits": true,
+     "footprint_max_mm": 246.2,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 9.8
+    },
+    "NEW_wrist_cap_outer_R": {
+     "fits": true,
+     "footprint_max_mm": 234.2,
+     "rotation_deg": 45.0,
+     "height_mm": 43.4,
+     "margin_mm": 21.8
+    },
+    "NEW_wrist_cap_outer_L": {
+     "fits": true,
+     "footprint_max_mm": 234.2,
+     "rotation_deg": 45.0,
+     "height_mm": 43.4,
+     "margin_mm": 21.8
+    },
+    "NEW_F5_root_fairing_R": {
+     "fits": true,
+     "footprint_max_mm": 223.1,
+     "rotation_deg": 46.0,
+     "height_mm": 50.9,
+     "margin_mm": 32.9
+    },
+    "NEW_F5_root_fairing_L": {
+     "fits": true,
+     "footprint_max_mm": 223.1,
+     "rotation_deg": 46.0,
+     "height_mm": 50.9,
+     "margin_mm": 32.9
+    },
+    "NEW_boom_hanger_front_R": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "NEW_boom_hanger_rear_R": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "NEW_rear_motor_riser_R": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "NEW_boom_hanger_front_L": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "NEW_boom_hanger_rear_L": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "NEW_rear_motor_riser_L": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "NEW_crest_R1": {
+     "fits": true,
+     "footprint_max_mm": 196.0,
+     "rotation_deg": 45.0,
+     "height_mm": 55.8,
+     "margin_mm": 60.0
+    },
+    "NEW_crest_elevator_R1": {
+     "fits": true,
+     "footprint_max_mm": 20.5,
+     "rotation_deg": 45.0,
+     "height_mm": 234.7,
+     "margin_mm": 235.5
+    },
+    "NEW_crest_R2": {
+     "fits": true,
+     "footprint_max_mm": 184.3,
+     "rotation_deg": 39.5,
+     "height_mm": 7.5,
+     "margin_mm": 71.7
+    },
+    "NEW_crest_elevator_R2": {
+     "fits": true,
+     "footprint_max_mm": 14.9,
+     "rotation_deg": 45.0,
+     "height_mm": 229.0,
+     "margin_mm": 241.1
+    },
+    "NEW_crest_L1": {
+     "fits": true,
+     "footprint_max_mm": 196.0,
+     "rotation_deg": 45.0,
+     "height_mm": 55.8,
+     "margin_mm": 60.0
+    },
+    "NEW_crest_elevator_L1": {
+     "fits": true,
+     "footprint_max_mm": 20.5,
+     "rotation_deg": 45.0,
+     "height_mm": 234.7,
+     "margin_mm": 235.5
+    },
+    "NEW_crest_L2": {
+     "fits": true,
+     "footprint_max_mm": 184.3,
+     "rotation_deg": 50.5,
+     "height_mm": 7.5,
+     "margin_mm": 71.7
+    },
+    "NEW_crest_elevator_L2": {
+     "fits": true,
+     "footprint_max_mm": 14.9,
+     "rotation_deg": 45.0,
+     "height_mm": 229.0,
+     "margin_mm": 241.1
+    }
+   },
+   "status": "PASS"
+  },
+  "extent": {
+   "length_mm": 1227.6,
+   "span_mm": 999.8,
+   "height_mm": 238.9
+  },
+  "changes": [
+   "Wing group 235 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.",
+   "All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.",
+   "Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.",
+   "Falcon crest: a 0.055 m2 swept stabiliser (663 mm span, 45 deg sweep, aspect ratio 8) bonded across the tips of your V18 fins at z 75, set 6 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.",
+   "F5 root fairings carry the wing-root profile past the end of the body to x 910.",
+   "Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 340 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (254 mm, 60 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.",
+   "Battery stays in your V18 Tray A, slid 5 mm forward of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.",
+   "Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).",
+   "GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.",
+   "Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.",
+   "Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 90 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake."
+  ],
+  "parts": [
+   {
+    "name": "NEW_canopy_frame",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 1.5,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Lower 12 mm of your C1 cover printed as the canopy frame: it carries the latches and the camera seat, and the clear canopy bonds to its lip.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 38.5,
+     "rotation_deg": 52.5,
+     "height_mm": 75.4,
+     "margin_mm": 217.5
+    },
+    "centroid_mm": [
+     82.6,
+     0.0,
+     17.2
+    ],
+    "bbox_mm": [
+     48.5,
+     75.4,
+     12.0
+    ]
+   },
+   {
+    "name": "NEW_canopy_clear_PETG",
+    "class": "printed",
+    "material": "PETG (clear sheet)",
+    "mass_g": 15.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Vacuum-formed 0.75 mm clear PETG sheet over a buck printed from the C1 shape (printed clear filament is only translucent). Trim to the frame lip.",
+    "mass_basis": "half the surface x 0.75 mm sheet",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 65.6,
+     "rotation_deg": 45.0,
+     "height_mm": 134.3,
+     "margin_mm": 190.4
+    },
+    "centroid_mm": [
+     141.1,
+     -0.0,
+     39.1
+    ],
+    "bbox_mm": [
+     133.7,
+     75.4,
+     37.7
+    ]
+   },
+   {
+    "name": "NEW_cockpit_camera_seat",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 8.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Pilot-seat camera mount: 19 mm micro FPV camera between two cheeks on M2 screws (0-25 deg uptilt), seat back behind it; screws to the canopy frame so lifting the canopy opens the nose bay.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 32.0,
+     "rotation_deg": 0.0,
+     "height_mm": 40.0,
+     "margin_mm": 224.0
+    },
+    "centroid_mm": [
+     136.3,
+     -0.0,
+     30.9
+    ],
+    "bbox_mm": [
+     40.0,
+     32.0,
+     28.4
+    ]
+   },
+   {
+    "name": "NEW_CF_wrist_spar_R_10x10x254",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 14.1,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10 x 10 carbon wrist spar, swept 60 deg, bonded in both panels from y 275 to 400: 40 mm in the inner panel, 85 mm in the outer. It carries the swept outer panel's bending; the panels are also bonded along the wrist overlap.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     829.7,
+     337.5,
+     0.0
+    ],
+    "bbox_mm": [
+     225.5,
+     133.7,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_CF_wrist_spar_L_10x10x254",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 14.1,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10 x 10 carbon wrist spar, swept 60 deg, bonded in both panels from y 275 to 400: 40 mm in the inner panel, 85 mm in the outer. It carries the swept outer panel's bending; the panels are also bonded along the wrist overlap.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     829.7,
+     -337.5,
+     0.0
+    ],
+    "bbox_mm": [
+     225.5,
+     133.7,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_inner_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 8.3,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the inner panel's tip face ahead of the swept-back outer panel (the falcon 'wrist').",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 246.2,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 9.8
+    },
+    "centroid_mm": [
+     575.6,
+     314.3,
+     0.1
+    ],
+    "bbox_mm": [
+     347.0,
+     1.2,
+     44.1
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_inner_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 8.3,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the inner panel's tip face ahead of the swept-back outer panel (the falcon 'wrist').",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 246.2,
+     "rotation_deg": 45.0,
+     "height_mm": 44.0,
+     "margin_mm": 9.8
+    },
+    "centroid_mm": [
+     575.6,
+     -314.3,
+     0.1
+    ],
+    "bbox_mm": [
+     347.0,
+     1.2,
+     44.1
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_outer_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.1,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the outer panel's root face behind the inner panel's trailing edge.",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 234.2,
+     "rotation_deg": 45.0,
+     "height_mm": 43.4,
+     "margin_mm": 21.8
+    },
+    "centroid_mm": [
+     1012.8,
+     315.7,
+     0.1
+    ],
+    "bbox_mm": [
+     330.0,
+     1.2,
+     43.4
+    ]
+   },
+   {
+    "name": "NEW_wrist_cap_outer_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 6.1,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Closes the outer panel's root face behind the inner panel's trailing edge.",
+    "mass_basis": "profile area x skin areal density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 234.2,
+     "rotation_deg": 45.0,
+     "height_mm": 43.4,
+     "margin_mm": 21.8
+    },
+    "centroid_mm": [
+     1012.8,
+     -315.7,
+     0.1
+    ],
+    "bbox_mm": [
+     330.0,
+     1.2,
+     43.4
+    ]
+   },
+   {
+    "name": "NEW_F5_root_fairing_R",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 7.1,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 910).",
+    "mass_basis": "V18 skin areal density x planform",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 223.1,
+     "rotation_deg": 46.0,
+     "height_mm": 50.9,
+     "margin_mm": 32.9
+    },
+    "centroid_mm": [
+     722.3,
+     71.3,
+     0.2
+    ],
+    "bbox_mm": [
+     300.0,
+     18.5,
+     50.9
+    ]
+   },
+   {
+    "name": "NEW_F5_root_fairing_L",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 7.1,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Fills the gap between F4 and the wing root, and carries the root profile past the end of the body to the wing trailing edge (x 910).",
+    "mass_basis": "V18 skin areal density x planform",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 223.1,
+     "rotation_deg": 46.0,
+     "height_mm": 50.9,
+     "margin_mm": 32.9
+    },
+    "centroid_mm": [
+     722.3,
+     -71.3,
+     0.2
+    ],
+    "bbox_mm": [
+     300.0,
+     18.5,
+     50.9
+    ]
+   },
+   {
+    "name": "NEW_CF_rotor_boom_R_10x10x245",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 13.7,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10x10x1 carbon square tube under the wing, from the front crossrail to behind the rear motor; carries the rear motor riser so the rear crossrail can sit ahead of the D1 intake.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     567.5,
+     220.0,
+     -32.5
+    ],
+    "bbox_mm": [
+     245.0,
+     10.0,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_front_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 2.4,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the front crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "centroid_mm": [
+     475.0,
+     220.0,
+     -24.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     5.4
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_rear_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 3.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the rear crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "centroid_mm": [
+     566.5,
+     220.0,
+     -23.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     7.4
+    ]
+   },
+   {
+    "name": "NEW_rear_motor_riser_R",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 10.8,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Hollow PETG riser (1.6 mm walls) from the boom to the V18 rear motor plate.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "centroid_mm": [
+     655.0,
+     220.0,
+     -18.7
+    ],
+    "bbox_mm": [
+     40.0,
+     40.0,
+     17.4
+    ]
+   },
+   {
+    "name": "NEW_CF_rotor_boom_L_10x10x245",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 13.7,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "10x10x1 carbon square tube under the wing, from the front crossrail to behind the rear motor; carries the rear motor riser so the rear crossrail can sit ahead of the D1 intake.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     567.5,
+     -220.0,
+     -32.5
+    ],
+    "bbox_mm": [
+     245.0,
+     10.0,
+     10.0
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_front_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 2.4,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the front crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 15.1,
+     "rotation_deg": 45.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.9
+    },
+    "centroid_mm": [
+     475.0,
+     -220.0,
+     -24.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     5.4
+    ]
+   },
+   {
+    "name": "NEW_boom_hanger_rear_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 3.3,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "PETG spacer between the rear crossrail and the boom, two M3 U-straps round each tube.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 16.0,
+     "rotation_deg": 0.0,
+     "height_mm": 22.0,
+     "margin_mm": 240.0
+    },
+    "centroid_mm": [
+     566.5,
+     -220.0,
+     -23.7
+    ],
+    "bbox_mm": [
+     22.0,
+     16.0,
+     7.4
+    ]
+   },
+   {
+    "name": "NEW_rear_motor_riser_L",
+    "class": "printed",
+    "material": "PETG",
+    "mass_g": 10.8,
+    "lwpla": false,
+    "layer": "skin",
+    "note": "Hollow PETG riser (1.6 mm walls) from the boom to the V18 rear motor plate.",
+    "mass_basis": "volume x density",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 40.0,
+     "rotation_deg": 0.0,
+     "height_mm": 17.4,
+     "margin_mm": 216.0
+    },
+    "centroid_mm": [
+     655.0,
+     -220.0,
+     -18.7
+    ],
+    "bbox_mm": [
+     40.0,
+     40.0,
+     17.4
+    ]
+   },
+   {
+    "name": "NEW_crest_R1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 12.4,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 196.0,
+     "rotation_deg": 45.0,
+     "height_mm": 55.8,
+     "margin_mm": 60.0
+    },
+    "centroid_mm": [
+     820.0,
+     74.3,
+     82.9
+    ],
+    "bbox_mm": [
+     221.6,
+     165.3,
+     28.4
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_R1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 5.3,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 20.5,
+     "rotation_deg": 45.0,
+     "height_mm": 234.7,
+     "margin_mm": 235.5
+    },
+    "centroid_mm": [
+     865.9,
+     74.4,
+     87.7
+    ],
+    "bbox_mm": [
+     167.1,
+     165.3,
+     21.0
+    ]
+   },
+   {
+    "name": "NEW_crest_R2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 8.4,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 184.3,
+     "rotation_deg": 39.5,
+     "height_mm": 7.5,
+     "margin_mm": 71.7
+    },
+    "centroid_mm": [
+     970.4,
+     236.2,
+     98.7
+    ],
+    "bbox_mm": [
+     200.1,
+     165.6,
+     24.5
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_R2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 3.6,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 14.9,
+     "rotation_deg": 45.0,
+     "height_mm": 229.0,
+     "margin_mm": 241.1
+    },
+    "centroid_mm": [
+     1002.7,
+     236.7,
+     102.1
+    ],
+    "bbox_mm": [
+     158.0,
+     165.6,
+     19.2
+    ]
+   },
+   {
+    "name": "NEW_CF_crest_spar_R_6x4x388",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 9.4,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     877.5,
+     141.0,
+     88.9
+    ],
+    "bbox_mm": [
+     268.8,
+     286.0,
+     33.8
+    ]
+   },
+   {
+    "name": "NEW_crest_L1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 12.4,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 196.0,
+     "rotation_deg": 45.0,
+     "height_mm": 55.8,
+     "margin_mm": 60.0
+    },
+    "centroid_mm": [
+     820.0,
+     -74.3,
+     82.9
+    ],
+    "bbox_mm": [
+     221.6,
+     165.3,
+     28.4
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_L1",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 5.3,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 20.5,
+     "rotation_deg": 45.0,
+     "height_mm": 234.7,
+     "margin_mm": 235.5
+    },
+    "centroid_mm": [
+     865.9,
+     -74.4,
+     87.7
+    ],
+    "bbox_mm": [
+     167.1,
+     165.3,
+     21.0
+    ]
+   },
+   {
+    "name": "NEW_crest_L2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 8.4,
+    "lwpla": true,
+    "layer": "skin",
+    "note": "Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 184.3,
+     "rotation_deg": 50.5,
+     "height_mm": 7.5,
+     "margin_mm": 71.7
+    },
+    "centroid_mm": [
+     970.4,
+     -236.2,
+     98.7
+    ],
+    "bbox_mm": [
+     200.1,
+     165.6,
+     24.5
+    ]
+   },
+   {
+    "name": "NEW_crest_elevator_L2",
+    "class": "printed",
+    "material": "LW-PLA",
+    "mass_g": 3.6,
+    "lwpla": true,
+    "layer": "controls",
+    "note": "Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first.",
+    "mass_basis": "falcon-panel areal density x area",
+    "P1S": {
+     "fits": true,
+     "footprint_max_mm": 14.9,
+     "rotation_deg": 45.0,
+     "height_mm": 229.0,
+     "margin_mm": 241.1
+    },
+    "centroid_mm": [
+     1002.7,
+     -236.7,
+     102.1
+    ],
+    "bbox_mm": [
+     158.0,
+     165.6,
+     19.2
+    ]
+   },
+   {
+    "name": "NEW_CF_crest_spar_L_6x4x388",
+    "class": "carbon",
+    "material": "carbon",
+    "mass_g": 9.4,
+    "lwpla": false,
+    "layer": "structure",
+    "note": "6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.",
+    "mass_basis": "length x g/m",
+    "P1S": null,
+    "centroid_mm": [
+     877.5,
+     -141.0,
+     88.9
+    ],
+    "bbox_mm": [
+     268.8,
+     286.0,
+     33.8
+    ]
+   },
+   {
+    "name": "KEEP_OUT_crest_elevator_servo_20x18x9",
+    "class": "keepout",
+    "material": null,
+    "mass_g": 10.0,
+    "lwpla": false,
+    "layer": "keepouts",
+    "note": "Slim 5 g wing servo (HS-40 class, 20 x 18 x 9 mm) + linkage, flat in a pocket under a printed cover in the crest root, right of centre; the lead runs down the starboard fin.",
+    "mass_basis": "item",
+    "P1S": null,
+    "centroid_mm": [
+     801.8,
+     30.0,
+     80.9
+    ],
+    "bbox_mm": [
+     20.8,
+     18.0,
+     11.0
+    ]
+   }
+  ],
+  "modified": [
+   {
+    "name": "CF_crossrail_450_10x10x820",
+    "why": [
+     "shortened to 610 mm: the swept outer panels ride on wrist spars"
+    ],
+    "move_mm": [
+     146.5,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRC_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRD_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLC_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLD_hollow_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRE1_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     575.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLE1_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     575.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRE2_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     575.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLE2_falcon_wing",
+    "why": [
+     "slot for the swept wrist spar"
+    ],
+    "move_mm": [
+     575.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WRB_hollow_wing",
+    "why": [
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "WLB_hollow_wing",
+    "why": [
+     "slot for the crossrail at its new station",
+     "slot for the rear boom hanger"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "F3_hollow_body",
+    "why": [
+     "slot for CF_crossrail_270_10x10x620 at x 475.0",
+     "slot for CF_crossrail_450_10x10x820 at x 566.5"
+    ],
+    "move_mm": [
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "name": "FIN_R",
+    "why": [
+     "tip trimmed at z 69 (following the crest's incidence) to carry the crest"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "name": "FIN_L",
+    "why": [
+     "tip trimmed at z 69 (following the crest's incidence) to carry the crest"
+    ],
+    "move_mm": [
+     235.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "removed": [
+   "CF_gear_crossbar_10x10x340",
+   "G10_main_gear_left",
+   "PURCHASE_OR_CUT_main_gear_plate",
+   "site:385,24,-31:2.8",
+   "site:385,-24,-31:2.8",
+   "C1_service_cover",
+   "CAM_19mm_cradle"
+  ],
+  "moves": {
+   "WRA_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WRB_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WRC_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WRD_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "FLAP_R": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WLA_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WLB_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WLC_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WLD_hollow_wing": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "FLAP_L": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "FIN_R": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "FIN_L": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "WRE1_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "WLE1_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "WRE2_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "WLE2_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "WRF_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "WLF_falcon_wing": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "ELEVON_R_falcon": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "ELEVON_L_falcon": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_-180": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_-180": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_180": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_180": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_-360.222222222": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_-360.222222222": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "SP1_side_servo_cassette_PRINT4_360.222222222": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "SC1_servo_access_cover_PRINT4_360.222222222": [
+    575.0,
+    0.0,
+    0.0
+   ],
+   "CF_crossrail_270_10x10x620": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "CF_crossrail_450_10x10x820": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_OR_CUT_motor_plate_PRINT_TEMPLATE_NOT_FLIGHT": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_OR_CUT_motor_backing_plate": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_M1_2207_envelope": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_2": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_2": [
+    235.0,
+    0.0,
+    -17.560000000000002
+   ],
+   "PURCHASE_M2_2207_envelope": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_3": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_3": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "PURCHASE_M3_2207_envelope": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_plate_4": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "G10_motor_backing_4": [
+    235.0,
+    0.0,
+    -17.560000000000002
+   ],
+   "PURCHASE_M4_2207_envelope": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "CF_gear_crossbar_10x10x340": [
+    270.0,
+    0.0,
+    -1.5
+   ],
+   "G10_main_gear_left": [
+    270.0,
+    0.0,
+    -1.5
+   ],
+   "PURCHASE_main_gear_leg_-1": [
+    270.0,
+    -110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_main_wheel_-1": [
+    270.0,
+    -110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_OR_CUT_main_gear_plate": [
+    270.0,
+    0.0,
+    -1.5
+   ],
+   "PURCHASE_main_gear_leg_1": [
+    270.0,
+    110.0,
+    0.33999999999999775
+   ],
+   "PURCHASE_main_wheel_1": [
+    270.0,
+    110.0,
+    0.33999999999999775
+   ],
+   "KEEP_OUT_CAMERA_19mm": [
+    27.0,
+    0.0,
+    4.0
+   ],
+   "KEEP_OUT_GPS_mount_EXTERNAL_TBD": [
+    441.0,
+    0.0,
+    16.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M1_REFERENCE_ONLY": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M2_REFERENCE_ONLY": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M3_REFERENCE_ONLY": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "NO_PRINT_PURCHASED_PROP_M4_REFERENCE_ONLY": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "site:240,24,-19:2.8": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "site:240,-24,-19:2.8": [
+    235.0,
+    0.0,
+    0.0
+   ],
+   "site:420,24,-19:2.8": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "site:420,-24,-19:2.8": [
+    146.5,
+    0.0,
+    0.0
+   ],
+   "site:385,24,-31:2.8": [
+    270.0,
+    0.0,
+    -1.5
+   ],
+   "site:385,-24,-31:2.8": [
+    270.0,
+    0.0,
+    -1.5
+   ]
+  },
+  "hidden_in_viewer": [
+   "CF_gear_crossbar_10x10x340",
+   "G10_main_gear_left",
+   "PURCHASE_OR_CUT_main_gear_plate",
+   "site:385,24,-31:2.8",
+   "site:385,-24,-31:2.8",
+   "C1_service_cover",
+   "CAM_19mm_cradle"
+  ],
+  "notes": [
+   "Outer falcon panels, elevons and their servo cassettes sweep 340 mm aft at the wrist (y 315); the panels stay bonded along 136 mm of shared chord with a swept carbon wrist spar through both.",
+   "Rear crossrail moves to x 566.5 (wing frame x 331.5), ahead of the D1 intake; the rear motors ride on risers on the under-wing booms.",
+   "Plug the V18 crossrail slots in F2 that the moved crossrails leave empty (printed plugs, bond in).",
+   "Rotor booms: 10x10 carbon at y +/-220, z -37.5 to -27.5 (0.5 mm under the lowest wing skin they pass)."
+  ],
+  "label": "V19-F deep stoop",
+  "summary": "V19-S layout with the outer panels swept 340 mm back and the slim crest: wing 235 mm aft, battery in the V18 tray"
  }
 }

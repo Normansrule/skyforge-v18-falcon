@@ -38,11 +38,11 @@ make serve                              # check it locally: http://localhost:808
 
 ```bash
 ./scripts/publish_github.sh                  # create the repo if needed, push main, turn on Pages, deploy
-./scripts/publish_github.sh --tag v0.5.0     # same, plus a tagged release: CI builds the desktop installers
+./scripts/publish_github.sh --tag v0.6.0     # same, plus a tagged release: CI builds the desktop installers
 ```
 
 The script refuses to run in your home folder or with uncommitted changes, checks SSH access first, and
-prints the web address and the release page at the end. `make publish TAG=v0.5.0` does the same.
+prints the web address and the release page at the end. `make publish TAG=v0.6.0` does the same.
 
 - **Web version:** `https://normansrule.github.io/skyforge-v18-falcon/`. In Chrome or Edge, the install icon in
   the address bar installs it as an offline app.
@@ -64,7 +64,7 @@ gh api -X POST "repos/$GH_USER/$REPO/pages" -f build_type=workflow 2>/dev/null \
 gh workflow run pages.yml --repo "$GH_USER/$REPO"
 
 # app version
-git tag -a v0.5.0 -m "SKYFORGE Falcon workbench v0.5.0" && git push origin v0.5.0
+git tag -a v0.6.0 -m "SKYFORGE Falcon workbench v0.6.0" && git push origin v0.6.0
 gh run watch --repo "$GH_USER/$REPO" $(gh run list --repo "$GH_USER/$REPO" --workflow desktop.yml --limit 1 --json databaseId -q '.[0].databaseId')
 ```
 

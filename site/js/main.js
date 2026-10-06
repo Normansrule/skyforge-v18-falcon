@@ -40,7 +40,7 @@ const ctx = {
       const band = [e.np_closed_x_mm, e.np_open_x_mm];
       const win = [band[0] - 0.12 * e.mac_mm, band[0] - 0.05 * e.mac_mm];
       drawRuler(this.els.ruler, { cgX: e.cg_mm[0], rotorX: e.rotor_centroid_x_mm, rotorRows: [e.rotor_front_x_mm, e.rotor_rear_x_mm], npBand: band, window: win, length: Math.ceil(v.length_mm / 100) * 100 });
-      this.viewer?.setMarkers({ cg: e.cg_mm, rotorX: e.rotor_centroid_x_mm, np: band });
+      this.viewer?.setMarkers({ cg: e.cg_mm, rotorRows: [e.rotor_front_x_mm, e.rotor_rear_x_mm], np: band });
       return;
     }
     const b = this.balance;
@@ -51,7 +51,7 @@ const ctx = {
     const mac = r.mac_mm;
     const win = [band[0] - 0.12 * mac, band[0] - 0.05 * mac];
     drawRuler(this.els.ruler, { cgX, rotorX, rotorRows: [240 + shift, 420 + shift], npBand: band, window: win });
-    this.viewer?.setMarkers({ cg: b ? [cgX, 0, 0] : r.cg_mm, rotorX, np: band });
+    this.viewer?.setMarkers({ cg: b ? [cgX, 0, 0] : r.cg_mm, rotorRows: [240 + shift, 420 + shift], np: band });
   },
   setPilot(on) {
     const vp = document.getElementById('viewport');

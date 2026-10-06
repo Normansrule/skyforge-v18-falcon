@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.6.0 - 2026-10-06
+
+Hover first: the CG on the centre of the four motors, and three looks to choose from.
+
+- The stoop-and-crest layout now balances the hover exactly: the battery slides up to 15 mm in your V18 tray so the CG
+  sits where the diagonals between the four lift motors cross, and the search only picks configurations within 3 mm of
+  that point.
+- Three looks on that layout, all passing every model gate:
+  - **V19-F deep stoop (recommended):** outer panels 340 mm back, slim 0.055 m2 crest (45 deg, aspect ratio 8).
+    CG 0.2 mm from the motor centre, every motor 24.9-25.1 %, static margin 7.5 / 13.3 %, 2,829 g, 1,228 mm.
+  - **V19-S:** 300 mm stoop and the 0.07 m2 crest from 0.5.0, now 1.0 mm from the motor centre.
+  - **V19-G:** 300 mm stoop with the slim crest (concept look).
+- The crest's leading edge now always crosses the fin tops 10 mm ahead of them, whatever its sweep.
+- Web app: a hover frame (the motor rectangle and its diagonals) replaces the rotor bar, so the CG marker visibly sits on
+  the crossing; the ruler reads "rotor centre". Screenshots reset the camera between views.
+
+
 ## 0.5.0 - 2026-10-06
 
 V19-S: the four-rotor layout without the big tail.

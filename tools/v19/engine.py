@@ -137,6 +137,8 @@ def mass_from_geometry(c: dict, geo: dict):
         if src in removed:
             continue
         x = np.array(xyz, dtype=float) + np.array(moves.get(src, (0, 0, 0)), dtype=float)
+        if src == BATT and c["battery"] == "v18":
+            x[0] += c.get("battery_dx_mm", 0.0)    # pack slid in the V18 tray to put the CG on the rotor centre
         entries.append((label, float(m), x))
     for name, mat, v, cen in poly:
         if name in removed:
@@ -182,7 +184,7 @@ def mass_and_cg(c: dict, gear_x: float | None = None):
         elif WING_SRC.match(src):
             x[0] += dw
         elif src == BATT:
-            x[0] = BATTERY_X[c["battery"]] if c["battery"] != "v18" else x[0]
+            x[0] = BATTERY_X[c["battery"]] if c["battery"] != "v18" else x[0] + c.get("battery_dx_mm", 0.0)
         elif src in SWAP and c["battery"] == "tray_front":
             x[0] += 146.0
         elif src in AVIONICS and c["avionics_forward"]:

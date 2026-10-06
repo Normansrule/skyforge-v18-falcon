@@ -112,13 +112,14 @@ Then the EDF, separately, outside the airframe, inlet screened, same logging: `e
 | 9 Weigh + CG | Whole aircraft; flight CG from aero work (neutral point, static margin) - **not** x330 | Hover gate re-run with measured mass and CG still PASS; simultaneous current measured; failsafes configured | Flight |
 | 10 Flight qualification | With an experienced RC / QuadPlane pilot at a proper site: taxi -> hover -> wing-borne -> transitions, as separate sessions | Each session's own plan; first flight line-of-sight, not immersive FPV | Decoration before final reweigh/rebalance |
 
-## V19-S additions (before the first hover)
+## V19-F / V19-S additions (before the first hover)
 
-From [V19_VARIANTS.md](V19_VARIANTS.md#v19-s-build-changes). V19-S is the recommendation; if you build V19-W instead,
-use the stabiliser and fin rows in place of the crest rows.
+From [V19_VARIANTS.md](V19_VARIANTS.md#v19-f-build-changes). V19-F is the recommendation; V19-S and V19-G use the same
+gates. If you build V19-W instead, use the stabiliser and fin rows in place of the crest rows.
 
 | Gate | PASS | FIX | STOP |
 |---|---|---|---|
+| Hover balance: weigh the aircraft on two scales (front and rear motor stations) with the pack at its marked position | CG within 3 mm of the motor centre | 3-10 mm: move the pack, re-mark | > 10 mm: recheck masses before any hover |
 | Wrist spars: 1.5 kg hung at each outer panel's mid-span for 1 min, aircraft held at the wing roots | no creak, no movement, no skin cracks at the wrist caps | creak or a cracked cap: re-bond, add a carbon cap strip over the wrist | joint moves or the spar slot cracks |
 | Rear boom / riser vibration at 50 % throttle on the stand | none visible | visible: add a second strap, stiffer riser | boom or clamp moves |
 | EDF at 100 % on the bench, tufts on the crest underside and fin tops (V19-W: stabiliser and fins) | tufts hang or flutter | tufts stream aft on the fin tops only: fair the fin tops | tufts stream on the crest |

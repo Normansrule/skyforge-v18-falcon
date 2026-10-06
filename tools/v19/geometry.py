@@ -92,7 +92,7 @@ G_PER_M = {10: 55.8, 8: 43.4, "rod6": 24.3}
 SKIN_G_M2 = E.SKIN_G_PER_M2_AT_08     # both skins, per planform area
 TAIL_G_M2 = E.TAIL_G_PER_M2_AT_08
 
-BUILD_PACKS = {"v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest"}
+BUILD_PACKS = {"v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest", "v19f_swift_stoop"}
 # cockpit: camera centre at a pilot's eye point under the canopy, GPS off the nose
 V18_CAM = (103.0, 0.0, 40.0)
 COCKPIT_CAM = (130.0, 0.0, 44.0)
@@ -854,6 +854,7 @@ class Builder:
         # incidence (leading edge up +) as a rotation about the root's 30 % chord point; a positive angle about +y lifts the LE
         pivot = np.array([tg["x_le_root"] + 0.3 * tg["c_root"], 0.0, zt])
         Rinc = trimesh.transformations.rotation_matrix(math.radians(t.get("incidence_deg", 0.0)), [0, 1, 0], pivot)
+        tg_sweep = t.get("le_sweep_deg", 35.0)
         pieces = [("crest", (0.0, 1.0))] if ef <= 0 else [("crest", (0.0, hinge - 0.01)), ("crest_elevator", (hinge + 0.005, 1.0))]
         for s_, side in ((1, "R"), (-1, "L")):
             for k in range(nseg):
@@ -877,7 +878,7 @@ class Builder:
                     area = float(np.trapezoid(cc * (u1 - u0), yv)) / 1e6
                     piece = "" if nseg == 1 else f" Piece {k + 1} of {nseg}, inboard first."
                     if part == "crest":
-                        note = ("Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your "
+                        note = (f"Falcon crest: swept stabiliser (NACA 0009, {tg_sweep:.0f} deg leading-edge sweep) bonded across the tips of your "
                                 f"V18 fins at {abs(t.get('incidence_deg', 0.0)):.0f} deg leading-edge-down incidence." + piece)
                     else:
                         note = (f"Crest elevator, {100 * ef:.0f} % chord, halves joined by a wire torque rod at the centre; "
@@ -1233,7 +1234,8 @@ class Builder:
             tg = E.tail_geometry(c["tail"])
             ef = c["tail"].get("elevator_frac", 0.0)
             inc = c["tail"].get("incidence_deg", 0.0)
-            out.append(f"Falcon crest: a {c['tail']['area_m2']:.3f} m2 swept stabiliser ({tg['span_mm']:.0f} mm span, 35 deg sweep) bonded "
+            out.append(f"Falcon crest: a {c['tail']['area_m2']:.3f} m2 swept stabiliser ({tg['span_mm']:.0f} mm span, "
+                       f"{c['tail'].get('le_sweep_deg', 35.0):.0f} deg sweep, aspect ratio {c['tail']['aspect']:.0f}) bonded "
                        f"across the tips of your V18 fins at z {tg['z_mm']:.0f}, set {abs(inc):.0f} deg leading edge "
                        f"{'down' if inc < 0 else 'up'}; no booms and no new fins. The fins are trimmed to its underside. "
                        + (f"A {100 * ef:.0f} % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons."
@@ -1251,6 +1253,12 @@ class Builder:
                        "the CG. " f"A swept 10 x 10 carbon wrist spar per side ({self.wrist['len']:.0f} mm, {self.wrist['sweep_deg']:.0f} deg) carries "
                        "each outer panel, printed caps close the step, and the rear "
                        f"crossrail is shortened to {2 * STOOP_RAIL_Y:.0f} mm.")
+        if c.get("battery_dx_mm"):
+            out.append(f"Battery stays in your V18 Tray A, slid {abs(c['battery_dx_mm']):.0f} mm "
+                       f"{'aft' if c['battery_dx_mm'] > 0 else 'forward'} of centre inside the 140 mm envelope, so the CG sits on the "
+                       "centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.")
+        elif c.get("battery") == "v18" and self.outer:
+            out.append("Battery stays centred in your V18 Tray A; the CG already sits on the centre of the four lift motors.")
         if c.get("cockpit_camera"):
             out.append(f"Pilot's-eye FPV camera: moved back to x {COCKPIT_CAM[0] - 10:.0f}-{COCKPIT_CAM[0] + 10:.0f}, z {COCKPIT_CAM[2]:.0f} under a "
                        "vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).")

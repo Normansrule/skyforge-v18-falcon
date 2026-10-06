@@ -1,0 +1,32 @@
+{
+ "name": "v19f_swift_stoop",
+ "label": "V19-F deep stoop",
+ "wing_shift_mm": 235,
+ "front_rotor": {
+  "mode": "wing",
+  "dx": 0.0
+ },
+ "rear_rotor_dx_mm": 0.0,
+ "battery": "v18",
+ "avionics_forward": false,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": {
+  "area_m2": 0.055,
+  "aspect": 8.0,
+  "taper": 0.45,
+  "le_sweep_deg": 45.0,
+  "x_le_root_mm": 711.0,
+  "incidence_deg": -6.0,
+  "elevator_frac": 0.3,
+  "height_mm": 75.0,
+  "mount": "fins"
+ },
+ "cockpit_camera": true,
+ "gps_aft": true,
+ "outer_shift_mm": 340,
+ "no_le_ext": true,
+ "rear_support": "boom",
+ "battery_dx_mm": -5.0,
+ "summary": "V19-S layout with the outer panels swept 340 mm back and the slim crest: wing 235 mm aft, battery in the V18 tray"
+}

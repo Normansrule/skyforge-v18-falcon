@@ -4,7 +4,7 @@
 
 Your three directions, each built from your V18 assembly (`tools/v19/geometry.py`), collision-checked against V18 and evaluated with the same gates as V18: heaviest motor in hover no more than 30 % of the weight, static margin 5-25 % of the mean chord, pitch trim within 10 deg at 16 m/s, prop and flap clearances.
 
-![V19-S, three-quarter view](../analysis/view_v19s_stoop_crest.png)
+![V19-F, three-quarter view](../analysis/view_v19f_swift_stoop.png)
 
 ## The answer
 
@@ -16,11 +16,25 @@ Your three directions, each built from your V18 assembly (`tools/v19/geometry.py
 | V19-C | 2883 | 480 | 480 | 7.4 / 8.7 | 25.0 | -6.0 / -8.4 | 952 | 0 | **PASS** |
 | V19-R | 3006 | 499 | 489 | 7.1 / 8.8 | 26.5 | -4.4 / -5.7 | 1175 | 0 | **PASS** |
 | V19-W | 3014 | 533 | 530 | 8.2 / 18.6 | 26.0 | -4.2 / -8.0 | 1355 | 0 | **PASS** |
-| V19-S | 2832 | 563 | 565 | 8.0 / 13.9 | 25.5 | -1.7 / -8.1 | 1188 | 0 | **PASS** |
+| V19-S | 2825 | 556 | 555 | 7.2 / 13.0 | 25.3 | -1.0 / -7.5 | 1178 | 0 | **PASS** |
+| V19-G | 2827 | 564 | 565 | 6.8 / 12.6 | 25.2 | 0.1 / -7.1 | 1188 | 0 | **PASS** |
+| V19-F | 2829 | 565 | 565 | 7.5 / 13.3 | 25.1 | 0.1 / -7.5 | 1228 | 0 | **PASS** |
 
-**Build V19-S.** It keeps everything you asked for in V19-W - all four lift motors in your V18 wing wells, the pilot's-eye FPV camera under a clear canopy, the single V18 EDF in the jet bay - and drops the big boom tail. Two changes do the tail's job instead. The outer falcon panels sweep 300 mm back at the wrist (a 'stoop', like a falcon tucking its wings in a dive), and a 0.07 m2 falcon crest sits on the tips of your own V18 fins, with no booms and no new fins. Without the tail weight to balance, the battery stays in the V18 tray and the nose bay goes. With the parts as modelled it weighs 2832 g (183 g less than V19-W), it is 168 mm shorter, its CG sits 2 mm from the rotor centroid, the heaviest motor carries 25.5 % in hover, and the static margin is 8.0 % to 13.9 %. V19-W (0.18 m2 boom tail), V19-R and V19-C also pass and stay as alternatives.
+**Build V19-F.** It keeps everything you asked for in V19-W - all four lift motors in your V18 wing wells, the pilot's-eye FPV camera under a clear canopy, the single V18 EDF in the jet bay - and drops the big boom tail. Two changes do the tail's job instead. The outer falcon panels sweep 340 mm back at the wrist (a 'stoop', like a falcon tucking its wings in a dive), and a slim 0.055 m2 falcon crest (45 deg sweep) sits on the tips of your own V18 fins, with no booms and no new fins. Without the tail weight to balance, the battery stays in the V18 tray and the nose bay goes. For hover the CG sits 0.2 mm from the centre of the four lift motors, so each carries 24.9-25.1 % of the weight. With the parts as modelled it weighs 2829 g (186 g less than V19-W), it is 128 mm shorter, and the static margin is 7.5 % to 13.3 %. V19-S and V19-G are the same layout with a different look (below); V19-W (0.18 m2 boom tail), V19-R and V19-C also pass.
 
-![V19-S pilot's-eye view from the FPV camera](../analysis/view_v19s_cockpit.png)
+![V19-F pilot's-eye view from the FPV camera](../analysis/view_v19f_cockpit.png)
+
+### Hover first: the CG on the centre of the four motors
+
+For the drone half of the flight the CG has to sit where the diagonals between the four lift motors cross; then every motor carries a quarter of the weight and none runs out of headroom when the controller corrects. All three looks below keep the four rotors in your V18 wells and put the CG on that point: the stoop and crest set the flight stability, and the battery slides a few millimetres in your V18 Tray A to finish the hover balance. The web app draws the motor rectangle and its diagonals over the model, with the CG marker where they cross.
+
+| Look | Stoop | Crest | Battery slide | CG from motor centre x / y mm | Motor share % | Static margin % | Trim 16 m/s deg | Mass g | Length mm |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| V19-S | 300 mm | 0.070 m2, AR 6, 35 deg | -15 mm | +1.0 / -0.1 | 24.7-25.3 | 7.2 / 13.0 | -1.0 / -7.5 | 2825 | 1178 |
+| V19-G | 300 mm | 0.060 m2, AR 8, 45 deg | +14 mm | -0.7 / -0.1 | 24.8-25.2 | 6.8 / 12.6 | 0.1 / -7.1 | 2827 | 1188 |
+| V19-F (recommended) | 340 mm | 0.055 m2, AR 8, 45 deg | -5 mm | -0.2 / -0.1 | 24.9-25.1 | 7.5 / 13.3 | 0.1 / -7.5 | 2829 | 1228 |
+
+![V19-S from above](../analysis/view_v19s_top.png) | ![V19-G from above](../analysis/view_v19g_top.png) | ![V19-F from above](../analysis/view_v19f_top.png)
 
 ### Why each direction alone is not enough
 
@@ -56,28 +70,42 @@ V19-W search (wing shift x tail area; tail leading edge 110 mm behind the wing r
 
 A smaller tail needs the wing further aft for hover balance but then loses margin; a bigger tail pulls the CG behind the rotors. The pick is the cheapest row with at least 7.5 % margin on the coarse lattice (it reads about 1 % high on tails) and no motor above 28 %.
 
-- **No big tail (V19-S).** A tailless wing balanced on its rotors has about 0-1 % margin (the wing's neutral point sits right at the rotor station), so something has to add lift behind the CG. V19-S splits that job: the stoop moves the outer panels' lift 300 mm aft (about 1.6 % margin per 60 mm), and the crest adds a little tail lift high on the fins, right over the EDF instead of on booms behind it. A fixed crest (no elevator) needed 16-38 deg of elevon at 16 m/s with the wells open, outside the 10 deg gate, so the crest is set 4 deg leading edge down and has a 30 % elevator on one slim servo.
+- **No big tail (V19-S, G, F).** A tailless wing balanced on its rotors has about 0-1 % margin (the wing's neutral point sits right at the rotor station), so something has to add lift behind the CG. These looks split that job: the stoop moves the outer panels' lift 340 mm aft (about 1.6 % margin per 60 mm), and the crest adds a little tail lift high on the fins, right over the EDF instead of on booms behind it. A fixed crest (no elevator) needed 14-35 deg of elevon at 16 m/s with the wells open, outside the 10 deg gate, so the crest is set 6 deg leading edge down and has a 30 % elevator on one slim servo.
 
-V19-S search (coarse lattice; wing shift x stoop x crest area; the last rows are fixed crests, kept for the record):
+Stoop-and-crest search (coarse lattice; the two S rows without an elevator are fixed crests, kept for the record):
 
-| Wing aft mm | Stoop mm | Crest m2 | Incidence deg | Elevator % | Static margin % | Heaviest motor % | Trim 16 m/s closed / open | Gates |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| 225 | 260 | 0.06 | -4 | 30 | 5.3 | 25.5 | 1.5 / -5.9 | PASS |
-| 225 | 260 | 0.07 | -4 | 30 | 6.1 | 25.0 | 1.1 / -5.9 | PASS |
-| 225 | 300 | 0.06 | -4 | 30 | 6.0 | 25.6 | 0.6 / -6.7 | PASS |
-| 225 | 300 | 0.07 | -4 | 30 | 6.9 | 26.1 | 0.2 / -6.7 | PASS |
-| 235 | 260 | 0.06 | -4 | 30 | 6.3 | 27.0 | 0.5 / -6.9 | PASS |
-| 235 | 260 | 0.07 | -4 | 30 | 7.1 | 26.5 | 0.2 / -6.9 | PASS |
-| 235 | 300 | 0.06 | -4 | 30 | 7.1 | 25.9 | -0.4 / -7.8 | PASS |
-| 235 | 300 | 0.07 | -4 | 30 | 8.0 | 25.4 | -0.7 / -7.7 | PASS |
-| 245 | 260 | 0.06 | -4 | 30 | 7.4 | 28.6 | -0.5 / -8.0 | PASS |
-| 245 | 260 | 0.07 | -4 | 30 | 8.2 | 28.0 | -0.8 / -7.9 | PASS |
-| 245 | 300 | 0.06 | -4 | 30 | 8.1 | 27.4 | -1.4 / -8.8 | PASS |
-| 245 | 300 | 0.07 | -4 | 30 | 9.0 | 26.9 | -1.7 / -8.8 | PASS |
-| 235 | 300 | 0.07 | 0 | 0 | 8.2 | 25.7 | -17.2 / -37.5 | - |
-| 235 | 300 | 0.07 | -6 | 0 | 8.2 | 25.7 | 4.7 / -16.0 | - |
+| Look | Wing aft mm | Stoop mm | Crest m2 / AR / sweep | Incidence deg | Battery slide mm | CG from motor centre mm | Elevator % | Static margin % | Heaviest motor % | Trim 16 m/s closed / open | Gates |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| S | 225 | 260 | 0.060 / 6 / 35 | -4 | +12 | -0.4 | 30 | 4.7 | 25.1 | 1.9 / -5.5 | - |
+| S | 225 | 260 | 0.070 / 6 / 35 | -4 | +2 | -0.1 | 30 | 5.8 | 25.0 | 1.2 / -5.8 | PASS |
+| S | 225 | 300 | 0.060 / 6 / 35 | -4 | -11 | +0.4 | 30 | 6.1 | 25.1 | 0.4 / -7.0 | PASS |
+| S | 225 | 300 | 0.070 / 6 / 35 | -4 | -15 | +1.5 | 30 | 7.1 | 25.4 | -0.0 / -7.1 | PASS |
+| S | 235 | 260 | 0.060 / 6 / 35 | -4 | +15 | -5.4 | 30 | 5.7 | 26.5 | 1.0 / -6.4 | PASS |
+| S | 235 | 260 | 0.070 / 6 / 35 | -4 | +15 | -3.6 | 30 | 6.5 | 26.0 | 0.6 / -6.4 | PASS |
+| S | 235 | 300 | 0.060 / 6 / 35 | -4 | +15 | -1.3 | 30 | 6.4 | 25.4 | 0.1 / -7.3 | PASS |
+| S | 235 | 300 | 0.070 / 6 / 35 | -4 | +10 | -0.3 | 30 | 7.4 | 25.1 | -0.4 / -7.4 | PASS |
+| S | 245 | 260 | 0.060 / 6 / 35 | -4 | +15 | -10.8 | 30 | 6.7 | 28.0 | -0.0 / -7.5 | PASS |
+| S | 245 | 260 | 0.070 / 6 / 35 | -4 | +15 | -9.1 | 30 | 7.5 | 27.5 | -0.3 / -7.4 | PASS |
+| S | 245 | 300 | 0.060 / 6 / 35 | -4 | +15 | -6.7 | 30 | 7.5 | 26.9 | -0.9 / -8.4 | PASS |
+| S | 245 | 300 | 0.070 / 6 / 35 | -4 | +15 | -5.0 | 30 | 8.4 | 26.4 | -1.2 / -8.3 | PASS |
+| S | 235 | 300 | 0.070 / 6 / 35 | 0 | +15 | -0.6 | 0 | 7.5 | 25.2 | -15.0 / -34.7 | - |
+| S | 235 | 300 | 0.070 / 6 / 35 | -6 | +15 | -0.6 | 0 | 7.5 | 25.2 | 5.8 / -14.4 | - |
+| G | 225 | 300 | 0.050 / 8 / 45 | -5 | -6 | +0.1 | 30 | 5.3 | 25.1 | 1.9 / -6.3 | PASS |
+| G | 225 | 300 | 0.060 / 8 / 45 | -5 | -15 | +0.7 | 30 | 6.4 | 25.2 | 1.4 / -6.4 | PASS |
+| G | 235 | 300 | 0.050 / 8 / 45 | -5 | +15 | -2.3 | 30 | 5.7 | 25.6 | 1.5 / -6.7 | PASS |
+| G | 235 | 300 | 0.060 / 8 / 45 | -5 | +14 | -0.5 | 30 | 6.7 | 25.1 | 1.1 / -6.6 | PASS |
+| G | 245 | 300 | 0.050 / 8 / 45 | -5 | +15 | -7.7 | 30 | 6.8 | 27.2 | 0.3 / -7.9 | PASS |
+| G | 245 | 300 | 0.060 / 8 / 45 | -5 | +15 | -5.8 | 30 | 7.7 | 26.6 | 0.1 / -7.7 | PASS |
+| F | 235 | 340 | 0.055 / 8 / 45 | -6 | -5 | +0.1 | 30 | 7.2 | 25.0 | 1.2 / -6.9 | PASS |
+| F | 235 | 340 | 0.060 / 8 / 45 | -6 | -10 | +0.3 | 30 | 7.9 | 25.1 | 1.0 / -6.9 | PASS |
+| F | 235 | 360 | 0.055 / 8 / 45 | -6 | -15 | +0.8 | 30 | 7.7 | 25.2 | 0.7 / -7.4 | PASS |
+| F | 235 | 360 | 0.060 / 8 / 45 | -6 | -15 | +1.8 | 30 | 8.2 | 25.5 | 0.6 / -7.3 | PASS |
+| F | 240 | 340 | 0.055 / 8 / 45 | -6 | +11 | -0.3 | 30 | 7.3 | 25.1 | 1.1 / -7.0 | PASS |
+| F | 240 | 340 | 0.060 / 8 / 45 | -6 | +5 | -0.2 | 30 | 8.0 | 25.1 | 0.8 / -7.0 | PASS |
+| F | 240 | 360 | 0.055 / 8 / 45 | -6 | -2 | +0.0 | 30 | 7.8 | 25.0 | 0.5 / -7.6 | PASS |
+| F | 240 | 360 | 0.060 / 8 / 45 | -6 | -7 | +0.2 | 30 | 8.5 | 25.1 | 0.3 / -7.6 | PASS |
 
-The pick is the cheapest passing row with at least 7.5 % margin on the coarse lattice (it reads about 1 % high), no motor above 28 % and at least 1.5 deg of the trim gate in hand. More stoop or more crest adds margin; more wing shift loads the front motors.
+The battery slides up to 15 mm either way in your V18 tray to put the CG on the centre of the four motors. Each look's pick is the cheapest passing row with the CG within 3 mm of that centre, at least 6.5 % margin (the coarse lattice reads these small crests the same as the fine one) and at least 1.5 deg of the trim gate in hand.
 
 ### Cruise engine: one EDF or two?
 
@@ -127,7 +155,7 @@ New parts (208 g), STL in `cad/v19/v19a_long_nose/stl/`:
 | `NEW_well_fill_L` | LW-PLA | 25.6 | V18 skin areal density x planform | fits |
 | `NEW_well_fill_R` | LW-PLA | 25.6 | V18 skin areal density x planform | fits |
 
-Your V18 parts that change (concept variant: the cut panels are shown in the web viewer; files are exported only for V19-C, R and W):
+Your V18 parts that change (concept variant: the cut panels are shown in the web viewer; files are exported for V19-F, S, W, R and C):
 
 - `WRA_hollow_wing`: re-cut rotor wells; slot for the crossrail at its new station; nose trimmed under the leading-edge glove
 - `WRB_hollow_wing`: re-cut rotor wells; slot for the crossrail at its new station; nose trimmed under the leading-edge glove
@@ -193,7 +221,7 @@ New parts (348 g), STL in `cad/v19/v19b_falcon_tail/stl/`:
 | `NEW_well_fill_L` | LW-PLA | 12.6 | V18 skin areal density x planform | fits |
 | `NEW_well_fill_R` | LW-PLA | 12.6 | V18 skin areal density x planform | fits |
 
-Your V18 parts that change (concept variant: the cut panels are shown in the web viewer; files are exported only for V19-C, R and W):
+Your V18 parts that change (concept variant: the cut panels are shown in the web viewer; files are exported for V19-F, S, W, R and C):
 
 - `WRA_hollow_wing`: re-cut rotor wells
 - `WRB_hollow_wing`: re-cut rotor wells; slot for the crossrail at its new station
@@ -425,24 +453,25 @@ Checks: 0 new collisions against V18; 25 intended contacts (clamps, sockets, bon
 
 ![V19-S stoop wing + falcon crest](../analysis/view_v19s_stoop_crest.png)
 
-_All four lift rotors in your V18 wing wells, wing 235 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF._ **Passes every model gate.**
+_All four lift rotors in your V18 wing wells, wing 225 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF._ **Passes every model gate.**
 
 What changes:
 
-- Wing group 235 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.
+- Wing group 225 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.
 - All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.
 - Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.
-- Falcon crest: a 0.070 m2 swept stabiliser (648 mm span, 35 deg sweep) bonded across the tips of your V18 fins at z 75, set 4 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.
-- F5 root fairings carry the wing-root profile past the end of the body to x 910.
+- Falcon crest: a 0.070 m2 swept stabiliser (648 mm span, 35 deg sweep, aspect ratio 6) bonded across the tips of your V18 fins at z 75, set 4 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.
+- F5 root fairings carry the wing-root profile past the end of the body to x 900.
 - Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 300 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (219 mm, 52 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.
+- Battery stays in your V18 Tray A, slid 15 mm forward of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.
 - Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).
 - GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.
 - Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.
-- Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 92 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake.
+- Main gear legs bolt to the rear motor backing plates under the booms at x 645 (about 89 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake.
 
 | Mass | CG | Rotors front / rear | Neutral point closed / open | Hover g M1/M2/M3/M4 | 16 m/s alpha / surfaces deg | 20 m/s alpha / surfaces deg | Stall m/s (CLmax 0.9) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| 2832 g | x 563.1 | x 475.0 / 655.0 | x 606.8 / 638.6 | 722 / 694 / 723 / 693 | 12.7 / -1.7 | 8.5 / 0.9 | 10.2 |
+| 2825 g | x 556.0 | x 465.0 / 645.0 | x 595.1 / 626.9 | 698 / 714 / 699 / 714 | 12.5 / -1.0 | 8.4 / 1.3 | 10.2 |
 
 New parts (250 g), STL in `cad/v19/v19s_stoop_crest/stl/`:
 
@@ -455,8 +484,8 @@ New parts (250 g), STL in `cad/v19/v19s_stoop_crest/stl/`:
 | `NEW_CF_rotor_boom_R_10x10x245` | carbon | 13.7 | length x g/m | - |
 | `NEW_CF_wrist_spar_L_10x10x219` | carbon | 12.2 | length x g/m | - |
 | `NEW_CF_wrist_spar_R_10x10x219` | carbon | 12.2 | length x g/m | - |
-| `NEW_F5_root_fairing_L` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
-| `NEW_F5_root_fairing_R` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
+| `NEW_F5_root_fairing_L` | LW-PLA | 6.9 | V18 skin areal density x planform | fits |
+| `NEW_F5_root_fairing_R` | LW-PLA | 6.9 | V18 skin areal density x planform | fits |
 | `NEW_boom_hanger_front_L` | PETG | 2.4 | volume x density | fits |
 | `NEW_boom_hanger_front_R` | PETG | 2.4 | volume x density | fits |
 | `NEW_boom_hanger_rear_L` | PETG | 3.3 | volume x density | fits |
@@ -482,6 +511,85 @@ New parts (250 g), STL in `cad/v19/v19s_stoop_crest/stl/`:
 Your V18 parts that change (modified STL beside the new parts, `*__V19.stl`):
 
 - `CF_crossrail_450_10x10x820`: shortened to 610 mm: the swept outer panels ride on wrist spars
+- `WRC_hollow_wing`: slot for the swept wrist spar; slot for the crossrail at its new station; slot for the rear boom hanger
+- `WRD_hollow_wing`: slot for the swept wrist spar
+- `WLC_hollow_wing`: slot for the swept wrist spar; slot for the crossrail at its new station; slot for the rear boom hanger
+- `WLD_hollow_wing`: slot for the swept wrist spar
+- `WRE1_falcon_wing`: slot for the swept wrist spar
+- `WLE1_falcon_wing`: slot for the swept wrist spar
+- `WRE2_falcon_wing`: slot for the swept wrist spar
+- `WLE2_falcon_wing`: slot for the swept wrist spar
+- `WRB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
+- `WLB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
+- `F3_hollow_body`: slot for CF_crossrail_270_10x10x620 at x 465.0; slot for CF_crossrail_450_10x10x820 at x 566.5
+- `FIN_R`: tip trimmed at z 68 (following the crest's incidence) to carry the crest
+- `FIN_L`: tip trimmed at z 68 (following the crest's incidence) to carry the crest
+
+Checks: 0 new collisions against V18; 31 intended contacts (clamps, sockets, bonded joints, listed in `cad/v19/v19s_stoop_crest/checks.json`).
+ EDF jet: estimated jet edge 22 mm above the axis at the stabiliser, underside at z 68; the fins' inner faces (y 999) are outside the estimated jet edge (radius 42) at the fin leading edge. Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued.
+
+## V19-G slim crest
+
+![V19-G slim crest](../analysis/view_v19g_gyr_crest.png)
+
+_V19-S layout with a slimmer, sharper crest (aspect 8, 45 deg sweep): wing 235 mm aft, outer panels swept 300 mm back, battery in the V18 tray._ **Passes every model gate.**
+
+What changes:
+
+- Wing group 235 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.
+- All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.
+- Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.
+- Falcon crest: a 0.060 m2 swept stabiliser (693 mm span, 45 deg sweep, aspect ratio 8) bonded across the tips of your V18 fins at z 75, set 5 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.
+- F5 root fairings carry the wing-root profile past the end of the body to x 910.
+- Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 300 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (219 mm, 52 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.
+- Battery stays in your V18 Tray A, slid 14 mm aft of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.
+- Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).
+- GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.
+- Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.
+- Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 91 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake.
+
+| Mass | CG | Rotors front / rear | Neutral point closed / open | Hover g M1/M2/M3/M4 | 16 m/s alpha / surfaces deg | 20 m/s alpha / surfaces deg | Stall m/s (CLmax 0.9) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2827 g | x 564.3 | x 475.0 / 655.0 | x 601.3 / 633.0 | 712 / 701 / 713 / 700 | 12.7 / 0.1 | 8.5 / 2.6 | 10.2 |
+
+New parts (243 g), STL in `cad/v19/v19g_gyr_crest/stl/`:
+
+| Part | Material | g | Mass basis | P1S |
+|---|---:|---:|---:|---:|
+| `KEEP_OUT_crest_elevator_servo_20x18x9` | - | 10.0 | item | - |
+| `NEW_CF_crest_spar_L_6x4x405` | carbon | 9.8 | length x g/m | - |
+| `NEW_CF_crest_spar_R_6x4x405` | carbon | 9.8 | length x g/m | - |
+| `NEW_CF_rotor_boom_L_10x10x245` | carbon | 13.7 | length x g/m | - |
+| `NEW_CF_rotor_boom_R_10x10x245` | carbon | 13.7 | length x g/m | - |
+| `NEW_CF_wrist_spar_L_10x10x219` | carbon | 12.2 | length x g/m | - |
+| `NEW_CF_wrist_spar_R_10x10x219` | carbon | 12.2 | length x g/m | - |
+| `NEW_F5_root_fairing_L` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
+| `NEW_F5_root_fairing_R` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
+| `NEW_boom_hanger_front_L` | PETG | 2.4 | volume x density | fits |
+| `NEW_boom_hanger_front_R` | PETG | 2.4 | volume x density | fits |
+| `NEW_boom_hanger_rear_L` | PETG | 3.3 | volume x density | fits |
+| `NEW_boom_hanger_rear_R` | PETG | 3.3 | volume x density | fits |
+| `NEW_canopy_clear_PETG` | PETG (clear sheet) | 15.3 | half the surface x 0.75 mm sheet | fits |
+| `NEW_canopy_frame` | PETG | 1.5 | volume x density | fits |
+| `NEW_cockpit_camera_seat` | PETG | 8.3 | volume x density | fits |
+| `NEW_crest_L1` | LW-PLA | 13.5 | falcon-panel areal density x area | fits |
+| `NEW_crest_L2` | LW-PLA | 9.2 | falcon-panel areal density x area | fits |
+| `NEW_crest_R1` | LW-PLA | 13.5 | falcon-panel areal density x area | fits |
+| `NEW_crest_R2` | LW-PLA | 9.2 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_L1` | LW-PLA | 5.8 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_L2` | LW-PLA | 3.9 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_R1` | LW-PLA | 5.8 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_R2` | LW-PLA | 3.9 | falcon-panel areal density x area | fits |
+| `NEW_rear_motor_riser_L` | PETG | 10.8 | volume x density | fits |
+| `NEW_rear_motor_riser_R` | PETG | 10.8 | volume x density | fits |
+| `NEW_wrist_cap_inner_L` | LW-PLA | 7.5 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_inner_R` | LW-PLA | 7.5 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_outer_L` | LW-PLA | 4.9 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_outer_R` | LW-PLA | 4.9 | profile area x skin areal density | fits |
+
+Your V18 parts that change (concept variant: the cut panels are shown in the web viewer; files are exported for V19-F, S, W, R and C):
+
+- `CF_crossrail_450_10x10x820`: shortened to 610 mm: the swept outer panels ride on wrist spars
 - `WRC_hollow_wing`: slot for the swept wrist spar; slot for the rear boom hanger
 - `WRD_hollow_wing`: slot for the swept wrist spar
 - `WLC_hollow_wing`: slot for the swept wrist spar; slot for the rear boom hanger
@@ -493,38 +601,117 @@ Your V18 parts that change (modified STL beside the new parts, `*__V19.stl`):
 - `WRB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
 - `WLB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
 - `F3_hollow_body`: slot for CF_crossrail_270_10x10x620 at x 475.0; slot for CF_crossrail_450_10x10x820 at x 566.5
-- `FIN_R`: tip trimmed at z 68 (following the crest's incidence) to carry the crest
-- `FIN_L`: tip trimmed at z 68 (following the crest's incidence) to carry the crest
+- `FIN_R`: tip trimmed at z 69 (following the crest's incidence) to carry the crest
+- `FIN_L`: tip trimmed at z 69 (following the crest's incidence) to carry the crest
 
-Checks: 0 new collisions against V18; 31 intended contacts (clamps, sockets, bonded joints, listed in `cad/v19/v19s_stoop_crest/checks.json`).
- EDF jet: estimated jet edge 24 mm above the axis at the stabiliser, underside at z 68; the fins' inner faces (y 999) are outside the estimated jet edge (radius 44) at the fin leading edge. Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued.
+Checks: 0 new collisions against V18; 32 intended contacts (clamps, sockets, bonded joints, listed in `cad/v19/v19g_gyr_crest/checks.json`).
+ EDF jet: estimated jet edge 20 mm above the axis at the stabiliser, underside at z 69; the fins' inner faces (y 999) are outside the estimated jet edge (radius 40) at the fin leading edge. Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued.
 
-## V19-S build changes
+## V19-F deep stoop
+
+![V19-F deep stoop](../analysis/view_v19f_swift_stoop.png)
+
+_V19-S layout with the outer panels swept 340 mm back and the slim crest: wing 235 mm aft, battery in the V18 tray._ **Passes every model gate.**
+
+What changes:
+
+- Wing group 235 mm further aft of the nose: inner and falcon panels, flaps, elevons, fins and servo cassettes move together; nose, body, trays and EDF stay.
+- All four lift motors stay in your V18 wing wells (the front pair back in the holes V19-R closes), on their V18 motor plates.
+- Rear motors ride on PETG risers on two 10 x 10 carbon booms under the wing (y +/-220), hung from the front crossrail and from the rear crossrail, which moves to x 566.5 ahead of the D1 intake.
+- Falcon crest: a 0.055 m2 swept stabiliser (663 mm span, 45 deg sweep, aspect ratio 8) bonded across the tips of your V18 fins at z 75, set 6 deg leading edge down; no booms and no new fins. The fins are trimmed to its underside. A 30 % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons.
+- F5 root fairings carry the wing-root profile past the end of the body to x 910.
+- Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep 340 mm aft at the wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind the CG. A swept 10 x 10 carbon wrist spar per side (254 mm, 60 deg) carries each outer panel, printed caps close the step, and the rear crossrail is shortened to 610 mm.
+- Battery stays in your V18 Tray A, slid 5 mm forward of centre inside the 140 mm envelope, so the CG sits on the centre of the four lift motors (each carries a quarter of the weight in hover). Mark the pack position on the tray.
+- Pilot's-eye FPV camera: moved back to x 120-140, z 44 under a vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).
+- GPS/compass moves off the nose (it sat in the camera's view) to a mast pad on the H2 hatch, over Tray B.
+- Cruise engine: the single V18 64 mm EDF (Freewing E7206) stays in the jet bay at the back.
+- Main gear legs bolt to the rear motor backing plates under the booms at x 655 (about 90 mm behind the CG), track about 580 mm. The gear crossbar and G10 gear plates go: at CG + 45 mm the crossbar would sit behind the keels, in the D1 intake.
+
+| Mass | CG | Rotors front / rear | Neutral point closed / open | Hover g M1/M2/M3/M4 | 16 m/s alpha / surfaces deg | 20 m/s alpha / surfaces deg | Stall m/s (CLmax 0.9) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2829 g | x 564.8 | x 475.0 / 655.0 | x 605.5 / 636.9 | 708 / 706 / 709 / 705 | 13.4 / 0.1 | 8.9 / 2.9 | 10.2 |
+
+New parts (245 g), STL in `cad/v19/v19f_swift_stoop/stl/`:
+
+| Part | Material | g | Mass basis | P1S |
+|---|---:|---:|---:|---:|
+| `KEEP_OUT_crest_elevator_servo_20x18x9` | - | 10.0 | item | - |
+| `NEW_CF_crest_spar_L_6x4x388` | carbon | 9.4 | length x g/m | - |
+| `NEW_CF_crest_spar_R_6x4x388` | carbon | 9.4 | length x g/m | - |
+| `NEW_CF_rotor_boom_L_10x10x245` | carbon | 13.7 | length x g/m | - |
+| `NEW_CF_rotor_boom_R_10x10x245` | carbon | 13.7 | length x g/m | - |
+| `NEW_CF_wrist_spar_L_10x10x254` | carbon | 14.1 | length x g/m | - |
+| `NEW_CF_wrist_spar_R_10x10x254` | carbon | 14.1 | length x g/m | - |
+| `NEW_F5_root_fairing_L` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
+| `NEW_F5_root_fairing_R` | LW-PLA | 7.1 | V18 skin areal density x planform | fits |
+| `NEW_boom_hanger_front_L` | PETG | 2.4 | volume x density | fits |
+| `NEW_boom_hanger_front_R` | PETG | 2.4 | volume x density | fits |
+| `NEW_boom_hanger_rear_L` | PETG | 3.3 | volume x density | fits |
+| `NEW_boom_hanger_rear_R` | PETG | 3.3 | volume x density | fits |
+| `NEW_canopy_clear_PETG` | PETG (clear sheet) | 15.3 | half the surface x 0.75 mm sheet | fits |
+| `NEW_canopy_frame` | PETG | 1.5 | volume x density | fits |
+| `NEW_cockpit_camera_seat` | PETG | 8.3 | volume x density | fits |
+| `NEW_crest_L1` | LW-PLA | 12.4 | falcon-panel areal density x area | fits |
+| `NEW_crest_L2` | LW-PLA | 8.4 | falcon-panel areal density x area | fits |
+| `NEW_crest_R1` | LW-PLA | 12.4 | falcon-panel areal density x area | fits |
+| `NEW_crest_R2` | LW-PLA | 8.4 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_L1` | LW-PLA | 5.3 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_L2` | LW-PLA | 3.6 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_R1` | LW-PLA | 5.3 | falcon-panel areal density x area | fits |
+| `NEW_crest_elevator_R2` | LW-PLA | 3.6 | falcon-panel areal density x area | fits |
+| `NEW_rear_motor_riser_L` | PETG | 10.8 | volume x density | fits |
+| `NEW_rear_motor_riser_R` | PETG | 10.8 | volume x density | fits |
+| `NEW_wrist_cap_inner_L` | LW-PLA | 8.3 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_inner_R` | LW-PLA | 8.3 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_outer_L` | LW-PLA | 6.1 | profile area x skin areal density | fits |
+| `NEW_wrist_cap_outer_R` | LW-PLA | 6.1 | profile area x skin areal density | fits |
+
+Your V18 parts that change (modified STL beside the new parts, `*__V19.stl`):
+
+- `CF_crossrail_450_10x10x820`: shortened to 610 mm: the swept outer panels ride on wrist spars
+- `WRC_hollow_wing`: slot for the swept wrist spar; slot for the rear boom hanger
+- `WRD_hollow_wing`: slot for the swept wrist spar
+- `WLC_hollow_wing`: slot for the swept wrist spar; slot for the rear boom hanger
+- `WLD_hollow_wing`: slot for the swept wrist spar
+- `WRE1_falcon_wing`: slot for the swept wrist spar
+- `WLE1_falcon_wing`: slot for the swept wrist spar
+- `WRE2_falcon_wing`: slot for the swept wrist spar
+- `WLE2_falcon_wing`: slot for the swept wrist spar
+- `WRB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
+- `WLB_hollow_wing`: slot for the crossrail at its new station; slot for the rear boom hanger
+- `F3_hollow_body`: slot for CF_crossrail_270_10x10x620 at x 475.0; slot for CF_crossrail_450_10x10x820 at x 566.5
+- `FIN_R`: tip trimmed at z 69 (following the crest's incidence) to carry the crest
+- `FIN_L`: tip trimmed at z 69 (following the crest's incidence) to carry the crest
+
+Checks: 0 new collisions against V18; 32 intended contacts (clamps, sockets, bonded joints, listed in `cad/v19/v19f_swift_stoop/checks.json`).
+ EDF jet: estimated jet edge 20 mm above the axis at the stabiliser, underside at z 70; the fins' inner faces (y 999) are outside the estimated jet edge (radius 40) at the fin leading edge. Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued.
+
+## V19-F build changes
 
 ### Buy (in addition to the V18 BOM)
 
 | Item (reference candidate) | Qty | USD |  |
 |---|---:|---:|---:|
-| Carbon square tube 10 x 10 x 1 mm, 1000 mm (cut 4 x 245 mm) | 1 | 8-18 each | [link](https://www.amazon.com/s?k=carbon+fiber+square+tube+10mm) |
-| Carbon round tube 6 x 4 mm, 1000 mm (cut 2 x 325 mm) | 1 | 8-18 each | [link](https://www.amazon.com/s?k=carbon+fiber+tube+6mm+4mm) |
+| Carbon square tube 10 x 10 x 1 mm, 1000 mm (cut 4 x 254 mm) | 2 | 8-18 each | [link](https://www.amazon.com/s?k=carbon+fiber+square+tube+10mm) |
+| Carbon round tube 6 x 4 mm, 1000 mm (cut 2 x 388 mm) | 1 | 8-18 each | [link](https://www.amazon.com/s?k=carbon+fiber+tube+6mm+4mm) |
 | Crest elevator servo, slim 5 g wing servo, about 20 x 18 x 9 mm (reference class: Hitec HS-40) | 1 | 15-25 | [link](https://www.amazon.com/s?k=hitec+hs-40+servo) |
 | Elevator torque rod, horn and clevis set (1.2 mm wire) | 1 | 6-10 | [link](https://www.amazon.com/s?k=rc+pushrod+clevis+control+horn+set) |
 | Clear PETG sheet 0.75 mm, A4 or larger (vacuum-formed canopy; two spares) | 3 | 8-15 | [link](https://www.amazon.com/s?k=petg+sheet+0.75mm+clear) |
 | M3 U-straps / saddle clamps for 10 mm tube, plus M3 hardware | 8 | 8-14 | [link](https://www.amazon.com/s?k=m3+u+bolt+10mm) |
 | M2 x 6 screws and washers (camera tilt) | 4 | 2-5 | [link](https://www.amazon.com/s?k=m2+x+6+screws) |
 
-Not added to `bom/bom.csv` on purpose: that file is the V18 budget. Fold these rows in when V19-S becomes the build.
+Not added to `bom/bom.csv` on purpose: that file is the V18 budget. Fold these rows in when V19-F becomes the build.
 
 ### Carbon and G10 cut list
 
 | Part | Material | Size |
 |---|---:|---:|
-| `NEW_CF_wrist_spar_R_10x10x219` | carbon | 10x10 section, 219 mm long |
-| `NEW_CF_wrist_spar_L_10x10x219` | carbon | 10x10 section, 219 mm long |
+| `NEW_CF_wrist_spar_R_10x10x254` | carbon | 10x10 section, 254 mm long |
+| `NEW_CF_wrist_spar_L_10x10x254` | carbon | 10x10 section, 254 mm long |
 | `NEW_CF_rotor_boom_R_10x10x245` | carbon | 10x10 section, 245 mm long |
 | `NEW_CF_rotor_boom_L_10x10x245` | carbon | 10x10 section, 245 mm long |
-| `NEW_CF_crest_spar_R_6x4x325` | carbon | 6x4 section, 325 mm long |
-| `NEW_CF_crest_spar_L_6x4x325` | carbon | 6x4 section, 325 mm long |
+| `NEW_CF_crest_spar_R_6x4x388` | carbon | 6x4 section, 388 mm long |
+| `NEW_CF_crest_spar_L_6x4x388` | carbon | 6x4 section, 388 mm long |
 
 ### Print
 
@@ -545,16 +732,16 @@ Not added to `bom/bom.csv` on purpose: that file is the V18 budget. Fold these r
 | `NEW_boom_hanger_front_L` | PETG | fits | PETG spacer between the front crossrail and the boom, two M3 U-straps round each tube. |
 | `NEW_boom_hanger_rear_L` | PETG | fits | PETG spacer between the rear crossrail and the boom, two M3 U-straps round each tube. |
 | `NEW_rear_motor_riser_L` | PETG | fits | Hollow PETG riser (1.6 mm walls) from the boom to the V18 rear motor plate. |
-| `NEW_crest_R1` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first. |
+| `NEW_crest_R1` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 1 of 2, inboard first. |
 | `NEW_crest_elevator_R1` | LW-PLA | fits | Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first. |
-| `NEW_crest_R2` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first. |
+| `NEW_crest_R2` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 2 of 2, inboard first. |
 | `NEW_crest_elevator_R2` | LW-PLA | fits | Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first. |
-| `NEW_crest_L1` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 1 of 2, inboard first. |
+| `NEW_crest_L1` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 1 of 2, inboard first. |
 | `NEW_crest_elevator_L1` | LW-PLA | fits | Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 1 of 2, inboard first. |
-| `NEW_crest_L2` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your V18 fins at 4 deg leading-edge-down incidence. Piece 2 of 2, inboard first. |
+| `NEW_crest_L2` | LW-PLA | fits | Falcon crest: swept stabiliser (NACA 0009, 45 deg leading-edge sweep) bonded across the tips of your V18 fins at 6 deg leading-edge-down incidence. Piece 2 of 2, inboard first. |
 | `NEW_crest_elevator_L2` | LW-PLA | fits | Crest elevator, 30 % chord, halves joined by a wire torque rod at the centre; one slim servo in the crest root. Piece 2 of 2, inboard first. |
 
-All printed parts in one file: `cad/v19/v19s_stoop_crest/v19s_stoop_crest_print_set.3mf` (unsliced; outer mould lines - print the LW-PLA parts hollow with your V18 wing settings). The clear canopy is vacuum-formed, not printed: print the `NEW_canopy_clear_PETG` shape solid as the forming buck.
+All printed parts in one file: `cad/v19/v19f_swift_stoop/v19f_swift_stoop_print_set.3mf` (unsliced; outer mould lines - print the LW-PLA parts hollow with your V18 wing settings). The clear canopy is vacuum-formed, not printed: print the `NEW_canopy_clear_PETG` shape solid as the forming buck.
 
 ### Gates to add before the first hover
 
@@ -563,12 +750,12 @@ All printed parts in one file: `cad/v19/v19s_stoop_crest/v19s_stoop_crest_print_
 - EDF jet on the crest: tuft the crest underside and the fin tops, run the EDF to 100 % on the bench; no tuft should stream aft.
 - Crest elevator: +/-20 deg throw with no contact against the fin tops; the slim servo centres within 1 deg.
 - Cockpit camera: the FPV image shows the horizon with the nose in the lower edge at 0-10 deg uptilt; no canopy glare at the sun angles you fly in (matt black seat and frame).
-- Weigh and balance the complete aircraft: CG within 5 mm of x 563 before any hover.
-- Trim: at 16 m/s the model needs 13 deg of angle of attack; plan transitions and cruise at 18-20 m/s (8 deg at 20 m/s) and confirm the stall speed (model 10.2 m/s at CLmax 0.9) in the glide tests.
+- Weigh and balance the complete aircraft: CG within 5 mm of x 565 before any hover.
+- Trim: at 16 m/s the model needs 13 deg of angle of attack; plan transitions and cruise at 18-20 m/s (9 deg at 20 m/s) and confirm the stall speed (model 10.2 m/s at CLmax 0.9) in the glide tests.
 
 ## How the numbers were made
 
-- `tools/v19/search.py` ran 78 configurations across six families. In families A-C and R the rotors are placed so their centroid sits on that configuration's CG within the geometric limits (in W and S they stay in your V18 wells and the wing shift, stoop and tail decide the balance), the masses come from the V19 construction (`geometry.py` mass-only mode), and the neutral points come from the vortex lattice with the wells closed and open. The cheapest passing configuration in each family becomes `config/v19/<variant>.json`.
+- `tools/v19/search.py` ran 92 configurations across six families. In families A-C and R the rotors are placed so their centroid sits on that configuration's CG within the geometric limits (in W and S they stay in your V18 wells and the wing shift, stoop and tail decide the balance), the masses come from the V19 construction (`geometry.py` mass-only mode), and the neutral points come from the vortex lattice with the wells closed and open. The cheapest passing configuration in each family becomes `config/v19/<variant>.json`.
 - `tools/v19/geometry.py` builds each variant from the V18 meshes, cuts the V18 parts that must change, generates the new parts, runs a full-assembly collision check against the V18 baseline, and re-evaluates with the mass of every part where it sits (`cad/v19/<variant>/mass_inputs.json`).
 - Assumptions to replace with measurements: LW-PLA at 0.80 g/cm3, new skins at the V18 skin areal density (1407 g/m2 for both skins), tail surfaces at the V18 falcon-panel density (1100 g/m2), PETG parts solid or at the stated wall, EDF jet spread 0.1 mm per mm from a 30 mm exit radius. Not counted: the 43 g of distributed fasteners and consumables stay at their V18 position, and longer motor leads, the elevator servo and camera leads and the boom U-straps (about 30-40 g, mostly aft of the CG, roughly -0.4 % static margin) are not modelled yet. Props are excluded from the collision check; the prop disc to leading-edge clearance is checked separately.
 - Regenerate everything: `make v19` (search + geometry + this document + web data).

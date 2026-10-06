@@ -1,5 +1,5 @@
 {
- "_note": "Search V19 configurations for the three requested directions and their combination.\n\n    python3 tools/v19/search.py            # analysis/v19_search.json, config/v19/*.json\n\nDirections (each with the supporting moves the long-nose direction already implied: battery in a\nnose bay, FC/VTX/EDF ESC into the vacated battery bay, tail ducts/saddles in LW-PLA):\n  A  long-nose falcon     wing group 150-200 mm aft of the nose; rotors stay in wing wells\n  B  falcon tail          horizontal tail on a dorsal pylon over the EDF nozzle\n  C  forward rotors       front rotor pair on booms ahead of the wing leading edge, front wells closed\n  W  four in the wings     all four lift rotors in your V18 wells (no dx: the holes stay where you drew them),\n                          rear pair on under-wing booms so the rear crossrail clears D1, falcon tail far aft\n  S  stoop + crest       V19-W without the big boom tail: four rotors in your V18 wells, the outer falcon panels\n                          swept back at the wrist (\"stoop\") and a small falcon crest on the tips of your V18 fins;\n                          the battery stays in the V18 tray (no nose bay needed without tail weight to balance)\n  R  boom alternative          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,\n                          the cheapest combination that passes every gate with margin on balance\n                          (heaviest motor <= 28 %, static margin >= 6 % wells closed; 7.5 % for W); the front\n                          props sit at the 15 mm leading-edge clearance limit\n\nIn every candidate the rotor positions are set so the rotor centroid sits on that candidate's CG\n(the way you would draw it), within the geometric limits (leading edge, flaps, boom length).\nMasses and their positions come from the V19 construction itself (tools/v19/geometry.py, mass-only\nmode: booms, pods, risers, hangers, well caps, tail booms, fins, stabiliser, fairings, nose bay), so\nthe variant the search picks is the one the CAD builds. The tail sits 80 mm above the wing plane to\nstay clear of the EDF jet. Coarse lattice for the search; finalists are re-evaluated at full resolution.",
+ "_note": "Search V19 configurations for the three requested directions and their combination.\n\n    python3 tools/v19/search.py            # analysis/v19_search.json, config/v19/*.json\n\nDirections (each with the supporting moves the long-nose direction already implied: battery in a\nnose bay, FC/VTX/EDF ESC into the vacated battery bay, tail ducts/saddles in LW-PLA):\n  A  long-nose falcon     wing group 150-200 mm aft of the nose; rotors stay in wing wells\n  B  falcon tail          horizontal tail on a dorsal pylon over the EDF nozzle\n  C  forward rotors       front rotor pair on booms ahead of the wing leading edge, front wells closed\n  W  four in the wings     all four lift rotors in your V18 wells (no dx: the holes stay where you drew them),\n                          rear pair on under-wing booms so the rear crossrail clears D1, falcon tail far aft\n  S  stoop + crest       V19-W without the big boom tail: four rotors in your V18 wells, the outer falcon panels\n                          swept back at the wrist (\"stoop\") and a small falcon crest on the tips of your V18 fins;\n                          the battery stays in the V18 tray (no nose bay needed without tail weight to balance)\n  G, F  two more looks on the V19-S layout: a slim 45 deg crest (G) and a deeper stoop with it (F)\n  In S, G and F the battery slides in the V18 tray so the CG sits on the centre of the four motors.\n  R  boom alternative          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,\n                          the cheapest combination that passes every gate with margin on balance\n                          (heaviest motor <= 28 %, static margin >= 6 % wells closed; 7.5 % for W); the front\n                          props sit at the 15 mm leading-edge clearance limit\n\nIn every candidate the rotor positions are set so the rotor centroid sits on that candidate's CG\n(the way you would draw it), within the geometric limits (leading edge, flaps, boom length).\nMasses and their positions come from the V19 construction itself (tools/v19/geometry.py, mass-only\nmode: booms, pods, risers, hangers, well caps, tail booms, fins, stabiliser, fairings, nose bay), so\nthe variant the search picks is the one the CAD builds. The tail sits 80 mm above the wing plane to\nstay clear of the EDF jet. Coarse lattice for the search; finalists are re-evaluated at full resolution.",
  "rows": [
   {
    "config": {
@@ -7566,7 +7566,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 743.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -7576,12 +7576,13 @@
     "gps_aft": true,
     "outer_shift_mm": 260,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 12.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2818.9,
    "cg_mm": [
-    553.2,
+    554.6,
     -0.1,
     1.4
    ],
@@ -7624,38 +7625,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 718.6,
-    "M2": 690.8,
-    "M3": 719.4,
-    "M4": 690.0
+    "M1": 707.1,
+    "M2": 702.3,
+    "M3": 707.9,
+    "M4": 701.6
    },
-   "worst_motor_pct": 25.5,
-   "np_closed_x_mm": 581.7,
-   "np_open_x_mm": 616.0,
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 580.2,
+   "np_open_x_mm": 614.3,
    "mac_mm": 542.3,
-   "sm_closed_pct": 5.3,
-   "sm_open_pct": 11.6,
+   "sm_closed_pct": 4.7,
+   "sm_open_pct": 11.0,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 11.5,
-     "pitch_surfaces_deg": 1.5,
+     "alpha_deg": 11.4,
+     "pitch_surfaces_deg": 1.9,
      "CL": 0.369
     },
     "open": {
-     "alpha_deg": 14.1,
-     "pitch_surfaces_deg": -5.9,
+     "alpha_deg": 14.0,
+     "pitch_surfaces_deg": -5.5,
      "CL": 0.369
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 7.5,
-     "pitch_surfaces_deg": 3.3,
+     "pitch_surfaces_deg": 3.5,
      "CL": 0.236
     },
     "open": {
-     "alpha_deg": 9.2,
-     "pitch_surfaces_deg": -1.5,
+     "alpha_deg": 9.1,
+     "pitch_surfaces_deg": -1.2,
      "CL": 0.236
     }
    },
@@ -7667,11 +7668,11 @@
    "main_gear_x_mm": 645.0,
    "length_mm": 900.0,
    "hover_ok": true,
-   "flight_ok": true,
+   "flight_ok": false,
    "geometry_ok": true,
-   "passes": true,
+   "passes": false,
    "family": "S",
-   "score": 0.0,
+   "score": 0.6,
    "cost": 8.2
   },
   {
@@ -7693,7 +7694,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 743.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -7703,7 +7704,8 @@
     "gps_aft": true,
     "outer_shift_mm": 260,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 2.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2830.9,
@@ -7751,38 +7753,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 707.7,
-    "M2": 707.7,
-    "M3": 708.5,
-    "M4": 706.9
+    "M1": 708.0,
+    "M2": 707.5,
+    "M3": 708.8,
+    "M4": 706.7
    },
    "worst_motor_pct": 25.0,
-   "np_closed_x_mm": 587.9,
-   "np_open_x_mm": 622.3,
+   "np_closed_x_mm": 586.2,
+   "np_open_x_mm": 620.5,
    "mac_mm": 542.3,
-   "sm_closed_pct": 6.1,
-   "sm_open_pct": 12.4,
+   "sm_closed_pct": 5.8,
+   "sm_open_pct": 12.1,
    "trim_16ms": {
     "closed": {
      "alpha_deg": 11.5,
-     "pitch_surfaces_deg": 1.1,
+     "pitch_surfaces_deg": 1.2,
      "CL": 0.37
     },
     "open": {
      "alpha_deg": 14.0,
-     "pitch_surfaces_deg": -5.9,
+     "pitch_surfaces_deg": -5.8,
      "CL": 0.37
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 7.6,
-     "pitch_surfaces_deg": 3.0,
+     "pitch_surfaces_deg": 3.1,
      "CL": 0.237
     },
     "open": {
      "alpha_deg": 9.2,
-     "pitch_surfaces_deg": -1.5,
+     "pitch_surfaces_deg": -1.4,
      "CL": 0.237
     }
    },
@@ -7820,7 +7822,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 743.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -7830,12 +7832,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": -11.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2825.6,
    "cg_mm": [
-    557.3,
+    555.4,
     -0.1,
     1.4
    ],
@@ -7878,38 +7881,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 688.2,
-    "M2": 724.6,
-    "M3": 689.0,
-    "M4": 723.8
+    "M1": 703.0,
+    "M2": 709.8,
+    "M3": 703.8,
+    "M4": 709.0
    },
-   "worst_motor_pct": 25.6,
-   "np_closed_x_mm": 590.0,
-   "np_open_x_mm": 623.7,
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 588.4,
+   "np_open_x_mm": 622.1,
    "mac_mm": 542.3,
-   "sm_closed_pct": 6.0,
+   "sm_closed_pct": 6.1,
    "sm_open_pct": 12.3,
    "trim_16ms": {
     "closed": {
      "alpha_deg": 12.1,
-     "pitch_surfaces_deg": 0.6,
+     "pitch_surfaces_deg": 0.4,
      "CL": 0.37
     },
     "open": {
-     "alpha_deg": 14.6,
-     "pitch_surfaces_deg": -6.7,
+     "alpha_deg": 14.7,
+     "pitch_surfaces_deg": -7.0,
      "CL": 0.37
     }
    },
    "trim_20ms": {
     "closed": {
-     "alpha_deg": 7.9,
-     "pitch_surfaces_deg": 2.7,
+     "alpha_deg": 8.0,
+     "pitch_surfaces_deg": 2.5,
      "CL": 0.237
     },
     "open": {
      "alpha_deg": 9.6,
-     "pitch_surfaces_deg": -2.1,
+     "pitch_surfaces_deg": -2.3,
      "CL": 0.237
     }
    },
@@ -7947,7 +7950,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 743.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -7957,12 +7960,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": -15.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2837.5,
    "cg_mm": [
-    559.0,
+    556.5,
     -0.1,
     1.7
    ],
@@ -8005,800 +8009,806 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 677.3,
-    "M2": 741.4,
-    "M3": 678.1,
-    "M4": 740.6
+    "M1": 697.0,
+    "M2": 721.7,
+    "M3": 697.8,
+    "M4": 720.9
    },
-   "worst_motor_pct": 26.1,
-   "np_closed_x_mm": 596.5,
-   "np_open_x_mm": 630.3,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 6.9,
-   "sm_open_pct": 13.1,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 12.1,
-     "pitch_surfaces_deg": 0.2,
-     "CL": 0.371
-    },
-    "open": {
-     "alpha_deg": 14.6,
-     "pitch_surfaces_deg": -6.7,
-     "CL": 0.371
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 7.9,
-     "pitch_surfaces_deg": 2.4,
-     "CL": 0.238
-    },
-    "open": {
-     "alpha_deg": 9.5,
-     "pitch_surfaces_deg": -2.1,
-     "CL": 0.238
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.7,
-    "CLmax_0.9": 10.3
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 645.0,
-   "length_mm": 900.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 8.8
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 235,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.06,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 260,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2819.3,
-   "cg_mm": [
-    557.7,
-    -0.1,
-    1.4
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
-    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
-    "NEW_wrist_cap_inner_R": 6.6,
-    "NEW_wrist_cap_inner_L": 6.6,
-    "NEW_wrist_cap_outer_R": 3.7,
-    "NEW_wrist_cap_outer_L": 3.7,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 13.5,
-    "NEW_crest_elevator_R1": 5.8,
-    "NEW_crest_R2": 9.2,
-    "NEW_crest_elevator_R2": 3.9,
-    "NEW_CF_crest_spar_R_6x4x301": 7.3,
-    "NEW_crest_L1": 13.5,
-    "NEW_crest_elevator_L1": 5.8,
-    "NEW_crest_L2": 9.2,
-    "NEW_crest_elevator_L2": 3.9,
-    "NEW_CF_crest_spar_L_6x4x301": 7.3,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.1,
-    "NEW_F5_root_fairing_L": 7.1
-   },
-   "rotor_front_x_mm": 475.0,
-   "rotor_rear_x_mm": 655.0,
-   "rotor_centroid_x_mm": 565.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 761.5,
-    "M2": 648.2,
-    "M3": 762.3,
-    "M4": 647.4
-   },
-   "worst_motor_pct": 27.0,
-   "np_closed_x_mm": 591.8,
-   "np_open_x_mm": 625.9,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 6.3,
-   "sm_open_pct": 12.6,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 11.8,
-     "pitch_surfaces_deg": 0.5,
-     "CL": 0.369
-    },
-    "open": {
-     "alpha_deg": 14.4,
-     "pitch_surfaces_deg": -6.9,
-     "CL": 0.369
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 7.7,
-     "pitch_surfaces_deg": 2.6,
-     "CL": 0.236
-    },
-    "open": {
-     "alpha_deg": 9.4,
-     "pitch_surfaces_deg": -2.2,
-     "CL": 0.236
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.6,
-    "CLmax_0.9": 10.2
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 655.0,
-   "length_mm": 910.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 8.4
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 235,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.07,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 260,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2831.3,
-   "cg_mm": [
-    559.5,
-    -0.1,
-    1.7
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
-    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
-    "NEW_wrist_cap_inner_R": 6.6,
-    "NEW_wrist_cap_inner_L": 6.6,
-    "NEW_wrist_cap_outer_R": 3.7,
-    "NEW_wrist_cap_outer_L": 3.7,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 15.7,
-    "NEW_crest_elevator_R1": 6.7,
-    "NEW_crest_R2": 10.7,
-    "NEW_crest_elevator_R2": 4.6,
-    "NEW_CF_crest_spar_R_6x4x325": 7.9,
-    "NEW_crest_L1": 15.7,
-    "NEW_crest_elevator_L1": 6.7,
-    "NEW_crest_L2": 10.7,
-    "NEW_crest_elevator_L2": 4.6,
-    "NEW_CF_crest_spar_L_6x4x325": 7.9,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.1,
-    "NEW_F5_root_fairing_L": 7.1
-   },
-   "rotor_front_x_mm": 475.0,
-   "rotor_rear_x_mm": 655.0,
-   "rotor_centroid_x_mm": 565.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 750.6,
-    "M2": 665.0,
-    "M3": 751.4,
-    "M4": 664.2
-   },
-   "worst_motor_pct": 26.5,
-   "np_closed_x_mm": 598.1,
-   "np_open_x_mm": 632.3,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 7.1,
-   "sm_open_pct": 13.4,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 11.8,
-     "pitch_surfaces_deg": 0.2,
-     "CL": 0.371
-    },
-    "open": {
-     "alpha_deg": 14.3,
-     "pitch_surfaces_deg": -6.9,
-     "CL": 0.371
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 7.8,
-     "pitch_surfaces_deg": 2.4,
-     "CL": 0.237
-    },
-    "open": {
-     "alpha_deg": 9.4,
-     "pitch_surfaces_deg": -2.1,
-     "CL": 0.237
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.6,
-    "CLmax_0.9": 10.3
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 655.0,
-   "length_mm": 910.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 8.8
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 235,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.06,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 300,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2826.0,
-   "cg_mm": [
-    561.8,
-    -0.1,
-    1.4
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
-    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
-    "NEW_wrist_cap_inner_R": 7.5,
-    "NEW_wrist_cap_inner_L": 7.5,
-    "NEW_wrist_cap_outer_R": 4.9,
-    "NEW_wrist_cap_outer_L": 4.9,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 13.5,
-    "NEW_crest_elevator_R1": 5.8,
-    "NEW_crest_R2": 9.2,
-    "NEW_crest_elevator_R2": 3.9,
-    "NEW_CF_crest_spar_R_6x4x301": 7.3,
-    "NEW_crest_L1": 13.5,
-    "NEW_crest_elevator_L1": 5.8,
-    "NEW_crest_L2": 9.2,
-    "NEW_crest_elevator_L2": 3.9,
-    "NEW_CF_crest_spar_L_6x4x301": 7.3,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.1,
-    "NEW_F5_root_fairing_L": 7.1
-   },
-   "rotor_front_x_mm": 475.0,
-   "rotor_rear_x_mm": 655.0,
-   "rotor_centroid_x_mm": 565.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 731.1,
-    "M2": 681.9,
-    "M3": 731.9,
-    "M4": 681.1
-   },
-   "worst_motor_pct": 25.9,
-   "np_closed_x_mm": 600.1,
-   "np_open_x_mm": 633.7,
+   "worst_motor_pct": 25.4,
+   "np_closed_x_mm": 594.8,
+   "np_open_x_mm": 628.5,
    "mac_mm": 542.3,
    "sm_closed_pct": 7.1,
    "sm_open_pct": 13.3,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.4,
-     "pitch_surfaces_deg": -0.4,
-     "CL": 0.37
-    },
-    "open": {
-     "alpha_deg": 14.9,
-     "pitch_surfaces_deg": -7.8,
-     "CL": 0.37
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 8.1,
-     "pitch_surfaces_deg": 2.0,
-     "CL": 0.237
-    },
-    "open": {
-     "alpha_deg": 9.8,
-     "pitch_surfaces_deg": -2.8,
-     "CL": 0.237
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.6,
-    "CLmax_0.9": 10.3
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 655.0,
-   "length_mm": 910.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 8.6
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 235,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.07,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 300,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2838.0,
-   "cg_mm": [
-    563.6,
-    -0.1,
-    1.7
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
-    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
-    "NEW_wrist_cap_inner_R": 7.5,
-    "NEW_wrist_cap_inner_L": 7.5,
-    "NEW_wrist_cap_outer_R": 4.9,
-    "NEW_wrist_cap_outer_L": 4.9,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 15.7,
-    "NEW_crest_elevator_R1": 6.7,
-    "NEW_crest_R2": 10.7,
-    "NEW_crest_elevator_R2": 4.6,
-    "NEW_CF_crest_spar_R_6x4x325": 7.9,
-    "NEW_crest_L1": 15.7,
-    "NEW_crest_elevator_L1": 6.7,
-    "NEW_crest_L2": 10.7,
-    "NEW_crest_elevator_L2": 4.6,
-    "NEW_CF_crest_spar_L_6x4x325": 7.9,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.1,
-    "NEW_F5_root_fairing_L": 7.1
-   },
-   "rotor_front_x_mm": 475.0,
-   "rotor_rear_x_mm": 655.0,
-   "rotor_centroid_x_mm": 565.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 720.2,
-    "M2": 698.8,
-    "M3": 721.0,
-    "M4": 698.0
-   },
-   "worst_motor_pct": 25.4,
-   "np_closed_x_mm": 606.7,
-   "np_open_x_mm": 640.3,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 8.0,
-   "sm_open_pct": 14.2,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 12.4,
-     "pitch_surfaces_deg": -0.7,
-     "CL": 0.371
-    },
-    "open": {
-     "alpha_deg": 14.9,
-     "pitch_surfaces_deg": -7.7,
-     "CL": 0.371
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 8.1,
-     "pitch_surfaces_deg": 1.8,
-     "CL": 0.238
-    },
-    "open": {
-     "alpha_deg": 9.8,
-     "pitch_surfaces_deg": -2.7,
-     "CL": 0.238
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.7,
-    "CLmax_0.9": 10.3
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 655.0,
-   "length_mm": 910.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 9.0
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 245,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.06,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 763.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 260,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2819.9,
-   "cg_mm": [
-    562.3,
-    -0.1,
-    1.4
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
-    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
-    "NEW_wrist_cap_inner_R": 6.6,
-    "NEW_wrist_cap_inner_L": 6.6,
-    "NEW_wrist_cap_outer_R": 3.7,
-    "NEW_wrist_cap_outer_L": 3.7,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 13.5,
-    "NEW_crest_elevator_R1": 5.8,
-    "NEW_crest_R2": 9.2,
-    "NEW_crest_elevator_R2": 3.9,
-    "NEW_CF_crest_spar_R_6x4x301": 7.3,
-    "NEW_crest_L1": 13.5,
-    "NEW_crest_elevator_L1": 5.8,
-    "NEW_crest_L2": 9.2,
-    "NEW_crest_elevator_L2": 3.9,
-    "NEW_CF_crest_spar_L_6x4x301": 7.3,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.4,
-    "NEW_F5_root_fairing_L": 7.4
-   },
-   "rotor_front_x_mm": 485.0,
-   "rotor_rear_x_mm": 665.0,
-   "rotor_centroid_x_mm": 575.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 804.3,
-    "M2": 605.6,
-    "M3": 805.1,
-    "M4": 604.8
-   },
-   "worst_motor_pct": 28.6,
-   "np_closed_x_mm": 602.2,
-   "np_open_x_mm": 636.1,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 7.4,
-   "sm_open_pct": 13.6,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 12.1,
-     "pitch_surfaces_deg": -0.5,
-     "CL": 0.369
-    },
-    "open": {
-     "alpha_deg": 14.7,
-     "pitch_surfaces_deg": -8.0,
-     "CL": 0.369
-    }
-   },
-   "trim_20ms": {
-    "closed": {
-     "alpha_deg": 7.9,
-     "pitch_surfaces_deg": 2.0,
-     "CL": 0.236
-    },
-    "open": {
-     "alpha_deg": 9.6,
-     "pitch_surfaces_deg": -2.8,
-     "CL": 0.236
-    }
-   },
-   "stall_speed_ms": {
-    "CLmax_0.7": 11.6,
-    "CLmax_0.9": 10.2
-   },
-   "wing_area_m2": 0.4779,
-   "main_gear_x_mm": 665.0,
-   "length_mm": 920.0,
-   "hover_ok": true,
-   "flight_ok": true,
-   "geometry_ok": true,
-   "passes": true,
-   "family": "S",
-   "score": 0.0,
-   "cost": 8.6
-  },
-  {
-   "config": {
-    "name": "V18",
-    "label": "V18 as modelled",
-    "wing_shift_mm": 245,
-    "front_rotor": {
-     "mode": "wing",
-     "dx": 0.0
-    },
-    "rear_rotor_dx_mm": 0.0,
-    "battery": "v18",
-    "avionics_forward": false,
-    "tail_parts_lwpla": true,
-    "lwpla_density": 0.8,
-    "tail": {
-     "area_m2": 0.07,
-     "aspect": 6.0,
-     "taper": 0.45,
-     "le_sweep_deg": 35.0,
-     "x_le_root_mm": 763.0,
-     "incidence_deg": -4.0,
-     "elevator_frac": 0.3,
-     "height_mm": 75.0,
-     "mount": "fins"
-    },
-    "cockpit_camera": true,
-    "gps_aft": true,
-    "outer_shift_mm": 260,
-    "no_le_ext": true,
-    "rear_support": "boom"
-   },
-   "mass_basis": "V19 geometry",
-   "all_up_g": 2831.9,
-   "cg_mm": [
-    564.1,
-    -0.1,
-    1.7
-   ],
-   "new_parts_g": {
-    "NEW_canopy_frame": 1.5,
-    "NEW_canopy_clear_PETG": 15.3,
-    "NEW_cockpit_camera_seat": 8.3,
-    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
-    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
-    "NEW_wrist_cap_inner_R": 6.6,
-    "NEW_wrist_cap_inner_L": 6.6,
-    "NEW_wrist_cap_outer_R": 3.7,
-    "NEW_wrist_cap_outer_L": 3.7,
-    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
-    "NEW_boom_hanger_front_R": 2.4,
-    "NEW_boom_hanger_rear_R": 3.3,
-    "NEW_rear_motor_riser_R": 10.8,
-    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
-    "NEW_boom_hanger_front_L": 2.4,
-    "NEW_boom_hanger_rear_L": 3.3,
-    "NEW_rear_motor_riser_L": 10.8,
-    "NEW_crest_R1": 15.7,
-    "NEW_crest_elevator_R1": 6.7,
-    "NEW_crest_R2": 10.7,
-    "NEW_crest_elevator_R2": 4.6,
-    "NEW_CF_crest_spar_R_6x4x325": 7.9,
-    "NEW_crest_L1": 15.7,
-    "NEW_crest_elevator_L1": 6.7,
-    "NEW_crest_L2": 10.7,
-    "NEW_crest_elevator_L2": 4.6,
-    "NEW_CF_crest_spar_L_6x4x325": 7.9,
-    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
-    "NEW_F5_root_fairing_R": 7.4,
-    "NEW_F5_root_fairing_L": 7.4
-   },
-   "rotor_front_x_mm": 485.0,
-   "rotor_rear_x_mm": 665.0,
-   "rotor_centroid_x_mm": 575.0,
-   "le_extension_mm": 0.0,
-   "boom_prop_to_le_mm": null,
-   "rear_well_to_flap_mm": 94.5,
-   "motor_hover_g": {
-    "M1": 793.5,
-    "M2": 622.5,
-    "M3": 794.3,
-    "M4": 621.7
-   },
-   "worst_motor_pct": 28.0,
-   "np_closed_x_mm": 608.6,
-   "np_open_x_mm": 642.5,
-   "mac_mm": 542.3,
-   "sm_closed_pct": 8.2,
-   "sm_open_pct": 14.5,
-   "trim_16ms": {
-    "closed": {
-     "alpha_deg": 12.1,
-     "pitch_surfaces_deg": -0.8,
+     "alpha_deg": 12.2,
+     "pitch_surfaces_deg": -0.0,
      "CL": 0.371
     },
     "open": {
      "alpha_deg": 14.7,
-     "pitch_surfaces_deg": -7.9,
+     "pitch_surfaces_deg": -7.1,
      "CL": 0.371
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 8.0,
-     "pitch_surfaces_deg": 1.8,
-     "CL": 0.237
+     "pitch_surfaces_deg": 2.2,
+     "CL": 0.238
     },
     "open": {
      "alpha_deg": 9.6,
-     "pitch_surfaces_deg": -2.8,
+     "pitch_surfaces_deg": -2.3,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 645.0,
+   "length_mm": 900.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 8.8
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 744.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 260,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2819.3,
+   "cg_mm": [
+    559.6,
+    -0.1,
+    1.4
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
+    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
+    "NEW_wrist_cap_inner_R": 6.6,
+    "NEW_wrist_cap_inner_L": 6.6,
+    "NEW_wrist_cap_outer_R": 3.7,
+    "NEW_wrist_cap_outer_L": 3.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x301": 7.3,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x301": 7.3,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 746.5,
+    "M2": 663.1,
+    "M3": 747.3,
+    "M4": 662.3
+   },
+   "worst_motor_pct": 26.5,
+   "np_closed_x_mm": 590.3,
+   "np_open_x_mm": 624.3,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 5.7,
+   "sm_open_pct": 11.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 11.7,
+     "pitch_surfaces_deg": 1.0,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 14.3,
+     "pitch_surfaces_deg": -6.4,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 7.7,
+     "pitch_surfaces_deg": 2.9,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 9.3,
+     "pitch_surfaces_deg": -1.9,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 8.4
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.07,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 744.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 260,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2831.3,
+   "cg_mm": [
+    561.4,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
+    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
+    "NEW_wrist_cap_inner_R": 6.6,
+    "NEW_wrist_cap_inner_L": 6.6,
+    "NEW_wrist_cap_outer_R": 3.7,
+    "NEW_wrist_cap_outer_L": 3.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 15.7,
+    "NEW_crest_elevator_R1": 6.7,
+    "NEW_crest_R2": 10.7,
+    "NEW_crest_elevator_R2": 4.6,
+    "NEW_CF_crest_spar_R_6x4x325": 7.9,
+    "NEW_crest_L1": 15.7,
+    "NEW_crest_elevator_L1": 6.7,
+    "NEW_crest_L2": 10.7,
+    "NEW_crest_elevator_L2": 4.6,
+    "NEW_CF_crest_spar_L_6x4x325": 7.9,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 736.0,
+    "M2": 679.7,
+    "M3": 736.8,
+    "M4": 678.9
+   },
+   "worst_motor_pct": 26.0,
+   "np_closed_x_mm": 596.4,
+   "np_open_x_mm": 630.5,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.5,
+   "sm_open_pct": 12.8,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 11.7,
+     "pitch_surfaces_deg": 0.6,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 14.2,
+     "pitch_surfaces_deg": -6.4,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 7.7,
+     "pitch_surfaces_deg": 2.7,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.3,
+     "pitch_surfaces_deg": -1.9,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 8.8
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 744.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2826.0,
+   "cg_mm": [
+    563.7,
+    -0.1,
+    1.4
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x301": 7.3,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x301": 7.3,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 716.1,
+    "M2": 696.9,
+    "M3": 716.9,
+    "M4": 696.1
+   },
+   "worst_motor_pct": 25.4,
+   "np_closed_x_mm": 598.6,
+   "np_open_x_mm": 632.0,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.4,
+   "sm_open_pct": 12.6,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.3,
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.37
+    },
+    "open": {
+     "alpha_deg": 14.8,
+     "pitch_surfaces_deg": -7.3,
+     "CL": 0.37
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.0,
+     "pitch_surfaces_deg": 2.3,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.7,
+     "pitch_surfaces_deg": -2.5,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 8.6
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.07,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 744.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 10.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2838.0,
+   "cg_mm": [
+    564.7,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 15.7,
+    "NEW_crest_elevator_R1": 6.7,
+    "NEW_crest_R2": 10.7,
+    "NEW_crest_elevator_R2": 4.6,
+    "NEW_CF_crest_spar_R_6x4x325": 7.9,
+    "NEW_crest_L1": 15.7,
+    "NEW_crest_elevator_L1": 6.7,
+    "NEW_crest_L2": 10.7,
+    "NEW_crest_elevator_L2": 4.6,
+    "NEW_CF_crest_spar_L_6x4x325": 7.9,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 711.3,
+    "M2": 707.7,
+    "M3": 712.1,
+    "M4": 706.9
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 605.0,
+   "np_open_x_mm": 638.5,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.4,
+   "sm_open_pct": 13.6,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.3,
+     "pitch_surfaces_deg": -0.4,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 14.8,
+     "pitch_surfaces_deg": -7.4,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.1,
+     "pitch_surfaces_deg": 2.0,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 9.7,
+     "pitch_surfaces_deg": -2.5,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 9.0
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 245,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 754.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 260,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2819.9,
+   "cg_mm": [
+    564.2,
+    -0.1,
+    1.4
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
+    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
+    "NEW_wrist_cap_inner_R": 6.6,
+    "NEW_wrist_cap_inner_L": 6.6,
+    "NEW_wrist_cap_outer_R": 3.7,
+    "NEW_wrist_cap_outer_L": 3.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x301": 7.3,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x301": 7.3,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.4,
+    "NEW_F5_root_fairing_L": 7.4
+   },
+   "rotor_front_x_mm": 485.0,
+   "rotor_rear_x_mm": 665.0,
+   "rotor_centroid_x_mm": 575.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 789.4,
+    "M2": 620.6,
+    "M3": 790.2,
+    "M4": 619.8
+   },
+   "worst_motor_pct": 28.0,
+   "np_closed_x_mm": 600.7,
+   "np_open_x_mm": 634.4,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.7,
+   "sm_open_pct": 12.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.0,
+     "pitch_surfaces_deg": -0.0,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 14.6,
+     "pitch_surfaces_deg": -7.5,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 7.9,
+     "pitch_surfaces_deg": 2.3,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 9.6,
+     "pitch_surfaces_deg": -2.6,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 665.0,
+   "length_mm": 920.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S",
+   "score": 0.0,
+   "cost": 8.6
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 245,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.07,
+     "aspect": 6.0,
+     "taper": 0.45,
+     "le_sweep_deg": 35.0,
+     "x_le_root_mm": 754.0,
+     "incidence_deg": -4.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 260,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2831.9,
+   "cg_mm": [
+    565.9,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x197": 11.0,
+    "NEW_CF_wrist_spar_L_10x10x197": 11.0,
+    "NEW_wrist_cap_inner_R": 6.6,
+    "NEW_wrist_cap_inner_L": 6.6,
+    "NEW_wrist_cap_outer_R": 3.7,
+    "NEW_wrist_cap_outer_L": 3.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 15.7,
+    "NEW_crest_elevator_R1": 6.7,
+    "NEW_crest_R2": 10.7,
+    "NEW_crest_elevator_R2": 4.6,
+    "NEW_CF_crest_spar_R_6x4x325": 7.9,
+    "NEW_crest_L1": 15.7,
+    "NEW_crest_elevator_L1": 6.7,
+    "NEW_crest_L2": 10.7,
+    "NEW_crest_elevator_L2": 4.6,
+    "NEW_CF_crest_spar_L_6x4x325": 7.9,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.4,
+    "NEW_F5_root_fairing_L": 7.4
+   },
+   "rotor_front_x_mm": 485.0,
+   "rotor_rear_x_mm": 665.0,
+   "rotor_centroid_x_mm": 575.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 778.8,
+    "M2": 637.1,
+    "M3": 779.6,
+    "M4": 636.3
+   },
+   "worst_motor_pct": 27.5,
+   "np_closed_x_mm": 606.9,
+   "np_open_x_mm": 640.7,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.5,
+   "sm_open_pct": 13.8,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.0,
+     "pitch_surfaces_deg": -0.3,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 14.6,
+     "pitch_surfaces_deg": -7.4,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 7.9,
+     "pitch_surfaces_deg": 2.1,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.5,
+     "pitch_surfaces_deg": -2.5,
      "CL": 0.237
     }
    },
@@ -8836,7 +8846,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 763.0,
+     "x_le_root_mm": 754.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -8846,12 +8856,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2826.6,
    "cg_mm": [
-    566.4,
+    568.3,
     -0.1,
     1.4
    ],
@@ -8894,38 +8905,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 773.9,
-    "M2": 639.4,
-    "M3": 774.7,
-    "M4": 638.6
+    "M1": 759.0,
+    "M2": 654.3,
+    "M3": 759.8,
+    "M4": 653.5
    },
-   "worst_motor_pct": 27.4,
-   "np_closed_x_mm": 610.5,
-   "np_open_x_mm": 643.8,
+   "worst_motor_pct": 26.9,
+   "np_closed_x_mm": 608.9,
+   "np_open_x_mm": 642.1,
    "mac_mm": 542.3,
-   "sm_closed_pct": 8.1,
-   "sm_open_pct": 14.3,
+   "sm_closed_pct": 7.5,
+   "sm_open_pct": 13.6,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.7,
-     "pitch_surfaces_deg": -1.4,
+     "alpha_deg": 12.6,
+     "pitch_surfaces_deg": -0.9,
      "CL": 0.37
     },
     "open": {
-     "alpha_deg": 15.3,
-     "pitch_surfaces_deg": -8.8,
+     "alpha_deg": 15.2,
+     "pitch_surfaces_deg": -8.4,
      "CL": 0.37
     }
    },
    "trim_20ms": {
     "closed": {
-     "alpha_deg": 8.3,
-     "pitch_surfaces_deg": 1.4,
+     "alpha_deg": 8.2,
+     "pitch_surfaces_deg": 1.7,
      "CL": 0.237
     },
     "open": {
-     "alpha_deg": 10.0,
-     "pitch_surfaces_deg": -3.4,
+     "alpha_deg": 9.9,
+     "pitch_surfaces_deg": -3.2,
      "CL": 0.237
     }
    },
@@ -8963,7 +8974,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 763.0,
+     "x_le_root_mm": 754.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -8973,12 +8984,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2838.6,
    "cg_mm": [
-    568.2,
+    570.0,
     -0.1,
     1.7
    ],
@@ -9021,38 +9033,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 763.1,
-    "M2": 656.2,
-    "M3": 763.9,
-    "M4": 655.4
+    "M1": 748.4,
+    "M2": 670.9,
+    "M3": 749.2,
+    "M4": 670.1
    },
-   "worst_motor_pct": 26.9,
-   "np_closed_x_mm": 617.2,
-   "np_open_x_mm": 650.5,
+   "worst_motor_pct": 26.4,
+   "np_closed_x_mm": 615.4,
+   "np_open_x_mm": 648.7,
    "mac_mm": 542.3,
-   "sm_closed_pct": 9.0,
-   "sm_open_pct": 15.2,
+   "sm_closed_pct": 8.4,
+   "sm_open_pct": 14.5,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.7,
-     "pitch_surfaces_deg": -1.7,
+     "alpha_deg": 12.6,
+     "pitch_surfaces_deg": -1.2,
      "CL": 0.372
     },
     "open": {
-     "alpha_deg": 15.2,
-     "pitch_surfaces_deg": -8.8,
+     "alpha_deg": 15.1,
+     "pitch_surfaces_deg": -8.3,
      "CL": 0.372
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 8.3,
-     "pitch_surfaces_deg": 1.2,
+     "pitch_surfaces_deg": 1.5,
      "CL": 0.238
     },
     "open": {
-     "alpha_deg": 10.0,
-     "pitch_surfaces_deg": -3.4,
+     "alpha_deg": 9.9,
+     "pitch_surfaces_deg": -3.1,
      "CL": 0.238
     }
    },
@@ -9090,7 +9102,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
+     "x_le_root_mm": 744.0,
      "incidence_deg": 0.0,
      "elevator_frac": 0.0,
      "height_mm": 75.0,
@@ -9100,12 +9112,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2829.1,
    "cg_mm": [
-    562.5,
+    564.4,
     -0.2,
     1.2
    ],
@@ -9143,38 +9156,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 726.4,
-    "M2": 688.2,
-    "M3": 727.8,
-    "M4": 686.7
+    "M1": 711.5,
+    "M2": 703.1,
+    "M3": 713.0,
+    "M4": 701.6
    },
-   "worst_motor_pct": 25.7,
-   "np_closed_x_mm": 606.7,
-   "np_open_x_mm": 640.3,
+   "worst_motor_pct": 25.2,
+   "np_closed_x_mm": 605.0,
+   "np_open_x_mm": 638.5,
    "mac_mm": 542.3,
-   "sm_closed_pct": 8.2,
-   "sm_open_pct": 14.4,
+   "sm_closed_pct": 7.5,
+   "sm_open_pct": 13.7,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.9,
-     "pitch_surfaces_deg": -17.2,
+     "alpha_deg": 12.7,
+     "pitch_surfaces_deg": -15.0,
      "CL": 0.37
     },
     "open": {
-     "alpha_deg": 15.8,
-     "pitch_surfaces_deg": -37.5,
+     "alpha_deg": 15.5,
+     "pitch_surfaces_deg": -34.7,
      "CL": 0.37
     }
    },
    "trim_20ms": {
     "closed": {
-     "alpha_deg": 8.4,
-     "pitch_surfaces_deg": -9.5,
+     "alpha_deg": 8.3,
+     "pitch_surfaces_deg": -8.1,
      "CL": 0.237
     },
     "open": {
-     "alpha_deg": 10.3,
-     "pitch_surfaces_deg": -22.6,
+     "alpha_deg": 10.1,
+     "pitch_surfaces_deg": -20.8,
      "CL": 0.237
     }
    },
@@ -9190,7 +9203,7 @@
    "geometry_ok": true,
    "passes": false,
    "family": "S",
-   "score": 13.75,
+   "score": 12.35,
    "cost": 9.0
   },
   {
@@ -9212,7 +9225,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
+     "x_le_root_mm": 744.0,
      "incidence_deg": -6.0,
      "elevator_frac": 0.0,
      "height_mm": 75.0,
@@ -9222,12 +9235,13 @@
     "gps_aft": true,
     "outer_shift_mm": 300,
     "no_le_ext": true,
-    "rear_support": "boom"
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
    },
    "mass_basis": "V19 geometry",
    "all_up_g": 2829.1,
    "cg_mm": [
-    562.5,
+    564.4,
     -0.2,
     1.6
    ],
@@ -9265,38 +9279,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 726.5,
-    "M2": 688.1,
-    "M3": 728.0,
-    "M4": 686.6
+    "M1": 711.6,
+    "M2": 702.9,
+    "M3": 713.1,
+    "M4": 701.4
    },
-   "worst_motor_pct": 25.7,
-   "np_closed_x_mm": 606.7,
-   "np_open_x_mm": 640.3,
+   "worst_motor_pct": 25.2,
+   "np_closed_x_mm": 605.0,
+   "np_open_x_mm": 638.5,
    "mac_mm": 542.3,
-   "sm_closed_pct": 8.2,
-   "sm_open_pct": 14.4,
+   "sm_closed_pct": 7.5,
+   "sm_open_pct": 13.7,
    "trim_16ms": {
     "closed": {
-     "alpha_deg": 12.2,
-     "pitch_surfaces_deg": 4.7,
+     "alpha_deg": 12.1,
+     "pitch_surfaces_deg": 5.8,
      "CL": 0.37
     },
     "open": {
-     "alpha_deg": 15.3,
-     "pitch_surfaces_deg": -16.0,
+     "alpha_deg": 15.1,
+     "pitch_surfaces_deg": -14.4,
      "CL": 0.37
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 7.8,
-     "pitch_surfaces_deg": 12.4,
+     "pitch_surfaces_deg": 12.7,
      "CL": 0.237
     },
     "open": {
-     "alpha_deg": 9.8,
-     "pitch_surfaces_deg": -1.2,
+     "alpha_deg": 9.7,
+     "pitch_surfaces_deg": -0.5,
      "CL": 0.237
     }
    },
@@ -9312,7 +9326,1799 @@
    "geometry_ok": true,
    "passes": false,
    "family": "S",
-   "score": 3.0,
+   "score": 2.2,
+   "cost": 9.0
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 225,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.05,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 701.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -6.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2818.1,
+   "cg_mm": [
+    555.1,
+    -0.1,
+    1.3
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 11.2,
+    "NEW_crest_elevator_R1": 4.8,
+    "NEW_crest_R2": 7.7,
+    "NEW_crest_elevator_R2": 3.3,
+    "NEW_CF_crest_spar_R_6x4x369": 9.0,
+    "NEW_crest_L1": 11.2,
+    "NEW_crest_elevator_L1": 4.8,
+    "NEW_crest_L2": 7.7,
+    "NEW_crest_elevator_L2": 3.3,
+    "NEW_CF_crest_spar_L_6x4x369": 9.0,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 6.9,
+    "NEW_F5_root_fairing_L": 6.9
+   },
+   "rotor_front_x_mm": 465.0,
+   "rotor_rear_x_mm": 645.0,
+   "rotor_centroid_x_mm": 555.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 703.0,
+    "M2": 706.0,
+    "M3": 703.8,
+    "M4": 705.2
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 583.7,
+   "np_open_x_mm": 617.3,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 5.3,
+   "sm_open_pct": 11.5,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.1,
+     "pitch_surfaces_deg": 1.9,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 14.7,
+     "pitch_surfaces_deg": -6.3,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 7.9,
+     "pitch_surfaces_deg": 4.0,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 9.6,
+     "pitch_surfaces_deg": -1.3,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 645.0,
+   "length_mm": 900.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.0
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 225,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 701.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2830.6,
+   "cg_mm": [
+    555.7,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 6.9,
+    "NEW_F5_root_fairing_L": 6.9
+   },
+   "rotor_front_x_mm": 465.0,
+   "rotor_rear_x_mm": 645.0,
+   "rotor_centroid_x_mm": 555.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 701.4,
+    "M2": 713.9,
+    "M3": 702.2,
+    "M4": 713.1
+   },
+   "worst_motor_pct": 25.2,
+   "np_closed_x_mm": 590.5,
+   "np_open_x_mm": 624.2,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.4,
+   "sm_open_pct": 12.6,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.2,
+     "pitch_surfaces_deg": 1.4,
+     "CL": 0.37
+    },
+    "open": {
+     "alpha_deg": 14.8,
+     "pitch_surfaces_deg": -6.4,
+     "CL": 0.37
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.0,
+     "pitch_surfaces_deg": 3.7,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.6,
+     "pitch_surfaces_deg": -1.3,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 645.0,
+   "length_mm": 900.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.4
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.05,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2818.5,
+   "cg_mm": [
+    562.7,
+    -0.1,
+    1.3
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 11.2,
+    "NEW_crest_elevator_R1": 4.8,
+    "NEW_crest_R2": 7.7,
+    "NEW_crest_elevator_R2": 3.3,
+    "NEW_CF_crest_spar_R_6x4x369": 9.0,
+    "NEW_crest_L1": 11.2,
+    "NEW_crest_elevator_L1": 4.8,
+    "NEW_crest_L2": 7.7,
+    "NEW_crest_elevator_L2": 3.3,
+    "NEW_CF_crest_spar_L_6x4x369": 9.0,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 721.9,
+    "M2": 687.4,
+    "M3": 722.7,
+    "M4": 686.6
+   },
+   "worst_motor_pct": 25.6,
+   "np_closed_x_mm": 593.7,
+   "np_open_x_mm": 627.2,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 5.7,
+   "sm_open_pct": 11.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.3,
+     "pitch_surfaces_deg": 1.5,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 14.9,
+     "pitch_surfaces_deg": -6.7,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.0,
+     "pitch_surfaces_deg": 3.7,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 9.7,
+     "pitch_surfaces_deg": -1.6,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.2
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 14.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2831.1,
+   "cg_mm": [
+    564.5,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 711.1,
+    "M2": 704.5,
+    "M3": 711.9,
+    "M4": 703.7
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 600.6,
+   "np_open_x_mm": 634.1,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.7,
+   "sm_open_pct": 12.8,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.3,
+     "pitch_surfaces_deg": 1.1,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 14.9,
+     "pitch_surfaces_deg": -6.6,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.0,
+     "pitch_surfaces_deg": 3.5,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.7,
+     "pitch_surfaces_deg": -1.5,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.6
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 245,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.05,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 721.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2819.1,
+   "cg_mm": [
+    567.3,
+    -0.1,
+    1.3
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 11.2,
+    "NEW_crest_elevator_R1": 4.8,
+    "NEW_crest_R2": 7.7,
+    "NEW_crest_elevator_R2": 3.3,
+    "NEW_CF_crest_spar_R_6x4x369": 9.0,
+    "NEW_crest_L1": 11.2,
+    "NEW_crest_elevator_L1": 4.8,
+    "NEW_crest_L2": 7.7,
+    "NEW_crest_elevator_L2": 3.3,
+    "NEW_CF_crest_spar_L_6x4x369": 9.0,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.4,
+    "NEW_F5_root_fairing_L": 7.4
+   },
+   "rotor_front_x_mm": 485.0,
+   "rotor_rear_x_mm": 665.0,
+   "rotor_centroid_x_mm": 575.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 764.7,
+    "M2": 644.8,
+    "M3": 765.5,
+    "M4": 644.0
+   },
+   "worst_motor_pct": 27.2,
+   "np_closed_x_mm": 604.0,
+   "np_open_x_mm": 637.2,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 6.8,
+   "sm_open_pct": 12.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.6,
+     "pitch_surfaces_deg": 0.3,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 15.3,
+     "pitch_surfaces_deg": -7.9,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.2,
+     "pitch_surfaces_deg": 3.0,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 10.0,
+     "pitch_surfaces_deg": -2.4,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 665.0,
+   "length_mm": 920.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.4
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 245,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 721.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2831.7,
+   "cg_mm": [
+    569.2,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.4,
+    "NEW_F5_root_fairing_L": 7.4
+   },
+   "rotor_front_x_mm": 485.0,
+   "rotor_rear_x_mm": 665.0,
+   "rotor_centroid_x_mm": 575.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 752.8,
+    "M2": 663.1,
+    "M3": 753.6,
+    "M4": 662.3
+   },
+   "worst_motor_pct": 26.6,
+   "np_closed_x_mm": 610.9,
+   "np_open_x_mm": 644.2,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.7,
+   "sm_open_pct": 13.8,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.6,
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 15.2,
+     "pitch_surfaces_deg": -7.7,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.2,
+     "pitch_surfaces_deg": 2.9,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 9.9,
+     "pitch_surfaces_deg": -2.2,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 665.0,
+   "length_mm": 920.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "G",
+   "score": 0.0,
+   "cost": 8.8
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -5.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2832.6,
+   "cg_mm": [
+    565.1,
+    -0.1,
+    1.6
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 707.1,
+    "M2": 709.2,
+    "M3": 707.9,
+    "M4": 708.4
+   },
+   "worst_motor_pct": 25.0,
+   "np_closed_x_mm": 604.4,
+   "np_open_x_mm": 637.8,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.2,
+   "sm_open_pct": 13.4,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.0,
+     "pitch_surfaces_deg": 1.2,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 15.6,
+     "pitch_surfaces_deg": -6.9,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.5,
+     "pitch_surfaces_deg": 3.9,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 10.2,
+     "pitch_surfaces_deg": -1.3,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.6
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -10.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2838.9,
+   "cg_mm": [
+    565.3,
+    -0.1,
+    1.8
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 706.8,
+    "M2": 712.6,
+    "M3": 707.6,
+    "M4": 711.8
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 608.0,
+   "np_open_x_mm": 641.5,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.9,
+   "sm_open_pct": 14.0,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.0,
+     "pitch_surfaces_deg": 1.0,
+     "CL": 0.372
+    },
+    "open": {
+     "alpha_deg": 15.6,
+     "pitch_surfaces_deg": -6.9,
+     "CL": 0.372
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.5,
+     "pitch_surfaces_deg": 3.8,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.2,
+     "pitch_surfaces_deg": -1.3,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.8
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 360,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2836.4,
+   "cg_mm": [
+    565.8,
+    -0.1,
+    1.6
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x271": 15.1,
+    "NEW_CF_wrist_spar_L_10x10x271": 15.1,
+    "NEW_wrist_cap_inner_R": 8.7,
+    "NEW_wrist_cap_inner_L": 8.7,
+    "NEW_wrist_cap_outer_R": 6.7,
+    "NEW_wrist_cap_outer_L": 6.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 702.3,
+    "M2": 715.9,
+    "M3": 703.1,
+    "M4": 715.1
+   },
+   "worst_motor_pct": 25.2,
+   "np_closed_x_mm": 607.3,
+   "np_open_x_mm": 641.0,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.7,
+   "sm_open_pct": 13.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.3,
+     "pitch_surfaces_deg": 0.7,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 16.0,
+     "pitch_surfaces_deg": -7.4,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.7,
+     "pitch_surfaces_deg": 3.6,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.4,
+     "pitch_surfaces_deg": -1.7,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.7
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 360,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -15.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2842.7,
+   "cg_mm": [
+    566.8,
+    -0.1,
+    1.8
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x271": 15.1,
+    "NEW_CF_wrist_spar_L_10x10x271": 15.1,
+    "NEW_wrist_cap_inner_R": 8.7,
+    "NEW_wrist_cap_inner_L": 8.7,
+    "NEW_wrist_cap_outer_R": 6.7,
+    "NEW_wrist_cap_outer_L": 6.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 696.3,
+    "M2": 725.1,
+    "M3": 697.1,
+    "M4": 724.3
+   },
+   "worst_motor_pct": 25.5,
+   "np_closed_x_mm": 611.1,
+   "np_open_x_mm": 644.7,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 8.2,
+   "sm_open_pct": 14.4,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.3,
+     "pitch_surfaces_deg": 0.6,
+     "CL": 0.372
+    },
+    "open": {
+     "alpha_deg": 16.0,
+     "pitch_surfaces_deg": -7.3,
+     "CL": 0.372
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.7,
+     "pitch_surfaces_deg": 3.5,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.4,
+     "pitch_surfaces_deg": -1.6,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.9
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 240,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 716.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 11.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2832.8,
+   "cg_mm": [
+    569.7,
+    -0.1,
+    1.6
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.2,
+    "NEW_F5_root_fairing_L": 7.2
+   },
+   "rotor_front_x_mm": 480.0,
+   "rotor_rear_x_mm": 660.0,
+   "rotor_centroid_x_mm": 570.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 710.3,
+    "M2": 706.2,
+    "M3": 711.1,
+    "M4": 705.4
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 609.5,
+   "np_open_x_mm": 642.9,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.3,
+   "sm_open_pct": 13.5,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.0,
+     "pitch_surfaces_deg": 1.1,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 15.7,
+     "pitch_surfaces_deg": -7.0,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.5,
+     "pitch_surfaces_deg": 3.8,
+     "CL": 0.237
+    },
+    "open": {
+     "alpha_deg": 10.2,
+     "pitch_surfaces_deg": -1.4,
+     "CL": 0.237
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 660.0,
+   "length_mm": 915.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.7
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 240,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 716.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 5.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2839.1,
+   "cg_mm": [
+    569.8,
+    -0.1,
+    1.8
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.2,
+    "NEW_F5_root_fairing_L": 7.2
+   },
+   "rotor_front_x_mm": 480.0,
+   "rotor_rear_x_mm": 660.0,
+   "rotor_centroid_x_mm": 570.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 711.1,
+    "M2": 708.5,
+    "M3": 711.9,
+    "M4": 707.7
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 613.1,
+   "np_open_x_mm": 646.5,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 8.0,
+   "sm_open_pct": 14.1,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.1,
+     "pitch_surfaces_deg": 0.8,
+     "CL": 0.372
+    },
+    "open": {
+     "alpha_deg": 15.7,
+     "pitch_surfaces_deg": -7.0,
+     "CL": 0.372
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.5,
+     "pitch_surfaces_deg": 3.7,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.2,
+     "pitch_surfaces_deg": -1.4,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 660.0,
+   "length_mm": 915.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.9
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 240,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 716.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 360,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -2.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2836.6,
+   "cg_mm": [
+    570.0,
+    -0.1,
+    1.6
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x271": 15.1,
+    "NEW_CF_wrist_spar_L_10x10x271": 15.1,
+    "NEW_wrist_cap_inner_R": 8.7,
+    "NEW_wrist_cap_inner_L": 8.7,
+    "NEW_wrist_cap_outer_R": 6.7,
+    "NEW_wrist_cap_outer_L": 6.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.2,
+    "NEW_F5_root_fairing_L": 7.2
+   },
+   "rotor_front_x_mm": 480.0,
+   "rotor_rear_x_mm": 660.0,
+   "rotor_centroid_x_mm": 570.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 708.9,
+    "M2": 709.4,
+    "M3": 709.7,
+    "M4": 708.6
+   },
+   "worst_motor_pct": 25.0,
+   "np_closed_x_mm": 612.5,
+   "np_open_x_mm": 646.0,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 7.8,
+   "sm_open_pct": 14.0,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.4,
+     "pitch_surfaces_deg": 0.5,
+     "CL": 0.371
+    },
+    "open": {
+     "alpha_deg": 16.1,
+     "pitch_surfaces_deg": -7.6,
+     "CL": 0.371
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.7,
+     "pitch_surfaces_deg": 3.4,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.5,
+     "pitch_surfaces_deg": -1.8,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 660.0,
+   "length_mm": 915.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
+   "cost": 8.8
+  },
+  {
+   "config": {
+    "name": "V18",
+    "label": "V18 as modelled",
+    "wing_shift_mm": 240,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 716.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 360,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -7.0
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2842.9,
+   "cg_mm": [
+    570.2,
+    -0.1,
+    1.8
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x271": 15.1,
+    "NEW_CF_wrist_spar_L_10x10x271": 15.1,
+    "NEW_wrist_cap_inner_R": 8.7,
+    "NEW_wrist_cap_inner_L": 8.7,
+    "NEW_wrist_cap_outer_R": 6.7,
+    "NEW_wrist_cap_outer_L": 6.7,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.2,
+    "NEW_F5_root_fairing_L": 7.2
+   },
+   "rotor_front_x_mm": 480.0,
+   "rotor_rear_x_mm": 660.0,
+   "rotor_centroid_x_mm": 570.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 708.6,
+    "M2": 712.9,
+    "M3": 709.4,
+    "M4": 712.1
+   },
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 616.2,
+   "np_open_x_mm": 649.7,
+   "mac_mm": 542.3,
+   "sm_closed_pct": 8.5,
+   "sm_open_pct": 14.7,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.4,
+     "pitch_surfaces_deg": 0.3,
+     "CL": 0.372
+    },
+    "open": {
+     "alpha_deg": 16.1,
+     "pitch_surfaces_deg": -7.6,
+     "CL": 0.372
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.8,
+     "pitch_surfaces_deg": 3.3,
+     "CL": 0.238
+    },
+    "open": {
+     "alpha_deg": 10.5,
+     "pitch_surfaces_deg": -1.8,
+     "CL": 0.238
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.7,
+    "CLmax_0.9": 10.3
+   },
+   "wing_area_m2": 0.4779,
+   "main_gear_x_mm": 660.0,
+   "length_mm": 915.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F",
+   "score": 0.0,
    "cost": 9.0
   }
  ],
@@ -9889,7 +11695,7 @@
    "config": {
     "name": "v19s_stoop_crest",
     "label": "V19-S stoop wing + falcon crest",
-    "wing_shift_mm": 235,
+    "wing_shift_mm": 225,
     "front_rotor": {
      "mode": "wing",
      "dx": 0.0
@@ -9904,7 +11710,7 @@
      "aspect": 6.0,
      "taper": 0.45,
      "le_sweep_deg": 35.0,
-     "x_le_root_mm": 753.0,
+     "x_le_root_mm": 734.0,
      "incidence_deg": -4.0,
      "elevator_frac": 0.3,
      "height_mm": 75.0,
@@ -9915,12 +11721,13 @@
     "outer_shift_mm": 300,
     "no_le_ext": true,
     "rear_support": "boom",
-    "summary": "All four lift rotors in your V18 wing wells, wing 235 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
+    "battery_dx_mm": -15.0,
+    "summary": "All four lift rotors in your V18 wing wells, wing 225 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
    },
    "mass_basis": "V19 geometry",
-   "all_up_g": 2838.0,
+   "all_up_g": 2837.5,
    "cg_mm": [
-    563.6,
+    556.5,
     -0.1,
     1.7
    ],
@@ -9953,6 +11760,133 @@
     "NEW_crest_elevator_L2": 4.6,
     "NEW_CF_crest_spar_L_6x4x325": 7.9,
     "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 6.9,
+    "NEW_F5_root_fairing_L": 6.9
+   },
+   "rotor_front_x_mm": 465.0,
+   "rotor_rear_x_mm": 645.0,
+   "rotor_centroid_x_mm": 555.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 697.0,
+    "M2": 721.7,
+    "M3": 697.8,
+    "M4": 720.9
+   },
+   "worst_motor_pct": 25.4,
+   "np_closed_x_mm": 595.1,
+   "np_open_x_mm": 626.9,
+   "mac_mm": 543.7,
+   "sm_closed_pct": 7.1,
+   "sm_open_pct": 12.9,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 12.6,
+     "pitch_surfaces_deg": -0.9,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 14.9,
+     "pitch_surfaces_deg": -7.4,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.4,
+     "pitch_surfaces_deg": 1.3,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 9.9,
+     "pitch_surfaces_deg": -2.8,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4806,
+   "main_gear_x_mm": 645.0,
+   "length_mm": 900.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "S"
+  },
+  "G": {
+   "config": {
+    "name": "v19g_gyr_crest",
+    "label": "V19-G slim crest",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.06,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -5.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 300,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": 14.0,
+    "summary": "V19-S layout with a slimmer, sharper crest (aspect 8, 45 deg sweep): wing 235 mm aft, outer panels swept 300 mm back, battery in the V18 tray"
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2831.1,
+   "cg_mm": [
+    564.5,
+    -0.1,
+    1.7
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x219": 12.2,
+    "NEW_CF_wrist_spar_L_10x10x219": 12.2,
+    "NEW_wrist_cap_inner_R": 7.5,
+    "NEW_wrist_cap_inner_L": 7.5,
+    "NEW_wrist_cap_outer_R": 4.9,
+    "NEW_wrist_cap_outer_L": 4.9,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 13.5,
+    "NEW_crest_elevator_R1": 5.8,
+    "NEW_crest_R2": 9.2,
+    "NEW_crest_elevator_R2": 3.9,
+    "NEW_CF_crest_spar_R_6x4x405": 9.8,
+    "NEW_crest_L1": 13.5,
+    "NEW_crest_elevator_L1": 5.8,
+    "NEW_crest_L2": 9.2,
+    "NEW_crest_elevator_L2": 3.9,
+    "NEW_CF_crest_spar_L_6x4x405": 9.8,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
     "NEW_F5_root_fairing_R": 7.1,
     "NEW_F5_root_fairing_L": 7.1
    },
@@ -9963,38 +11897,38 @@
    "boom_prop_to_le_mm": null,
    "rear_well_to_flap_mm": 94.5,
    "motor_hover_g": {
-    "M1": 720.2,
-    "M2": 698.8,
-    "M3": 721.0,
-    "M4": 698.0
+    "M1": 711.1,
+    "M2": 704.5,
+    "M3": 711.9,
+    "M4": 703.7
    },
-   "worst_motor_pct": 25.4,
-   "np_closed_x_mm": 606.8,
-   "np_open_x_mm": 638.6,
+   "worst_motor_pct": 25.1,
+   "np_closed_x_mm": 601.3,
+   "np_open_x_mm": 633.0,
    "mac_mm": 543.7,
-   "sm_closed_pct": 8.0,
-   "sm_open_pct": 13.8,
+   "sm_closed_pct": 6.8,
+   "sm_open_pct": 12.6,
    "trim_16ms": {
     "closed": {
      "alpha_deg": 12.7,
-     "pitch_surfaces_deg": -1.6,
-     "CL": 0.369
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.368
     },
     "open": {
      "alpha_deg": 15.1,
-     "pitch_surfaces_deg": -8.0,
-     "CL": 0.369
+     "pitch_surfaces_deg": -7.1,
+     "CL": 0.368
     }
    },
    "trim_20ms": {
     "closed": {
      "alpha_deg": 8.5,
-     "pitch_surfaces_deg": 0.9,
+     "pitch_surfaces_deg": 2.6,
      "CL": 0.236
     },
     "open": {
      "alpha_deg": 10.0,
-     "pitch_surfaces_deg": -3.2,
+     "pitch_surfaces_deg": -2.0,
      "CL": 0.236
     }
    },
@@ -10009,7 +11943,134 @@
    "flight_ok": true,
    "geometry_ok": true,
    "passes": true,
-   "family": "S"
+   "family": "G"
+  },
+  "F": {
+   "config": {
+    "name": "v19f_swift_stoop",
+    "label": "V19-F deep stoop",
+    "wing_shift_mm": 235,
+    "front_rotor": {
+     "mode": "wing",
+     "dx": 0.0
+    },
+    "rear_rotor_dx_mm": 0.0,
+    "battery": "v18",
+    "avionics_forward": false,
+    "tail_parts_lwpla": true,
+    "lwpla_density": 0.8,
+    "tail": {
+     "area_m2": 0.055,
+     "aspect": 8.0,
+     "taper": 0.45,
+     "le_sweep_deg": 45.0,
+     "x_le_root_mm": 711.0,
+     "incidence_deg": -6.0,
+     "elevator_frac": 0.3,
+     "height_mm": 75.0,
+     "mount": "fins"
+    },
+    "cockpit_camera": true,
+    "gps_aft": true,
+    "outer_shift_mm": 340,
+    "no_le_ext": true,
+    "rear_support": "boom",
+    "battery_dx_mm": -5.0,
+    "summary": "V19-S layout with the outer panels swept 340 mm back and the slim crest: wing 235 mm aft, battery in the V18 tray"
+   },
+   "mass_basis": "V19 geometry",
+   "all_up_g": 2832.6,
+   "cg_mm": [
+    565.1,
+    -0.1,
+    1.6
+   ],
+   "new_parts_g": {
+    "NEW_canopy_frame": 1.5,
+    "NEW_canopy_clear_PETG": 15.3,
+    "NEW_cockpit_camera_seat": 8.3,
+    "NEW_CF_wrist_spar_R_10x10x254": 14.1,
+    "NEW_CF_wrist_spar_L_10x10x254": 14.1,
+    "NEW_wrist_cap_inner_R": 8.3,
+    "NEW_wrist_cap_inner_L": 8.3,
+    "NEW_wrist_cap_outer_R": 6.1,
+    "NEW_wrist_cap_outer_L": 6.1,
+    "NEW_CF_rotor_boom_R_10x10x245": 13.7,
+    "NEW_boom_hanger_front_R": 2.4,
+    "NEW_boom_hanger_rear_R": 3.3,
+    "NEW_rear_motor_riser_R": 10.8,
+    "NEW_CF_rotor_boom_L_10x10x245": 13.7,
+    "NEW_boom_hanger_front_L": 2.4,
+    "NEW_boom_hanger_rear_L": 3.3,
+    "NEW_rear_motor_riser_L": 10.8,
+    "NEW_crest_R1": 12.4,
+    "NEW_crest_elevator_R1": 5.3,
+    "NEW_crest_R2": 8.4,
+    "NEW_crest_elevator_R2": 3.6,
+    "NEW_CF_crest_spar_R_6x4x388": 9.4,
+    "NEW_crest_L1": 12.4,
+    "NEW_crest_elevator_L1": 5.3,
+    "NEW_crest_L2": 8.4,
+    "NEW_crest_elevator_L2": 3.6,
+    "NEW_CF_crest_spar_L_6x4x388": 9.4,
+    "KEEP_OUT_crest_elevator_servo_20x18x9": 10.0,
+    "NEW_F5_root_fairing_R": 7.1,
+    "NEW_F5_root_fairing_L": 7.1
+   },
+   "rotor_front_x_mm": 475.0,
+   "rotor_rear_x_mm": 655.0,
+   "rotor_centroid_x_mm": 565.0,
+   "le_extension_mm": 0.0,
+   "boom_prop_to_le_mm": null,
+   "rear_well_to_flap_mm": 94.5,
+   "motor_hover_g": {
+    "M1": 707.1,
+    "M2": 709.2,
+    "M3": 707.9,
+    "M4": 708.4
+   },
+   "worst_motor_pct": 25.0,
+   "np_closed_x_mm": 605.5,
+   "np_open_x_mm": 636.9,
+   "mac_mm": 543.7,
+   "sm_closed_pct": 7.4,
+   "sm_open_pct": 13.2,
+   "trim_16ms": {
+    "closed": {
+     "alpha_deg": 13.4,
+     "pitch_surfaces_deg": 0.1,
+     "CL": 0.369
+    },
+    "open": {
+     "alpha_deg": 15.8,
+     "pitch_surfaces_deg": -7.5,
+     "CL": 0.369
+    }
+   },
+   "trim_20ms": {
+    "closed": {
+     "alpha_deg": 8.9,
+     "pitch_surfaces_deg": 2.9,
+     "CL": 0.236
+    },
+    "open": {
+     "alpha_deg": 10.5,
+     "pitch_surfaces_deg": -1.9,
+     "CL": 0.236
+    }
+   },
+   "stall_speed_ms": {
+    "CLmax_0.7": 11.6,
+    "CLmax_0.9": 10.2
+   },
+   "wing_area_m2": 0.4806,
+   "main_gear_x_mm": 655.0,
+   "length_mm": 910.0,
+   "hover_ok": true,
+   "flight_ok": true,
+   "geometry_ok": true,
+   "passes": true,
+   "family": "F"
   }
  }
 }

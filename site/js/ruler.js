@@ -35,7 +35,7 @@ export function drawRuler(host, { cgX, rotorX, rotorRows, npBand, window: win, l
   if (!narrow) svg.append(el('text', { class: 'lbl', x: sx(length), y: y0 + 30, 'text-anchor': 'end' }, 'x mm, aft from the nose'));
   for (const r of rotorRows) svg.append(el('line', { class: 'rotor-row', x1: sx(r), x2: sx(r), y1: y0 - 30, y2: y0 }));
   svg.append(el('line', { class: 'rotor', x1: sx(rotorX), x2: sx(rotorX), y1: y0 - 34, y2: y0 + 4 }));
-  svg.append(el('text', { class: 'lbl rotor-lbl big', x: sx(rotorX), y: 14, 'text-anchor': 'middle' }, `rotors x${rotorX.toFixed(0)}`));
+  svg.append(el('text', { class: 'lbl rotor-lbl big', x: sx(rotorX), y: 14, 'text-anchor': 'middle' }, `rotor centre x${rotorX.toFixed(0)}`));
   svg.append(el('text', { class: 'lbl np-lbl', x: sx(npBand[0]), y: y0 + 30, 'text-anchor': 'start' }, win && !narrow ? 'neutral point band; flight CG window under it' : 'neutral point band'));
 
   const target = win ? (win[0] + win[1]) / 2 : rotorX;

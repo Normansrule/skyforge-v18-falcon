@@ -160,10 +160,10 @@
  "jet_vs_tail": {
   "assumed_exit_radius_mm": 30.0,
   "assumed_spread_mm_per_mm": 0.1,
-  "jet_top_at_stab_le_mm": 24.3,
+  "jet_top_at_stab_le_mm": 22.4,
   "stab_underside_z_mm": 67.9,
-  "stab_clear_mm": 39.1,
-  "jet_radius_at_fin_le_mm": 44.3,
+  "stab_clear_mm": 41.0,
+  "jet_radius_at_fin_le_mm": 42.4,
   "fin_inner_face_y_mm": 999.0,
   "status": "PASS",
   "note": "Estimate only: confirm with a tuft/streamer test on the EDF bench rig before the tail is glued."
@@ -220,17 +220,17 @@
   },
   "NEW_F5_root_fairing_R": {
    "fits": true,
-   "footprint_max_mm": 223.1,
+   "footprint_max_mm": 217.4,
    "rotation_deg": 46.0,
-   "height_mm": 50.9,
-   "margin_mm": 32.9
+   "height_mm": 50.0,
+   "margin_mm": 38.6
   },
   "NEW_F5_root_fairing_L": {
    "fits": true,
-   "footprint_max_mm": 223.1,
+   "footprint_max_mm": 217.4,
    "rotation_deg": 46.0,
-   "height_mm": 50.9,
-   "margin_mm": 32.9
+   "height_mm": 50.0,
+   "margin_mm": 38.6
   },
   "NEW_boom_hanger_front_R": {
    "fits": true,
