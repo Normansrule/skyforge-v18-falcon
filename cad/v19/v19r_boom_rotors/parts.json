@@ -910,7 +910,7 @@
     "slot for the rear boom hanger"
    ],
    "move_mm": [
-    250,
+    250.0,
     0.0,
     0.0
    ]
@@ -922,7 +922,7 @@
     "slot for the rear boom hanger"
    ],
    "move_mm": [
-    250,
+    250.0,
     0.0,
     0.0
    ]
@@ -933,7 +933,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    250,
+    250.0,
     0.0,
     0.0
    ]
@@ -944,7 +944,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    250,
+    250.0,
     0.0,
     0.0
    ]

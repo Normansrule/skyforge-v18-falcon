@@ -1,52 +1,52 @@
 {
  "moves": {
   "WRA_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRB_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRC_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRD_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "FLAP_R": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLA_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLB_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLC_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLD_hollow_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "FLAP_L": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
@@ -56,92 +56,92 @@
    0.0
   ],
   "FIN_R": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "FIN_L": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRE1_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLE1_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRE2_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLE2_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WRF_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "WLF_falcon_wing": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "ELEVON_R_falcon": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "ELEVON_L_falcon": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SP1_side_servo_cassette_PRINT4_-180": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SC1_servo_access_cover_PRINT4_-180": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SP1_side_servo_cassette_PRINT4_180": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SC1_servo_access_cover_PRINT4_180": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SP1_side_servo_cassette_PRINT4_-360.222222222": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SC1_servo_access_cover_PRINT4_-360.222222222": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SP1_side_servo_cassette_PRINT4_360.222222222": [
-   120,
+   120.0,
    0.0,
    0.0
   ],
   "SC1_servo_access_cover_PRINT4_360.222222222": [
-   120,
+   120.0,
    0.0,
    0.0
   ],

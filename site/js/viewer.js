@@ -117,6 +117,12 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
   const [v18, repo] = await Promise.all([loader.loadAsync('models/v18.glb', (e) => e.total && track(e.loaded / e.total)), loader.loadAsync('models/repo_parts.glb')]);
 
   const meta = new Map(parts.map((p) => [p.name, p]));
+  // GLTFLoader strips '.', ':', '/' and brackets from node names (PropertyBinding.sanitizeNodeName); map them back so
+  // parts such as SP1_side_servo_cassette_PRINT4_360.222222222 find their metadata and variant moves
+  const realName = new Map();
+  const sanitize = (n) => THREE.PropertyBinding.sanitizeNodeName(n);
+  for (const n of meta.keys()) realName.set(sanitize(n), n);
+  for (const v of Object.values(variants)) for (const n of [...(v.modified || []), ...(v.new || []).map((x) => x.name)]) realName.set(sanitize(n), n);
   const all = []; // every registered entry, V18 and variants
   const objects = new Map(); // V18 name -> entry
   const vobjects = new Map(); // slug -> Map(name -> entry)
@@ -144,7 +150,8 @@ export async function createViewer(canvas, { parts, hinges, onPick, variants = {
     const holder = new THREE.Group();
     const map = variant ? new Map() : objects;
     for (const child of [...gltf.scene.children]) {
-      const name = child.name;
+      const name = realName.get(child.name) ?? child.name;
+      child.name = name;
       const m = metaFor(name);
       const pivot = new THREE.Group();
       pivot.name = name;

@@ -50,6 +50,11 @@ CACHE = ROOT / ".cache"
 # ---------------------------------------------------------------------------------------------------
 # design constants (mm) - every one is a V19 drawing decision, documented in docs/V19_VARIANTS.md
 WING_GROUP = re.compile(r"^(W[RL]|FLAP_|ELEVON_|FIN_|SP1_|SC1_)")
+OUTER_GROUP = re.compile(r"^(W[RL]E1_|W[RL]E2_|W[RL]F_|ELEVON_|SP1_side_servo_cassette_PRINT4_-?360|SC1_servo_access_cover_PRINT4_-?360)")
+OUTER_Y = 315.0               # V18 seam between the inner wing and the falcon outer panels (the "wrist")
+OUTER_RAIL_Y = 393.0
+STOOP_RAIL_Y = 305.0          # stoop wing: rear crossrail ends inside the inner panels
+WRIST_X, WRIST_OUT_X, WRIST_Y1 = 555.0, 365.0, 400.0   # wrist spar x at the seam (inner frame) and at y 400 (outer frame)
 FRONT_HW = re.compile(r"^(PURCHASE_M[13]_2207|NO_PRINT_PURCHASED_PROP_M[13]_|G10_motor_plate_3|G10_motor_backing_3|PURCHASE_OR_CUT_motor_plate|PURCHASE_OR_CUT_motor_backing_plate)")
 REAR_HW = re.compile(r"^(PURCHASE_M[24]_2207|NO_PRINT_PURCHASED_PROP_M[24]_|G10_motor_plate_[24]|G10_motor_backing_[24])")
 BACKING = re.compile(r"(motor_backing)")
@@ -87,7 +92,7 @@ G_PER_M = {10: 55.8, 8: 43.4, "rod6": 24.3}
 SKIN_G_M2 = E.SKIN_G_PER_M2_AT_08     # both skins, per planform area
 TAIL_G_M2 = E.TAIL_G_PER_M2_AT_08
 
-BUILD_PACKS = {"v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"}
+BUILD_PACKS = {"v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest"}
 # cockpit: camera centre at a pilot's eye point under the canopy, GPS off the nose
 V18_CAM = (103.0, 0.0, 40.0)
 COCKPIT_CAM = (130.0, 0.0, 44.0)
@@ -186,6 +191,7 @@ class WingField:
     def __init__(self, parts: dict):
         self.mesh = trimesh.util.concatenate([parts[n].mesh() for n in parts if re.match(r"^WR[A-C]_", n)])
         self.full = trimesh.util.concatenate([parts[n].mesh() for n in parts if re.match(r"^WR[A-D]_", n)])
+        self.all = trimesh.util.concatenate([parts[n].mesh() for n in parts if re.match(r"^WR(A|B|C|D|E1|E2|F)_", n)])
         self.body = trimesh.util.concatenate([parts[n].mesh() for n in ("F3_hollow_body", "F4_hollow_body")])
         self.cache = CACHE / "v19_wingfield.npz"
         self._fields = {}
@@ -204,7 +210,7 @@ class WingField:
         o_bot = np.c_[X.ravel(), Y.ravel(), np.full(X.size, -200.0)]
         zt = np.full(X.size, np.nan)
         zb = np.full(X.size, np.nan)
-        mesh = self.full if full else self.mesh
+        mesh = self.all if full == "all" else (self.full if full else self.mesh)
         loc, ri, _ = mesh.ray.intersects_location(o_top, np.tile([0, 0, -1.0], (X.size, 1)), multiple_hits=True)
         for r in np.unique(ri):
             zz = loc[ri == r, 2]
@@ -277,6 +283,7 @@ class Builder:
         # four rotors in the wing wells, rear pair carried on under-wing booms so the rear crossrail can move ahead of D1
         self.wellboom = (not self.boom) and self.c.get("rear_support") == "boom"
         self.underboom = self.boom or self.wellboom
+        self.outer = float(self.c.get("outer_shift_mm", 0.0) or 0.0)   # "stoop" sweep of the outer panels
         self.out = OUT / slug
         if not light:
             for sub in ("stl", "dxf"):
@@ -299,7 +306,7 @@ class Builder:
         for n, p in self.parts.items():
             mv = [0.0, 0.0, 0.0]
             if WING_GROUP.match(n):
-                mv[0] = dw
+                mv[0] = dw + (self.outer if OUTER_GROUP.match(n) else 0.0)
             elif FRONT_HW.match(n):
                 mv[0] = dxf
                 if self.boom and BACKING.search(n):
@@ -611,11 +618,95 @@ class Builder:
                 self.modified[n] = out
                 self.mod_why.setdefault(n, []).append(why)
 
+    def stoop(self):
+        """Outer panels swept back: re-slot them for the rear crossrail, shorten the rail to end inside WRE1, cap the
+        exposed root and tip faces at the wrist."""
+        if not self.outer:
+            return
+        S = self.outer
+        dw = self.dw
+        # rear crossrail now ends inside the inner panels; a swept carbon wrist spar ties each outer panel on
+        rail = self.parts[CR_R].mesh()
+        if not self.light and getattr(self, "final", False):
+            self.modified[CR_R] = trimesh.boolean.intersection([rail, box(-1e3, 2e3, -STOOP_RAIL_Y, STOOP_RAIL_Y, -100, 100)],
+                                                               engine="manifold")
+            self.mod_why.setdefault(CR_R, []).append(f"shortened to {2 * STOOP_RAIL_Y:.0f} mm: the swept outer panels ride on wrist spars")
+        # swept wrist spar: it has to sit inside the thick inner panel (ahead of the flap, clear of the rear well) and
+        # still be inside the outer panel's thick section 85 mm outboard, so it follows the stoop's sweep
+        k = (WRIST_OUT_X + S - WRIST_X) / (WRIST_Y1 - OUTER_Y)
+        x_at = lambda y: WRIST_X + k * (y - OUTER_Y)                                     # noqa: E731
+        y0 = next(y for y in np.arange(230.0, OUTER_Y, 1.0)
+                  if math.hypot(x_at(y) - E.REAR_X, y - E.MOTOR_Y) >= E.WELL_R + 12.0)
+        p0, p1 = np.array([x_at(y0), y0, 0.0]), np.array([x_at(WRIST_Y1), WRIST_Y1, 0.0])
+        L = float(np.linalg.norm(p1 - p0))
+        sweep = math.degrees(math.atan(k))
+        self.wrist = {"y0": y0, "x0": p0[0], "x1": p1[0], "sweep_deg": sweep, "len": L}
+
+        def spar(w, extra=0.0):
+            m = trimesh.creation.box([L + 2 * extra, w, w])
+            ang = math.atan2(p1[1] - p0[1], p1[0] - p0[0])
+            T = trimesh.transformations.rotation_matrix(ang, [0, 0, 1])
+            T[:3, 3] = (p0 + p1) / 2
+            m.apply_transform(T)
+            return m
+        for s_, side in ((1, "R"), (-1, "L")):
+            j = spar(10.0)
+            j.apply_translation([dw, 0, 0])
+            self.add(f"NEW_CF_wrist_spar_{side}_10x10x{L:.0f}", j if s_ > 0 else mirror_y(j), "carbon", "carbon",
+                     L / 1000 * G_PER_M[10], layer="structure",
+                     note=f"10 x 10 carbon wrist spar, swept {sweep:.0f} deg, bonded in both panels from y {y0:.0f} to {WRIST_Y1:.0f}: "
+                          f"{OUTER_Y - y0:.0f} mm in the inner panel, {WRIST_Y1 - OUTER_Y:.0f} mm in the outer. It carries the swept "
+                          "outer panel's bending; the panels are also bonded along the wrist overlap.")
+        if not self.light and getattr(self, "final", False):
+            cut = spar(10.6, 2.0)
+            inner = trimesh.boolean.intersection([cut, box(-1e3, 2e3, 0, OUTER_Y + 0.5, -50, 50)], engine="manifold")
+            outer = trimesh.boolean.intersection([cut, box(-1e3, 2e3, OUTER_Y - 0.5, 1e3, -50, 50)], engine="manifold")
+            outer.apply_translation([-S, 0, 0])
+            self.cut_panels([inner], "slot for the swept wrist spar", pattern=r"^W[RL][A-D]_")
+            self.cut_panels([outer], "slot for the swept wrist spar", pattern=r"^W[RL](E1|E2|F)_")
+        self.allow += [(r"NEW_CF_wrist_spar", r"^W[RL]", "spar bonded in its slot"),
+                       (r"NEW_CF_wrist_spar", r"NEW_wrist_cap", "spar passes through the wrist caps")]
+        # wrist caps: inner-panel tip face ahead of the swept outer panel, outer-panel root face behind the inner panel
+        xs = np.arange(60.0, 700.0, 1.0)
+        ys = np.array([OUTER_Y - 2.0, OUTER_Y - 1.0, OUTER_Y + 1.0, OUTER_Y + 2.0])
+        ft, fb, (fx, fy, zt, zb) = self.wf.interp("wrist", xs, ys, full="all")
+        from shapely.geometry import Polygon
+        def cap(yrow, x0, x1, ycap, dx, name, note):
+            row_t, row_b = zt[yrow], zb[yrow]
+            ok = (~np.isnan(row_t)) & (fx >= x0) & (fx <= x1) & ((row_t - row_b) > 0.6)
+            if ok.sum() < 3:
+                return
+            xx = fx[ok]
+            pts = [(x, z) for x, z in zip(xx, row_t[ok])] + [(x, z) for x, z in zip(xx[::-1], row_b[ok][::-1])]
+            poly = Polygon(pts).buffer(0)
+            if poly.is_empty or poly.area < 5:
+                return
+            if poly.geom_type != "Polygon":
+                poly = max(poly.geoms, key=lambda g_: g_.area)
+            m = trimesh.creation.extrude_polygon(poly, 1.2)
+            T = np.array([[1, 0, 0, dx], [0, 0, 1, ycap], [0, 1, 0, 0], [0, 0, 0, 1]], float)   # (x, z, t) -> (x, y, z)
+            m.apply_transform(T)
+            if m.volume < 0:
+                m.invert()
+            for side, mm in (("R", m), ("L", mirror_y(m))):
+                self.add(f"{name}_{side}", mm, "printed", "LW-PLA", poly.area / 1e6 * SKIN_G_M2 * 0.5, lwpla=True,
+                         mass_basis="profile area x skin areal density", note=note)
+        dw = self.dw
+        cap(0, 60, 175 + S - 2, OUTER_Y - 1.3, dw, "NEW_wrist_cap_inner",
+            "Closes the inner panel's tip face ahead of the swept-back outer panel (the falcon 'wrist').")
+        cap(3, 655 - S, 700, OUTER_Y + 0.1, dw + S, "NEW_wrist_cap_outer",
+            "Closes the outer panel's root face behind the inner panel's trailing edge.")
+        self.allow += [(r"NEW_wrist_cap", r"^W[RL]", "cap bonds to the panel face"),
+                       (r"^W[RL][A-D]_", r"^W[RL](E1|E2|F)_", "inner and outer panels bonded along the overlap at the wrist"),
+                       (r"^W[RL][A-D]_|^W[RL](E1|E2|F)_", r"ELEVON_|FLAP_", "control surfaces sit in their V18 cut-outs")]
+        self.notes.append(f"Outer falcon panels, elevons and their servo cassettes sweep {S:.0f} mm aft at the wrist (y {OUTER_Y:.0f}); "
+                          f"the panels stay bonded along {max(0.0, 476 - S):.0f} mm of shared chord with a swept carbon wrist spar through both.")
+
     def body_slots(self):
         """Slots in the body skins where a crossrail or the gear crossbar now passes (V18 F2 has them at the V18 stations)."""
         for n in (CR_F, CR_R, "CF_gear_crossbar_10x10x340"):
             mv = self.moves.get(n)
-            if not mv or abs(mv[0]) < 0.5:
+            if not mv or abs(mv[0]) < 0.5 or n in self.removed:
                 continue
             m = self.final_mesh(n)
             (x0, y0, z0), (x1, y1, z1) = m.bounds
@@ -640,7 +731,9 @@ class Builder:
             for n, x, x18 in ((CR_F, self.front_rail_x, E.FRONT_X), (CR_R, self.rear_rail_x, E.REAR_X)):
                 xw = x - self.dw
                 if abs(xw - x18) > 0.5:
-                    cuts.append(box(xw - 5.3, xw + 5.3, 75, 420, -20.3, -9.7))
+                    # a stoop wing's rear crossrail ends inside the inner panels: no slot in the swept outer panels
+                    y_end = STOOP_RAIL_Y + 1.0 if (self.outer and n == CR_R) else 420
+                    cuts.append(box(xw - 5.3, xw + 5.3, 75, y_end, -20.3, -9.7))
             self.cut_panels(cuts, "slot for the crossrail at its new station")
             self.rail_cuts = cuts
             if self.wellboom:
@@ -748,9 +841,93 @@ class Builder:
                           f"to the wing trailing edge (x {te:.0f}).")
 
     # ---------------- falcon tail
+    def crest(self):
+        """Falcon crest: a small swept stabiliser carried on the tips of your V18 fins (no booms, no new fins), with an
+        optional elevator. The fins are trimmed to the crest's underside; a 6 x 4 carbon spar per half runs through the fin tops."""
+        t = dict(self.c["tail"])
+        tg = E.tail_geometry(t)
+        zt, b2 = tg["z_mm"], tg["y_tip"]
+        nseg = max(1, math.ceil(b2 / 200.0))
+        bounds = np.linspace(0.0, b2, nseg + 1)
+        ef = float(t.get("elevator_frac", 0.0) or 0.0)
+        hinge = 1.0 - ef
+        # incidence (leading edge up +) as a rotation about the root's 30 % chord point; a positive angle about +y lifts the LE
+        pivot = np.array([tg["x_le_root"] + 0.3 * tg["c_root"], 0.0, zt])
+        Rinc = trimesh.transformations.rotation_matrix(math.radians(t.get("incidence_deg", 0.0)), [0, 1, 0], pivot)
+        pieces = [("crest", (0.0, 1.0))] if ef <= 0 else [("crest", (0.0, hinge - 0.01)), ("crest_elevator", (hinge + 0.005, 1.0))]
+        for s_, side in ((1, "R"), (-1, "L")):
+            for k in range(nseg):
+                y_a, y_b = bounds[k] + (0.25 if k else 0.3), bounds[k + 1] - (0.25 if k < nseg - 1 else 0.0)
+                yv = np.linspace(y_a, y_b, 16)
+                le = tg["x_le_root"] + yv / b2 * (tg["x_le_tip"] - tg["x_le_root"])
+                cc = tg["c_root"] + yv / b2 * (tg["c_tip"] - tg["c_root"])
+                tag = side if nseg == 1 else f"{side}{k + 1}"
+                for part, (u0, u1) in pieces:
+                    uu = u0 + (u1 - u0) * (1 - np.cos(np.linspace(0, np.pi, 30))) / 2
+                    X = le[:, None] + uu[None, :] * cc[:, None]
+                    Y = np.repeat(s_ * yv[:, None], len(uu), 1)
+                    P = np.stack([X, Y, np.full(X.shape, zt)], -1)
+                    N = np.zeros_like(P)
+                    N[..., 2] = 1
+                    H = naca_t(uu, 0.09)[None, :] * cc[:, None]
+                    if part == "crest_elevator":
+                        H = np.maximum(H, 0.4)
+                    m = surface_solid(P, N, H)
+                    m.apply_transform(Rinc)
+                    area = float(np.trapezoid(cc * (u1 - u0), yv)) / 1e6
+                    piece = "" if nseg == 1 else f" Piece {k + 1} of {nseg}, inboard first."
+                    if part == "crest":
+                        note = ("Falcon crest: swept stabiliser (NACA 0009, 35 deg leading-edge sweep) bonded across the tips of your "
+                                f"V18 fins at {abs(t.get('incidence_deg', 0.0)):.0f} deg leading-edge-down incidence." + piece)
+                    else:
+                        note = (f"Crest elevator, {100 * ef:.0f} % chord, halves joined by a wire torque rod at the centre; "
+                                "one slim servo in the crest root." + piece)
+                    self.add(f"NEW_{part}_{tag}", m, "printed", "LW-PLA", area * TAIL_G_M2, lwpla=True,
+                             layer="controls" if part == "crest_elevator" else "skin",
+                             mass_basis="falcon-panel areal density x area", note=note)
+            p0 = np.array([tg["x_le_root"] + 0.3 * tg["c_root"], 0.0, zt])
+            yt = 0.85 * b2
+            ft = yt / b2
+            p1 = np.array([tg["x_le_root"] + ft * (tg["x_le_tip"] - tg["x_le_root"]) + 0.3 * (tg["c_root"] + ft * (tg["c_tip"] - tg["c_root"])),
+                           s_ * yt, zt])
+            L = float(np.linalg.norm(p1 - p0))
+            sp = trimesh.creation.cylinder(radius=3.0, segment=[p0, p1], sections=16)
+            sp.apply_transform(Rinc)
+            self.add(f"NEW_CF_crest_spar_{side}_6x4x{L:.0f}", sp, "carbon", "carbon", L / 1000 * G_PER_M["rod6"], layer="structure",
+                     note="6 x 4 mm carbon round tube along the crest's 30 % chord line; passes through the fin top.")
+        # fins trimmed to the crest underside (fins are in the V18 frame before their move)
+        z_cut = zt - naca_t(np.array([0.3]), 0.09)[0] * tg["c_root"] - 0.4
+        if not self.light:
+            for fin in ("FIN_R", "FIN_L"):
+                m = self.parts[fin].mesh()
+                keep = box(-1e3, 2e3, -1e3, 1e3, -50, z_cut)
+                keep.apply_transform(trimesh.transformations.rotation_matrix(math.radians(t.get("incidence_deg", 0.0)), [0, 1, 0],
+                                                                            pivot - np.array([self.dw, 0.0, 0.0])))
+                self.modified[fin] = trimesh.boolean.intersection([m, keep], engine="manifold")
+                self.mod_why.setdefault(fin, []).append(f"tip trimmed at z {z_cut:.0f} (following the crest's incidence) to carry the crest")
+        if ef > 0:
+            yc, xs1 = 30.0, tg["x_le_root"] + hinge * (tg["c_root"] - 30.0 / b2 * (tg["c_root"] - tg["c_tip"])) + 30.0 / b2 * (tg["x_le_tip"] - tg["x_le_root"]) - 5.0
+            servo = box(xs1 - 20.0, xs1, yc - 9.0, yc + 9.0, zt - 4.5, zt + 4.5)
+            servo.apply_transform(Rinc)
+            self.add("KEEP_OUT_crest_elevator_servo_20x18x9", servo, "keepout", None, 10.0, layer="keepouts",
+                     note="Slim 5 g wing servo (HS-40 class, 20 x 18 x 9 mm) + linkage, flat in a pocket under a printed cover in "
+                          "the crest root, right of centre; the lead runs down the starboard fin.")
+            self.allow += [(r"KEEP_OUT_crest_elevator_servo", r"NEW_crest", "servo pocket in the crest root"),
+                           (r"NEW_crest_elevator_R", r"NEW_crest_elevator_L", "elevator halves meet at the torque rod"),
+                           (r"NEW_crest_elevator", r"NEW_crest_(R|L)", "hinge line"),
+                           (r"NEW_crest_elevator", r"NEW_CF_crest_spar", "spar end near the hinge")]
+        self.allow += [(r"NEW_crest", r"^FIN_", "crest bonds onto the trimmed fin tips"),
+                       (r"NEW_CF_crest_spar", r"(NEW_crest|^FIN_)", "spar inside the crest, through the fin tops"),
+                       (r"NEW_crest_R", r"NEW_crest_L", "halves meet at the centre"),
+                       (r"NEW_CF_crest_spar_R", r"NEW_CF_crest_spar_L", "spars meet at the centre joiner")]
+        self.tail_info = {"x_le_root": tg["x_le_root"], "z": zt, "fin_inner_y": 999.0, "fin_x0": tg["x_le_root"] + 200,
+                          "stab_bottom_z": z_cut, "boom_end": tg["x_le_root"], "span": 2 * b2, "c_root": tg["c_root"]}
+
     def tail(self):
         if not self.c["tail"]:
             return
+        if self.c["tail"].get("mount") == "fins":
+            return self.crest()
         t = dict(self.c["tail"])
         tg = E.tail_geometry(t)
         zt = tg["z_mm"]
@@ -945,9 +1122,11 @@ class Builder:
             self.moves, self.removed, self.modified, self.new, self.allow, self.notes = {}, [], {}, [], [], []
             self.removed_viewer = []
             self.mod_why = {}
+            self.final = it == passes - 1
             self.place()
             self.nose_bay()
             self.cockpit()
+            self.stoop()
             if it == passes - 1 and not self.light:   # heavy geometry only on the last pass
                 self.wells()
                 self.rail_slots()
@@ -1050,13 +1229,28 @@ class Builder:
             if lay["le_ext_mm"] > 0:
                 out.append(f"Leading-edge glove takes the inner-wing leading edge {lay['le_ext_mm']:.0f} mm forward (y 82-314) so the "
                            "front wells keep 35 mm of wing ahead of them.")
-        if c["tail"]:
+        if c["tail"] and c["tail"].get("mount") == "fins":
+            tg = E.tail_geometry(c["tail"])
+            ef = c["tail"].get("elevator_frac", 0.0)
+            inc = c["tail"].get("incidence_deg", 0.0)
+            out.append(f"Falcon crest: a {c['tail']['area_m2']:.3f} m2 swept stabiliser ({tg['span_mm']:.0f} mm span, 35 deg sweep) bonded "
+                       f"across the tips of your V18 fins at z {tg['z_mm']:.0f}, set {abs(inc):.0f} deg leading edge "
+                       f"{'down' if inc < 0 else 'up'}; no booms and no new fins. The fins are trimmed to its underside. "
+                       + (f"A {100 * ef:.0f} % chord elevator on one slim 5 g servo in the crest root shares the pitch trim with the elevons."
+                          if ef > 0 else "No elevator: pitch stays on the elevons and flaps."))
+        elif c["tail"]:
             tg = E.tail_geometry(c["tail"])
             out.append(f"Falcon tail: {c['tail']['area_m2']:.3f} m2 stabiliser, {tg['span_mm']:.0f} mm span, 28 deg sweep, 80 mm above "
                        f"the wing plane on two swept fins; {100 * c['tail']['elevator_frac']:.0f} % elevator, one servo in the "
                        "starboard fin. The V18 EDF outriggers become one-piece 8 x 8 tail booms.")
         if 675.0 + dw > 812:
             out.append(f"F5 root fairings carry the wing-root profile past the end of the body to x {675 + dw:.0f}.")
+        if self.outer:
+            out.append(f"Stoop wing: the outer falcon panels, elevons and their servo cassettes sweep {self.outer:.0f} mm aft at the "
+                       "wrist (the V18 seam at y 315), like a falcon tucking its wings in a dive. That moves the outer lift behind "
+                       "the CG. " f"A swept 10 x 10 carbon wrist spar per side ({self.wrist['len']:.0f} mm, {self.wrist['sweep_deg']:.0f} deg) carries "
+                       "each outer panel, printed caps close the step, and the rear "
+                       f"crossrail is shortened to {2 * STOOP_RAIL_Y:.0f} mm.")
         if c.get("cockpit_camera"):
             out.append(f"Pilot's-eye FPV camera: moved back to x {COCKPIT_CAM[0] - 10:.0f}-{COCKPIT_CAM[0] + 10:.0f}, z {COCKPIT_CAM[2]:.0f} under a "
                        "vacuum-formed clear PETG canopy on a printed canopy frame, on a PETG pilot-seat mount (tilt 0-25 deg).")

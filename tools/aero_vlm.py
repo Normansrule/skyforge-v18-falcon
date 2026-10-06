@@ -264,9 +264,10 @@ def trim(d: dict, x_cg_mm: float, mass_g: float, V: float, eta: float = 0.8, sur
 
 
 def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift_mm=0.0, wells=None, body_half_mm=81.0,
-                      le_ext_mm=0.0, le_ext_span=(81.0, 315.0), extra_surfaces=None):
+                      le_ext_mm=0.0, le_ext_span=(81.0, 315.0), extra_surfaces=None, outer_shift_mm=0.0, outer_y_mm=315.0):
     """wing_shift_mm moves every strip outboard of |y| > body_half_mm aft (wing group relative to the body).
-    wells: list of (x, y, r) circles (mm, after the shift) whose panels are removed; implies fill_wells."""
+    wells: list of (x, y, r) circles (mm, after the shift) whose panels are removed; implies fill_wells.
+    outer_shift_mm moves the outer (falcon) panels outboard of outer_y_mm a further distance aft: a cranked "stoop" wing."""
     fill_wells = fill_wells or wells is not None
     meshes = lifting_meshes()
     half = max(b[1][1] for _, _, b in meshes)
@@ -306,7 +307,7 @@ def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift
                 ivs[0] = (a0 - k, ivs[0][1])
         if not ivs:
             continue
-        sh = wing_shift_mm if yc > body_half_mm else 0.0
+        sh = (wing_shift_mm if yc > body_half_mm else 0.0) + (outer_shift_mm if yc > outer_y_mm else 0.0)
         stations.append({"y": yc, "le": float(xs[ivs[0][0]] - 1 + sh), "te": float(xs[ivs[-1][1] - 1] + 1 + sh),
                          "intervals": [[float(xs[a] - 1 + sh), float(xs[b - 1] + 1 + sh)] for a, b in ivs],
                          "tmax": float(np.nanmax(zu[cov] - zl[cov]))})
@@ -316,7 +317,7 @@ def build_v18_lattice(strip_mm=10.0, panel_mm=12.0, fill_wells=False, wing_shift
             dx = (xr - xl) / n
             seg_x = xs[a:b]
             seg_z = zc[a:b]
-            shift = wing_shift_mm if yc > body_half_mm else 0.0
+            shift = (wing_shift_mm if yc > body_half_mm else 0.0) + (outer_shift_mm if yc > outer_y_mm else 0.0)
             for i in range(n):
                 x0 = xl + i * dx
                 if wells is not None and shift is not None:

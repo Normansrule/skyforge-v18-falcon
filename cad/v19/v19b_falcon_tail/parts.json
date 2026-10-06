@@ -651,7 +651,7 @@
     "re-cut rotor wells"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -663,7 +663,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -675,7 +675,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -686,7 +686,7 @@
     "re-cut rotor wells"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -698,7 +698,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -710,7 +710,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -721,7 +721,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -732,7 +732,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -743,7 +743,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -754,7 +754,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -765,7 +765,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]
@@ -776,7 +776,7 @@
     "slot for the crossrail at its new station"
    ],
    "move_mm": [
-    120,
+    120.0,
     0.0,
     0.0
    ]

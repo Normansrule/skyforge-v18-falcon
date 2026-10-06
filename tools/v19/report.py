@@ -13,14 +13,14 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "v19"))
 
-ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"]
+ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest"]
 SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_boom_rotors": "V19-R",
-         "v19w_four_in_wings": "V19-W"}
-REC = "v19w_four_in_wings"
-PACKS = ("v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings")
+         "v19w_four_in_wings": "V19-W", "v19s_stoop_crest": "V19-S"}
+REC = "v19s_stoop_crest"
+PACKS = ("v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest")
 BUY_FIXED = [  # purchases the recommended build adds beyond the V18 BOM (reference candidates, as in bom/bom.csv)
-    ("Elevator servo, 9 g digital, metal gear (reference: EMAX ES08MD II)", 1, "15-25", "https://www.amazon.com/s?k=emax+es08md+ii"),
-    ("Elevator pushrod, clevis and horn set (1.2 mm wire)", 1, "6-10", "https://www.amazon.com/s?k=rc+pushrod+clevis+control+horn+set"),
+    ("Crest elevator servo, slim 5 g wing servo, about 20 x 18 x 9 mm (reference class: Hitec HS-40)", 1, "15-25", "https://www.amazon.com/s?k=hitec+hs-40+servo"),
+    ("Elevator torque rod, horn and clevis set (1.2 mm wire)", 1, "6-10", "https://www.amazon.com/s?k=rc+pushrod+clevis+control+horn+set"),
     ("Clear PETG sheet 0.75 mm, A4 or larger (vacuum-formed canopy; two spares)", 3, "8-15", "https://www.amazon.com/s?k=petg+sheet+0.75mm+clear"),
     ("M3 U-straps / saddle clamps for 10 mm tube, plus M3 hardware", 8, "8-14", "https://www.amazon.com/s?k=m3+u+bolt+10mm"),
     ("M2 x 6 screws and washers (camera tilt)", 4, "2-5", "https://www.amazon.com/s?k=m2+x+6+screws"),
@@ -59,7 +59,7 @@ def main() -> int:
     w("Your three directions, each built from your V18 assembly (`tools/v19/geometry.py`), collision-checked against V18 "
       "and evaluated with the same gates as V18: heaviest motor in hover no more than 30 % of the weight, static margin "
       "5-25 % of the mean chord, pitch trim within 10 deg at 16 m/s, prop and flap clearances.\n")
-    w("![V19-R, three-quarter view](../analysis/view_v19r_recommended.png)\n")
+    w("![V19-S, three-quarter view](../analysis/view_v19s_stoop_crest.png)\n")
     w("## The answer\n")
     rows = []
     for name, e, extra in [("V18 as designed", v18, None)] + [(SHORT[s], allv[s]["evaluation"], allv[s]) for s in ORDER]:
@@ -75,14 +75,19 @@ def main() -> int:
     r = allv[REC]
     re_ = r["evaluation"]
     rc = cfg[REC]
-    w(f"**Build V19-W.** It is your long-nose falcon with the falcon tail and the layout you asked for: all four lift motors in "
-      f"your V18 wing wells (the front pair back in the holes V19-R closes), the wing group {rc['wing_shift_mm']:.0f} mm aft of the "
-      f"nose, a {rc['tail']['area_m2']:.2f} m2 falcon tail, a pilot's-eye FPV camera under a clear canopy, and the single V18 EDF "
-      f"in the jet bay at the back. With the parts as modelled it weighs {re_['all_up_g']:.0f} g, its CG sits "
+    rw = allv["v19w_four_in_wings"]["evaluation"]
+    wc = cfg["v19w_four_in_wings"]
+    w(f"**Build V19-S.** It keeps everything you asked for in V19-W - all four lift motors in your V18 wing wells, the pilot's-eye "
+      "FPV camera under a clear canopy, the single V18 EDF in the jet bay - and drops the big boom tail. Two changes do the tail's "
+      f"job instead. The outer falcon panels sweep {rc['outer_shift_mm']:.0f} mm back at the wrist (a 'stoop', like a falcon "
+      f"tucking its wings in a dive), and a {rc['tail']['area_m2']:.2f} m2 falcon crest sits on the tips of your own V18 fins, "
+      f"with no booms and no new fins. Without the tail weight to balance, the battery stays in the V18 tray and the nose bay goes. "
+      f"With the parts as modelled it weighs {re_['all_up_g']:.0f} g ({rw['all_up_g'] - re_['all_up_g']:.0f} g less than V19-W), "
+      f"it is {allv['v19w_four_in_wings']['extent']['length_mm'] - r['extent']['length_mm']:.0f} mm shorter, its CG sits "
       f"{abs(re_['cg_mm'][0] - re_['rotor_centroid_x_mm']):.0f} mm from the rotor centroid, the heaviest motor carries "
       f"{f1(re_['worst_motor_pct'])} % in hover, and the static margin is {f1(re_['sm_closed_pct'])} % to {f1(re_['sm_open_pct'])} %. "
-      "V19-R (front rotors on booms ahead of the wing, smaller tail) and V19-C (no tail) also pass and stay as alternatives.\n")
-    w(f"![V19-W pilot's-eye view from the FPV camera](../analysis/view_v19w_cockpit.png)\n")
+      f"V19-W ({wc['tail']['area_m2']:.2f} m2 boom tail), V19-R and V19-C also pass and stay as alternatives.\n")
+    w(f"![V19-S pilot's-eye view from the FPV camera](../analysis/view_v19s_cockpit.png)\n")
     w("### Why each direction alone is not enough\n")
     a, b = allv["v19a_long_nose"]["evaluation"], allv["v19b_falcon_tail"]["evaluation"]
     w(f"- **Long nose alone (V19-A).** Moving the wing aft moves the neutral point aft almost one for one, but the CG only by the "
@@ -98,7 +103,7 @@ def main() -> int:
     w(f"- **Four rotors in the wings (V19-W).** With the rotors fixed in your wells, the CG has to sit on their centroid, at wing "
       "station x 330. Your wing's own neutral point sits ahead of that station (x 285-332 on V18), so on its own the wing is "
       "unstable there; the tail is what moves the neutral point behind the CG. The tail's weight pulls the CG aft, so the wing "
-      f"moves {rc['wing_shift_mm']:.0f} mm aft until the rotors sit under the CG again. The rear crossrail cannot follow the wells into "
+      f"moves {cfg['v19w_four_in_wings']['wing_shift_mm']:.0f} mm aft until the rotors sit under the CG again. The rear crossrail cannot follow the wells into "
       "the D1 intake, so it stops at x 566.5 and two short carbon booms under the wing carry the rear motors.\n")
     rows_w = [x for x in search["rows"] if x["family"] == "W"]
     if rows_w:
@@ -107,7 +112,31 @@ def main() -> int:
         w("V19-W search (wing shift x tail area; tail leading edge 110 mm behind the wing root):\n")
         w(table(tab, ["Wing aft mm", "Tail m2", "Static margin %", "Heaviest motor %", "Gates"]))
         w("\nA smaller tail needs the wing further aft for hover balance but then loses margin; a bigger tail pulls the CG behind "
-          "the rotors. The pick is the cheapest row with at least 6 % margin and no motor above 28 %.\n")
+          "the rotors. The pick is the cheapest row with at least 7.5 % margin on the coarse lattice (it reads about 1 % high on "
+          "tails) and no motor above 28 %.\n")
+    sc = cfg[REC]
+    fixed = [x for x in search["rows"] if x["family"] == "S" and not x["config"]["tail"]["elevator_frac"]]
+    fx = [min(abs(t["pitch_surfaces_deg"]) for t in x["trim_16ms"].values()) for x in fixed] or [0]
+    fy = [max(abs(t["pitch_surfaces_deg"]) for t in x["trim_16ms"].values()) for x in fixed] or [0]
+    w(f"- **No big tail (V19-S).** A tailless wing balanced on its rotors has about 0-1 % margin (the wing's neutral point sits "
+      "right at the rotor station), so something has to add lift behind the CG. V19-S splits that job: the stoop moves the outer "
+      f"panels' lift {sc['outer_shift_mm']:.0f} mm aft (about 1.6 % margin per 60 mm), and the crest adds a little tail lift high on "
+      f"the fins, right over the EDF instead of on booms behind it. A fixed crest (no elevator) needed {min(fy):.0f}-{max(fy):.0f} deg "
+      f"of elevon at 16 m/s with the wells open, outside the 10 deg gate, so the crest is set {abs(sc['tail']['incidence_deg']):.0f} deg leading edge down and has a "
+      f"{100 * sc['tail']['elevator_frac']:.0f} % elevator on one slim servo.\n")
+    rows_s = [x for x in search["rows"] if x["family"] == "S"]
+    if rows_s:
+        tab = [[x["config"]["wing_shift_mm"], x["config"]["outer_shift_mm"], f"{x['config']['tail']['area_m2']:.2f}",
+                f"{x['config']['tail']['incidence_deg']:.0f}", f"{100 * x['config']['tail']['elevator_frac']:.0f}",
+                f1(x["sm_closed_pct"]), f1(x["worst_motor_pct"]),
+                " / ".join(f1(t["pitch_surfaces_deg"]) for t in x["trim_16ms"].values()), "PASS" if x["passes"] else "-"]
+               for x in rows_s]
+        w("V19-S search (coarse lattice; wing shift x stoop x crest area; the last rows are fixed crests, kept for the record):\n")
+        w(table(tab, ["Wing aft mm", "Stoop mm", "Crest m2", "Incidence deg", "Elevator %", "Static margin %", "Heaviest motor %",
+                      "Trim 16 m/s closed / open", "Gates"]))
+        w("\nThe pick is the cheapest passing row with at least 7.5 % margin on the coarse lattice (it reads about 1 % high), no "
+          "motor above 28 % and at least 1.5 deg of the trim gate in hand. More stoop or more crest adds margin; more wing shift "
+          "loads the front motors.\n")
     w("### Cruise engine: one EDF or two?\n")
     sg, tw = EDF["single"], EDF["twin"]
     w(table([[f"One {sg[0]}", f"{sg[1]} g", f"{sg[2]} A", f"{sg[3]} g + 1 ESC", f"[spec]({sg[4]})"],
@@ -168,7 +197,7 @@ def main() -> int:
     # recommended build pack
     import math as _m
     import re as _re
-    w("## V19-W build changes\n")
+    w(f"## {SHORT[REC]} build changes\n")
     w("### Buy (in addition to the V18 BOM)\n")
     need = {}
     for p in r["parts"]:
@@ -182,8 +211,7 @@ def main() -> int:
         d, url = TUBES.get(sec, (f"Carbon tube {sec}", ""))
         buy.append((f"{d}, {stock} mm (cut {len(ls)} x {max(ls)} mm)", bars, "8-18 each", url))
     w(table([[d, q, u, f"[link]({url})" if url else ""] for d, q, u, url in buy + BUY_FIXED], ["Item (reference candidate)", "Qty", "USD", ""]))
-    w("\nNot added to `bom/bom.csv` on purpose: that file is the V18 budget. Fold these rows in when V19-W becomes the build. "
-      "The V18 EDF outriggers (2 x 174 mm) are no longer cut; the 8 x 8 tail booms replace them.\n")
+    w("\nNot added to `bom/bom.csv` on purpose: that file is the V18 budget. Fold these rows in when " + SHORT[REC] + " becomes the build.\n")
     w("### Carbon and G10 cut list\n")
     rows = []
     for p in r["parts"]:
@@ -193,7 +221,10 @@ def main() -> int:
         size = f"{m.group(1)} section, {m.group(2)} mm long" if m else " x ".join(f"{x:.0f}" for x in p["bbox_mm"]) + " mm (outline)"
         rows.append([f"`{p['name']}`", p["material"], size])
     w(table(rows, ["Part", "Material", "Size"]))
-    w(f"\nThe nose-bay floor profile is `cad/v19/{REC}/dxf/NEW_G10_nose_battery_floor.dxf`.\n")
+    if (ROOT / "cad" / "v19" / REC / "dxf" / "NEW_G10_nose_battery_floor.dxf").exists():
+        w(f"\nThe nose-bay floor profile is `cad/v19/{REC}/dxf/NEW_G10_nose_battery_floor.dxf`.\n")
+    else:
+        w("")
     w("### Print\n")
     rows = [[f"`{p['name']}`", p["material"], ("fits" if p["P1S"]["fits"] else "split") if p.get("P1S") else "-", p["note"]]
             for p in r["parts"] if p["class"] == "printed"]
@@ -203,8 +234,10 @@ def main() -> int:
       "`NEW_canopy_clear_PETG` shape solid as the forming buck.\n")
     w("### Gates to add before the first hover\n")
     w("- Rear booms: with each rear motor at 50 % throttle on the stand, no visible riser or boom vibration; tap test each clamp.")
-    w("- EDF jet on the tail: tuft the stabiliser underside and fins, run the EDF to 100 % on the bench; no tuft should stream aft.")
-    w("- Elevator: +/-20 deg throw with no contact against the fins.")
+    w("- Wrist spars: with the aircraft held at the wing roots, hang 1.5 kg (about 2.5 g of manoeuvre load on one outer panel) "
+      "from each outer panel's mid-span for one minute; no creak, no visible joint movement, no skin cracking at the wrist caps.")
+    w("- EDF jet on the crest: tuft the crest underside and the fin tops, run the EDF to 100 % on the bench; no tuft should stream aft.")
+    w("- Crest elevator: +/-20 deg throw with no contact against the fin tops; the slim servo centres within 1 deg.")
     w("- Cockpit camera: the FPV image shows the horizon with the nose in the lower edge at 0-10 deg uptilt; no canopy glare at "
       "the sun angles you fly in (matt black seat and frame).")
     w(f"- Weigh and balance the complete aircraft: CG within 5 mm of x {re_['cg_mm'][0]:.0f} before any hover.")
@@ -212,9 +245,9 @@ def main() -> int:
       f"and cruise at 18-20 m/s ({re_['trim_20ms']['closed']['alpha_deg']:.0f} deg at 20 m/s) and confirm the stall speed "
       f"(model {re_['stall_speed_ms']['CLmax_0.9']:.1f} m/s at CLmax 0.9) in the glide tests.\n")
     w("## How the numbers were made\n")
-    w("- `tools/v19/search.py` ran " + str(len(search["rows"])) + " configurations across five families. In families A-C and R the "
-      "rotors are placed so their centroid sits on that configuration's CG within the geometric limits (in W they stay in your "
-      "V18 wells and the wing shift and tail decide the balance), the masses come from the "
+    w("- `tools/v19/search.py` ran " + str(len(search["rows"])) + " configurations across six families. In families A-C and R the "
+      "rotors are placed so their centroid sits on that configuration's CG within the geometric limits (in W and S they stay in your "
+      "V18 wells and the wing shift, stoop and tail decide the balance), the masses come from the "
       "V19 construction (`geometry.py` mass-only mode), and the neutral points come from the vortex lattice with the wells closed "
       "and open. The cheapest passing configuration in each family becomes `config/v19/<variant>.json`.")
     w("- `tools/v19/geometry.py` builds each variant from the V18 meshes, cuts the V18 parts that must change, generates the new "

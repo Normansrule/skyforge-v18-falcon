@@ -241,6 +241,13 @@ def _aero_key(kind: str, c: dict) -> str:
          "wells": [[round(x, 1), y, r] for x, y, r in lay["wells"]] if kind == "open" else None,
          "tail": {kk: round(v, 2) for kk, v in tail.items() if isinstance(v, float)} if tail else None,
          "v": 4}
+    if c.get("outer_shift_mm"):
+        k["outer"] = round(c["outer_shift_mm"], 1)
+    if tail and (tail["incidence_deg"] or c["tail"].get("mount")):
+        # integer-valued fields slip past the float filter above; key them explicitly (A-W tails set x from dw alone)
+        k["tail_x"] = round(float(tail["x_le_root"]), 1)
+        k["inc"] = round(float(tail["incidence_deg"]), 2)
+        k["mount"] = c["tail"].get("mount")
     return hashlib.sha1(json.dumps(k, sort_keys=True).encode()).hexdigest()[:16]
 
 
@@ -268,9 +275,9 @@ def aero(c: dict, kind: str) -> dict:
     lay = rotor_layout(c)
     extra = [tail_geometry(c["tail"])] if c["tail"] else None
     if kind == "open":
-        P, st = av.build_v18_lattice(strip_mm=strip, panel_mm=panel, wells=lay["wells"], wing_shift_mm=c["wing_shift_mm"], le_ext_mm=lay["le_ext_mm"], extra_surfaces=extra)
+        P, st = av.build_v18_lattice(strip_mm=strip, panel_mm=panel, wells=lay["wells"], wing_shift_mm=c["wing_shift_mm"], le_ext_mm=lay["le_ext_mm"], extra_surfaces=extra, outer_shift_mm=c.get("outer_shift_mm", 0.0))
     else:
-        P, st = av.build_v18_lattice(strip_mm=strip, panel_mm=panel, fill_wells=True, wing_shift_mm=c["wing_shift_mm"], le_ext_mm=lay["le_ext_mm"], extra_surfaces=extra)
+        P, st = av.build_v18_lattice(strip_mm=strip, panel_mm=panel, fill_wells=True, wing_shift_mm=c["wing_shift_mm"], le_ext_mm=lay["le_ext_mm"], extra_surfaces=extra, outer_shift_mm=c.get("outer_shift_mm", 0.0))
     d = av.derivatives(P, st)
     out = {k: float(v) for k, v in d.items() if k != "geo"}
     out["geo"] = {k: float(v) for k, v in d["geo"].items()}

@@ -112,14 +112,16 @@ Then the EDF, separately, outside the airframe, inlet screened, same logging: `e
 | 9 Weigh + CG | Whole aircraft; flight CG from aero work (neutral point, static margin) - **not** x330 | Hover gate re-run with measured mass and CG still PASS; simultaneous current measured; failsafes configured | Flight |
 | 10 Flight qualification | With an experienced RC / QuadPlane pilot at a proper site: taxi -> hover -> wing-borne -> transitions, as separate sessions | Each session's own plan; first flight line-of-sight, not immersive FPV | Decoration before final reweigh/rebalance |
 
-## V19-W additions (before the first hover)
+## V19-S additions (before the first hover)
 
-From [V19_VARIANTS.md](V19_VARIANTS.md#v19-w-build-changes):
+From [V19_VARIANTS.md](V19_VARIANTS.md#v19-s-build-changes). V19-S is the recommendation; if you build V19-W instead,
+use the stabiliser and fin rows in place of the crest rows.
 
 | Gate | PASS | FIX | STOP |
 |---|---|---|---|
+| Wrist spars: 1.5 kg hung at each outer panel's mid-span for 1 min, aircraft held at the wing roots | no creak, no movement, no skin cracks at the wrist caps | creak or a cracked cap: re-bond, add a carbon cap strip over the wrist | joint moves or the spar slot cracks |
 | Rear boom / riser vibration at 50 % throttle on the stand | none visible | visible: add a second strap, stiffer riser | boom or clamp moves |
-| EDF at 100 % on the bench, tufts on the stabiliser underside and fins | tufts hang or flutter | tufts stream aft on the fins only: raise or splay the fins | tufts stream on the stabiliser |
-| Elevator +/-20 deg | no contact | rubs: trim the fin trailing edge | binds |
+| EDF at 100 % on the bench, tufts on the crest underside and fin tops (V19-W: stabiliser and fins) | tufts hang or flutter | tufts stream aft on the fin tops only: fair the fin tops | tufts stream on the crest |
+| Crest elevator +/-20 deg (V19-W: elevator) | no contact, servo centres within 1 deg | rubs: trim the fin tops or the hinge gap | binds, or the slim servo stalls |
 | FPV image through the canopy | horizon and nose clear, no glare at your flying sun angles | glare: matt-black seat and frame, tilt the camera | image unusable: cut a windscreen aperture |
 | Weighed CG | within 5 mm of the model (V19_VARIANTS.md) | 5-15 mm: move the pack in the bay or add nose ballast | > 15 mm |

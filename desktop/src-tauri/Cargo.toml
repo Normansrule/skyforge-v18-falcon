@@ -1,6 +1,6 @@
 [package]
 name = "skyforge-v18"
-version = "0.4.0"
+version = "0.5.0"
 description = "SKYFORGE V18 Falcon build workbench (desktop shell around site/)"
 authors = ["Aleksander Norman"]
 edition = "2021"

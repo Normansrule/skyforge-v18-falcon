@@ -10,6 +10,9 @@ nose bay, FC/VTX/EDF ESC into the vacated battery bay, tail ducts/saddles in LW-
   C  forward rotors       front rotor pair on booms ahead of the wing leading edge, front wells closed
   W  four in the wings     all four lift rotors in your V18 wells (no dx: the holes stay where you drew them),
                           rear pair on under-wing booms so the rear crossrail clears D1, falcon tail far aft
+  S  stoop + crest       V19-W without the big boom tail: four rotors in your V18 wells, the outer falcon panels
+                          swept back at the wrist ("stoop") and a small falcon crest on the tips of your V18 fins;
+                          the battery stays in the V18 tray (no nose bay needed without tail weight to balance)
   R  boom alternative          long nose + forward rotors + falcon tail, rear rotors left in the V18 wells,
                           the cheapest combination that passes every gate with margin on balance
                           (heaviest motor <= 28 %, static margin >= 6 % wells closed; 7.5 % for W); the front
@@ -90,12 +93,22 @@ def cost(r):
     c = r["config"]
     t = c["tail"]["area_m2"] if c["tail"] else 0
     boom = (E.FRONT_X + c["wing_shift_mm"] - c["front_rotor"]["x"]) if c["front_rotor"]["mode"] == "boom" else 0
-    return c["wing_shift_mm"] / 50 + t * 40 + boom / 100 + r["le_extension_mm"] / 40 + (c["lwpla_density"] < 0.7) * 0.5
+    return c["wing_shift_mm"] / 50 + c.get("outer_shift_mm", 0.0) / 200 + t * 40 + boom / 100 + r["le_extension_mm"] / 40 + (c["lwpla_density"] < 0.7) * 0.5
 
 
 def tail(area, x=790.0):
     return {"area_m2": area, "aspect": 3.2, "taper": 0.55, "le_sweep_deg": 28.0, "x_le_root_mm": x,
             "incidence_deg": 0.0, "elevator_frac": 0.35, "height_mm": 80.0}
+
+
+SUPPORT_S = {"battery": "v18", "avionics_forward": False, "tail_parts_lwpla": True, "cockpit_camera": True, "gps_aft": True}
+
+
+def crest(area, dw, inc=-4.0, ef=0.3):
+    """Falcon crest on the V18 fin tips (wing frame x 518 = 80 mm ahead of the fin-top chord), 75 mm above the wing
+    plane. A small elevator (ef of chord) and a few degrees of nose-down incidence keep the pitch trim in the gate."""
+    return {"area_m2": area, "aspect": 6.0, "taper": 0.45, "le_sweep_deg": 35.0, "x_le_root_mm": 518.0 + dw,
+            "incidence_deg": inc, "elevator_frac": ef, "height_mm": 75.0, "mount": "fins"}
 
 
 def candidates():
@@ -114,6 +127,12 @@ def candidates():
         out.append(("W", {**SUPPORT, "wing_shift_mm": dw, "lwpla_density": 0.8, "tail": tail(area, 675 + dw + 110),
                           "front_rotor": {"mode": "wing", "dx": 0.0}, "rear_rotor_dx_mm": 0.0, "no_le_ext": True,
                           "rear_support": "boom"}))
+    stoop = [(dw, st, area, -4.0, 0.3) for dw, st, area in itertools.product((225, 235, 245), (260, 300), (0.06, 0.07))]
+    stoop += [(235, 300, 0.07, 0.0, 0.0), (235, 300, 0.07, -6.0, 0.0)]     # fixed crest, for the record: trim fails
+    for dw, st, area, inc, ef in stoop:
+        out.append(("S", {**SUPPORT_S, "wing_shift_mm": dw, "outer_shift_mm": st, "lwpla_density": 0.8, "tail": crest(area, dw, inc, ef),
+                          "front_rotor": {"mode": "wing", "dx": 0.0}, "rear_rotor_dx_mm": 0.0, "no_le_ext": True,
+                          "rear_support": "boom"}))
     return out
 
 
@@ -122,6 +141,7 @@ VARIANTS = {
     "B": ("v19b_falcon_tail", "V19-B falcon tail", "Horizontal tail on twin swept fins at the ends of the EDF outrigger booms; wing {dw} mm aft"),
     "C": ("v19c_forward_rotors", "V19-C forward rotors", "Front rotors on booms ahead of the leading edge, wing {dw} mm aft"),
     "W": ("v19w_four_in_wings", "V19-W four rotors in the wings", "All four lift rotors in your V18 wing wells, wing {dw} mm aft, falcon tail, pilot's-eye cockpit camera, one EDF"),
+    "S": ("v19s_stoop_crest", "V19-S stoop wing + falcon crest", "All four lift rotors in your V18 wing wells, wing {dw} mm aft, outer panels swept {st} mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"),
     "R": ("v19r_boom_rotors", "V19-R boom rotors", "Long nose, forward rotors on booms and a small falcon tail; rear rotors stay in the V18 wells"),
 }
 
@@ -134,10 +154,13 @@ def pick(fam: str, fr: list) -> dict:
         passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 6]
     if fam == "W":   # the coarse lattice reads ~1 % high on these tails; ask for more so the fine result keeps margin
         passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 7.5]
+    if fam == "S":   # same margin rule as W, and keep 1.5 deg of the 10 deg trim gate in hand (the crest trims close to it)
+        passing = [r for r in passing if r["worst_motor_pct"] <= 28 and r["sm_closed_pct"] >= 7.5
+                   and max(abs(t["pitch_surfaces_deg"]) for t in r["trim_16ms"].values()) <= 8.5]
     if fam == "C":
         passing = [r for r in passing if r["config"]["lwpla_density"] == 0.8]
     if passing:
-        return min(passing, key=lambda r: r["cost"])
+        return min(passing, key=lambda r: (r["cost"], r["worst_motor_pct"]))
     return min(fr, key=lambda r: (r["score"], r["cost"]))
 
 
@@ -146,7 +169,7 @@ def main() -> int:
     t0 = time.time()
     rows = []
     for i, (fam, cfg) in enumerate(candidates()):
-        c = E.full(cfg) if fam == "W" else balance_rotors(cfg, lock_rear=(fam == "R"))
+        c = E.full(cfg) if fam in "WS" else balance_rotors(cfg, lock_rear=(fam == "R"))
         r = evaluate(c)
         r["family"] = fam
         r["score"] = round(score(r), 2)
@@ -157,7 +180,7 @@ def main() -> int:
               f"NP={r['np_closed_x_mm']}/{r['np_open_x_mm']} SM={r['sm_closed_pct']}/{r['sm_open_pct']} worst={r['worst_motor_pct']} "
               f"trim={[t['pitch_surfaces_deg'] for t in r['trim_16ms'].values()]} pass={r['passes']} ({time.time() - t0:.0f}s)", flush=True)
         E.save_cache()
-    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCRW"}
+    best = {fam: pick(fam, [r for r in rows if r["family"] == fam]) for fam in "ABCRWS"}
     # finalists at full resolution
     E.MODE["res"] = "fine"
     final = {}
@@ -165,7 +188,7 @@ def main() -> int:
     cfg_dir.mkdir(parents=True, exist_ok=True)
     for fam, r in best.items():
         slug, label, blurb = VARIANTS[fam]
-        cfg = {**r["config"], "name": slug, "label": label, "summary": blurb.format(dw=round(r["config"]["wing_shift_mm"]))}
+        cfg = {**r["config"], "name": slug, "label": label, "summary": blurb.format(dw=round(r["config"]["wing_shift_mm"]), st=round(r["config"].get("outer_shift_mm", 0)))}
         rr = evaluate(cfg)
         rr["family"] = fam
         final[fam] = rr

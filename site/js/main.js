@@ -129,7 +129,7 @@ function intro() {
   const host = document.getElementById('intro');
   const V = ctx.data.variants;
   let seen = false;
-  try { seen = localStorage.getItem('skyforge-intro-v3') === '1'; } catch { /* storage blocked */ }
+  try { seen = localStorage.getItem('skyforge-intro-v4') === '1'; } catch { /* storage blocked */ }
   if (seen || !V || location.hash) return;
   const rec = V.variants[V.recommended];
   host.innerHTML = `
@@ -144,7 +144,7 @@ function intro() {
   const close = (go) => {
     host.hidden = true;
     document.removeEventListener('keydown', onKey);
-    try { localStorage.setItem('skyforge-intro-v3', '1'); } catch { /* storage blocked */ }
+    try { localStorage.setItem('skyforge-intro-v4', '1'); } catch { /* storage blocked */ }
     if (go) location.hash = go;
   };
   $$(host, '[data-go]').forEach((b) => b.addEventListener('click', () => close(b.dataset.go)));

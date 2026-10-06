@@ -18,7 +18,9 @@ SHOTS = [("view_v18", "#aircraft", None), ("view_v19a_long_nose", "#v19/v19a_lon
          ("view_v19b_falcon_tail", "#v19/v19b_falcon_tail", None), ("view_v19c_forward_rotors", "#v19/v19c_forward_rotors", None),
          ("view_v19r_boom_rotors", "#v19/v19r_boom_rotors", None), ("view_v19w_four_in_wings", "#v19/v19w_four_in_wings", None),
          ("view_v19w_side", "#v19/v19w_four_in_wings", "side"), ("view_v19w_top", "#v19/v19w_four_in_wings", "top"),
-         ("view_v19w_cockpit", "#v19/v19w_four_in_wings", "cockpit")]
+         ("view_v19w_cockpit", "#v19/v19w_four_in_wings", "cockpit"), ("view_v19s_stoop_crest", "#v19/v19s_stoop_crest", None),
+         ("view_v19s_side", "#v19/v19s_stoop_crest", "side"), ("view_v19s_top", "#v19/v19s_stoop_crest", "top"),
+         ("view_v19s_cockpit", "#v19/v19s_stoop_crest", "cockpit")]
 HIDE = ".variant-pills, .viewport-hint { display: none !important; }"
 
 
@@ -36,7 +38,7 @@ async def main(url: str) -> None:
             if view:
                 await pg.evaluate(f"window.__viewer && window.__viewer.frame('{view}', 0)")
                 if view == "cockpit":
-                    await pg.evaluate("document.getElementById('viewport').classList.add('pilot'); document.querySelector('.hud-cap').textContent = 'FPV · 19 mm camera at x 130 mm · V19-W'")
+                    await pg.evaluate(f"document.getElementById('viewport').classList.add('pilot'); document.querySelector('.hud-cap').textContent = 'FPV · 19 mm camera at x 130 mm · {h.split('/')[-1].split('_')[0].upper().replace('V19', 'V19-')}'")
                 await pg.wait_for_timeout(1500)
             box = await pg.locator("#viewport").bounding_box()
             await pg.screenshot(path=str(ROOT / "analysis" / f"{name}.png"), clip=box, timeout=120000)

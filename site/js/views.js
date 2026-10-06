@@ -173,7 +173,7 @@ export function v19(ctx, el, sub) {
   if (v) for (const p of v.new) { const k = p.group_label; (groups[k] ||= []).push(p); }
   html(el, `
     <h2>V19 directions</h2>
-    <p class="lede-s">Your directions, built from your V18 parts and checked with the same models: the long nose, the falcon tail, the forward rotors, the combination, and four rotors in the wings with a pilot's-eye cockpit camera. Try the <b>Pilot</b> view on the Aircraft tab.</p>
+    <p class="lede-s">Your directions, built from your V18 parts and checked with the same models: the long nose, the falcon tail, the forward rotors, the combination, four rotors in the wings with a pilot's-eye cockpit camera, and the same without the big tail: a stoop wing and a falcon crest on your fins. Try the <b>Pilot</b> view on the Aircraft tab.</p>
     <div class="vcards">
       ${card('', V.v18, 'V18 as designed', 'Your assembly today.')}
       ${V.order.map((s) => card(s, V.variants[s].eval, V.variants[s].label, V.variants[s].summary)).join('')}

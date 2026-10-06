@@ -1,6 +1,6 @@
 {
   "name": "skyforge-v18-falcon",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "description": "SKYFORGE V18 Falcon - educational hybrid-VTOL build workbench (web + desktop)",
   "author": "Aleksander Norman",

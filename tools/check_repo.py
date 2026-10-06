@@ -141,7 +141,7 @@ def check_analysis() -> None:
             flags.append(f"{k}: inside the rear-well footprint {v['inside_well_footprint_of']}")
     bs = j("analysis/balance_study.json")
     if bs["n_feasible"] == 0:
-        flags.append("balance study: no silhouette-preserving V18 combination passes hover AND static margin - see docs/V19_VARIANTS.md (V19-R passes)")
+        flags.append("balance study: no silhouette-preserving V18 combination passes hover AND static margin - see docs/V19_VARIANTS.md (V19-S, V19-W, V19-R and V19-C pass)")
     man = ROOT / "cad" / "interface" / "out" / "manifest.json"
     if man.exists():
         for name, info in json.loads(man.read_text())["parts"].items():
@@ -219,7 +219,7 @@ def check_v19() -> None:
     rec = allv.get(web["recommended"])
     if not rec or not rec["evaluation"]["passes"] or rec["checks"]["collisions_new_vs_V18"]:
         fails.append("the recommended V19 variant does not pass its gates cleanly")
-    for slug in ("v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"):
+    for slug in ("v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest"):
         out = ROOT / "cad" / "v19" / slug
         for f in ("parts.json", "checks.json", "mass_inputs.json", f"{slug}_print_set.3mf"):
             if not (out / f).exists():

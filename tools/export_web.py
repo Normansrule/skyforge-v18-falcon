@@ -98,8 +98,8 @@ def build_glb():
     s2.export(raw / "repo_parts.glb")
 
 
-V19_ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings"]
-V19_SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_boom_rotors": "V19-R", "v19w_four_in_wings": "V19-W"}
+V19_ORDER = ["v19a_long_nose", "v19b_falcon_tail", "v19c_forward_rotors", "v19r_boom_rotors", "v19w_four_in_wings", "v19s_stoop_crest"]
+V19_SHORT = {"v19a_long_nose": "V19-A", "v19b_falcon_tail": "V19-B", "v19c_forward_rotors": "V19-C", "v19r_boom_rotors": "V19-R", "v19w_four_in_wings": "V19-W", "v19s_stoop_crest": "V19-S"}
 
 
 def part_group(n: str) -> str:
@@ -113,6 +113,10 @@ def part_group(n: str) -> str:
         return "Rotor booms"
     if re.search(r"well_cap|well_fill", n):
         return "Well caps and fills"
+    if re.search(r"crest", n):
+        return "Falcon crest"
+    if re.search(r"wrist", n):
+        return "Stoop wrist"
     if re.search(r"tail_|elevator_servo", n):
         return "Falcon tail"
     return "Fairings and glove"
@@ -160,7 +164,7 @@ def variants_data():
     names = {p.name for p in g.load()}
     sys.path.insert(0, str(ROOT / "cad" / "interface" / "src"))
     import build as ib
-    out = {"order": [s for s in V19_ORDER if s in allv], "recommended": "v19w_four_in_wings", "v18": v18, "variants": {}}
+    out = {"order": [s for s in V19_ORDER if s in allv], "recommended": "v19s_stoop_crest", "v18": v18, "variants": {}}
     for slug in out["order"]:
         v = allv[slug]
         cfg = json.loads((ROOT / "config" / "v19" / f"{slug}.json").read_text())

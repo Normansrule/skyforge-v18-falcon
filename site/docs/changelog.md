@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.5.0 - 2026-10-06
+
+V19-S: the four-rotor layout without the big tail.
+
+- New variant V19-S, now the recommendation. It keeps V19-W's four lift motors in your V18 wing wells, the pilot's-eye
+  camera and the single EDF, and drops the 0.18 m2 boom tail. Two features take over its job. The outer falcon panels
+  and elevons sweep 300 mm back at the wrist (the "stoop"), carried by a swept 10 x 10 carbon spar per side. A 0.07 m2
+  falcon crest sits on the tips of your V18 fins, 4 deg leading edge down, with a 30 % elevator on one slim servo.
+  The wing group moves 235 mm aft and the battery stays in the V18 tray. Result: 2,832 g (183 g lighter than V19-W),
+  1,188 mm long (168 mm shorter), static margin 8.0 / 13.9 %, heaviest motor 25.5 %, no new collisions.
+- For the record: a fixed crest (no elevator) gets the margin but needs 16-38 deg of elevon at 16 m/s with the wells
+  open, outside the 10 deg gate; the search keeps those rows in the V19 document.
+- Fixes: tail incidence and position are now part of the aero cache key; the web viewer maps GLB node names with dots
+  back to part names, so the outer servo cassettes follow their panels; F4 is no longer slotted for a removed gear
+  crossbar (V19-W).
+- Web app and docs: V19-S in the switcher, V19-S gates in TEST_GATES.md (wrist load, crest tufts, crest elevator).
+
+
 ## 0.4.0 - 2026-10-04
 
 V19-W: four rotors in the wings, pilot's-eye camera, one EDF.

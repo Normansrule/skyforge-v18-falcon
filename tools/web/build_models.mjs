@@ -7,7 +7,7 @@ const root = new URL('../..', import.meta.url).pathname;
 const cli = `${root}node_modules/.bin/gltf-transform`;
 const run = (...a) => execFileSync(cli, a, { stdio: ['ignore', 'ignore', 'inherit'] });
 import { existsSync } from 'node:fs';
-const variants = ['v19a_long_nose', 'v19b_falcon_tail', 'v19c_forward_rotors', 'v19r_boom_rotors', 'v19w_four_in_wings']
+const variants = ['v19a_long_nose', 'v19b_falcon_tail', 'v19c_forward_rotors', 'v19r_boom_rotors', 'v19w_four_in_wings', 'v19s_stoop_crest']
   .filter((v) => existsSync(`${root}site/models/raw/${v}.glb`)).map((v) => [v, '0.25', '0.0005']);
 for (const [name, ratio, error] of [['v18', '0.12', '0.0006'], ['repo_parts', '0.5', '0.0005'], ...variants]) {
   const raw = `${root}site/models/raw/${name}.glb`;

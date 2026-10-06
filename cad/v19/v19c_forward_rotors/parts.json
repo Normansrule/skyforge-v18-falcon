@@ -642,7 +642,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    275,
+    275.0,
     0.0,
     0.0
    ]
@@ -653,7 +653,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    275,
+    275.0,
     0.0,
     0.0
    ]
@@ -664,7 +664,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    275,
+    275.0,
     0.0,
     0.0
    ]
@@ -675,7 +675,7 @@
     "slot for the relocated rear crossrail"
    ],
    "move_mm": [
-    275,
+    275.0,
     0.0,
     0.0
    ]

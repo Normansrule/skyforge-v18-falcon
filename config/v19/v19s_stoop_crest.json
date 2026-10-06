@@ -1,0 +1,31 @@
+{
+ "name": "v19s_stoop_crest",
+ "label": "V19-S stoop wing + falcon crest",
+ "wing_shift_mm": 235,
+ "front_rotor": {
+  "mode": "wing",
+  "dx": 0.0
+ },
+ "rear_rotor_dx_mm": 0.0,
+ "battery": "v18",
+ "avionics_forward": false,
+ "tail_parts_lwpla": true,
+ "lwpla_density": 0.8,
+ "tail": {
+  "area_m2": 0.07,
+  "aspect": 6.0,
+  "taper": 0.45,
+  "le_sweep_deg": 35.0,
+  "x_le_root_mm": 753.0,
+  "incidence_deg": -4.0,
+  "elevator_frac": 0.3,
+  "height_mm": 75.0,
+  "mount": "fins"
+ },
+ "cockpit_camera": true,
+ "gps_aft": true,
+ "outer_shift_mm": 300,
+ "no_le_ext": true,
+ "rear_support": "boom",
+ "summary": "All four lift rotors in your V18 wing wells, wing 235 mm aft, outer panels swept 300 mm back at the wrist, falcon crest on your V18 fins, battery in the V18 tray, pilot's-eye cockpit camera, one EDF"
+}
